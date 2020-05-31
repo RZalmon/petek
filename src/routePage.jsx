@@ -1,32 +1,31 @@
 import React from "react";
 
 
-import { connect } from "react-redux";
-import { Route, Switch, withRouter } from "react-router-dom";
-// import Home from "./pages/";
+import { Route, Switch } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 
 class RoutePage extends React.Component {
-// async  componentDidMount() {
-//    await this.props.getUser();    
-//     if(!this.isInSignupPage && !this.props.user){
-//       this.props.history.push('/')
-//     }
-//   }
+  // async  componentDidMount() {
+  //    await this.props.getUser();    
+  //     if(!this.isInSignupPage && !this.props.user){
+  //       this.props.history.push('/')
+  //     }
+  //   }
 
-//   get isInSignupPage(){
-//     return this.props.location.pathname === "/";
-//   }
-  
+  //   get isInSignupPage(){
+  //     return this.props.location.pathname === "/";
+  //   }
 
-//   componentDidUpdate(prevProps, prevState) {
-//     if (
-//       this.props.location !== prevProps.location &&
-//       !this.props.user &&
-//       !this.isInSignupPage
-//     ) {
-//       this.props.history.push("/");
-//     }
-//   }
+
+  //   componentDidUpdate(prevProps, prevState) {
+  //     if (
+  //       this.props.location !== prevProps.location &&
+  //       !this.props.user &&
+  //       !this.isInSignupPage
+  //     ) {
+  //       this.props.history.push("/");
+  //     }
+  //   }
 
   render() {
     // if(!this.isInSignupPage && !this.props.user ) return <h1>Nothing for you here</h1>
@@ -36,7 +35,7 @@ class RoutePage extends React.Component {
         <main>
           <Switch>
             {/* <Route path="/" exact component={SignUp} /> */}
-            <Route path="/home" component={Home} />
+            <Route path="/" component={HomePage} />
             {/* <Route path="/contact/edit/:id?" component={ContactEdit} /> */}
             {/* <Route path="/contact/:id" component={ContactDetails} /> */}
             {/* <Route path="/contact" component={ContactPage} /> */}
@@ -58,7 +57,4 @@ class RoutePage extends React.Component {
 //   getUser,
 // };
 
-export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-)(withRouter(RoutePage));
+export default RoutePage;
