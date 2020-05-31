@@ -19,6 +19,7 @@ class HomePage extends Component {
         const { user } = this.props;
         return (
             <div>
+              {!user && <h2>SAAMEK</h2>}
             {user &&(
               <div>
                 <h2>Hi There {this.capitalizeFirstLetter(user.userName)}</h2>
