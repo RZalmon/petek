@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import SocketService from '../services/SocketService'
 
 import { signUp } from '../actions/UserActions'
 import { getUser } from '../actions/UserActions'
@@ -27,11 +28,11 @@ class SignUp extends Component {
     this.setState({ [name]: value }) 
   };
 
-  onHandleSubmit = (ev) => {
+  onHandleSubmit = async (ev) => {
     ev.preventDefault();
     // const { value, name } = ev.target;
     // this.setState({ [name]: value }, () => {
-    this.props.signUp({...this.state})
+   await this.props.signUp({...this.state})
     // }),
     this.props.history.push("/")
 }

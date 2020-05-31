@@ -3,11 +3,14 @@ import './App.scss';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
 
+
+
 import RoutePage from './RoutePage'
 import NavBar from './cmps/NavBar';
 
 
 const history = createBrowserHistory();
+
 
 
 function App() {
