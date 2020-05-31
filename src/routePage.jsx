@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ContactPage from './pages/ContactPage'
 import BoardPage from './pages/BoardPage'
+import SignUp from './pages/SignUp'
 class RoutePage extends React.Component {
   // async  componentDidMount() {
   //    await this.props.getUser();    
@@ -35,7 +36,7 @@ class RoutePage extends React.Component {
       <div className="router-page">
         <main>
           <Switch>
-            {/* <Route path="/" exact component={SignUp} /> */}
+            <Route path="/signup" exact component={SignUp} />
             <Route path="/" exact component={HomePage} />
             <Route path="/contact" component={ContactPage} />
             <Route path="/board/:id" component={BoardPage} />
