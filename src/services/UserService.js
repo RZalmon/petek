@@ -19,6 +19,7 @@ async function signUp(newUser) {
     };
     StorageService.save(KEY, USER);
     await HttpService.post('auth/signup',USER)
+    getUser()
     return USER;
 }
 
