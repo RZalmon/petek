@@ -1,8 +1,6 @@
 import { UserService } from '../services/UserService'
 
 export function signUp(user) {
-    console.log(user);
-    
     return async dispatch => {
         const newUser = await UserService.signUp(user);
         dispatch({ type: 'SET_USER',newUser })
