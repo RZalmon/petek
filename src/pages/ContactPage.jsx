@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
-export default class ContactPage extends Component {
+import { loadContacts } from '../actions/ContactActions';
+
+
+class ContactPage extends Component {
+
+    componentDidMount() {
+        this.loadContacts()
+    }
+
     render() {
         return (
             <div>
@@ -9,3 +18,17 @@ export default class ContactPage extends Component {
         )
     }
 }
+
+
+
+const mapStateToProps = (state) => {
+    return {
+        contacts: state.contact.contacts,
+    };
+};
+
+const mapDispatchToProps = {
+    loadContacts,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactPage);

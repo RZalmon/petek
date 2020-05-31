@@ -110,8 +110,8 @@ function filter(term) {
     term = term.toLocaleLowerCase()
     return contacts.filter(contact => {
         return contact.userName.toLocaleLowerCase().includes(term) ||
-            contact.fullName.toLocaleLowerCase().includes(term) ||
-  })
+            contact.fullName.toLocaleLowerCase().includes(term)
+    })
 }
 
 export const ContactService = {

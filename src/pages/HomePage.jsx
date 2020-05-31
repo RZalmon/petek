@@ -1,11 +1,25 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { getUser } from '../actions/UserActions';
 
-export default class HomePage extends Component {
+class HomePage extends Component {
     render() {
         return (
             <div>
-                <h1>Home Page</h1>     
+                <h1>Home Page</h1>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user.loggedinUser,
+    };
+};
+
+const mapDispatchToProps = {
+    getUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
