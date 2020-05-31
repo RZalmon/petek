@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { getUser } from '../actions/UserActions';
 
 class HomePage extends Component {
-     async componentDidMount() {
-
+      componentDidMount() {
+       const {user} = this.props;
         console.log(this.props);
-        // if(!user) this.props.history.push(`/signup`);
+        if(!user) this.props.history.push(`/signup`);
       }
 
 
@@ -16,7 +16,7 @@ class HomePage extends Component {
 
     render() {
         const { user } = this.props;
-        if(!user) return <h1>balls?</h1>
+
         return (
             <div>
             {user &&
