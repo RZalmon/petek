@@ -3,21 +3,51 @@ import { connect } from 'react-redux';
 
 import { loadContacts } from '../actions/ContactActions';
 
+import ContactFilter from '../cmps/ContactFilter'
+import ContactList from '../cmps/ContactList'
 
 class ContactPage extends Component {
+    state = {
+        filterBy: { term: '' }
+    }
 
     componentDidMount() {
         this.loadContacts()
     }
 
+    loadContacts = async () => {
+        await this.props.loadContacts(this.state.filterBy);
+    };
+
+    onFilterHandler = (filterBy) => {
+        this.setState((prevState) => {
+            return {
+                filterBy: {
+                    ...prevState.filterBy,
+                    ...filterBy,
+                },
+            };
+        }, this.loadContacts);
+    };
+
+    handleKeyPress = () => {
+        if (this.props.contacts.length === 1) {
+            let id = this.props.contacts[0]._id
+            this.props.history.push(`/board/${id}`);
+        }
+    }
+
     render() {
+        const { contacts } = this.props
         return (
             <div>
-                <h1>Hello Contact Page</h1>
+                <ContactFilter filterBy={this.state.filterBy} onFilter={this.onFilterHandler} moveToContact={this.handleKeyPress}></ContactFilter>
+                {contacts.length && <ContactList contacts={contacts}></ContactList>}
             </div>
         )
     }
 }
+
 
 
 

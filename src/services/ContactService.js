@@ -5,19 +5,19 @@ const CONTACT_KEY = 'contacts';
 
 var contacts = [
     {
-        "_id": "5a56640269f443a5d64b32ca",
+        "_id": "aa56640269f443a5d64b32ca",
         "fullName": "Eyal Golan",
         "userName": "Eyalush",
         "friends": []
     },
     {
-        "_id": "5a56640269f443a5d64b32ca",
+        "_id": "ba56640269f443a5d64b32cb",
         "fullName": "Omer Adam",
         "userName": "Omerush",
         "friends": []
     },
     {
-        "_id": "5a56640269f443a5d64b32ca",
+        "_id": "ca56640269f443a5d64b32cc",
         "fullName": "Zohar Argov",
         "userName": "Ha Melech",
         "friends": []
@@ -26,10 +26,10 @@ var contacts = [
 
 function sort(arr) {
     return arr.sort((a, b) => {
-        if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
+        if (a.userName.toLocaleLowerCase() < b.userName.toLocaleLowerCase()) {
             return -1;
         }
-        if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
+        if (a.userName.toLocaleLowerCase() > b.userName.toLocaleLowerCase()) {
             return 1;
         }
 

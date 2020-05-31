@@ -1,0 +1,15 @@
+.contact-preview {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    column-gap: 6px;
+    margin-bottom: 10px;
+    align-items: center;
+    padding: 4px 6px;
+    img {
+        grid-row: 1 / -1;
+        width: 100px;
+        border-radius: 50%;
+        border: solid 1px black;
+    }
+}
