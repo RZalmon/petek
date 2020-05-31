@@ -26,12 +26,12 @@ class BurgerMenu extends React.Component {
         <NavLink activeClassName="active" exact to="/" onClick={() => this.closeMenu()}>
           Home
         </NavLink>
-        {/* <NavLink activeClassName="active" to="/contact" exact onClick={() => this.closeMenu()}>
+        <NavLink activeClassName="active" to="/contact" exact onClick={() => this.closeMenu()}>
           Contacts
         </NavLink>
-        <NavLink activeClassName="active" to="/statistics" exact onClick={() => this.closeMenu()}>
-          Statistics
-        </NavLink> */}
+        <NavLink activeClassName="active" to="/board/:id" exact onClick={() => this.closeMenu()}>
+          BoardPage
+        </NavLink>
       </Menu>
     );
   }

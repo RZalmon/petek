@@ -5,7 +5,7 @@
     height: 30px;
     right: 0;
     top: 0;
-    margin: 10px 10px 0 0 ;
+    margin: 15px 10px 0 0 ;
   }
   
   /* Color/shape of burger icon bars */
@@ -59,6 +59,8 @@
   /* Individual item */
   .bm-item {
     display: inline-block;
+    color: lightblue;
+      margin-bottom: 10px;
   }
   
   /* Styling of overlay */
