@@ -3,7 +3,8 @@ import React from "react";
 
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-
+import ContactPage from './pages/ContactPage'
+import BoardPage from './pages/BoardPage'
 class RoutePage extends React.Component {
   // async  componentDidMount() {
   //    await this.props.getUser();    
@@ -35,10 +36,11 @@ class RoutePage extends React.Component {
         <main>
           <Switch>
             {/* <Route path="/" exact component={SignUp} /> */}
-            <Route path="/" component={HomePage} />
+            <Route path="/" exact component={HomePage} />
+            <Route path="/contact" component={ContactPage} />
+            <Route path="/board/:id" component={BoardPage} />
             {/* <Route path="/contact/edit/:id?" component={ContactEdit} /> */}
             {/* <Route path="/contact/:id" component={ContactDetails} /> */}
-            {/* <Route path="/contact" component={ContactPage} /> */}
             {/* <Route path="/statistics" component={Statistics} /> */}
           </Switch>
         </main>
