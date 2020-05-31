@@ -1,29 +1,29 @@
 import React, { Component } from "react";
 
-import {signUp} from '../../actions/UserActions'
-// import {getUser} from '../../actions/UserActions'
-// import { connect } from "react-redux";
+import { signUp } from '../actions/UserActions'
+import { getUser } from '../actions/UserActions'
+import { connect } from "react-redux";
 
 
 class SignUp extends Component {
 
-  state ={
+  state = {
     userName: ''
   }
 
 
- componentDidMount() {      
-  this.getLoggedinUser();
+  componentDidMount() {
+    this.getLoggedinUser();
   }
 
-  getLoggedinUser = async  () => {
-   await this.props.getUser()
-   if(this.props.user) this.props.history.push('/home')
+  getLoggedinUser = async () => {
+    await this.props.getUser()
+    if (this.props.user) this.props.history.push('/home')
   }
 
   onHandleChange = (e) => {
     this.setState({
-      userName:e.target.value
+      userName: e.target.value
     })
   };
 
