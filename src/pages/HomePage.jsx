@@ -5,8 +5,7 @@ import { getUser } from '../actions/UserActions';
 class HomePage extends Component {
       componentDidMount() {
        const {user} = this.props;
-        console.log(this.props);
-        if(!user) this.props.history.push(`/signup`);
+        // if(!user) this.props.history.push(`/signup`);
       }
 
 
@@ -16,13 +15,15 @@ class HomePage extends Component {
 
     render() {
         const { user } = this.props;
+        
+        if(!user) return <h1>Balls?</h1>    
 
         return (
             <div>
             {user &&
               <div>
                 <pre>{user.userName}</pre>
-                <h2>Hi There {this.capitalize(user.userName)}</h2>
+                <h2>Hi There {user.userName}</h2>
               </div>
             }
             <h1>balss</h1>
