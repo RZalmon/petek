@@ -1,33 +1,36 @@
 import React from "react";
+import { getUser } from "./actions/UserActions";
 
+import { connect } from "react-redux";
 
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ContactPage from './pages/ContactPage'
 import BoardPage from './pages/BoardPage'
 import SignUp from './pages/SignUp'
 class RoutePage extends React.Component {
-  // async  componentDidMount() {
-  //    await this.props.getUser();    
-  //     if(!this.isInSignupPage && !this.props.user){
-  //       this.props.history.push('/')
-  //     }
-  //   }
 
-  //   get isInSignupPage(){
-  //     return this.props.location.pathname === "/";
-  //   }
+  async  componentDidMount() {
+     await this.props.getUser();    
+      if(!this.isInSignupPage && !this.props.user){
+        this.props.history.push('/signup')
+      }
+    }
+
+    get isInSignupPage(){
+      return this.props.location.pathname === "/signup";
+    }
 
 
-  //   componentDidUpdate(prevProps, prevState) {
-  //     if (
-  //       this.props.location !== prevProps.location &&
-  //       !this.props.user &&
-  //       !this.isInSignupPage
-  //     ) {
-  //       this.props.history.push("/");
-  //     }
-  //   }
+    componentDidUpdate(prevProps, prevState) {
+      if (
+        this.props.location !== prevProps.location &&
+        !this.props.user &&
+        !this.isInSignupPage
+      ) {
+        this.props.history.push("/signup");
+      }
+    }
 
   render() {
     // if(!this.isInSignupPage && !this.props.user ) return <h1>Nothing for you here</h1>
@@ -50,14 +53,18 @@ class RoutePage extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     user: state.user.loggedinUser,
-//   };
-// };
 
-// const mapDispatchToProps = {
-//   getUser,
-// };
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.loggedinUser,
+  };
+};
 
-export default RoutePage;
+const mapDispatchToProps = {
+  getUser,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(RoutePage));

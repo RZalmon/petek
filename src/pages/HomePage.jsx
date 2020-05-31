@@ -3,11 +3,29 @@ import { connect } from 'react-redux';
 import { getUser } from '../actions/UserActions';
 
 class HomePage extends Component {
+     componentDidMount() {
+        const { user } =  this.props;
+        console.log(user);
+        
+        if(!user) this.props.history.push(`/signup`);
+      }
+
+
+    capitalizeFirstLetter = (name) => {
+        return name.charAt(0).toUpperCase() + name.slice(1);
+      };
+
     render() {
+        const { user } = this.props;
         return (
             <div>
-                <h1>Home Page</h1>
-            </div>
+            {user &&(
+              <div>
+                <h2>Hi There {this.capitalizeFirstLetter(user.userName)}</h2>
+              </div>
+            )}
+            <h1>balss</h1>
+          </div>
         )
     }
 }

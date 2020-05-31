@@ -8,9 +8,10 @@ import { connect } from "react-redux";
 class SignUp extends Component {
 
   state = {
-    userName: ''
+    userName: '',
+    fullName:'',
+    password:''
   }
-
 
   componentDidMount() {
     this.getLoggedinUser();
@@ -18,27 +19,34 @@ class SignUp extends Component {
 
   getLoggedinUser = async () => {
     await this.props.getUser()
-    if (this.props.user) this.props.history.push('/home')
+    if (this.props.user) this.props.history.push('/')
   }
 
-  onHandleChange = (e) => {
-    this.setState({
-      userName: e.target.value
-    })
+  onChangeHandler = (ev) => {
+    const { value, name } = ev.target;
+    this.setState({ [name]: value }) 
   };
 
-  onHandleSubmit = (e) => {
-    e.preventDefault();
-    this.props.signUp(this.state.userName)
-    this.props.history.push("/home");
-  };
+  onHandleSubmit = (ev) => {
+    ev.preventDefault();
+    // const { value, name } = ev.target;
+    // this.setState({ [name]: value }, () => {
+    this.props.signUp({...this.state})
+    // }),
+    this.props.history.push("/")
+}
+
+
+
 
   render() {
 
     return (
       <div>
         <form onSubmit={this.onHandleSubmit}>
-          <input type="text" onChange={this.onHandleChange} />
+          <input type="text" name="userName" value={this.state.userName} placeholder="UserName" onChange={this.onChangeHandler}/>
+          <input type="text" name="fullName" value={this.state.fullName} placeholder="Full Name" onChange={this.onChangeHandler}/>
+          <input type="password" name="password" value={this.state.password} placeholder="Password" onChange={this.onChangeHandler}/>
           <button>SignIn</button>
         </form>
       </div>
