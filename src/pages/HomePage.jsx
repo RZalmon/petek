@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getUser } from '../actions/UserActions';
+import { UserService } from '../services/UserService';
 
 class HomePage extends Component {
   componentDidMount() {
-    // const { user } = this.props;
-    // if (!user) this.props.getUser()
+    const { user } = this.props;
+    // if(!user) this.props.history.push(`/signup`);
   }
 
 
@@ -14,15 +15,17 @@ class HomePage extends Component {
   };
 
   render() {
-    const { user } = this.props;
-    if (!user) return <h1>Loading</h1>
+    const user = UserService.getUser()
+    console.log('user', user);
+
+    if (!user) return <h1>Loading...</h1>
 
     return (
       <div>
         {user &&
           <div>
             <pre>{user.userName}</pre>
-            <h2>Hi There {this.capitalize(user.userName)}</h2>
+            <h2>Hi There {user.userName}</h2>
           </div>
         }
         <h1>balss</h1>
