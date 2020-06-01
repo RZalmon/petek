@@ -15,19 +15,20 @@ class BurgerMenu extends React.Component {
   };
 
   closeMenu = (ev) => {
-    console.log('ev',ev);
     if(ev){
       this.handleLogout()
     }
-    
     this.setState({ menuOpen: false });
   };
 
 
-  handleLogout = () =>{
+  handleLogout = async () =>{
     console.log('hi!', this.props);
-    this.props.logout()
+    await this.props.logout()
+    console.log(this.props.user);
+    
     this.props.history.push('/signup') 
+    
   }
 
 

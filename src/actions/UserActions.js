@@ -17,7 +17,7 @@ export function login(user) {
 export function logout() {
     const user = null
     return async dispatch => {
-        const res = await UserService.logout();
+        const res = await UserService.logout();        
         dispatch({ type: 'SET_USER',user})
     }
 }

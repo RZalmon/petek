@@ -26,9 +26,10 @@ class SignUp extends Component {
     this.getLoggedinUser();    
   }
 
-  getLoggedinUser = async  () => {
+  getLoggedinUser = () => {
     
-    await this.props.getUser()
+     this.props.getUser()
+    
     console.log('here?', this.props.user);
     if (this.props.user && this.props.user !== 'err') this.props.history.push('/') 
   }
@@ -43,7 +44,7 @@ class SignUp extends Component {
   })
   };
 
-  resetInput = (ev) => {
+  resetInput = () => {
     
     this.setState({
       newUser: {
@@ -65,10 +66,10 @@ class SignUp extends Component {
       await this.props.signUp({...this.state.newUser})
       :await this.props.login({...this.state.newUser})
        await this.getLoggedinUser();
-    if(this.props.user === 'err') {      
+    if(!this.props.user) {      
       Swal.fire({
         title: 'Wrong password or Username.',
-        width: 600,
+        width: 300,
         padding: '1em',
         background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
         backdrop: `
@@ -79,7 +80,7 @@ class SignUp extends Component {
         `
       })
       this.props.history.push("/signup")
-      this.resetInput(ev)
+      this.resetInput()
       return
     }
     
