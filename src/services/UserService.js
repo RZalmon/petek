@@ -1,4 +1,4 @@
-import { UtilService } from './UtilService'
+// import { UtilService } from './UtilService'
 import { StorageService } from './StorageService'
 import { HttpService } from './HttpService.js'
 
@@ -9,12 +9,11 @@ function getUser() {
     USER = StorageService.load(KEY);
     return USER ? USER : null;
 }
-
-async function signUp(newUser) {
+async function signUp(credentials) {
     USER = {
-        userName: newUser.userName,
-        fullName: newUser.fullName,
-        password: newUser.password,
+        userName: credentials.userName,
+        fullName: credentials.fullName,
+        password: credentials.password,
         friends: [],
     };
     StorageService.save(KEY, USER);
@@ -22,7 +21,16 @@ async function signUp(newUser) {
     // getUser()
     return USER;
 }
+
+async function login(credentials) {
+    const USER = await HttpService.post('auth/login', credentials)
+    StorageService.save(KEY, USER);
+    return USER;
+
+}
+
 export const UserService = {
     getUser,
     signUp,
+    login
 }
