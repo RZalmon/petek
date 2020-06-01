@@ -26,11 +26,18 @@ async function login(credentials) {
     const USER = await HttpService.post('auth/login', credentials)
     StorageService.save(KEY, USER);
     return USER;
+}
 
+
+async function logout() {
+    const msg = await HttpService.post('auth/logout');
+    localStorage.removeItem(KEY)
+    return (msg)
 }
 
 export const UserService = {
     getUser,
     signUp,
-    login
+    login,
+    logout
 }
