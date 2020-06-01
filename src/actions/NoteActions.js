@@ -1,11 +1,11 @@
-import { ContactService } from '../services/ContactService'
+import { NoteService } from '../services/NoteService'
 
 // LIST
-export function loadContacts(filterBy) {
+export function loadNotes(filterBy) {
     return async dispatch => {
         try {
-            const contacts = await ContactService.getContacts(filterBy);
-            dispatch({ type: 'SET_CONTACTS', contacts })
+            const notes = await NoteService.query(filterBy);
+            dispatch({ type: 'SET_NOTES', notes })
         } catch (err) {
             console.log('ERROR', err)
         }
@@ -13,11 +13,11 @@ export function loadContacts(filterBy) {
 }
 
 // READ
-export function loadContactById(id) {
+export function loadNoteById(id) {
     return async dispatch => {
         try {
-            const contact = await ContactService.getContactById(id);
-            dispatch({ type: 'SET_CURR_CONTACT', contact })
+            const note = await NoteService.getById(id);   //MAYBE WE NOT NEED
+            dispatch({ type: 'SET_CURR_NOTE', note })
         } catch (err) {
             console.log('ERROR', err)
         }
@@ -25,11 +25,11 @@ export function loadContactById(id) {
 }
 
 //RESET
-export function resetCurrContact() {
+export function resetCurrNote() {
     return async dispatch => {
         try {
-            const contact = null
-            dispatch({ type: 'SET_CURR_CONTACT', contact })
+            const note = null
+            dispatch({ type: 'SET_CURR_NOTE', note })
         } catch (err) {
             console.log('ERROR:', err)
         }
@@ -37,21 +37,21 @@ export function resetCurrContact() {
 }
 
 // UPDATE + CREATE
-export function saveContact(contact) {
+export function saveNote(note) {
     return async dispatch => {
-        const isEdit = !!contact._id
-        contact = await ContactService.saveContact(contact);
-        if (isEdit) dispatch({ type: 'UPDATE_CONTACT', contact })
-        else dispatch({ type: 'ADD_CONTACT', contact })
-        return contact;
+        const isEdit = !!note._id
+        note = await NoteService.save(note);
+        if (isEdit) dispatch({ type: 'UPDATE_NOTE', note })
+        else dispatch({ type: 'ADD_NOTE', note })
+        return note;
     }
 }
 
 // REMOVE
 
-export function deleteContact(id) {
+export function deleteNote(id) {
     return async dispatch => {
-        await ContactService.deleteContact(id);
-        dispatch({ type: 'DELETE_CONTACT', id })
+        await NoteService.remove(id);
+        dispatch({ type: 'DELETE_NOTE', id })
     }
 }
