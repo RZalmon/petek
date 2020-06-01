@@ -4,10 +4,8 @@ import { getUser } from '../actions/UserActions';
 
 class HomePage extends Component {
       componentDidMount() {
-       const {user} = this.props;
-        // if(!user) this.props.history.push(`/signup`);
+        if(!this.props.user)this.props.history.push("/signup")
       }
-
 
     capitalize = (name) => {
         return name.charAt(0).toUpperCase() + name.slice(1);
@@ -16,17 +14,13 @@ class HomePage extends Component {
     render() {
         const { user } = this.props;
         
-        if(!user) return <h1>Balls?</h1>    
-
         return (
             <div>
             {user &&
               <div>
-                <pre>{user.userName}</pre>
-                <h2>Hi There {user.userName}</h2>
+                {user.userName && <h2>Hi There {this.capitalize(user.userName)}</h2>}
               </div>
             }
-            <h1>balss</h1>
           </div>
         )
     }
