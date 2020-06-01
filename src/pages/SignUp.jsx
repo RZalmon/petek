@@ -21,12 +21,16 @@ class SignUp extends Component {
   }
 
   componentDidMount() {
-    this.getLoggedinUser();
+    
+    
+    this.getLoggedinUser();    
   }
 
   getLoggedinUser = async  () => {
+    
     await this.props.getUser()
-    if (this.props.user && this.props.user !== 'err') this.props.history.push('/')
+    console.log('here?', this.props.user);
+    if (this.props.user && this.props.user !== 'err') this.props.history.push('/') 
   }
 
   onChangeHandler = (ev) => {
@@ -39,6 +43,16 @@ class SignUp extends Component {
   })
   };
 
+  resetInput = (ev) => {
+    
+    this.setState({
+      newUser: {
+        userName:'',
+        password: ''
+      }
+  })
+  }
+
   toggleSignUp = () =>{
     this.setState(prevState => ({
       isSignUp: !prevState.isSignUp
@@ -50,15 +64,13 @@ class SignUp extends Component {
       this.state.isSignUp ? 
       await this.props.signUp({...this.state.newUser})
       :await this.props.login({...this.state.newUser})
-       let newUser = await this.getLoggedinUser();
-    console.log(newUser);
-    if(!newUser) {  
-          
+       await this.getLoggedinUser();
+    if(this.props.user === 'err') {      
       Swal.fire({
         title: 'Wrong password or Username.',
         width: 600,
-        padding: '3em',
-        background: '#fff url(/images/trees.png)',
+        padding: '1em',
+        background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
         backdrop: `
           rgba(0,0,123,0.4)
           url("https://sweetalert2.github.io/images/nyan-cat.gif")
@@ -67,6 +79,7 @@ class SignUp extends Component {
         `
       })
       this.props.history.push("/signup")
+      this.resetInput(ev)
       return
     }
     

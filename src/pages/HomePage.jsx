@@ -13,7 +13,6 @@ class HomePage extends Component {
 
     render() {
         const { user } = this.props;
-        
         return (
             <div>
             {user &&
