@@ -4,7 +4,7 @@ export function signUp(user) {
     console.log(user);
     return async dispatch => {
         const newUser = await UserService.signUp(user);
-        dispatch({ type: 'SET_USER',newUser })
+        dispatch({ type: 'SET_USER', newUser })
     }
 }
 export function login(user) {
@@ -30,9 +30,9 @@ export function getUser() {
 }
 
 //ADD Move
-export function addMove(contact, amount){
-    return async dispatch => {
-      const user = await UserService.addMove(contact,amount);
-      dispatch({ type: 'SET_USER', user })
-    }
-}
+// export function addMove(contact, amount){
+//     return async dispatch => {
+//       const user = await UserService.addMove(contact,amount);
+//       dispatch({ type: 'SET_USER', user })
+//     }
+// }

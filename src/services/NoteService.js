@@ -1,6 +1,6 @@
 var demoNotes = [
     {
-        id: 'd4a5x',
+        _id: 'd4a5x',
         type: 'noteText',
         data: 'Free I feel free like you promised I\d be',
         style: {
@@ -8,7 +8,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'ZzZzZ',
+        _id: 'ZzZzZ',
         type: 'noteVideo',
         data: 'https://www.youtube.com/embed/aYDfwUJzYQg',
         style: {
@@ -16,7 +16,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'XxXxX',
+        _id: 'XxXxX',
         type: 'noteImg',
         data: 'https://media.giphy.com/media/PDmXIQru17Udy/giphy.gif',
         style: {
@@ -24,7 +24,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'AaAaA',
+        _id: 'AaAaA',
         type: 'noteTodos',
         data: [
             { txt: 'Eat', isDone: false },
@@ -36,7 +36,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'Babab',
+        _id: 'Babab',
         type: 'noteText',
         data: 'Rak TB!',
         style: {
@@ -44,7 +44,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'C3PO1',
+        _id: 'C3PO1',
         type: 'noteImg',
         data: 'https://www.myabandonware.com/media/screenshots/j/jazz-jackrabbit-2-4dm/jazz-jackrabbit-2_3.jpg',
         style: {
@@ -52,7 +52,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'R2D21',
+        _id: 'R2D21',
         type: 'noteImg',
         data: 'https://media.giphy.com/media/l11IVhXPESQqu0z3GQ/giphy.gif',
         style: {
@@ -60,7 +60,7 @@ var demoNotes = [
         }
     },
     {
-        id: '12d2r',
+        _id: '12d2r',
         type: 'noteImg',
         data: 'https://media.giphy.com/media/mi6DsSSNKDbUY/giphy.gif',
         style: {
@@ -68,7 +68,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'SPura',
+        _id: 'SPura',
         type: 'noteTodos',
         data: [
             { txt: 'Elections1', isDone: true },
@@ -80,7 +80,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'SPurs',
+        _id: 'SPurs',
         type: 'noteImg',
         data: 'https://media.giphy.com/media/3GnCVaJAGhfJ6/giphy.gif',
         style: {
@@ -88,7 +88,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'pPZpZp',
+        _id: 'pPZpZp',
         type: 'noteVideo',
         data: 'https://www.youtube.com/embed/9yVsFL6oMGE',
         style: {
@@ -96,7 +96,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'srups',
+        _id: 'srups',
         type: 'noteImg',
         data: 'https://assets.bigcartel.com/product_images/217429087/Primus_Norfolk_Regular.jpg?auto=format&fit=max&h=1000&w=1000',
         style: {
@@ -104,7 +104,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'BeAtl',
+        _id: 'BeAtl',
         type: 'noteText',
         data: `It was twenty years ago today
             Sergeant Pepper taught the band to play,
@@ -119,7 +119,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'parcR',
+        _id: 'parcR',
         type: 'noteImg',
         data: 'https://www.disccenter.co.il/content/products/prodimage_46385.jpg',
         style: {
@@ -127,7 +127,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'igPOP',
+        _id: 'igPOP',
         type: 'noteImg',
         data: 'https://i.pinimg.com/originals/fc/45/67/fc456734ac8265e654aaa4360750c488.jpg',
         style: {
@@ -135,7 +135,7 @@ var demoNotes = [
         }
     },
     {
-        id: 'ww2DD',
+        _id: 'ww2DD',
         type: 'noteImg',
         data: 'https://wallpaperaccess.com/full/560725.jpg',
         style: {
