@@ -24,6 +24,7 @@ async function signUp(credentials) {
 
 async function login(credentials) {
     const USER = await HttpService.post('auth/login', credentials)
+    if (!USER) return  
     StorageService.save(KEY, USER);
     return USER;
 }
