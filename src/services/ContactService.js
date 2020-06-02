@@ -54,17 +54,14 @@ function sort(arr) {
 //     })
 // }
 function query(filterBy) {
-    console.log(filterBy);
-    
+    if(!filterBy.term) return null
     const queryParams = new URLSearchParams();
     if (filterBy) {
         for (const property in filterBy) {            
             if (filterBy[property]){
                 queryParams.set(property, filterBy[property])
             }
-        } 
-        console.log(queryParams);
-        
+        }         
         return HttpService.get(`user?${queryParams}`);
     }
    
