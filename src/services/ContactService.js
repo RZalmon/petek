@@ -1,5 +1,7 @@
 import { UtilService } from './UtilService'
 import { StorageService } from './StorageService'
+import { HttpService } from './HttpService.js'
+
 
 const CONTACT_KEY = 'contacts';
 
@@ -37,20 +39,39 @@ function sort(arr) {
     })
 }
 
-function getContacts(filterBy = null) {
-    return new Promise((resolve, reject) => {
-        var contactsToReturn = StorageService.load(CONTACT_KEY);
-        if (!contactsToReturn || !contactsToReturn.length) {
-            contactsToReturn = [...contacts]
-            StorageService.save(CONTACT_KEY, contactsToReturn)
-        }
-        contacts = [...contactsToReturn]
-        if (filterBy && filterBy.term) {
-            contactsToReturn = filter(filterBy.term)
-        }
-        contactsToReturn ? resolve(sort(contactsToReturn)) : reject(`Contacts not found!`)
-    })
+// function query(filterBy = null) {
+//     return new Promise((resolve, reject) => {
+//         var contactsToReturn = StorageService.load(CONTACT_KEY);
+//         if (!contactsToReturn || !contactsToReturn.length) {
+//             contactsToReturn = [...contacts]
+//             StorageService.save(CONTACT_KEY, contactsToReturn)
+//         }
+//         contacts = [...contactsToReturn]
+//         if (filterBy && filterBy.term) {
+//             contactsToReturn = filter(filterBy.term)
+//         }
+//         contactsToReturn ? resolve(sort(contactsToReturn)) : reject(`Contacts not found!`)
+//     })
+// }
+function query(filterBy) {
+    console.log(filterBy);
+    
+    const queryParams = new URLSearchParams();
+    if (filterBy) {
+        for (const property in filterBy) {            
+            if (filterBy[property]){
+                queryParams.set(property, filterBy[property])
+            }
+        } 
+        console.log(queryParams);
+        
+        return HttpService.get(`user?${queryParams}`);
+    }
+   
+    return HttpService.get('user');
 }
+
+
 
 function getContactById(id) {
     return new Promise((resolve, reject) => {
@@ -115,7 +136,7 @@ function filter(term) {
 }
 
 export const ContactService = {
-    getContacts,
+    query,
     getContactById,
     deleteContact,
     saveContact,
