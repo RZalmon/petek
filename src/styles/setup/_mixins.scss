@@ -1,0 +1,215 @@
+/* Media queries Breakpoint mixins */
+
+@mixin for-mini-mobile-layout {
+  @media (min-width: $break-mini-mobile) {
+    @content;
+  }
+}
+@mixin for-medium-mobile-layout {
+  @media (min-width: $break-medium-mobile) {
+    @content;
+  }
+}
+@mixin for-mobile-layout {
+  @media (min-width: $break-mobile) {
+    @content;
+  }
+}
+
+@mixin for-narrow-layout {
+  @media (min-width: $break-narrow) {
+    @content;
+  }
+}
+
+@mixin for-normal-layout {
+  @media (min-width: $break-normal) {
+    @content;
+  }
+}
+
+@mixin for-wide-layout {
+  @media (min-width: $break-wide) {
+    @content;
+  }
+}
+
+
+/* Media  Mixins */
+
+//aspect ratio mixin
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+    overflow: hidden;
+    &:before {
+      content: "";
+      display: block;
+      width: 100%;
+      padding-top: ($height / $width) * 100%;
+    }
+    > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }  
+    > img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  // Mixin for removing hover efects on iphone screen
+  @mixin hover-supported {    
+    @media not all and (pointer: coarse) {
+        &:hover {
+            @content;
+        }
+    }
+  }
+
+
+  @mixin h1-l {
+    font-family: LivvicBold;
+    line-height: 100px;
+    font-size: 100px;
+  }
+ 
+  @mixin h1-s {
+    font-family: LivvicBold;
+    line-height: 56px;
+    font-size: 64px;
+  }
+ 
+  @mixin h2 {
+    font-family: LivvicBold;
+    line-height: 48px;
+    font-size: 48px;
+  }
+  
+  @mixin h3 {
+    font-family: LivvicBold;
+    line-height: 28px;
+    font-size: 18px;
+  }
+  @mixin p1 {
+    font-family: LivvicSemiBold;
+    line-height: 28px;
+    font-size: 18px;
+  }
+  @mixin p2 {
+    font-family: LivvicSemiBold;
+    line-height: 25px;
+    font-size: 15px;
+  }
+  
+  
+  @mixin my-btn  {
+    border-radius: 100vh;
+    font-size: 18px;
+    font-family: LivvicBold;
+    cursor: pointer;
+    width: fit-content;
+    padding: rem(12px) rem(36px);
+    transition: border .3s, color .3s, background-color .3s;
+  }
+  
+  @mixin btn1  {
+    border: 1.2px solid $clr24;
+    color: $clr24;
+    background-color: $clr13;
+    &:hover {
+      border-color:  $clr13;
+      color: $clr13;
+      background-color: $clr24;
+    }
+    &.disabled {
+      border-color: rgba(1, 47, 52, 0.479) ;
+      color:rgba(1, 47, 52, 0.322);
+      background-color: $clr13;
+      cursor: not-allowed;
+    }
+  }
+  
+  
+  @mixin btn2  {
+    border: 1.2px solid $clr24;
+    color: $clr13;
+    background-color: $clr24;
+    &:hover {
+      border-color: $clr23;
+      color: $clr23;
+      background-color: $clr13;
+    }
+    &.disabled {
+      border-color: $clr24;
+      color: $clr22;
+      background-color: $clr24;
+      cursor: not-allowed;
+    }
+  }
+  
+  
+  @mixin btn3  {
+    color: $clr24;
+    background-color: $clr13;
+    &:hover {
+      color: $clr24;
+      background-color: $clr21;
+    }
+    &.disabled {
+      color: $clr22;
+      background-color: $clr23;
+      cursor: not-allowed;
+    }
+  }
+  
+  @mixin my-form  {
+    font-size: 18px;
+    font-family: LivvicBold;
+    cursor: text;
+    // width: fit-content;
+    padding: rem(12px) rem(36px);
+    transition: box-shadow .3s, color .3s;
+    box-shadow: 0px 1px 0px 0px $clr13;
+    // background-color: initial;
+    color: $clr13;
+    &:hover {
+      box-shadow: 0px 1px 0px 0px $clr21;
+      color: $clr21;
+    }
+    &.required {
+      box-shadow: 0px 1px 0px 0px $clr12;
+      color: $clr12;
+    }
+  }
+
+  @mixin my-textarea  {
+    font-size: 18px;
+    font-family: LivvicBold;
+    cursor: text;
+    // width: fit-content;
+    padding: rem(12px) ;
+    transition: box-shadow .3s, color .3s;
+    box-shadow: 0px 1px 0px 0px $clr13;
+    color: $clr13;
+    &:hover, &:focus {
+      box-shadow: 0px 1px 0px 0px $clr21;
+      color: $clr21;
+    }
+    &.required {
+      box-shadow: 0px 1px 0px 0px $clr12;
+      color: $clr12;
+      position: relative;
+      &::after{
+        content: 'This field is required';
+        position: absolute;
+        bottom: -25px;
+        left: 10px;
+        font-size: 12px;
+        cursor: initial;
+      }
+    }
+  }
+  

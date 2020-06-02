@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { MDBInput } from "mdbreact";
+
 import Swal from 'sweetalert2'
 
 // import SocketService from '../services/SocketService'
@@ -7,6 +9,9 @@ import { signUp } from '../actions/UserActions'
 import { login } from '../actions/UserActions'
 import { getUser } from '../actions/UserActions'
 import { connect } from "react-redux";
+import CloudinaryService from '../../src/services/CloudinaryService'
+
+import {AvatarEdit} from '../cmps/User/AvatarEdit'
 
 
 class SignUp extends Component {
@@ -15,23 +20,20 @@ class SignUp extends Component {
     newUser : {
       userName: '',
       fullName:'',
-      password:''
+      password:'',
+      imgUrl:''
     },
     isSignUp:false
   }
 
-  componentDidMount() {
-    
-    
+  componentDidMount() {  
     this.getLoggedinUser();    
   }
 
-  getLoggedinUser = () => {
-    
-     this.props.getUser()
-    
-    console.log('here?', this.props.user);
-    if (this.props.user && this.props.user !== 'err') this.props.history.push('/') 
+  getLoggedinUser = async () => {    
+     await this.props.getUser()
+     
+    if (this.props.user) this.props.history.push('/') 
   }
 
   onChangeHandler = (ev) => {
@@ -45,13 +47,22 @@ class SignUp extends Component {
   };
 
   resetInput = () => {
-    
     this.setState({
       newUser: {
         userName:'',
         password: ''
       }
   })
+  }
+
+  onUploadImg = async (ev) =>{    
+    let userImgUrl = await CloudinaryService.uploadImg(ev) 
+    this.setState({ newUser: {
+      ...this.state.newUser,
+      imgUrl: userImgUrl.secure_url
+}})
+
+
   }
 
   toggleSignUp = () =>{
@@ -70,6 +81,8 @@ class SignUp extends Component {
       Swal.fire({
         title: 'Wrong password or Username.',
         width: 300,
+        confirmButtonText: "Say what?",
+        confirmButtonColor: "yellow",
         padding: '1em',
         background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
         backdrop: `
@@ -92,15 +105,17 @@ class SignUp extends Component {
 
   render() {
     const {isSignUp} = this.state
+    const {imgUrl} = this.state.newUser
     return (
-      <div>
+      <div className="signup-form">
         <form onSubmit={this.onHandleSubmit}>
           {!isSignUp && <h1>Login</h1>}
           {isSignUp && <h1>SignUp</h1>}
-          {isSignUp &&<input type="text" name="fullName" value={this.state.newUser.fullName || ''} placeholder="Full Name" onChange={this.onChangeHandler}/>}
-          <input type="text" name="userName" value={this.state.newUser.userName || ''} placeholder="UserName" onChange={this.onChangeHandler}/>
-          <input type="password" name="password" value={this.state.newUser.password || ''} placeholder="Password" onChange={this.onChangeHandler}/>
-          <button>Login</button>
+          {isSignUp && <AvatarEdit onUploadImg = {this.onUploadImg} imgUrl={imgUrl} />}
+          {isSignUp &&<MDBInput label="Full Name" name="fullName" value={this.state.newUser.fullName || ''} onChange={this.onChangeHandler}/>}
+          <MDBInput label="UserName"  type="text" name="userName" value={this.state.newUser.userName || ''}  onChange={this.onChangeHandler} />
+          <MDBInput label="Password" type="password" name="password" value={this.state.newUser.password || ''}  onChange={this.onChangeHandler}/>
+           <button>{isSignUp? 'SignUp' : 'Login'}</button>
           {!isSignUp && <h2 onClick ={this.toggleSignUp}>Don't Have an account? Sign Up!</h2>}
           {isSignUp && <h2 onClick ={this.toggleSignUp}>Head Back to Login</h2>}
         </form>

@@ -23,12 +23,8 @@ class BurgerMenu extends React.Component {
 
 
   handleLogout = async () =>{
-    console.log('hi!', this.props);
-    await this.props.logout()
-    console.log(this.props.user);
-    
-    this.props.history.push('/signup') 
-    
+    await this.props.logout()    
+    this.props.history.push('/signup')  
   }
 
 
@@ -39,8 +35,10 @@ class BurgerMenu extends React.Component {
 
   render() {
 
-   const  {menuOpen} = this.state
+   const {menuOpen} = this.state
    const {user} = this.props
+
+   if(!user) return ''
 
     return (
       <Menu right isOpen={menuOpen} onStateChange={(state) => this.handleStateChange(state)}>
@@ -53,9 +51,9 @@ class BurgerMenu extends React.Component {
         <NavLink activeClassName="active" to="/board/:id" exact onClick={() => this.closeMenu()}>
           BoardPage
         </NavLink>
-        {user && <NavLink activeClassName="active" to="/signup" exact onClick={() => this.closeMenu(logout)}  > 
+        <NavLink activeClassName="active" to="/signup" exact onClick={() => this.closeMenu(logout)}  > 
           Logout
-        </NavLink>}
+        </NavLink>
       </Menu>
     );
   }

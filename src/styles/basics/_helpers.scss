@@ -1,0 +1,128 @@
+
+.site-block {
+    margin-bottom: rem(20px);
+}
+
+// Aspect ratios
+
+.ratio-16-9 { @include aspect-ratio(100, 56); }
+
+.ratio-square { @include aspect-ratio(100, 100); }
+
+.ratio-card { @include aspect-ratio(100, 80); }
+
+.ratio-poster { @include aspect-ratio(100, 150); }
+
+// FLEX
+
+.flex {
+    display: flex;
+}
+
+.col {
+    flex-direction: column;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.bet{
+    justify-content: space-between;
+}
+
+.around{
+    justify-content: space-around;
+}
+
+.j-center {
+    justify-content: center;
+}
+
+.j-end {
+    justify-content: flex-end;
+}
+
+.a-end {
+    align-items: flex-end;
+}
+
+.a-center {
+    align-items: center;
+}
+
+// CURSOR
+
+.pointer {
+    cursor: pointer;
+}
+
+.not-allowed {
+    cursor: not-allowed;
+}
+
+.cursor-initial {
+    cursor: initial;
+}
+
+// POSITIONS
+
+.relative {
+    position: relative;
+}
+.fixed {
+    position: fixed;
+}
+.absolute {
+    position: absolute;
+}
+.static {
+    position: static;
+}
+.sticky {
+    position: sticky;
+}
+
+// AVATAR
+
+.avatar {
+    border-radius: 50%;
+    background-color: $clr1;
+    transition: background-color .3s;
+    object-fit: cover;
+
+    &.avatar-s {
+        width: 75px;
+        height: 75px;
+      }
+    &.avatar-m {
+        width: 150px;
+        height: 150px;
+      }
+    &.avatar-l {
+        width: 300px;
+        height: 300px;
+      }
+}
+
+// .img-container {
+//     padding: 10px;
+//     border-radius: 50%;
+//     background-color: red;
+//     z-index: 1001;
+// }
+// @media (prefers-reduced-motion: no-preference) {
+//     .avatar {
+//         &:hover{
+//             animation: avatar infinite 0.6s linear;
+//         }
+//     }
+//   }
+// @keyframes avatar {
+//     from {
+//       transform: rotateZ(-5deg);
+//     }
+//     to {
+//       transform: rotateZ(5deg);
+//     }
+//   }

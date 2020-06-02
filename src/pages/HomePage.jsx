@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getUser } from '../actions/UserActions';
 import { UserService } from '../services/UserService';
+import {AvatarEdit} from '../cmps/User/AvatarEdit'
+
 
 class HomePage extends Component {
   componentDidMount() {
@@ -20,6 +22,7 @@ class HomePage extends Component {
         {user &&
           <div>
             {user.userName && <h2>Hi There {this.capitalize(user.userName)}</h2>}
+            <AvatarEdit imgUrl={user.imgUrl}/>
           </div>
         }
       </div>

@@ -1,0 +1,15 @@
+.signup-form{
+    .md-form{
+        display: flex;
+        justify-content: center;
+        label{
+            margin: 10px 0 0 10%;
+        }
+        .form-control{
+            width: 80%;
+            padding-bottom: 0;
+            padding-top: 20px;
+            font-size: 25px;
+        }
+    }
+}

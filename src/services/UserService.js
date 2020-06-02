@@ -6,7 +6,7 @@ var USER = { userName: 'Ramus', fullName: 'Rami Davidov', password: '123456', fr
 const KEY = 'user';
 
 function getUser() {
-    USER = StorageService.load(KEY);
+    USER = StorageService.load(KEY);    
     return USER ? USER : null;
 }
 async function signUp(credentials) {
@@ -15,6 +15,7 @@ async function signUp(credentials) {
         fullName: credentials.fullName,
         password: credentials.password,
         friends: [],
+        imgUrl:credentials.imgUrl
     };
     StorageService.save(KEY, USER);
     await HttpService.post('auth/signup', USER)

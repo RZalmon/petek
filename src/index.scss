@@ -1,6 +1,25 @@
+
+//CMPS
 @import './styles/cmps/NavBar';
 @import './styles/cmps/BurgerMenu';
 @import './styles/cmps/ContactPreview';
+@import './styles/cmps/AvatarEdit.scss';
+
+//PAGES
+@import './styles/pages/SignUp';
+
+
+//SETUP
+@import './styles/setup/functions';
+@import './styles/setup/mixins';
+@import './styles/setup/typography';
+@import './styles/setup/variables';
+
+//BASE
+@import './styles/basics/helpers';
+@import './styles/basics/layout';
+
+
 
 body {
   margin: 0;
@@ -14,4 +33,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.swal2-title {
+  font-size: 19px !important
+}
+
+.swal2-styled.swal2-confirm{
+  font-size: 15px;
+  color: rgba(0, 0, 123, 0.4) !important
 }
