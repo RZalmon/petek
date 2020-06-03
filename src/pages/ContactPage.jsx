@@ -12,7 +12,8 @@ class ContactPage extends Component {
     }
 
     componentDidMount() {
-        this.loadContacts()
+        // this.loadContacts()
+        console.log(this.state.filterBy)
     }
 
     loadContacts = async () => {
@@ -20,7 +21,9 @@ class ContactPage extends Component {
     };
 
     onFilterHandler = (filterBy) => {
+        console.log('filter handler', filterBy);
         this.setState((prevState) => {
+            // debugger
             return {
                 filterBy: {
                     ...prevState.filterBy,
@@ -41,7 +44,10 @@ class ContactPage extends Component {
         const { contacts } = this.props
         return (
             <div>
-                <ContactFilter filterBy={this.state.filterBy} onFilter={this.onFilterHandler} moveToContact={this.handleKeyPress}></ContactFilter>
+                <ContactFilter
+                    filterBy={this.state.filterBy}
+                    onFilter={this.onFilterHandler}
+                    moveToContact={this.handleKeyPress}></ContactFilter>
                 {contacts.length && <ContactList contacts={contacts}></ContactList>}
             </div>
         )

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { DebounceInput } from 'react-debounce-input';
 
 export default class ContactFilter extends Component {
     state = { term: '' };
@@ -10,6 +11,8 @@ export default class ContactFilter extends Component {
 
     onChangeHandler = (ev) => {
         const { value, name } = ev.target;
+        console.log(name, ':', value);
+        
         this.setState({ [name]: value }, () => {
             this.props.onFilter({ ...this.state });
         });
@@ -24,14 +27,24 @@ export default class ContactFilter extends Component {
     render() {
         return (
             <form>
-                <input
+                <DebounceInput
+                    minLength={0}
+                    debounceTimeout={500}
                     type="text"
                     placeholder="Contact Name"
                     onChange={this.onChangeHandler}
                     name="term"
                     value={this.state.term}
                     onKeyDown={this.onKeyHandler}
-                />
+                     />
+                {/* <input
+                    type="text"
+                    placeholder="Contact Name"
+                    onChange={this.onChangeHandler}
+                    name="term"
+                    value={this.state.term}
+                    onKeyDown={this.onKeyHandler}
+                /> */}
             </form>
         )
     }
