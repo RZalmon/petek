@@ -28,6 +28,14 @@ export function getUser() {
         dispatch({ type: 'GET_USER', user })
     }
 }
+export function updateUser(user) {
+    return async dispatch => {
+        const updatedUser = await UserService.update(user);
+        console.log(updatedUser);
+        dispatch({ type: 'SET_USER', user:updatedUser })
+    }
+}
+
 
 //ADD Move
 // export function addMove(contact, amount){

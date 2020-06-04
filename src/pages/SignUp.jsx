@@ -101,8 +101,6 @@ class SignUp extends Component {
 }
 
 
-
-
   render() {
     const {isSignUp} = this.state
     const {imgUrl} = this.state.newUser
