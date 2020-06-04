@@ -6,9 +6,16 @@ import NoteTodo from './Note/NoteTodo'
 
 
 export default ({ note }) => {
+    const cmps = {
+        NoteText,
+        NoteImg,
+        NoteVideo,
+        NoteTodo
+    }
+    const NoteType = cmps[note.type];
     return (
         <div className="note-preview">
-            <h2>{note.data}</h2>
+            <NoteType note={note} />
         </div>
     )
 }
