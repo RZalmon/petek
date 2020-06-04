@@ -5,7 +5,7 @@ import { storageService } from '@/services/storage.service';
 var demoNotes = [
     {
         _id: 'd4a5x',
-        type: 'noteText',
+        type: 'NoteText',
         data: 'Free I feel free like you promised I\d be',
         style: {
             backgroundColor: '#90ccf4'
@@ -13,7 +13,7 @@ var demoNotes = [
     },
     {
         _id: 'ZzZzZ',
-        type: 'noteVideo',
+        type: 'NoteVideo',
         data: 'https://www.youtube.com/embed/aYDfwUJzYQg',
         style: {
             backgroundColor: '#4caf50'
@@ -21,7 +21,7 @@ var demoNotes = [
     },
     {
         _id: 'XxXxX',
-        type: 'noteImg',
+        type: 'NoteImg',
         data: 'https://media.giphy.com/media/PDmXIQru17Udy/giphy.gif',
         style: {
             backgroundColor: '#f3d250'
@@ -29,7 +29,7 @@ var demoNotes = [
     },
     {
         _id: 'AaAaA',
-        type: 'noteTodos',
+        type: 'NoteTodo',
         data: [
             { txt: 'Eat', isDone: false },
             { txt: 'Pray', isDone: false },
@@ -41,7 +41,7 @@ var demoNotes = [
     },
     {
         _id: 'Babab',
-        type: 'noteText',
+        type: 'NoteText',
         data: 'Rak TB!',
         style: {
             backgroundColor: '#4caf50'
@@ -49,7 +49,7 @@ var demoNotes = [
     },
     {
         _id: 'C3PO1',
-        type: 'noteImg',
+        type: 'NoteImg',
         data: 'https://www.myabandonware.com/media/screenshots/j/jazz-jackrabbit-2-4dm/jazz-jackrabbit-2_3.jpg',
         style: {
             backgroundColor: '#ffa350'
@@ -57,7 +57,7 @@ var demoNotes = [
     },
     {
         _id: 'R2D21',
-        type: 'noteImg',
+        type: 'NoteImg',
         data: 'https://media.giphy.com/media/l11IVhXPESQqu0z3GQ/giphy.gif',
         style: {
             backgroundColor: '#f78888'
@@ -65,7 +65,7 @@ var demoNotes = [
     },
     {
         _id: '12d2r',
-        type: 'noteImg',
+        type: 'NoteImg',
         data: 'https://media.giphy.com/media/mi6DsSSNKDbUY/giphy.gif',
         style: {
             backgroundColor: '#ffa350'
@@ -73,7 +73,7 @@ var demoNotes = [
     },
     {
         _id: 'SPura',
-        type: 'noteTodos',
+        type: 'NoteTodo',
         data: [
             { txt: 'Elections1', isDone: true },
             { txt: 'Elections2', isDone: true },
@@ -85,7 +85,7 @@ var demoNotes = [
     },
     {
         _id: 'SPurs',
-        type: 'noteImg',
+        type: 'NoteImg',
         data: 'https://media.giphy.com/media/3GnCVaJAGhfJ6/giphy.gif',
         style: {
             backgroundColor: '#4caf50'
@@ -93,7 +93,7 @@ var demoNotes = [
     },
     {
         _id: 'pPZpZp',
-        type: 'noteVideo',
+        type: 'NoteVideo',
         data: 'https://www.youtube.com/embed/9yVsFL6oMGE',
         style: {
             backgroundColor: '#4caf50'
@@ -101,7 +101,7 @@ var demoNotes = [
     },
     {
         _id: 'srups',
-        type: 'noteImg',
+        type: 'NoteImg',
         data: 'https://assets.bigcartel.com/product_images/217429087/Primus_Norfolk_Regular.jpg?auto=format&fit=max&h=1000&w=1000',
         style: {
             backgroundColor: '#f3d250'
@@ -109,7 +109,7 @@ var demoNotes = [
     },
     {
         _id: 'BeAtl',
-        type: 'noteText',
+        type: 'NoteText',
         data: `It was twenty years ago today
             Sergeant Pepper taught the band to play,
             They\'ve been going in and out of style,
@@ -124,7 +124,7 @@ var demoNotes = [
     },
     {
         _id: 'parcR',
-        type: 'noteImg',
+        type: 'NoteImg',
         data: 'https://www.disccenter.co.il/content/products/prodimage_46385.jpg',
         style: {
             backgroundColor: '#f78888'
@@ -132,7 +132,7 @@ var demoNotes = [
     },
     {
         _id: 'igPOP',
-        type: 'noteImg',
+        type: 'NoteImg',
         data: 'https://i.pinimg.com/originals/fc/45/67/fc456734ac8265e654aaa4360750c488.jpg',
         style: {
             backgroundColor: '#f3d250'
@@ -140,7 +140,7 @@ var demoNotes = [
     },
     {
         _id: 'ww2DD',
-        type: 'noteImg',
+        type: 'NoteImg',
         data: 'https://wallpaperaccess.com/full/560725.jpg',
         style: {
             backgroundColor: '#ffa350'
