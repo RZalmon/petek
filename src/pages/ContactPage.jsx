@@ -48,7 +48,7 @@ class ContactPage extends Component {
                     filterBy={this.state.filterBy}
                     onFilter={this.onFilterHandler}
                     moveToContact={this.handleKeyPress}></ContactFilter>
-                {contacts.length && <ContactList contacts={contacts}></ContactList>}
+                {!!contacts && <ContactList contacts={contacts}></ContactList>}
             </div>
         )
     }

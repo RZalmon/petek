@@ -15,6 +15,7 @@ async function signUp(credentials) {
         fullName: credentials.fullName,
         password: credentials.password,
         friends: [],
+        notifications: [],
         imgUrl:credentials.imgUrl
     };
     StorageService.save(KEY, USER);

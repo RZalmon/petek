@@ -1,11 +1,19 @@
 import React from 'react';
+import addFriendImg from '../assets/svg/friends.svg'
+import { Link } from 'react-router-dom';
 
-export default ({ contact }) => {
+
+export default ({ contact , onAddFriend }) => {
     return (
         <div className="contact-preview">
-            <img src={contact.imgUrl? contact.imgUrl : `https://robohash.org/${contact.userName}.png`} alt={`${contact.userName}`} className="avatar avatar-s"/>
+            <Link to={'/board/' + contact._id}>
+            <img src={contact.imgUrl} alt={`${contact.userName}`} className="avatar avatar-s"/>
+            <div className="user-name-container">
             <span>User Name: {contact.userName}</span>
             <span>full Name: {contact.fullName}</span>
+            </div>
+            </Link>
+            <img src={addFriendImg} alt="" className="add-friend-img" onClick={onAddFriend}/>
         </div>
     );
 };

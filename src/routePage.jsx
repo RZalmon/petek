@@ -11,6 +11,8 @@ import SignUp from './pages/SignUp'
 class RoutePage extends React.Component {
 
   async  componentDidMount() {
+    console.log(this.props);
+    
      await this.props.getUser();    
       if(!this.isInSignupPage && !this.props.user){
         this.props.history.push('/signup')
@@ -39,7 +41,7 @@ class RoutePage extends React.Component {
       <div className="router-page">
         <main>
           <Switch>
-            <Route path="/signup" exact component={SignUp} />
+            <Route path="/signup" exact render={(routerProps)=><SignUp {...routerProps} onConnectSocket={this.props.onConnectSocket}/>} />
             <Route path="/" exact component={HomePage} />
             <Route path="/contact" component={ContactPage} />
             <Route path="/board/:id" component={BoardPage} />

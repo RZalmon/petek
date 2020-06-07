@@ -21,12 +21,13 @@ class SignUp extends Component {
       userName: '',
       fullName:'',
       password:'',
-      imgUrl:''
+      imgUrl:'',
     },
-    isSignUp:false
+    isSignUp:false,
+    isLoading:false
   }
 
-  componentDidMount() {  
+  componentDidMount() { 
     this.getLoggedinUser();    
   }
 
@@ -56,13 +57,18 @@ class SignUp extends Component {
   }
 
   onUploadImg = async (ev) =>{    
+    this.setState({isLoading:true})
     let userImgUrl = await CloudinaryService.uploadImg(ev) 
     this.setState({ newUser: {
       ...this.state.newUser,
       imgUrl: userImgUrl.secure_url
-}})
+    }})
+    this.setState({isLoading:false})
+  }
 
-
+  connectSockets(id){
+   this.props.onConnectSocket(id)
+ 
   }
 
   toggleSignUp = () =>{
@@ -96,20 +102,21 @@ class SignUp extends Component {
       this.resetInput()
       return
     }
-    
+    this.connectSockets(this.props.user._id)
     this.props.history.push("/")
 }
 
 
+
   render() {
-    const {isSignUp} = this.state
+    const {isSignUp, isLoading} = this.state
     const {imgUrl} = this.state.newUser
     return (
       <div className="signup-form">
         <form onSubmit={this.onHandleSubmit}>
           {!isSignUp && <h1>Login</h1>}
           {isSignUp && <h1>SignUp</h1>}
-          {isSignUp && <AvatarEdit onUploadImg = {this.onUploadImg} imgUrl={imgUrl} />}
+          {isSignUp && <AvatarEdit onUploadImg = {this.onUploadImg} imgUrl={imgUrl} isLoading={isLoading}/>}
           {isSignUp &&<MDBInput label="Full Name" name="fullName" value={this.state.newUser.fullName || ''} onChange={this.onChangeHandler}/>}
           <MDBInput label="UserName"  type="text" name="userName" value={this.state.newUser.userName || ''}  onChange={this.onChangeHandler} />
           <MDBInput label="Password" type="password" name="password" value={this.state.newUser.password || ''}  onChange={this.onChangeHandler}/>

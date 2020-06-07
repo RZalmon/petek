@@ -2,17 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { getUser } from '../actions/UserActions';
 import { updateUser } from '../actions/UserActions';
-import { UserService } from '../services/UserService';
 import {AvatarEdit} from '../cmps/User/AvatarEdit'
 import ContactFilter from '../cmps/ContactFilter'
 import { loadContacts } from '../actions/ContactActions';
 import ContactList from '../cmps/ContactList'
+
 import CloudinaryService from '../../src/services/CloudinaryService'
 
 
 class HomePage extends Component {
   state = {
-    filterBy: { term: '' }
+    filterBy: { term: '' },
+    isLoading:false
 }
   componentDidMount() {
     if (!this.props.user) this.props.history.push("/signup")
@@ -23,13 +24,15 @@ class HomePage extends Component {
 
 onUploadImg = async (ev) =>{    
   let user = this.props.user
+  this.setState({isLoading:true})
   let userImgUrl = await CloudinaryService.uploadImg(ev) 
-  //TODO UPDATED USER USING ACTION
-  const updatedUser = Object.assign(user, {imgUrl: userImgUrl.secure_url})
-  console.log(updatedUser);
-  
+  const updatedUser = Object.assign(user, {imgUrl: userImgUrl.secure_url})  
   this.props.updateUser(updatedUser)
-  
+  this.setState({isLoading:false})
+}
+
+onAddFriend = (ev) => {
+  console.log('bo kapara',ev);
 }
 
 onFilterHandler = (filterBy) => {
@@ -41,9 +44,6 @@ onFilterHandler = (filterBy) => {
             },
         };
     }, this.loadContacts);
-
-    //TODO? IF !FILTER BY return 
-    console.log(filterBy);
     
 };
 
@@ -53,16 +53,17 @@ onFilterHandler = (filterBy) => {
 
   render() {
     const { user,contacts } = this.props;
+    const {isLoading} = this.state
 
     return (
       <div>
         {user &&
           <div>
             {user.userName && <h2>Hi There {this.capitalize(user.userName)}</h2>}
-            <AvatarEdit imgUrl={user.imgUrl}  onUploadImg = {this.onUploadImg}/>
+            <AvatarEdit imgUrl={user.imgUrl}  onUploadImg = {this.onUploadImg} isLoading = {isLoading}/>
             <h6>Let's add contacts veze</h6>
             <ContactFilter filterBy={this.state.filterBy} onFilter={this.onFilterHandler} ></ContactFilter>
-            {contacts && <ContactList contacts={contacts}/>}
+            {contacts && <ContactList contacts={contacts} onAddFriend={this.onAddFriend}/>}
           </div>
         }
       </div>

@@ -1,15 +1,13 @@
 .contact-preview {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    column-gap: 6px;
-    margin-bottom: 10px;
-    align-items: center;
-    padding: 4px 6px;
-    img {
-        grid-row: 1 / -1;
-        width: 100px;
-        border-radius: 50%;
-        border: solid 1px black;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin:10px;
+    .add-friend-img{
+        width: 2.4rem;
+    }
+    .user-name-container{
+        display: flex;
+        flex-direction: column;
     }
 }

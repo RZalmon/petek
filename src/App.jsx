@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.scss';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import SocketService from './services/SocketService'
+
 
 
 
@@ -13,15 +17,55 @@ const history = createBrowserHistory();
 
 
 
-function App() {
+
+ const updateUser = (updatedUser,props) => {
+  if (updatedUser) {
+    props.updateUser(updatedUser)
+    // this.audioNotification.play();
+    console.log('updated user', props);
+    
+  } else {
+    console.log("ERROR IN UPDATE USER");
+  }
+}
+
+
+
+ const App = (props) => {
+
+  const connectSockets = (id) => {
+    SocketService.setup()
+    const user = JSON.parse(JSON.stringify(props.user));
+    if (!user) return;
+    SocketService.on(`updateUser ${user._id}`, updateUser, props);
+    console.log(id,props);
+  }
+
+  useEffect(() => {
+    // Update the document title using the browser API
+  });
   return (
     <div className="App">
       <Router history={history}>
          <NavBar/>
-            <RoutePage/>
+            <RoutePage onConnectSocket={connectSockets}/>
           </Router>
     </div>
   );
 }
 
-export default App;
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.loggedinUser,
+    contacts: state.contact.contacts,
+  };
+};
+
+const mapDispatchToProps = {
+  // getUser,
+  // updateUser,
+  // loadContacts,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
