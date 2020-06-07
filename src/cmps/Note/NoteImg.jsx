@@ -3,7 +3,7 @@ import React from 'react'
 export default ({ note }) => {
     return (
         <div className="note-img">
-            <p>Hello {note.type}</p>
+            <img src={note.data} alt={note.data} />
         </div>
     )
 }
