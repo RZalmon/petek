@@ -1,12 +1,12 @@
 
-import { httpService } from './http.service';
-import { storageService } from '@/services/storage.service';
+import { HttpService } from './HttpService';
+import { StorageService } from './StorageService';
 
 var demoNotes = [
     {
         _id: 'd4a5x',
         type: 'NoteText',
-        data: 'Free I feel free like you promised I\d be',
+        data: `Free I feel free like you promised I'd be`,
         style: {
             backgroundColor: '#90ccf4'
         }
@@ -112,11 +112,11 @@ var demoNotes = [
         type: 'NoteText',
         data: `It was twenty years ago today
             Sergeant Pepper taught the band to play,
-            They\'ve been going in and out of style,
-            But they\'re guaranteed to raise the smile,
+            They've been going in and out of style,
+            But they're guaranteed to raise the smile,
             So may I introduce to you,
-            The act you\'ve known for all these years,
-            Sergeant Pepper\'s Lonely Hearts Club Band.`,
+            The act you've known for all these years,
+            Sergeant Pepper's Lonely Hearts Club Band.`,
 
         style: {
             backgroundColor: '#90ccf4'
@@ -152,30 +152,23 @@ var demoNotes = [
 const NOTE_KEY = 'notes';
 
 
-export const noteService = {
-    query,
-    getById,
-    save,
-    remove,
-    getEmptyNote
-}
 
 function query(critirea) {
     const params = new URLSearchParams(critirea);
-    return httpService.get(`note?${params}`);
+    return HttpService.get(`note?${params}`);
 }
 function getById(id) {
-    return httpService.get(`note/${id}`);
+    return HttpService.get(`note/${id}`);
 }
 function remove(id) {
-    return httpService.delete(`note/${id}`);
+    return HttpService.delete(`note/${id}`);
 }
 
 async function save(note) {
     let prm;
-    if (note._id) prm = httpService.put(`station/${note._id}`, note);
+    if (note._id) prm = HttpService.put(`station/${note._id}`, note);
     else {
-        prm = httpService.post('note', note);
+        prm = HttpService.post('note', note);
     }
     const res = await prm;
     return res;
@@ -191,6 +184,17 @@ function getEmptyNote(type) {
         }
     }
 }
+
+
+export const NoteService = {
+    query,
+    getById,
+    save,
+    remove,
+    getEmptyNote
+}
+
+
 // function getEmptyCritirea() {
 //     return {
 //         txt: '',
