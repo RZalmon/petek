@@ -16,7 +16,7 @@ export function loadNotes(filterBy) {
 export function loadNoteById(id) {
     return async dispatch => {
         try {
-            const note = await NoteService.getById(id);   //MAYBE WE NOT NEED
+            const note = await NoteService.getById(id);   //MAYBE WE DONT NEED
             dispatch({ type: 'SET_CURR_NOTE', note })
         } catch (err) {
             console.log('ERROR', err)

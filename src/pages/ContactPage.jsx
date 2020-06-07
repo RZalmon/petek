@@ -8,7 +8,7 @@ import ContactList from '../cmps/ContactList'
 
 class ContactPage extends Component {
     state = {
-        filterBy: { term: '' }
+        filterBy: { term: '', roomId: '' }
     }
 
     componentDidMount() {
