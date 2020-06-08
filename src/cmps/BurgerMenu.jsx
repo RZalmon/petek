@@ -50,6 +50,7 @@ class BurgerMenu extends React.Component {
         <NavLink activeClassName="active" to="/board/:id" exact onClick={() => this.closeMenu()}>
           BoardPage
         </NavLink>
+            <span className="notification-count">{user.notifications.length}</span>
         <NavLink activeClassName="active" to={`/inbox/${user._id}`} exact onClick={() => this.closeMenu()}>
           Inbox
         </NavLink>

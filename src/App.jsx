@@ -20,6 +20,8 @@ const history = createBrowserHistory();
  const App = (props) => {
 
   const connectSockets = (id) => {
+    console.log('socket connected!');
+    
     SocketService.setup()
     const user = JSON.parse(JSON.stringify(props.user));
     if (!user) return;
@@ -28,15 +30,11 @@ const history = createBrowserHistory();
 
   const updateUser = (updatedUser) => {
     let audio = new Audio(audioNotification);
-
     console.log('its back!', updatedUser);
-    console.log('its props!', props);
-    
+
    if (updatedUser) {
      props.updateUser(updatedUser)
      audio.play()
-     // this.audioNotification.play();
-     console.log('updated user', props);
      
    } else {
      console.log("ERROR IN UPDATE USER");
@@ -45,7 +43,7 @@ const history = createBrowserHistory();
  
 
   useEffect(() => {
-    SocketService.setup()
+    // connectSockets()
 
     // Update the document title using the browser API
   });
