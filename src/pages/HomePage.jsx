@@ -38,6 +38,8 @@ class HomePage extends Component {
   }
 
 onAddFriend = (ev,friendId) => {
+  console.log('bo kapara 2');
+  
   ev.preventDefault()
   const {user} = this.props
   SocketService.emit('Add Friend', {friendId, _id: user._id, userName:user.userName, fullName:user.fullName, type:'NotificationFriend',imgUrl:user.imgUrl })
