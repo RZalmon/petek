@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 
 import { Route, Switch, withRouter } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import InboxPage from './pages/InboxPage'
+
 import ContactPage from './pages/ContactPage'
 import BoardPage from './pages/BoardPage'
 import SignUp from './pages/SignUp'
@@ -45,6 +47,7 @@ class RoutePage extends React.Component {
             <Route path="/" exact component={HomePage} />
             <Route path="/contact" component={ContactPage} />
             <Route path="/board/:id" component={BoardPage} />
+            <Route path="/inbox/:id" exact component={InboxPage} />
             {/* <Route path="/contact/edit/:id?" component={ContactEdit} /> */}
             {/* <Route path="/contact/:id" component={ContactDetails} /> */}
             {/* <Route path="/statistics" component={Statistics} /> */}

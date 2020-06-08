@@ -1,4 +1,4 @@
-import React, { useState  } from 'react';
+import React from 'react';
 import avatarImg from '../../assets/png/user.png'
 import Loading from "../Loading";
 

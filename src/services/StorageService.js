@@ -7,6 +7,8 @@ function load(key) {
     let value = JSON.parse(item);
     return value;
 }
+
+
 export const StorageService = {
     save,
     load
