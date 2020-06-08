@@ -166,7 +166,7 @@ function remove(id) {
 
 async function save(note) {
     let prm;
-    if (note._id) prm = HttpService.put(`station/${note._id}`, note);
+    if (note._id) prm = HttpService.put(`note/${note._id}`, note);
     else {
         prm = HttpService.post('note', note);
     }

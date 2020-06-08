@@ -21,17 +21,13 @@ const history = createBrowserHistory();
 
   const connectSockets = (id) => {
     SocketService.setup()
-    const user = JSON.parse(JSON.stringify(props.user));
+    const user = props.user;
     if (!user) return;
     SocketService.on(`updateUser ${user._id}`, updateUser);
   }
 
   const updateUser = (updatedUser) => {
-    let audio = new Audio(audioNotification);
-
-    console.log('its back!', updatedUser);
-    console.log('its props!', props);
-    
+    let audio = new Audio(audioNotification);    
    if (updatedUser) {
      props.updateUser(updatedUser)
      audio.play()
