@@ -67,3 +67,15 @@
   .bm-overlay {
     background: rgba(0, 0, 0, 0.3);
   }
+  
+  .notification-count{
+    position: absolute;
+    color: white;
+    border: 1px solid white;
+    border-radius: 50%;
+    font-size: 15px;
+    width: 25px;
+    height: 25px;
+    background-color: red;
+
+  }

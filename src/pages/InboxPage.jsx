@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import { updateUser } from '../actions/UserActions';
 
+import SocketService from '../services/SocketService'
+
+
 
 import NotificationList from '../cmps/Notification/NotificationList';
 
@@ -11,10 +14,16 @@ const InboxPage = (props) => {
   console.log('USER', user);
 
  const onApprove = (notification) =>{
-  spliceNotification(notification);
-}
-const onDecline = (notification) =>{
-  spliceNotification(notification);
+   const _id = user._id;
+
+   spliceNotification(notification); 
+   SocketService.emit("approve", {notification, _id});
+   
+  }
+  const onDecline = (notification) =>{
+    
+    spliceNotification(notification);
+    SocketService.emit("decline", notification);
  }
 
  const spliceNotification = (notification) =>{
@@ -22,7 +31,8 @@ const onDecline = (notification) =>{
     currNotification => currNotification._id === notification._id
   );
   user.notifications.splice(idx, 1);
-  props.updateUser(JSON.parse(JSON.stringify(user)))
+  props.updateUser(user)
+
   
  }
   return (
