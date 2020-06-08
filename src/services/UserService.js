@@ -6,7 +6,7 @@ var USER = { userName: 'Ramus', fullName: 'Rami Davidov', password: '123456', fr
 const KEY = 'user';
 
 function getUser() {
-    USER = StorageService.load(KEY);    
+    USER = StorageService.load(KEY);
     return USER ? USER : null;
 }
 async function signUp(credentials) {
@@ -16,7 +16,7 @@ async function signUp(credentials) {
         password: credentials.password,
         friends: [],
         notifications: [],
-        imgUrl:credentials.imgUrl
+        imgUrl: credentials.imgUrl
     };
     StorageService.save(KEY, USER);
     await HttpService.post('auth/signup', USER)
@@ -26,7 +26,7 @@ async function signUp(credentials) {
 
 async function login(credentials) {
     const USER = await HttpService.post('auth/login', credentials)
-    if (!USER) return  
+    if (!USER) return
     StorageService.save(KEY, USER);
     return USER;
 }
@@ -39,8 +39,10 @@ async function logout() {
 }
 
 function update(user) {
-    StorageService.save(KEY, user);
-    return HttpService.put(`user/${user._id}`, user)
+    const updatedUser = HttpService.put(`user/${user._id}`, user)
+    StorageService.save(KEY, updatedUser);
+    console.log('updatedUser!', updatedUser);
+    return updatedUser
 }
 
 export const UserService = {

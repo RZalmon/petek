@@ -21,8 +21,7 @@ const history = createBrowserHistory();
     SocketService.setup()
     const user = JSON.parse(JSON.stringify(props.user));
     if (!user) return;
-    SocketService.on(`updateUser ${user._id}`, updateUser, props);
-    console.log(id,props);
+    SocketService.on(`updateUser ${user._id}`, updateUser);
   }
 
   const updateUser = (updatedUser) => {
