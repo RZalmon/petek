@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+
 import { getUser } from '../actions/UserActions';
 import { updateUser } from '../actions/UserActions';
-import {AvatarEdit} from '../cmps/User/AvatarEdit'
-import ContactFilter from '../cmps/ContactFilter'
 import { loadContacts } from '../actions/ContactActions';
-import ContactList from '../cmps/ContactList'
 
+import {AvatarEdit} from '../cmps/User/AvatarEdit'
+import ContactList from '../cmps/ContactList'
+import ContactFilter from '../cmps/ContactFilter'
+
+import SocketService from '../services/SocketService'
 import CloudinaryService from '../../src/services/CloudinaryService'
+
 
 
 class HomePage extends Component {
@@ -16,6 +20,7 @@ class HomePage extends Component {
     isLoading:false
 }
   componentDidMount() {
+    // SocketService.setup()
     if (!this.props.user) this.props.history.push("/signup")
   }
   loadContacts = async () => {
@@ -31,8 +36,10 @@ onUploadImg = async (ev) =>{
   this.setState({isLoading:false})
 }
 
-onAddFriend = (ev) => {
-  console.log('bo kapara',ev);
+onAddFriend = (ev,friendId) => {
+  ev.preventDefault()
+  const {user} = this.props
+  SocketService.emit('Add Friend', {friendId, _id: user._id, userName:user.userName, fullName:user.fullName, type:'NotificationFriend',imgUrl:user.imgUrl })
 }
 
 onFilterHandler = (filterBy) => {

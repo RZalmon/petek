@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 import ContactPreview from './ContactPreview'
 export default (props) => {
@@ -7,7 +8,9 @@ export default (props) => {
         <div className="contact-list">
             {props.contacts.map(contact => {
                 return (
-                   <ContactPreview contact={contact}  key={contact._id} onAddFriend={onAddFriend} />
+                    <Link to={'/board/' + contact._id} key={contact._id}>
+                        <ContactPreview contact={contact} onAddFriend={onAddFriend} />
+                    </Link>
                 )
             })}
         </div>

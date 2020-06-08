@@ -5,7 +5,7 @@ import { Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import SocketService from './services/SocketService'
-
+import { updateUser } from '../src/actions/UserActions';
 
 
 
@@ -14,22 +14,6 @@ import NavBar from './cmps/NavBar';
 
 
 const history = createBrowserHistory();
-
-
-
-
- const updateUser = (updatedUser,props) => {
-  if (updatedUser) {
-    props.updateUser(updatedUser)
-    // this.audioNotification.play();
-    console.log('updated user', props);
-    
-  } else {
-    console.log("ERROR IN UPDATE USER");
-  }
-}
-
-
 
  const App = (props) => {
 
@@ -41,7 +25,24 @@ const history = createBrowserHistory();
     console.log(id,props);
   }
 
+  const updateUser = (updatedUser) => {
+    console.log('its back!', updatedUser);
+    console.log('its props!', props);
+    
+   if (updatedUser) {
+     props.updateUser(updatedUser)
+     // this.audioNotification.play();
+     console.log('updated user', props);
+     
+   } else {
+     console.log("ERROR IN UPDATE USER");
+   }
+ }
+ 
+
   useEffect(() => {
+    SocketService.setup()
+
     // Update the document title using the browser API
   });
   return (
@@ -64,7 +65,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   // getUser,
-  // updateUser,
+  updateUser,
   // loadContacts,
 };
 
