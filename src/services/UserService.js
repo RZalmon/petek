@@ -2,15 +2,15 @@
 import { StorageService } from './StorageService'
 import { HttpService } from './HttpService.js'
 
-var USER = { userName: 'Ramus', fullName: 'Rami Davidov', password: '123456', friends: [] };
+// var USER = { userName: 'Ramus', fullName: 'Rami Davidov', password: '123456', friends: [] };
 const KEY = 'user';
 
 function getUser() {
-    USER = StorageService.load(KEY);
+    const USER = StorageService.load(KEY);
     return USER ? USER : null;
 }
 async function signUp(credentials) {
-    USER = {
+    let USER = {
         userName: credentials.userName,
         fullName: credentials.fullName,
         password: credentials.password,
@@ -18,8 +18,9 @@ async function signUp(credentials) {
         notifications: [],
         imgUrl: credentials.imgUrl
     };
+    USER = await HttpService.post('auth/signup', USER)
+    console.log('Frontend USER SERVICE USER, ', USER);
     StorageService.save(KEY, USER);
-    await HttpService.post('auth/signup', USER)
     // getUser()
     return USER;
 }
@@ -38,8 +39,8 @@ async function logout() {
     return (msg)
 }
 
-function update(user) {
-    const updatedUser =  HttpService.put(`user/${user._id}`, user)
+async function update(user) {
+    const updatedUser = await HttpService.put(`user/${user._id}`, user)
     StorageService.save(KEY, updatedUser);
     return updatedUser
 }

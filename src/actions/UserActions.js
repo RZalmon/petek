@@ -1,14 +1,12 @@
 import { UserService } from '../services/UserService'
 
 export function signUp(user) {
-    console.log(user);
     return async dispatch => {
         const newUser = await UserService.signUp(user);
         dispatch({ type: 'SET_USER', newUser })
     }
 }
 export function login(user) {
-    console.log(user);
     return async dispatch => {
         const newUser = await UserService.login(user);
         dispatch({ type: 'SET_USER',newUser })
@@ -23,18 +21,14 @@ export function logout() {
 }
 
 export function getUser() {
-    console.log('getUser INVOKED!');
     return async dispatch => {
         const user = await UserService.getUser();
         dispatch({ type: 'GET_USER', user })
     }
 }
 export function updateUser(user) {
-    console.log('user in actionnnnnnn',user);
-    
     return async dispatch => {
         const updatedUser = await UserService.update(user);
-        console.log(updatedUser);
         dispatch({ type: 'SET_USER', user:updatedUser })
     }
 }
