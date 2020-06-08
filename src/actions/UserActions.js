@@ -23,6 +23,7 @@ export function logout() {
 }
 
 export function getUser() {
+    console.log('getUser INVOKED!');
     return async dispatch => {
         const user = await UserService.getUser();
         dispatch({ type: 'GET_USER', user })

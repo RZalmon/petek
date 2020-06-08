@@ -13,7 +13,8 @@ class ContactPage extends Component {
 
     componentDidMount() {
         // this.loadContacts()
-        console.log(this.state.filterBy)
+        console.log('filter by', this.state.filterBy)
+        console.log('ContaactPage User', this.props.user)
     }
 
     loadContacts = async () => {
@@ -41,14 +42,17 @@ class ContactPage extends Component {
     }
 
     render() {
-        const { contacts } = this.props
+        const { contacts, user } = this.props
         return (
             <div>
-                <ContactFilter
-                    filterBy={this.state.filterBy}
-                    onFilter={this.onFilterHandler}
-                    moveToContact={this.handleKeyPress}></ContactFilter>
-                {!!contacts && <ContactList contacts={contacts}></ContactList>}
+                {user && <div>
+                    <ContactFilter
+                        filterBy={this.state.filterBy}
+                        onFilter={this.onFilterHandler}
+                        moveToContact={this.handleKeyPress}></ContactFilter>
+                    {!!contacts && <ContactList contacts={user.friends}></ContactList>}
+                </div>
+                }
             </div>
         )
     }
@@ -60,6 +64,7 @@ class ContactPage extends Component {
 const mapStateToProps = (state) => {
     return {
         contacts: state.contact.contacts,
+        user: state.user.loggedinUser,
     };
 };
 
