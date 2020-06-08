@@ -12,9 +12,7 @@ export default ({ note }) => {
     //     let url = this.note.info.url
     //     const vidId = url.substring(url.length - 11, url.length)
     //     return 'https://www.youtube.com/embed/' + vidId
-    // }
-    console.log(formattedVidLink());
-    
+    // }    
     return (
         <div className="note-video">
             <iframe width="100%" src={formattedVidLink()}></iframe>
