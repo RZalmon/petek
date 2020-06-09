@@ -73,7 +73,7 @@ onAddFriend = (ev,friendId) => {
             <AvatarEdit imgUrl={user.imgUrl} onUploadImg={this.onUploadImg} isLoading={isLoading} />
             <h6>Let's add contacts veze</h6>
             <ContactFilter filterBy={this.state.filterBy} onFilter={this.onFilterHandler} ></ContactFilter>
-            {contacts && <ContactList contacts={contacts} onAddFriend={this.onAddFriend} />}
+            {contacts && <ContactList contacts={contacts} onAddFriend={this.onAddFriend} loggedinUser={user} />}
           </div>
         }
       </div>

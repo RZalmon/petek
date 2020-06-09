@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import addFriendImg from '../assets/svg/friends.svg'
 import friendReqSent from '../assets/svg/ok.svg'
 
 
-export default ({ contact, onAddFriend }) => {
+export default ({ contact, onAddFriend, loggedinUser }) => {
     ;
 
     const [isFriendSent, setIsFriendSent] = useState(false)
+    const [isFriend, setIsFriend] = useState(false)
+
+    useEffect(() => {
+        if(!loggedinUser) return
+        let friend = loggedinUser.friends.find(friend =>{return friend._id === contact._id})
+        friend ? setIsFriend(true) : setIsFriend(false) 
+        
+        
+      });
 
     const toggleIsFriend = (ev) => {
         ev.preventDefault()
         setIsFriendSent(true)
+        
     }
 
     const handelClick = (ev) => {
@@ -26,8 +36,11 @@ export default ({ contact, onAddFriend }) => {
                 <span>User Name: {contact.userName}</span>
                 <span>full Name: {contact.fullName}</span>
             </div>
-            {!contact.roomId && <img src={isFriendSent ? friendReqSent : addFriendImg} alt="" className="add-friend-img" onClick={(ev) => isFriendSent ? '' : handelClick(ev)} />}
-            {/* <img src={addFriendImg} alt="" className="add-friend-img" onClick={(ev) => onAddFriend(ev,contact._id) ; (ev) => toggleIsFriend(ev)}/> */}
+            {!contact.roomId &&
+             <img src={isFriendSent || isFriend ? friendReqSent : addFriendImg} 
+             alt=""
+              className="add-friend-img"
+               onClick={(ev) => isFriend || isFriendSent ? toggleIsFriend(ev) : handelClick(ev)}/>}
         </div>
     );
 };
