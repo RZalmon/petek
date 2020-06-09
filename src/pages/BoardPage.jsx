@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { loadRoomById } from '../actions/RoomActions';
 
+import NoteAdd from '../cmps/NoteAdd'
 import ButtonMenu from '../cmps/ButtonMenu'
 import NoteList from '../cmps/NoteList'
 
@@ -53,9 +54,8 @@ class BoardPage extends Component {
         if (this.props.room) var { notes } = this.props.room //ASK BAR WHY CONST NOT WORKS INSTED OF VAR
         return (
             <div className="board-page">
+                <NoteAdd />
                 {notes && <div>
-                    <h1>Hello Board Page</h1>
-                    <ButtonMenu></ButtonMenu>
                     {!!notes.length && <NoteList notes={notes} />}
                 </div>
                 }

@@ -43,7 +43,7 @@ const history = createBrowserHistory();
  
 
   useEffect(() => {
-    // connectSockets()
+    connectSockets()
 
     // Update the document title using the browser API
   });
