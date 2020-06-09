@@ -19,13 +19,13 @@ const history = createBrowserHistory();
 
  const App = (props) => {
 
-  const connectSockets = (id) => {
-    console.log('socket connected!');
-    
+  const connectSockets = (id) => {    
     SocketService.setup()
     const user = props.user;
     if (!user) return;
     SocketService.on(`updateUser ${user._id}`, updateUser);
+    SocketService.on(`updateUserWithoutAudio ${user._id}`, updatedUser => {console.log(updatedUser);
+    } )
   }
 
   const updateUser = (updatedUser) => {
