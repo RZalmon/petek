@@ -1,10 +1,12 @@
 import React from 'react'
 import NotificationFriend from './NotificationFriend'
+import NotificationResponse from './NotificationResponse'
 
 
-export default ({ notification,onApprove, onDecline }) => {
+export default ({ notification,onApprove, onDecline, onDeleteNotification }) => {
     const cmps = {
-        NotificationFriend
+        NotificationFriend,
+        NotificationResponse,
     }
   
 
@@ -12,6 +14,7 @@ export default ({ notification,onApprove, onDecline }) => {
     return (
         <div className="notification-preview">
             <NotificationType notification={notification} onApprove={onApprove} onDecline={onDecline}/>
+            <button onClick={()=> onDeleteNotification(notification)}>X</button>
         </div>
     )
 }
