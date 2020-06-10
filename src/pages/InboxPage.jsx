@@ -13,29 +13,29 @@ const InboxPage = (props) => {
   const { user } = props
   console.log('USER', user);
 
- const onApprove = (notification) =>{
-   const _id = user._id;
-   spliceNotification(notification); 
-   SocketService.emit("approve", {notification, _id});
-   
-  }
-  const onDecline = (notification) =>{
+  const onApprove = (notification) => {
     const _id = user._id;
     spliceNotification(notification);
-    SocketService.emit("decline", {notification, _id});
- }
+    SocketService.emit("approve", { notification, _id });
 
- const spliceNotification = (notification) =>{
-  const idx = user.notifications.findIndex(
-    currNotification => currNotification._id === notification._id
-  );
-  user.notifications.splice(idx, 1);
-  props.updateUser(user)
- }
+  }
+  const onDecline = (notification) => {
+    const _id = user._id;
+    spliceNotification(notification);
+    SocketService.emit("decline", { notification, _id });
+  }
 
- const onDeleteNotification = (notification) =>{
-  spliceNotification(notification)   
- }
+  const spliceNotification = (notification) => {
+    const idx = user.notifications.findIndex(
+      currNotification => currNotification._id === notification._id
+    );
+    user.notifications.splice(idx, 1);
+    props.updateUser(user)
+  }
+
+  const onDeleteNotification = (notification) => {
+    spliceNotification(notification)
+  }
 
 
 

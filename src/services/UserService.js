@@ -41,6 +41,7 @@ async function logout() {
 
 async function update(user) {
     const updatedUser = await HttpService.put(`user/${user._id}`, user)
+    console.log('user service update USER AFTER BACKEND', updatedUser);
     StorageService.save(KEY, updatedUser);
     return updatedUser
 }

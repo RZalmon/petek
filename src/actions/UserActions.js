@@ -31,8 +31,6 @@ export function updateUser(user) {
     
     return async dispatch => {
         const updatedUser = await UserService.update(user);
-        console.log('updatedUser in actions', updatedUser);
-        
         dispatch({ type: 'SET_USER', user:updatedUser })
     }
 }
