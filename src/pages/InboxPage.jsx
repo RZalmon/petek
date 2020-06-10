@@ -43,7 +43,7 @@ const InboxPage = (props) => {
 
 
   return (
-    (!user) ?  <h1>balls for you</h1> :
+    (!user.notifications.length) ?  <h1>Inbox is empty</h1> :
     <div>
       {user && <div>
         {!!user.notifications.length && <NotificationList notifications={user.notifications} onApprove={onApprove} onDecline={onDecline} onDeleteNotification={onDeleteNotification} ></NotificationList>}

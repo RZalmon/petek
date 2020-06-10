@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
@@ -17,33 +17,35 @@ import NavBar from './cmps/NavBar';
 
 const history = createBrowserHistory();
 
- const App = (props) => {
+const App = (props) => {
 
-  const connectSockets = (id) => {    
+  const connectSockets = (id) => {
     SocketService.setup()
-    const user = props.user;
-    if (!user) return;
-    SocketService.on(`updateUser ${user._id}`, updateUser);
-    SocketService.on(`updateUserWithoutAudio ${user._id}`, updatedUser => {
-      props.updateUser(updatedUser)
-      console.log('app updated user',updatedUser );
-      
-    } )
+    let loggedinUser = props.user;
+    if (!loggedinUser) return;
+    SocketService.on(`updateUser ${loggedinUser._id}`, updateUser);
+    SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => {
+      // user = JSON.parse(JSON.stringify({ loggedinUser }))
+      props.updateUser(user)
+      console.log('app updated user', user);
+
+    })
   }
 
   const updateUser = (updatedUser) => {
     let audio = new Audio(audioNotification);
 
-   if (updatedUser) {;
-     
-     props.updateUser(updatedUser)
-     audio.play()
-     
-   } else {
-     console.log("ERROR IN UPDATE USER");
-   }
- }
- 
+    if (updatedUser) {
+      ;
+
+      props.updateUser(updatedUser)
+      audio.play()
+
+    } else {
+      console.log("ERROR IN UPDATE USER");
+    }
+  }
+
 
   useEffect(() => {
     connectSockets()
@@ -53,9 +55,9 @@ const history = createBrowserHistory();
   return (
     <div className="App">
       <Router history={history}>
-         <NavBar/>
-            <RoutePage onConnectSocket={connectSockets}/>
-          </Router>
+        <NavBar />
+        <RoutePage onConnectSocket={connectSockets} />
+      </Router>
     </div>
   );
 }
