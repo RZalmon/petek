@@ -13,7 +13,6 @@ import SignUp from './pages/SignUp'
 class RoutePage extends React.Component {
 
   async  componentDidMount() {
-    console.log(this.props);
     
      await this.props.getUser();    
       if(!this.isInSignupPage && !this.props.user){

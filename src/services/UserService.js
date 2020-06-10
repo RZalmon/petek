@@ -16,10 +16,10 @@ async function signUp(credentials) {
         password: credentials.password,
         friends: [],
         notifications: [],
-        imgUrl: credentials.imgUrl
+        imgUrl: credentials.imgUrl,
+        joinedAt:Date.now()
     };
     USER = await HttpService.post('auth/signup', USER)
-    console.log('Frontend USER SERVICE USER, ', USER);
     StorageService.save(KEY, USER);
     // getUser()
     return USER;

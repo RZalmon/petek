@@ -24,15 +24,18 @@ const history = createBrowserHistory();
     const user = props.user;
     if (!user) return;
     SocketService.on(`updateUser ${user._id}`, updateUser);
-    SocketService.on(`updateUserWithoutAudio ${user._id}`, updatedUser => {console.log(updatedUser);
+    SocketService.on(`updateUserWithoutAudio ${user._id}`, updatedUser => {
+      props.updateUser(updatedUser)
+      console.log('app updated user',updatedUser );
+      
     } )
   }
 
   const updateUser = (updatedUser) => {
     let audio = new Audio(audioNotification);
-    console.log('its back!', updatedUser);
 
-   if (updatedUser) {
+   if (updatedUser) {;
+     
      props.updateUser(updatedUser)
      audio.play()
      

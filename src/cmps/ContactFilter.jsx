@@ -11,7 +11,6 @@ export default class ContactFilter extends Component {
 
     onChangeHandler = (ev) => {
         const { value, name } = ev.target;
-        console.log(name, ':', value);
         
         this.setState({ [name]: value }, () => {
             this.props.onFilter({ ...this.state });
