@@ -29,10 +29,8 @@ class BoardPage extends Component {
         //         roomId
         //     }
         // }))
-        console.log('RoomID', roomId);
 
         await this.props.loadRoomById(roomId);
-        console.log('room is', this.props.room);
 
     }
 

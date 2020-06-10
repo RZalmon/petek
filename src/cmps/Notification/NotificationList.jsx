@@ -2,7 +2,6 @@ import React from 'react'
 import NotificationPreview from './NotificationPreview'
 
 export default ({notifications, onApprove, onDecline,onDeleteNotification}) => {
-    console.log(onApprove);
     
 
     return (

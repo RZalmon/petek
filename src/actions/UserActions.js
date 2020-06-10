@@ -26,11 +26,12 @@ export function getUser() {
         dispatch({ type: 'GET_USER', user })
     }
 }
-export function updateUser(user) {
-    console.log('user in action', user);
+export function updateUser(user) {    
+    console.log('user in actions', user);
     
     return async dispatch => {
         const updatedUser = await UserService.update(user);
+        
         dispatch({ type: 'SET_USER', user:updatedUser })
     }
 }

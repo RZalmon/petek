@@ -22,7 +22,6 @@ class HomePage extends Component {
   componentDidMount() {
     // SocketService.setup()
     if (!this.props.user) this.props.history.push("/signup")
-    console.log('HomePage USER', this.props.user);
   }
   loadContacts = async () => {
     await this.props.loadContacts(this.state.filterBy);
@@ -38,7 +37,6 @@ class HomePage extends Component {
   }
 
 onAddFriend = (ev,friendId) => {
-  console.log('bo kapara 2');
   
   ev.preventDefault()
   const {user} = this.props

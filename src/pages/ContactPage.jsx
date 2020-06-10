@@ -13,8 +13,6 @@ class ContactPage extends Component {
 
     componentDidMount() {
         // this.loadContacts()
-        console.log('filter by', this.state.filterBy)
-        console.log('ContaactPage User', this.props.user)
     }
 
     loadContacts = async () => {
@@ -22,7 +20,6 @@ class ContactPage extends Component {
     };
 
     onFilterHandler = (filterBy) => {
-        console.log('filter handler', filterBy);
         this.setState((prevState) => {
             // debugger
             return {
