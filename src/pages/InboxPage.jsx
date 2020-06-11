@@ -6,39 +6,28 @@ import { updateUser } from '../actions/UserActions';
 import SocketService from '../services/SocketService'
 
 
-
 import NotificationList from '../cmps/Notification/NotificationList';
 
 const InboxPage = (props) => {
+  
   const { user } = props
-  console.log('USER', user);
 
   const onApprove = (notification) => {
-    const _id = user._id;
-    spliceNotification(notification);
-    SocketService.emit("approve", { notification, _id });
+    SocketService.emit("approve", { notification,user });
 
   }
   const onDecline = (notification) => {
-    const _id = user._id;
-    spliceNotification(notification);
-    SocketService.emit("decline", { notification, _id });
+    SocketService.emit("decline", { notification, user });
   }
 
-  const spliceNotification = (notification) => {
+
+  const onDeleteNotification = (notification) => {
     const idx = user.notifications.findIndex(
       currNotification => currNotification._id === notification._id
     );
     user.notifications.splice(idx, 1);
-    props.updateUser(user)
+      props.updateUser(user)
   }
-
-  const onDeleteNotification = (notification) => {
-    spliceNotification(notification)
-  }
-
-
-
 
 
 

@@ -20,8 +20,8 @@ class HomePage extends Component {
     isLoading: false
   }
   componentDidMount() {
-    // SocketService.setup()
     if (!this.props.user) this.props.history.push("/signup")
+    this.loadContacts()
   }
   loadContacts = async () => {
     await this.props.loadContacts(this.state.filterBy);

@@ -30,6 +30,7 @@ class BurgerMenu extends React.Component {
 
   handleStateChange(state) {
     this.setState({ menuOpen: state.isOpen });
+    this.props.onOpenMenu(state.isOpen)
   }
 
 
@@ -40,7 +41,7 @@ class BurgerMenu extends React.Component {
     if (!user) return ''
 
     return (
-      <Menu right isOpen={menuOpen} onStateChange={(state) => this.handleStateChange(state)}>
+      <Menu right isOpen={menuOpen}  onStateChange={(state) => this.handleStateChange(state)}>
         <NavLink activeClassName="active" exact to="/" onClick={() => this.closeMenu()}>
           Home
         </NavLink>
@@ -50,7 +51,7 @@ class BurgerMenu extends React.Component {
         <NavLink activeClassName="active" to="/board/:id" exact onClick={() => this.closeMenu()}>
           BoardPage
         </NavLink>
-            <span className="notification-count">{user.notifications.length}</span>
+      {user.notifications.length && <span className="notification-count">{user.notifications.length}</span>}
         <NavLink activeClassName="active" to={`/inbox/${user._id}`} exact onClick={() => this.closeMenu()}>
           Inbox
         </NavLink>

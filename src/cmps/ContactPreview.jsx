@@ -33,7 +33,6 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom }) => {
     const handelClick = (ev) => {
         onAddFriend(ev, contact._id);
         toggleIsFriend(ev)
-
     }
 
     // const getRoomId = () => {

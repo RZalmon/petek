@@ -17,7 +17,7 @@ async function signUp(credentials) {
         friends: [],
         notifications: [],
         imgUrl: credentials.imgUrl,
-        joinedAt:Date.now()
+        joinedAt: Date.now()
     };
     USER = await HttpService.post('auth/signup', USER)
     StorageService.save(KEY, USER);
