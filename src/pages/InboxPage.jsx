@@ -39,9 +39,6 @@ const InboxPage = (props) => {
 
 
 
-
-
-
   return (
     (!user) ?  <h1>balls for you</h1> :
     <div>
