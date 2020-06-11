@@ -12,9 +12,7 @@ export default ({ contact, onAddFriend, loggedinUser }) => {
     useEffect(() => {
         if(!loggedinUser) return
         let friend = loggedinUser.friends.find(friend =>{return friend._id === contact._id})
-        friend ? setIsFriend(true) : setIsFriend(false) 
-        
-        
+        friend ? setIsFriend(true) : setIsFriend(false)   
       });
 
     const toggleIsFriend = (ev) => {
@@ -26,7 +24,6 @@ export default ({ contact, onAddFriend, loggedinUser }) => {
     const handelClick = (ev) => {
         onAddFriend(ev, contact._id);
         toggleIsFriend(ev)
-
     }
 
     return (

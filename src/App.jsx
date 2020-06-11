@@ -8,6 +8,7 @@ import audioNotification from '../src/assets/sound/notification.mp3'
 
 import SocketService from './services/SocketService'
 import { updateUser } from '../src/actions/UserActions';
+// import { getUser } from '../src/actions/UserActions';
 
 
 
@@ -24,20 +25,13 @@ const App = (props) => {
     let loggedinUser = props.user;
     if (!loggedinUser) return;
     SocketService.on(`updateUser ${loggedinUser._id}`, updateUser);
-    SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => {
-      // user = JSON.parse(JSON.stringify({ loggedinUser }))
-      props.updateUser(user)
-      console.log('app updated user', user);
-
-    })
+    SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => {props.updateUser(user)})
   }
 
   const updateUser = (updatedUser) => {
     let audio = new Audio(audioNotification);
-
+    
     if (updatedUser) {
-      ;
-
       props.updateUser(updatedUser)
       audio.play()
 
@@ -49,13 +43,15 @@ const App = (props) => {
 
   useEffect(() => {
     connectSockets()
+    // props.getUser()
+    
 
     // Update the document title using the browser API
   });
   return (
     <div className="App">
       <Router history={history}>
-        <NavBar />
+        <NavBar user={props.user} />
         <RoutePage onConnectSocket={connectSockets} />
       </Router>
     </div>

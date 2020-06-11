@@ -6,4 +6,11 @@
     position: relative;
     background-color: yellow;
     height: 60px;
+
+    .nav-count{
+        position: absolute;
+        top: 10%;
+        left: 92%;
+        z-index: 10000;
+       }
 }
