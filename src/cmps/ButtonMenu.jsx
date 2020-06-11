@@ -22,6 +22,7 @@ export default (props) => {
             direction="down"
             spacing={8}
             isOpen={isOpen}
+            className="button-menu"
         >
             <MainButton
                 iconResting={<MdAdd style={{ fontSize: 20 }} nativecolor="white" />}

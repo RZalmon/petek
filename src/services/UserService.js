@@ -17,7 +17,7 @@ async function signUp(credentials) {
         friends: [],
         notifications: [],
         imgUrl: credentials.imgUrl,
-        joinedAt:Date.now()
+        joinedAt: Date.now()
     };
     USER = await HttpService.post('auth/signup', USER)
     StorageService.save(KEY, USER);
@@ -41,8 +41,7 @@ async function logout() {
 
 async function update(user) {
     const updatedUser = await HttpService.put(`user/${user._id}`, user)
-    console.log('updatedUser in service front', updatedUser);
-    
+    console.log('user service update USER AFTER BACKEND', updatedUser);
     StorageService.save(KEY, updatedUser);
     return updatedUser
 }
