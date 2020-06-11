@@ -38,6 +38,10 @@ class ContactPage extends Component {
         }
     }
 
+    onMoveToRoom = (roomId) => {
+        this.props.history.push(`/board/${roomId}`);
+    }
+
     render() {
         const { contacts, user } = this.props
         return (
@@ -47,7 +51,7 @@ class ContactPage extends Component {
                         filterBy={this.state.filterBy}
                         onFilter={this.onFilterHandler}
                         moveToContact={this.handleKeyPress}></ContactFilter>
-                    {!!contacts && <ContactList contacts={user.friends}></ContactList>}
+                    {!!contacts && <ContactList loggedinUser={user} contacts={user.friends} onMoveToRoom={this.onMoveToRoom}></ContactList>}
                 </div>
                 }
             </div>

@@ -14,7 +14,7 @@ import ListIcon from '@material-ui/icons/List';
 // import SvgIcon from '@material-ui/core/SvgIcon';    //PROBABLY NOT NEEDED
 // import styled from 'styled-components' //PROBABLY NOT NEEDED
 
-export default (props) => {
+export default ({ setNoteType }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <FloatingMenu
@@ -35,22 +35,25 @@ export default (props) => {
                 icon={<TextFieldsIcon style={{ fontSize: 20, fill: '#51a255' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
-                onClick={() => console.log('First button clicked')}
+                onClick={() => setNoteType('NoteText')}
             />
             <ChildButton
                 icon={<ImageIcon style={{ fontSize: 20, fill: '#28b5f2' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
+                onClick={() => setNoteType('NoteImg')}
             />
             <ChildButton
                 icon={<VideocamIcon style={{ fontSize: 20, fill: '#ff0000' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
+                onClick={() => setNoteType('NoteVideo')}
             />
             <ChildButton
                 icon={<ListIcon style={{ fontSize: 20, fill: '#ffa350' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
+                onClick={() => setNoteType('NoteTodo')}
             />
         </FloatingMenu>
     )

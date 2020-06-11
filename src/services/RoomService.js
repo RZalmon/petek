@@ -20,6 +20,7 @@ function remove(id) {
 
 async function save(room) {
     let prm;
+
     if (room._id) prm = HttpService.put(`room/${room._id}`, room);
     else {
         prm = HttpService.post('room', room);
