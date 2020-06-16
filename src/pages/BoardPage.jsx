@@ -43,13 +43,12 @@ const BoardPage = (props) => {
     
     const onUploadImg = async (ev) =>{
         if(noteType === 'NoteImg'){
-            const imgUrl = await CloudinaryService.uploadImg(ev)
+            const imgUrl = await CloudinaryService.uploadImg(ev) 
             setNoteData(imgUrl.secure_url)
             setImgStat(true)
         }
         
     }
-    
     
     
     const onHandleSubmit = async (ev) => {
@@ -60,7 +59,8 @@ const BoardPage = (props) => {
         let minimalUser = await UserService.getMinimalUser(user._id, user.imgUrl)
         newNote.createdBy = minimalUser
         const friend = user.friends.find(friend =>{return friend.roomId === props.match.params.id })  
-        props.room.notes.unshift(newNote)              
+        props.room.notes.unshift(newNote)   
+        props.saveRoom(props.room)           
         SocketService.emit("added note", ({room:props.room, user:props.user, friendId:friend._id}));
         setNoteData('')
         setNoteType('NoteText')
@@ -69,13 +69,17 @@ const BoardPage = (props) => {
     
     
     useEffect(() => {
-        console.log('used affect');
        if (noteData && noteType === 'NoteImg') onHandleSubmit()
-       
-       if (!isImg) loadRoom()  
          
-         return () => {props.resetCurrRoom()};
-    },[isImg]);
+        },[isImg]);
+        
+        useEffect(() => {
+            
+            loadRoom()  
+            
+            return () => {props.resetCurrRoom()};
+        
+    },[]);
 
 
     return (
@@ -103,7 +107,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     loadRoomById,
     saveRoom,
-    resetCurrRoom
+    resetCurrRoom,
+    saveRoom,
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardPage);

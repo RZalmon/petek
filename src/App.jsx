@@ -28,8 +28,11 @@ const App = (props) => {
     SocketService.setup()
     if(room) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom }) => {
-        let newRoom = await props.saveRoom(updatedRoom)
-        props.loadRoomById(newRoom._id)
+        // let newRoom = await props.saveRoom(updatedRoom)
+        if(updatedRoom.notes[0].createdBy._id !== loggedinUser._id ){
+          props.loadRoomById(updatedRoom._id)
+        }
+        
       });
     }
     if(loggedinUser) {
