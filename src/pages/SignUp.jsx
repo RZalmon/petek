@@ -68,7 +68,6 @@ class SignUp extends Component {
 
   connectSockets(id){
    this.props.onConnectSocket(id)
- 
   }
 
   toggleSignUp = () =>{
@@ -79,6 +78,7 @@ class SignUp extends Component {
 
   onHandleSubmit = async (ev) => {
     ev.preventDefault();
+
       this.state.isSignUp ? 
       await this.props.signUp({...this.state.newUser})
       :await this.props.login({...this.state.newUser})
