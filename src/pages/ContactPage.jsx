@@ -15,6 +15,11 @@ class ContactPage extends Component {
         // this.loadContacts()
     }
 
+    onMoveToRoom = (ev,roomId) => {   
+        console.log(ev);    
+        ev.stopPropagation()
+        this.props.history.push(`/board/${roomId}`);
+    }
     loadContacts = async () => {
         await this.props.loadContacts(this.state.filterBy);
     };
@@ -38,9 +43,7 @@ class ContactPage extends Component {
         }
     }
 
-    onMoveToRoom = (roomId) => {
-        this.props.history.push(`/board/${roomId}`);
-    }
+ 
 
     render() {
         const { contacts, user } = this.props
@@ -51,7 +54,7 @@ class ContactPage extends Component {
                         filterBy={this.state.filterBy}
                         onFilter={this.onFilterHandler}
                         moveToContact={this.handleKeyPress}></ContactFilter>
-                    {!!contacts && <ContactList loggedinUser={user} contacts={user.friends} onMoveToRoom={this.onMoveToRoom}></ContactList>}
+                    {!!contacts && <ContactList onMoveToRoom={this.onMoveToRoom} loggedinUser={user} contacts={user.friends}></ContactList>}
                 </div>
                 }
             </div>

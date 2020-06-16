@@ -5,7 +5,7 @@ import NoteVideo from './Note/NoteVideo'
 import NoteTodo from './Note/NoteTodo'
 
 
-export default ({ note }) => {
+export default ({ note, userId }) => {
     const cmps = {
         NoteText,
         NoteImg,
@@ -15,7 +15,12 @@ export default ({ note }) => {
     const NoteType = cmps[note.type];
     return (
         <div className="note-preview">
+            <div className={userId === note.createdBy._id ? 'user-container' : 'friend-container'}>
+            <img src={note.createdBy.imgUrl} alt="" className="avatar avatar-s"/>
+            <div className="note-container" >
             <NoteType note={note} />
+            </div>
+            </div>
         </div>
     )
 }

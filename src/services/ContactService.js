@@ -93,25 +93,25 @@ function _updateContact(contact) {
         if (index !== -1) {
             contacts[index] = contact
         }
-        console.log('(edit)Contacts after replace ', contacts)
+        // console.log('(edit)Contacts after replace ', contacts)
         StorageService.save(CONTACT_KEY, contacts)
         resolve(contact)
     })
 }
 
 function _addContact(contact) {
-    console.log('add contact')
+    // console.log('add contact')
     return new Promise((resolve, reject) => {
         contact._id = UtilService.makeId()
         contacts.push(contact)
-        console.log('(ADD)Contacts after push ', contacts)
+        // console.log('(ADD)Contacts after push ', contacts)
         StorageService.save(CONTACT_KEY, contacts)
         resolve(contact)
     })
 }
 
 function saveContact(contact) {
-    console.log('save contact', contact)
+    // console.log('save contact', contact)
     return contact._id ? _updateContact(contact) : _addContact(contact)
 }
 

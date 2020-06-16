@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import { connect } from 'react-redux';
 
 import { updateUser } from '../actions/UserActions';
@@ -19,7 +19,6 @@ const InboxPage = (props) => {
   const onDecline = (notification) => {
     SocketService.emit("decline", { notification, user });
   }
-
 
   const onDeleteNotification = (notification) => {
     const idx = user.notifications.findIndex(
@@ -45,6 +44,8 @@ const InboxPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     user: state.user.loggedinUser,
+    room: state.room.currRoom,
+
   };
 };
 

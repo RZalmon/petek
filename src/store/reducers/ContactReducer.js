@@ -11,7 +11,6 @@ export default function ContactReducer(state = initialState, action) {
         case 'SET_CURR_CONTACT':
             return { ...state, currContact: action.contact }
         case 'UPDATE_CONTACT':
-            console.log('UPDATE REDUCER')
             return {
                 ...state,
                 contacts: state.contacts.map(contact => {
@@ -27,7 +26,6 @@ export default function ContactReducer(state = initialState, action) {
                 })
             }
         case 'ADD_CONTACT':
-            console.log('ADD REDUCER')
             return {
                 ...state,
                 contacts: [...state.contacts, action.contact]
