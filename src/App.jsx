@@ -8,6 +8,7 @@ import audioNotification from '../src/assets/sound/notification.mp3'
 
 import SocketService from './services/SocketService'
 import { updateUser } from '../src/actions/UserActions';
+import { saveRoom, loadRoomById } from '../src/actions/RoomActions';
 // import { getUser } from '../src/actions/UserActions';
 
 
@@ -19,18 +20,27 @@ import NavBar from './cmps/NavBar';
 const history = createBrowserHistory();
 
 const App = (props) => {
+ 
+  const loggedinUser = props.user;
+  const room = props.room
 
-  const connectSockets = (id) => {
+  const connectSockets =  (id) => {
     SocketService.setup()
-    let loggedinUser = props.user;
-    if (!loggedinUser) return;
-    SocketService.on(`updateUser ${loggedinUser._id}`, updateUser);
-    SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => {props.updateUser(user)})
+    if(room) {
+      SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom }) => {
+        let newRoom = await props.saveRoom(updatedRoom)
+        props.loadRoomById(newRoom._id)
+      });
+    }
+    if(loggedinUser) {
+      
+      SocketService.on(`updateUser ${loggedinUser._id}`, updateUser);
+      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => {props.updateUser(user)})
+    }
   }
-
+  
   const updateUser = (updatedUser) => {
     let audio = new Audio(audioNotification);
-    
     if (updatedUser) {
       props.updateUser(updatedUser)
       audio.play()
@@ -43,6 +53,7 @@ const App = (props) => {
 
   useEffect(() => {
     connectSockets()
+    
     // props.getUser()
     
 
@@ -63,13 +74,15 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.loggedinUser,
     contacts: state.contact.contacts,
+    room:state.room.currRoom
   };
 };
 
 const mapDispatchToProps = {
   // getUser,
   updateUser,
-  // loadContacts,
+  saveRoom,
+  loadRoomById,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

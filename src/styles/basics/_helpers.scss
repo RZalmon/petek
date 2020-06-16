@@ -90,10 +90,11 @@
     // background-color: $clr1;
     transition: background-color .3s;
     object-fit: cover;
+    margin: 5px;
 
     &.avatar-s {
-        width: 75px;
-        height: 75px;
+        width: 65px;
+        height: 65px;
       }
     &.avatar-m {
         width: 150px;

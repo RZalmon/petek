@@ -41,9 +41,15 @@ async function logout() {
 
 async function update(user) {
     const updatedUser = await HttpService.put(`user/${user._id}`, user)
-    console.log('user service update USER AFTER BACKEND', updatedUser);
     StorageService.save(KEY, updatedUser);
     return updatedUser
+}
+
+async function getMinimalUser(_id, imgUrl){
+    return{
+        _id,
+        imgUrl
+    }
 }
 
 export const UserService = {
@@ -51,5 +57,6 @@ export const UserService = {
     signUp,
     update,
     login,
-    logout
+    logout,
+    getMinimalUser
 }

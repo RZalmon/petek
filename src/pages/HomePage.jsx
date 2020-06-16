@@ -55,6 +55,12 @@ onAddFriend = (ev,friendId) => {
 
   };
 
+  onMoveToRoom = (ev,roomId) => {   
+    console.log(ev);    
+    ev.stopPropagation()
+    this.props.history.push(`/board/${roomId}`);
+}
+
   capitalize = (name) => {
     return name.charAt(0).toUpperCase() + name.slice(1);
   };
@@ -71,7 +77,7 @@ onAddFriend = (ev,friendId) => {
             <AvatarEdit imgUrl={user.imgUrl} onUploadImg={this.onUploadImg} isLoading={isLoading} />
             <h6>Let's add contacts veze</h6>
             <ContactFilter filterBy={this.state.filterBy} onFilter={this.onFilterHandler} ></ContactFilter>
-            {contacts && <ContactList contacts={contacts} onAddFriend={this.onAddFriend} loggedinUser={user} />}
+            {contacts && <ContactList onMoveToRoom={this.onMoveToRoom} contacts={contacts} onAddFriend={this.onAddFriend} loggedinUser={user} />}
           </div>
         }
       </div>
@@ -83,7 +89,6 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.loggedinUser,
     contacts: state.contact.contacts,
-
   };
 };
 

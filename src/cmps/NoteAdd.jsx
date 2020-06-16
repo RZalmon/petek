@@ -13,7 +13,7 @@ export default (props) => {
     }
 
     useEffect(() => {
-        console.log(newNote);
+        // console.log(newNote);
     });
 
     return (

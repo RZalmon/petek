@@ -1,12 +1,14 @@
 import React from 'react'
 import NotificationFriend from './NotificationFriend'
 import NotificationResponse from './NotificationResponse'
+import NotificationNote from './NotificationNote'
 
 
 export default ({ notification,onApprove, onDecline, onDeleteNotification }) => {
     const cmps = {
         NotificationFriend,
         NotificationResponse,
+        NotificationNote
     }
   
 

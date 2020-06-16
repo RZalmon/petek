@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import addFriendImg from '../assets/svg/friends.svg'
 import friendReqSent from '../assets/svg/ok.svg'
 
 
 export default ({ contact, onAddFriend, loggedinUser, moveToRoom }) => {
-    ;
+
 
     const [isFriendSent, setIsFriendSent] = useState(false)
     const [isFriend, setIsFriend] = useState(false)
@@ -22,7 +21,7 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom }) => {
         } else {
             setIsFriend(false)
         }
-    });
+    },[loggedinUser, contact._id]);
 
     const toggleIsFriend = (ev) => {
         ev.preventDefault()
@@ -35,21 +34,9 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom }) => {
         toggleIsFriend(ev)
     }
 
-    // const getRoomId = () => {
-    //     if (!isFriend) return
-    //     const roomId = contact.friends.find(friend => friend._id === loggedinUser._id).roomId
-    //     console.log(roomId);
-    //     return roomId
-    // }
-
-    // const moveToRoom = (ev) => {
-    //     // console.log('ev', ev);
-    //     console.log('props', props);
-    //     // if (isFriend) history.push('/board/' + roomId)
-    // }
 
     return (
-        <div className="contact-preview" onClick={(ev) => { moveToRoom(roomId) }}>
+        <div className="contact-preview" onClick={(ev) => {if(isFriend) moveToRoom(ev,roomId) }}>
             <img src={contact.imgUrl} alt={`${contact.userName}`} className="avatar avatar-s" />
             <div className="user-name-container">
                 <span>User Name: {contact.userName}</span>

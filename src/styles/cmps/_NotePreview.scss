@@ -1,3 +1,40 @@
 .note-preview {
     max-width: 420px;
+    p{
+        margin: unset;
+        text-align: start;
+    }
+
+
+
+    .friend-container{
+        display: flex;
+        margin: 5px;
+        .note-container{
+            width: fit-content;
+            height: fit-content;
+            background-color: lightblue;
+            border: 1px solid transparent;
+            border-radius: 5px 20px 20px 5px;
+            padding: 10px;
+            margin: 5px;
+        }
+        
+    }
+    
+    .user-container{
+        margin: 5px;
+        display: flex;
+        flex-direction: row-reverse;
+        .note-container{
+            width: fit-content;
+            height: fit-content;
+            background-color: lightskyblue;
+            border: 1px solid transparent;
+            border-radius: 20px 5px 5px 20px;
+            padding: 10px;
+            margin: 5px;
+        }
+
+    }
 }

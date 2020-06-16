@@ -12,6 +12,7 @@ function query(critirea) {
     return HttpService.get(`room?${params}`);
 }
 function getById(id) {
+    console.log(id);
     return HttpService.get(`room/${id}`);
 }
 function remove(id) {
