@@ -11,7 +11,6 @@ return <div className="avatar-edit">
           <label>
             <input type="file" onChange={(ev) => props.onUploadImg(ev)} hidden />
             {isLoading ? <Loading/> : <img src={imgUrl? imgUrl : avatarImg} alt="" className="avatar avatar-m"/>}
-            
           </label>
     </div>;
 }

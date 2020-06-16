@@ -1,6 +1,8 @@
 // import { UtilService } from './UtilService'
 import { StorageService } from './StorageService'
 import { HttpService } from './HttpService.js'
+import avatarImg from '../assets/png/user.png'
+
 
 // var USER = { userName: 'Ramus', fullName: 'Rami Davidov', password: '123456', friends: [] };
 const KEY = 'user';
@@ -16,7 +18,7 @@ async function signUp(credentials) {
         password: credentials.password,
         friends: [],
         notifications: [],
-        imgUrl: credentials.imgUrl,
+        imgUrl: credentials.imgUrl ? credentials.imgUrl : avatarImg,
         joinedAt: Date.now()
     };
     USER = await HttpService.post('auth/signup', USER)
