@@ -1,10 +1,10 @@
 import axios from 'axios';
+//AIzaSyDD1nIJuc1thshvoaRykKhVDjI8-kbDSFM RAN'S KEY
+const API_KEY = 'AIzaSyD09tfK-pjT-G6kEZmXRfeicoKR-neGKNU' 
+const limit = 5;
 
-const API_KEY = 'AIzaSyDD1nIJuc1thshvoaRykKhVDjI8-kbDSFM' 
-const limit = 15;
 
-
-export const youtubeApiService = {
+export const YoutubeApiService = {
     youtubeQuery
 }
 

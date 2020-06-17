@@ -14,12 +14,13 @@ export function loadRooms(filterBy) {
 
 // READ
 export function loadRoomById(id) {
-    console.log('@@@loadRoomById was invoked!@@@');
+    console.log('$$$$loaded room@@@');
+    
     return async dispatch => {
         try {
             const room = await RoomService.getById(id);
             console.log('room in actions', room);
-
+            
             dispatch({ type: 'SET_CURR_ROOM', room })
         } catch (err) {
             console.log('ERROR', err)
@@ -30,7 +31,7 @@ export function loadRoomById(id) {
 //RESET
 export function resetCurrRoom() {
     console.log('made it');
-
+    
     return async dispatch => {
         try {
             const room = null
@@ -43,7 +44,7 @@ export function resetCurrRoom() {
 
 // UPDATE + CREATE
 export function saveRoom(room) {
-
+    
     return async dispatch => {
         const isEdit = !!room._id
         console.log('room inside actions', room);

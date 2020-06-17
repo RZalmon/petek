@@ -35,25 +35,25 @@ export default ({ setNoteType, onUploadImgHandler }) => {
                 icon={<TextFieldsIcon style={{ fontSize: 20, fill: '#51a255' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
-                onClick={() => setNoteType('NoteText')}
+                onClick={() => { setNoteType('NoteText'); setIsOpen(!isOpen); }}
             />
             <ChildButton
                 icon={<ImageIcon style={{ fontSize: 20, fill: '#28b5f2' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
-                onClick={() => onUploadImgHandler() } 
+                onClick={() => { onUploadImgHandler(); setIsOpen(!isOpen); }}
             />
             <ChildButton
                 icon={<VideocamIcon style={{ fontSize: 20, fill: '#ff0000' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
-                onClick={() => setNoteType('NoteVideo')}
+                onClick={() => { setNoteType('NoteVideo'); setIsOpen(!isOpen); }}
             />
             <ChildButton
                 icon={<ListIcon style={{ fontSize: 20, fill: '#ffa350' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
-                onClick={() => setNoteType('NoteTodo')}
+                onClick={() => { setNoteType('NoteTodo'); setIsOpen(!isOpen); }}
             />
         </FloatingMenu>
     )

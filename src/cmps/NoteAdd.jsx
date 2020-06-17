@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import NoteInput from './NoteInput'
+import SearchVideo from './SearchVideo'
 import ButtonMenu from './ButtonMenu'
 
 export default (props) => {
@@ -16,9 +17,19 @@ export default (props) => {
         // console.log(newNote);
     });
 
+
     return (
         <div className="note-add">
-            <NoteInput setNoteData={setNoteData} />
+            {noteType !== 'NoteVideo' && <NoteInput setNoteData={setNoteData} />}
+            {noteType === 'NoteVideo' && <SearchVideo />}
+
+            {noteType === 'NoteVideo'
+                ? <SearchVideo />
+                : <NoteInput setNoteData={setNoteData} />
+            }
+
+            <SearchVideo />
+
             <ButtonMenu setNoteType={setNoteType} />
         </div>
     )

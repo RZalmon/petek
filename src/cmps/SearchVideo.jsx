@@ -4,28 +4,48 @@ import { DebounceInput } from 'react-debounce-input';
 
 import { YoutubeApiService } from '../services/YoutubeApiService'
 
-const SearchVideo = (props) => {
-    const [queryStr, setQueryStr] = useState('');
+import PlusIcon from '../assets/svg/plus.svg'
+
+const SearchVideo = ({ setNoteData, handleSubmit, testData }) => {
     const [videos, setVideos] = useState([]);
 
-
-    const searchYoutubeVideos = () => {
-        if (!queryStr) setVideos([])
-        const youtubeVideos = await youtubeApiService.youtubeQuery(this.queryStr);
-        setSongs(youtubeVideos)
+    const searchYoutubeVideos = async (queryStr) => {
+        if (!queryStr) {
+            setVideos([])
+            return
+        }
+        const youtubeVideos = await YoutubeApiService.youtubeQuery(queryStr);
+        setVideos(youtubeVideos)
     }
+
+    const addVideo = (videoId) => {
+        setNoteData(videoId)
+        handleSubmit()
+    }
+
 
     useEffect(() => {
     });
 
     return (
-        <DebounceInput
-            minLength={3}
-            debounceTimeout={500}
-            type="text"
-            placeholder="Search Video"
-            onChange={searchYoutubeVideos}
-        />
+        <section className="search-video">
+            <DebounceInput
+                minLength={0}
+                debounceTimeout={500}
+                type="text"
+                placeholder="Search Video"
+                onChange={e => searchYoutubeVideos(e.target.value)}
+            />
+            {!!videos.length && videos.map(video => {
+                return (
+                    <div className="video-card" key={video.id.videoId}>
+                        <img src={video.snippet.thumbnails.default.url} />
+                        <h6>{video.snippet.title}</h6>
+                        <img src={PlusIcon} className="add-button" onClick={() => addVideo(video.id.videoId)} />
+                    </div>
+                )
+            })}
+        </section >
     );
 };
 
@@ -36,8 +56,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    loadRoomById,
-    saveRoom
+    // loadRoomById,
+    // saveRoom
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoardPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchVideo);
