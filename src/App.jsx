@@ -20,25 +20,28 @@ import NavBar from './cmps/NavBar';
 const history = createBrowserHistory();
 
 const App = (props) => {
-
+ 
   const loggedinUser = props.user;
   const room = props.room
 
-  const connectSockets = (id) => {
+  const connectSockets =  (id) => {
     SocketService.setup()
-    if (room) {
+    if(room) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom }) => {
-        let newRoom = await props.saveRoom(updatedRoom)
-        props.loadRoomById(newRoom._id)
+        // let newRoom = await props.saveRoom(updatedRoom)
+        if(updatedRoom.notes[0].createdBy._id !== loggedinUser._id ){
+          props.loadRoomById(updatedRoom._id)
+        }
+        
       });
     }
-    if (loggedinUser) {
-
+    if(loggedinUser) {
+      
       SocketService.on(`updateUser ${loggedinUser._id}`, updateUser);
-      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => { props.updateUser(user) })
+      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => {props.updateUser(user)})
     }
   }
-
+  
   const updateUser = (updatedUser) => {
     let audio = new Audio(audioNotification);
     if (updatedUser) {
@@ -53,9 +56,9 @@ const App = (props) => {
 
   useEffect(() => {
     connectSockets()
-
+    
     // props.getUser()
-
+    
 
     // Update the document title using the browser API
   });
@@ -74,7 +77,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.loggedinUser,
     contacts: state.contact.contacts,
-    room: state.room.currRoom
+    room:state.room.currRoom
   };
 };
 

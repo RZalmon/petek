@@ -92,6 +92,10 @@
     object-fit: cover;
     margin: 5px;
 
+    &.avatar-xs {
+        width: 45px;
+        height: 45px;
+      }
     &.avatar-s {
         width: 65px;
         height: 65px;

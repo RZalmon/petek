@@ -1,0 +1,30 @@
+.notification-preview{
+      border-bottom: 1px solid lightblue;
+
+
+    .notification-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px 0 20px;
+      
+    
+        p{
+            color: purple;
+            margin: 5px 0 5px 0;
+            font-size: 14px;
+        }
+    
+        .x-mark{
+            width: 20px
+        }
+        
+    }
+    time{
+        font-size: 15px;
+        font-weight: bold;
+        text-align: left;
+        display: flex;
+    }
+}
+

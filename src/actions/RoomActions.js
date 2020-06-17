@@ -46,7 +46,9 @@ export function saveRoom(room) {
 
     return async dispatch => {
         const isEdit = !!room._id
-        room = await RoomService.save(room);
+        console.log('room inside actions', room);
+        
+        room = await RoomService.save(room);        
         console.log(room);
         if (isEdit) dispatch({ type: 'UPDATE_ROOM', room })
         else dispatch({ type: 'ADD_ROOM', room })

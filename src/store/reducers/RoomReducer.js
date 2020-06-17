@@ -10,7 +10,7 @@ export default function RoomReducer(state = initialState, action) {
             return { ...state, rooms: action.rooms }
         case 'SET_CURR_ROOM':
             return { ...state, currRoom: action.room }
-            case 'UPDATE_ROOM':
+            case 'UPDATE_ROOM':     
                 return {
                     ...state,
                     rooms: state.rooms.map(room => {

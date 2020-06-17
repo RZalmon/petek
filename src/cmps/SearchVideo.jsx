@@ -4,15 +4,15 @@ import { DebounceInput } from 'react-debounce-input';
 
 import { YoutubeApiService } from '../services/YoutubeApiService'
 
-const SearchSong = (props) => {
+const SearchVideo = (props) => {
     const [queryStr, setQueryStr] = useState('');
-    const [songs, setSongs] = useState([]);
+    const [videos, setVideos] = useState([]);
 
 
-    const searchSong = () => {
-        if (!queryStr) setSongs([])
-        const youtubeSongs = await youtubeApiService.youtubeQuery(this.queryStr);
-        setSongs(youtubeSongs)
+    const searchYoutubeVideos = () => {
+        if (!queryStr) setVideos([])
+        const youtubeVideos = await youtubeApiService.youtubeQuery(this.queryStr);
+        setSongs(youtubeVideos)
     }
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const SearchSong = (props) => {
             debounceTimeout={500}
             type="text"
             placeholder="Search Video"
-            onChange={searchSong}
+            onChange={searchYoutubeVideos}
         />
     );
 };
