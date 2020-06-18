@@ -6,7 +6,7 @@ import { YoutubeApiService } from '../services/YoutubeApiService'
 
 import PlusIcon from '../assets/svg/plus.svg'
 
-const SearchVideo = (props) => {
+const InputVideo = ({ addVideo }) => {
     const [videos, setVideos] = useState([]);
 
     const searchYoutubeVideos = async (queryStr) => {
@@ -23,7 +23,7 @@ const SearchVideo = (props) => {
     });
 
     return (
-        <section className="search-video">
+        <section className="input-video">
             <DebounceInput
                 minLength={0}
                 debounceTimeout={500}
@@ -55,4 +55,4 @@ const mapDispatchToProps = {
     // saveRoom
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchVideo);
+export default connect(mapStateToProps, mapDispatchToProps)(InputVideo);

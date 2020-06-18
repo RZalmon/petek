@@ -6,7 +6,7 @@ export default ({ note }) => {
     }
     return (
         <div className="note-video">
-            <iframe width="100%" src={formattedVidLink()}></iframe>
+            <iframe width="100%" allow="fullscreen" src={formattedVidLink()}></iframe>
         </div>
     )
 }

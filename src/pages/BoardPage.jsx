@@ -9,17 +9,17 @@ import CloudinaryService from '../../src/services/CloudinaryService'
 
 import { loadRoomById, saveRoom, resetCurrRoom } from '../actions/RoomActions';
 
-import TextInput from '../cmps/TextInput'
+import InputText from '../cmps/InputText'
 import ButtonMenu from '../cmps/ButtonMenu'
 import NoteList from '../cmps/NoteList'
-import SearchVideo from '../cmps/SearchVideo'
+import InputVideo from '../cmps/InputVideo'
 
 import { UserService } from '../services/UserService';
 
 const BoardPage = (props) => {
     const [noteData, setNoteData] = useState('');
     const [noteType, setNoteType] = useState('NoteText');
-    const [isImg, setImgStat] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
 
     const inputRef = createRef();
 
@@ -47,14 +47,14 @@ const BoardPage = (props) => {
         if (noteType === 'NoteImg') {
             const imgUrl = await CloudinaryService.uploadImg(ev)
             setNoteData(imgUrl.secure_url)
-            setImgStat(true)
+            setIsUploading(true)
         }
 
     }
 
     const onAddVideo = (videoId) => {
         setNoteData(videoId)
-        onHandleSubmit()
+        setIsUploading(true)
     }
 
 
@@ -73,22 +73,20 @@ const BoardPage = (props) => {
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
         setNoteData('')
         setNoteType('NoteText')
-        setImgStat(false)
+        setIsUploading(false)
     }
 
 
     useEffect(() => {
-        if (noteData && noteType === 'NoteImg' || noteType === 'NoteVideo') onHandleSubmit()
-
-    }, [isImg]);
+        if (noteData && noteType === 'NoteImg' || noteType === 'NoteVideo') {
+            onHandleSubmit()
+        } 
+    }, [isUploading]);
 
 
     useEffect(() => {
-
         loadRoom()
-
         return () => { props.resetCurrRoom() };
-
     }, []);
 
 
@@ -96,11 +94,11 @@ const BoardPage = (props) => {
         <div className="board-page">
             <div className="note-add">
                 <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden />
-                {/* <TextInput setNoteData={setNoteData} handleSubmit={onHandleSubmit} /> */}
+                {/* <InputText setNoteData={setNoteData} handleSubmit={onHandleSubmit} /> */}
 
                 {noteType === 'NoteVideo'
-                    ? <SearchVideo addVideo={onAddVideo} />
-                    : <TextInput setNoteData={setNoteData} handleSubmit={onHandleSubmit} />
+                    ? <InputVideo addVideo={onAddVideo} />
+                    : <InputText setNoteData={setNoteData} handleSubmit={onHandleSubmit} />
                 }
                 <ButtonMenu setNoteType={setNoteType} onUploadImgHandler={onUploadImgHandler} />
             </div>
