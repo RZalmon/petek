@@ -9,7 +9,7 @@ import CloudinaryService from '../../src/services/CloudinaryService'
 
 import { loadRoomById, saveRoom, resetCurrRoom } from '../actions/RoomActions';
 
-import NoteInput from '../cmps/NoteInput'
+import TextInput from '../cmps/TextInput'
 import ButtonMenu from '../cmps/ButtonMenu'
 import NoteList from '../cmps/NoteList'
 import SearchVideo from '../cmps/SearchVideo'
@@ -96,11 +96,11 @@ const BoardPage = (props) => {
         <div className="board-page">
             <div className="note-add">
                 <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden />
-                {/* <NoteInput setNoteData={setNoteData} handleSubmit={onHandleSubmit} /> */}
+                {/* <TextInput setNoteData={setNoteData} handleSubmit={onHandleSubmit} /> */}
 
                 {noteType === 'NoteVideo'
                     ? <SearchVideo addVideo={onAddVideo} />
-                    : <NoteInput setNoteData={setNoteData} handleSubmit={onHandleSubmit} />
+                    : <TextInput setNoteData={setNoteData} handleSubmit={onHandleSubmit} />
                 }
                 <ButtonMenu setNoteType={setNoteType} onUploadImgHandler={onUploadImgHandler} />
             </div>
