@@ -6,7 +6,7 @@ import { YoutubeApiService } from '../services/YoutubeApiService'
 
 import PlusIcon from '../assets/svg/plus.svg'
 
-const SearchVideo = ({ setNoteData, handleSubmit, testData }) => {
+const SearchVideo = ({ setNoteData, handleSubmit, addVideo }) => {
     const [videos, setVideos] = useState([]);
 
     const searchYoutubeVideos = async (queryStr) => {
@@ -18,10 +18,10 @@ const SearchVideo = ({ setNoteData, handleSubmit, testData }) => {
         setVideos(youtubeVideos)
     }
 
-    const addVideo = (videoId) => {
-        setNoteData(videoId)
-        handleSubmit()
-    }
+    // const addVideo = (videoId) => {
+    //     setNoteData(videoId)
+    //     handleSubmit()
+    // }
 
 
     useEffect(() => {

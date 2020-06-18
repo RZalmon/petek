@@ -51,9 +51,12 @@ const BoardPage = (props) => {
         }
 
     }
-    const testData = () => {
-        console.log('note data:', noteData);
+
+    const onAddVideo = (videoId) => {
+        setNoteData(videoId)
+        onHandleSubmit()
     }
+
 
     const onHandleSubmit = async (ev) => {
         const { user } = props
@@ -75,9 +78,10 @@ const BoardPage = (props) => {
 
 
     useEffect(() => {
-        if (noteData && noteType === 'NoteImg') onHandleSubmit()
+        if (noteData && noteType === 'NoteImg' || noteType === 'NoteVideo') onHandleSubmit()
 
     }, [isImg]);
+
 
     useEffect(() => {
 
@@ -95,7 +99,7 @@ const BoardPage = (props) => {
                 {/* <NoteInput setNoteData={setNoteData} handleSubmit={onHandleSubmit} /> */}
 
                 {noteType === 'NoteVideo'
-                    ? <SearchVideo setNoteData={setNoteData} handleSubmit={onHandleSubmit} testData={testData} />
+                    ? <SearchVideo addVideo={onAddVideo} />
                     : <NoteInput setNoteData={setNoteData} handleSubmit={onHandleSubmit} />
                 }
                 <ButtonMenu setNoteType={setNoteType} onUploadImgHandler={onUploadImgHandler} />
