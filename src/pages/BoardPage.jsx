@@ -75,7 +75,7 @@ const BoardPage = (props) => {
 
 
     useEffect(() => {
-        if (noteData && noteType === 'NoteImg') onHandleSubmit()
+      if (noteData && noteType === 'NoteImg') onHandleSubmit()
 
     }, [isImg]);
 
