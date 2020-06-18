@@ -19,7 +19,7 @@ import { UserService } from '../services/UserService';
 const BoardPage = (props) => {
     const [noteData, setNoteData] = useState('');
     const [noteType, setNoteType] = useState('NoteText');
-    const [isImg, setImgStat] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
 
     const inputRef = createRef();
 
@@ -47,14 +47,14 @@ const BoardPage = (props) => {
         if (noteType === 'NoteImg') {
             const imgUrl = await CloudinaryService.uploadImg(ev)
             setNoteData(imgUrl.secure_url)
-            setImgStat(true)
+            setIsUploading(true)
         }
 
     }
 
     const onAddVideo = (videoId) => {
         setNoteData(videoId)
-        onHandleSubmit()
+        setIsUploading(true)
     }
 
 
@@ -73,22 +73,20 @@ const BoardPage = (props) => {
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
         setNoteData('')
         setNoteType('NoteText')
-        setImgStat(false)
+        setIsUploading(false)
     }
 
 
     useEffect(() => {
-        if (noteData && noteType === 'NoteImg' || noteType === 'NoteVideo') onHandleSubmit()
-
-    }, [isImg]);
+        if (noteData && noteType === 'NoteImg' || noteType === 'NoteVideo') {
+            onHandleSubmit()
+        } 
+    }, [isUploading]);
 
 
     useEffect(() => {
-
         loadRoom()
-
         return () => { props.resetCurrRoom() };
-
     }, []);
 
 

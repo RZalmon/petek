@@ -6,7 +6,7 @@ import { YoutubeApiService } from '../services/YoutubeApiService'
 
 import PlusIcon from '../assets/svg/plus.svg'
 
-const SearchVideo = ({ setNoteData, handleSubmit, addVideo }) => {
+const SearchVideo = ({ addVideo }) => {
     const [videos, setVideos] = useState([]);
 
     const searchYoutubeVideos = async (queryStr) => {
