@@ -1,6 +1,40 @@
-.input-todo{
-    .add-button{
-        max-width: 30px;
-        cursor: pointer;
+.input-todo {
+    .input-header,
+    .input-task {
+        border: 1px solid transparent;
+        border-radius: 5%;
+        height: 60px;
+        font-size: 18px;
+        background-color: $clr-input;
+        width: 85%;
+        position: fixed;
+        // bottom: 2.5%;
+        left: 10%;
+    }
+
+    .input-header {
+        bottom: 25%;
+        // left: 10%;
+    }
+
+    .add-todo-container {
+
+        .input-task {
+            bottom: 12.5%;
+        }
+        .add-button {
+            position: fixed;
+            cursor: pointer;
+            max-width: 30px;
+            left: 85%;
+            bottom: 15%;
+
+
+        }
+    }
+
+    
+    .x-mark {
+        width: 20px;
     }
 }

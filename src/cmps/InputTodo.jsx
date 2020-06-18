@@ -20,7 +20,7 @@ export default ({ setNoteHeader }) => {
 
     return (
         <div className="input-todo">
-            <input type="text" placeholder="Header?" onChange={e => setNoteHeader(e.target.value)} />
+            <input type="text" placeholder="Header?" className="input-header" onChange={e => setNoteHeader(e.target.value)} />
             <ul>
                 {!!todos.length && todos.map(todo => {
                     return (
@@ -31,8 +31,10 @@ export default ({ setNoteHeader }) => {
                     )
                 })}
             </ul>
-            <input type="text" placeholder="task?" onChange={e => setCurrTodo(e.target.value)} />
-            <img src={PlusIcon} className="add-button" onClick={() => addTodo()} />
+            <div className="add-todo-container">
+                <input type="text" placeholder="task?" className="input-task" onChange={e => setCurrTodo(e.target.value)} />
+                <img src={PlusIcon} className="add-button" onClick={() => addTodo()} />
+            </div>
             <button>Save</button>
         </div>
     )

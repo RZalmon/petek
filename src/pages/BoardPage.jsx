@@ -108,7 +108,6 @@ const BoardPage = (props) => {
     return (
         <div className="board-page">
             <div className="note-add">
-                <h2>{noteInputType}</h2>
                 <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden />
                 {noteType && <InputType
                     addVideo={onAddVideo}
