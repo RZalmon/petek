@@ -47,6 +47,8 @@ const App = (props) => {
     if (updatedUser) {
       props.updateUser(updatedUser)
       audio.play()
+      console.log('notifications');
+      
 
     } else {
       console.log("ERROR IN UPDATE USER");

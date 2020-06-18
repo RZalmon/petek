@@ -25,6 +25,7 @@ const SearchVideo = ({ setNoteData, handleSubmit, addVideo }) => {
 
 
     useEffect(() => {
+
     });
 
     return (
