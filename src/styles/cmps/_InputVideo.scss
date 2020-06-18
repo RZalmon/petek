@@ -1,6 +1,25 @@
-.input-video{
-    .add-button{
-        max-width: 30px;
-        cursor: pointer;
+
+    .input-video{
+        background-color:rgba(255, 255, 255, 0.90);
+        position: fixed;
+        max-height: 77vh;
+        width: 100%;
+        bottom: 13%;
+        overflow-y:scroll;
+
+        .video-card{
+            display: flex;
+            margin-bottom: 5px;
+            padding: 5px;
+            border-bottom: 1px solid lightsteelblue;
+            justify-content: space-between;
+            align-items: center;
+
+
+            .add-button{
+                max-width:30px;
+                cursor: pointer;
+            }
+
+        }
     }
-}
