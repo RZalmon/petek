@@ -36,7 +36,7 @@ const InputVideo = ({ addVideo }) => {
                     <div className="video-card" key={video.id.videoId}>
                         <img src={video.snippet.thumbnails.default.url} />
                         <h6>{video.snippet.title}</h6>
-                        <img src={PlusIcon} className="add-button" onClick={() => addVideo(video.id.videoId)} />
+                        <img src={PlusIcon} className="add-button" onClick={() => { addVideo(video.id.videoId); setVideos([]) }} />
                     </div>
                 )
             })}

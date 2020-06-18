@@ -5,7 +5,7 @@ export default ({ setNoteData, handleSubmit }) => {
 
     return (
         <form className="input-text" onSubmit={handleSubmit}>
-            <input type="text" onChange={e => setNoteData(e.target.value)} />
+            <input placeholder="Say Something" type="text" onChange={e => setNoteData(e.target.value)} />
         </form>
     )
 }

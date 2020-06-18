@@ -14,7 +14,7 @@ import ListIcon from '@material-ui/icons/List';
 // import SvgIcon from '@material-ui/core/SvgIcon';    //PROBABLY NOT NEEDED
 // import styled from 'styled-components' //PROBABLY NOT NEEDED
 
-export default ({ setNoteType, onUploadImgHandler }) => {
+export default ({ setNoteType, onUploadImgHandler, setNoteInputType }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <FloatingMenu
@@ -35,7 +35,7 @@ export default ({ setNoteType, onUploadImgHandler }) => {
                 icon={<TextFieldsIcon style={{ fontSize: 20, fill: '#51a255' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
-                onClick={() => { setNoteType('NoteText'); setIsOpen(!isOpen); }}
+                onClick={() => { setNoteType('NoteText'); setIsOpen(!isOpen); setNoteInputType('InputText')}}
             />
             <ChildButton
                 icon={<ImageIcon style={{ fontSize: 20, fill: '#28b5f2' }} nativecolor="black" />}
@@ -47,7 +47,7 @@ export default ({ setNoteType, onUploadImgHandler }) => {
                 icon={<VideocamIcon style={{ fontSize: 20, fill: '#ff0000' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
-                onClick={() => { setNoteType('NoteVideo'); setIsOpen(!isOpen); }}
+                onClick={() => { setNoteType('NoteVideo'); setIsOpen(!isOpen); setNoteInputType('InputVideo')}}
             />
             <ChildButton
                 icon={<ListIcon style={{ fontSize: 20, fill: '#ffa350' }} nativecolor="black" />}
