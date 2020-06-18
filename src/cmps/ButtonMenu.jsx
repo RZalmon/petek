@@ -19,7 +19,7 @@ export default ({ setNoteType, onUploadImgHandler }) => {
     return (
         <FloatingMenu
             slideSpeed={500}
-            direction="down"
+            direction="up"
             spacing={8}
             isOpen={isOpen}
             className="button-menu"
