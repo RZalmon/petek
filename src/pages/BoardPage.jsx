@@ -103,7 +103,7 @@ const BoardPage = (props) => {
         <div className="board-page">
             <div className="note-add">
                 <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden />
-                {noteType && <InputType className="add-note-input" addVideo={onAddVideo} setNoteData={setNoteData} handleSubmit={onHandleSubmit} />}
+                {noteType && <InputType  addVideo={onAddVideo} setNoteData={setNoteData} handleSubmit={onHandleSubmit} />}
 
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} onUploadImgHandler={onUploadImgHandler} />
             </div>

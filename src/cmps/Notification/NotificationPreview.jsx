@@ -24,7 +24,6 @@ export default ({ notification,onApprove, onDecline, onDeleteNotification }) => 
                 <div>
             <NotificationType notification={notification} onApprove={onApprove} onDecline={onDecline}/>
             <Moment fromNow>{notification.createdAt}</Moment>
-
                 </div>
             <img src={xMark} onClick={()=> onDeleteNotification(notification)} className="x-mark"/>
             </div>
