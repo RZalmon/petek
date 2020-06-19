@@ -19,9 +19,9 @@ import InputTodo from '../cmps/InputTodo'
 import { UserService } from '../services/UserService';
 
 const BoardPage = (props) => {
+    const [noteType, setNoteType] = useState('');
     const [noteHeader, setNoteHeader] = useState('');
     const [noteData, setNoteData] = useState('');
-    const [noteType, setNoteType] = useState('');
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
 
@@ -111,10 +111,9 @@ const BoardPage = (props) => {
                 <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden />
                 {noteType && <InputType
                     addVideo={onAddVideo}
-                    setNoteData={setNoteData}
                     handleSubmit={onHandleSubmit}
-                    setNoteHeader={setNoteHeader} />}
-
+                    setNoteHeader={setNoteHeader}
+                    setNoteData={setNoteData} />}
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} onUploadImgHandler={onUploadImgHandler} />
             </div>
             {notes && <div>
@@ -136,8 +135,6 @@ const mapDispatchToProps = {
     loadRoomById,
     saveRoom,
     resetCurrRoom,
-    saveRoom,
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardPage);

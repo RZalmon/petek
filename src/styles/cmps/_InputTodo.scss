@@ -1,4 +1,11 @@
 .input-todo {
+    background-color: darken($color: $clr-input, $amount: 30%);
+    position: fixed;
+    width: 85%;
+    bottom: 2.5%;
+    left: 10%;
+    border-radius: 5%;
+
     .input-header,
     .input-task {
         border: 1px solid transparent;
@@ -6,35 +13,68 @@
         height: 60px;
         font-size: 18px;
         background-color: $clr-input;
-        width: 85%;
-        position: fixed;
-        // bottom: 2.5%;
-        left: 10%;
     }
 
     .input-header {
-        bottom: 25%;
-        // left: 10%;
     }
 
+    .todo {
+        display: flex;
+        justify-content: center;
+        font-size: 18px;
+    }
     .add-todo-container {
-
         .input-task {
-            bottom: 12.5%;
         }
         .add-button {
-            position: fixed;
             cursor: pointer;
             max-width: 30px;
-            left: 85%;
-            bottom: 15%;
-
-
+            z-index: 4;
         }
     }
 
-    
     .x-mark {
+        cursor: pointer;
         width: 20px;
     }
 }
+
+// .input-todo {
+//     background-color: red;
+//     .input-header,
+//     .input-task {
+//         border: 1px solid transparent;
+//         border-radius: 5%;
+//         height: 60px;
+//         font-size: 18px;
+//         background-color: $clr-input;
+//         width: 85%;
+//         position: fixed;
+//         // bottom: 2.5%;
+//         left: 10%;
+//     }
+
+//     .input-header {
+//         bottom: 25%;
+//         // left: 10%;
+//     }
+
+//     .add-todo-container {
+
+//         .input-task {
+//             bottom: 12.5%;
+//         }
+//         .add-button {
+//             position: fixed;
+//             cursor: pointer;
+//             max-width: 30px;
+//             left: 85%;
+//             bottom: 15%;
+
+//         }
+//     }
+
+//     .x-mark {
+//         width: 20px;
+//     }
+// }
