@@ -53,7 +53,7 @@ export default ({ setNoteType, onUploadImgHandler, setNoteInputType }) => {
                 icon={<ListIcon style={{ fontSize: 20, fill: '#ffa350' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
-                onClick={() => { setNoteType('NoteTodo'); setIsOpen(!isOpen); }}
+                onClick={() => { setNoteType('NoteTodo'); setIsOpen(!isOpen);  setNoteInputType('InputTodo'); }}
             />
         </FloatingMenu>
     )

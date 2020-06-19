@@ -14,12 +14,14 @@ import NoteList from '../cmps/NoteList'
 
 import InputText from '../cmps/InputText'
 import InputVideo from '../cmps/InputVideo'
+import InputTodo from '../cmps/InputTodo'
 
 import { UserService } from '../services/UserService';
 
 const BoardPage = (props) => {
-    const [noteData, setNoteData] = useState('');
     const [noteType, setNoteType] = useState('');
+    const [noteHeader, setNoteHeader] = useState('');
+    const [noteData, setNoteData] = useState('');
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
 
@@ -27,13 +29,15 @@ const BoardPage = (props) => {
 
 
     const newNote = {
+        header: noteHeader,
         data: noteData,
         type: noteType
     }
 
     const cmps = {
         InputText,
-        InputVideo
+        InputVideo,
+        InputTodo
     }
 
     const InputType = cmps[noteInputType];
@@ -45,7 +49,7 @@ const BoardPage = (props) => {
     }
 
 
-    if (props.room) var { notes } = props.room
+    // if (props.room) var { notes } = props.room
 
     const onUploadImgHandler = () => {
         inputRef.current.click()
@@ -80,6 +84,7 @@ const BoardPage = (props) => {
         props.room.notes.unshift(newNote)
         props.saveRoom(props.room)
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
+        setNoteHeader('')
         setNoteData('')
         setNoteType('')
         setIsUploading(false)
@@ -98,13 +103,17 @@ const BoardPage = (props) => {
         return () => { props.resetCurrRoom() };
     }, []);
 
+    if (props.room) var { notes } = props.room
 
     return (
         <div className="board-page">
             <div className="note-add">
                 <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden />
-                {noteType && <InputType  addVideo={onAddVideo} setNoteData={setNoteData} handleSubmit={onHandleSubmit} />}
-
+                {noteType && <InputType
+                    addVideo={onAddVideo}
+                    handleSubmit={onHandleSubmit}
+                    setNoteHeader={setNoteHeader}
+                    setNoteData={setNoteData} />}
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} onUploadImgHandler={onUploadImgHandler} />
             </div>
             {notes && <div>
@@ -126,8 +135,6 @@ const mapDispatchToProps = {
     loadRoomById,
     saveRoom,
     resetCurrRoom,
-    saveRoom,
-
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardPage);

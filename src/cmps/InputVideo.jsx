@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 
 import { YoutubeApiService } from '../services/YoutubeApiService'
 
 import PlusIcon from '../assets/svg/plus.svg'
 
-const InputVideo = ({ addVideo }) => {
+export default ({ addVideo }) => {
     const [videos, setVideos] = useState([]);
 
     const searchYoutubeVideos = async (queryStr) => {
@@ -17,10 +16,6 @@ const InputVideo = ({ addVideo }) => {
         const youtubeVideos = await YoutubeApiService.youtubeQuery(queryStr);
         setVideos(youtubeVideos)
     }
-
-    useEffect(() => {
-
-    });
 
     return (
         <section className="input-video">
@@ -44,15 +39,3 @@ const InputVideo = ({ addVideo }) => {
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        room: state.room.currRoom,
-    };
-};
-
-const mapDispatchToProps = {
-    // loadRoomById,
-    // saveRoom
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(InputVideo);
