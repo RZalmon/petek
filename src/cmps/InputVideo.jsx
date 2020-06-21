@@ -5,7 +5,7 @@ import { YoutubeApiService } from '../services/YoutubeApiService'
 
 import PlusIcon from '../assets/svg/plus.svg'
 
-export default ({ addVideo }) => {
+export default ({ addVideo, setNoteHeader }) => {
     const [videos, setVideos] = useState([]);
 
     const searchYoutubeVideos = async (queryStr) => {
@@ -26,12 +26,13 @@ export default ({ addVideo }) => {
                 placeholder="Search Video"
                 onChange={e => searchYoutubeVideos(e.target.value)}
             />
+            <input className="input-header" placeholder="Note Header" type="text" onChange={e => setNoteHeader(e.target.value)} />
             {!!videos.length && videos.map(video => {
                 return (
                     <div className="video-card" key={video.id.videoId}>
-                        <img src={video.snippet.thumbnails.default.url} />
+                        <img src={video.snippet.thumbnails.default.url} alt="Video Thumbnail" />
                         <h6>{video.snippet.title}</h6>
-                        <img src={PlusIcon} className="add-button" onClick={() => { addVideo(video.id.videoId); setVideos([]) }} />
+                        <img src={PlusIcon} className="add-button" alt="Plus Icon" onClick={() => { addVideo(video.id.videoId); setVideos([]) }} />
                     </div>
                 )
             })}

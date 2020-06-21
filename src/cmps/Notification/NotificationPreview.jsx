@@ -20,12 +20,12 @@ export default ({ notification,onApprove, onDecline, onDeleteNotification }) => 
     return (
         <div className="notification-preview">
             <div className="notification-header">
-                <img src={notification.imgUrl} className="avatar avatar-xs" />
+                <img src={notification.imgUrl} className="avatar avatar-xs" alt="User Avatar"/>
                 <div>
             <NotificationType notification={notification} onApprove={onApprove} onDecline={onDecline}/>
             <Moment fromNow>{notification.createdAt}</Moment>
                 </div>
-            <img src={xMark} onClick={()=> onDeleteNotification(notification)} className="x-mark"/>
+            <img src={xMark} onClick={()=> onDeleteNotification(notification)} className="x-mark" alt="Close"/>
             </div>
         </div>
     )

@@ -26,18 +26,18 @@ var contacts = [
     }
 ];
 
-function sort(arr) {
-    return arr.sort((a, b) => {
-        if (a.userName.toLocaleLowerCase() < b.userName.toLocaleLowerCase()) {
-            return -1;
-        }
-        if (a.userName.toLocaleLowerCase() > b.userName.toLocaleLowerCase()) {
-            return 1;
-        }
+// function sort(arr) {
+//     return arr.sort((a, b) => {
+//         if (a.userName.toLocaleLowerCase() < b.userName.toLocaleLowerCase()) {
+//             return -1;
+//         }
+//         if (a.userName.toLocaleLowerCase() > b.userName.toLocaleLowerCase()) {
+//             return 1;
+//         }
 
-        return 0;
-    })
-}
+//         return 0;
+//     })
+// }
 
 // function query(filterBy = null) {
 //     return new Promise((resolve, reject) => {
@@ -122,13 +122,13 @@ function getEmptyContact() {
     }
 }
 
-function filter(term) {
-    term = term.toLocaleLowerCase()
-    return contacts.filter(contact => {
-        return contact.userName.toLocaleLowerCase().includes(term) ||
-            contact.fullName.toLocaleLowerCase().includes(term)
-    })
-}
+// function filter(term) {
+//     term = term.toLocaleLowerCase()
+//     return contacts.filter(contact => {
+//         return contact.userName.toLocaleLowerCase().includes(term) ||
+//             contact.fullName.toLocaleLowerCase().includes(term)
+//     })
+// }
 
 export const ContactService = {
     query,

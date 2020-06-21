@@ -1,6 +1,7 @@
 import axios from 'axios';
 //AIzaSyDD1nIJuc1thshvoaRykKhVDjI8-kbDSFM RAN'S KEY
-const API_KEY = 'AIzaSyD09tfK-pjT-G6kEZmXRfeicoKR-neGKNU' 
+//AIzaSyD09tfK-pjT-G6kEZmXRfeicoKR-neGKNU alt key
+const API_KEY = 'AIzaSyDD1nIJuc1thshvoaRykKhVDjI8-kbDSFM' 
 const limit = 15;
 
 

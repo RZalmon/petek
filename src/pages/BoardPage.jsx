@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, createRef } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import { connect } from 'react-redux';
 
 import { UtilService } from '../services/UtilService'
@@ -72,6 +72,8 @@ const BoardPage = (props) => {
 
 
     const onHandleSubmit = async (ev) => {
+        console.log('invoked');
+        
         const { user } = props
         if (ev) ev.preventDefault()
         newNote._id = UtilService.makeId(24)
@@ -92,7 +94,7 @@ const BoardPage = (props) => {
 
 
     useEffect(() => {
-        if (noteData && noteType === 'NoteImg' || noteType === 'NoteVideo') {
+        if ((noteData && noteType === 'NoteImg') || noteType === 'NoteVideo') {
             onHandleSubmit()
         }
     }, [isUploading]);
@@ -113,7 +115,8 @@ const BoardPage = (props) => {
                     addVideo={onAddVideo}
                     handleSubmit={onHandleSubmit}
                     setNoteHeader={setNoteHeader}
-                    setNoteData={setNoteData} />}
+                    setNoteData={setNoteData}
+                    noteData={noteData} />}
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} onUploadImgHandler={onUploadImgHandler} />
             </div>
             {notes && <div>

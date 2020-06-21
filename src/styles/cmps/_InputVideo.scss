@@ -7,17 +7,25 @@
         bottom: 13%;
         overflow-y:scroll;
 
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        bottom: 2.5%;
+        left: 10%;
+        width: 85%;
+    
         input {
             border: 1px solid transparent;
             border-radius: 5%;
             height: 60px;
             font-size: 18px;
             background-color: $clr-input;
-            width: 85%;
-            position: fixed;
-            bottom: 2.5%;
-            left: 10%;
+            // width: 85%;
+            // position: fixed;
+            // bottom: 2.5%;
+            // left: 10%;
         }
+    
         
         .video-card{
             display: flex;

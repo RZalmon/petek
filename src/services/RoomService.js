@@ -1,6 +1,6 @@
 
 import { HttpService } from './HttpService';
-import { StorageService } from './StorageService';
+// import { StorageService } from './StorageService';
 
 
 // const ROOM_KEY = 'notes';
@@ -30,13 +30,13 @@ async function save(room) {
     return res;
 }
 
-function getEmptyRoom() {
-    return {
-        roomId: '',
-        notes: [],
-        createdAt: ''
-    }
-}
+// function getEmptyRoom() {
+//     return {
+//         roomId: '',
+//         notes: [],
+//         createdAt: ''
+//     }
+// }
 
 
 
