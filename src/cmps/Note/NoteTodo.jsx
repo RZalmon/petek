@@ -11,7 +11,7 @@ const NoteTodo = ({ note, saveRoom, room }) => {
     const toggleIsDone = async (idx) => {
         note.data[idx].isDone = !note.data[idx].isDone
         await saveRoom(room)
-        SocketService.emit("roomUpdated", ({ room }));
+        SocketService.emit("roomUpdated", { room, isDeleted:true });
     }
 
 
