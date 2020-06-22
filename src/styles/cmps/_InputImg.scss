@@ -1,0 +1,32 @@
+.input-img{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    .add-button{
+        max-width:30px;
+        cursor: pointer;
+        margin-left: 10px;
+        position: fixed;
+        bottom: 4.5%;
+        left: 70%;
+    }
+
+    
+    input {
+        border: 1px solid transparent;
+        border-radius: 5%;
+        height: 60px;
+        font-size: 18px;
+        background-color: $clr-input;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        bottom: 2.5%;
+        left: 10%;
+        width: 85%;
+        // width: 85%;
+        // position: fixed;
+        // bottom: 2.5%;
+        // left: 10%;
+    }
+}

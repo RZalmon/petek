@@ -48,6 +48,7 @@ const App = (props) => {
  const disconnectSockets = () =>{
   SocketService.off(`updateRoom ${room._id}`)
   SocketService.off(`updateUser ${loggedinUser._id}`)
+  SocketService.off(`updateUserWithoutAudio ${loggedinUser._id}`)
   }
   
   const updateUser = (updatedUser) => {

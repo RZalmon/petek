@@ -22,8 +22,8 @@ export default ({ note, userId, removeNote }) => {
             <div className={userId === note.createdBy._id ? 'user-container' : 'friend-container'}>
                 <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" />
                 <div className="note-container" >
+                    <div className="note-header">
                     <img src={xMark} className="remove-btn" onClick={() => removeNote(note._id)}/>
-                    <div className="date">
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
                     <NoteType note={note} userId={userId} />

@@ -1,11 +1,18 @@
 .note-preview {
     max-width: 420px;
 
+    h4{
+        text-align: start;
+    }
+
+
     .remove-btn {
         cursor: pointer;
         width: 30px;
         align-self: flex-end;
         fill: white;
+        margin-left:10px;
+        
         &:hover{
             fill: white;
             transition: .3s;
@@ -18,8 +25,13 @@
         text-align: start;
     }
 
-    .date {
-        text-align: left;
+    .note-header {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
     }
 
     .friend-container {

@@ -1,6 +1,6 @@
 import React, { createRef } from 'react';
 
-import PlusIcon from '../assets/svg/plus.svg'
+import uploadImg from '../assets/svg/upload.svg'
 
 export default ({ setNoteHeader, onUploadImg }) => {
 
@@ -13,10 +13,10 @@ export default ({ setNoteHeader, onUploadImg }) => {
     }
 
     return (
-        <section className="input-video">
-            <input className="input-header" placeholder="Note Header" type="text" onChange={e => setNoteHeader(e.target.value)} />
+        <section className="input-img">
+            <input className="input-header" placeholder="Img Header" type="text" onChange={e => setNoteHeader(e.target.value)} />
             <input type="file" onChange={(ev) => { onUploadImg(ev); }} ref={inputRef} hidden />
-            <img src={PlusIcon} className="add-button" alt="Plus Icon" onClick={() => { onUploadImgHandler() }} />
+            <img src={uploadImg} className="add-button" alt="Plus Icon" onClick={() => { onUploadImgHandler() }} />
         </section >
     );
 };
