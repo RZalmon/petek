@@ -72,8 +72,6 @@ const BoardPage = (props) => {
 
 
     const onHandleSubmit = async (ev) => {
-        console.log('invoked');
-
         const { user } = props
         if (ev) ev.preventDefault()
         newNote._id = UtilService.makeId(24)
@@ -81,7 +79,6 @@ const BoardPage = (props) => {
         let minimalUser = await UserService.getMinimalUser(user._id, user.imgUrl)
         newNote.createdBy = minimalUser
         const friend = user.friends.find(friend => { return friend.roomId === props.match.params.id })
-        console.log('newNote is:', newNote);
         props.room.notes.unshift(newNote)
         props.saveRoom(props.room)
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
