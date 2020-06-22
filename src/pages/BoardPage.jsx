@@ -82,7 +82,6 @@ const BoardPage = (props) => {
         newNote.createdBy = minimalUser
         const friend = user.friends.find(friend => { return friend.roomId === props.match.params.id })
         console.log('newNote is:', newNote);
-
         props.room.notes.unshift(newNote)
         props.saveRoom(props.room)
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));

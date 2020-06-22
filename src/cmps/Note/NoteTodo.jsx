@@ -8,12 +8,12 @@ const NoteTodo = ({ note, saveRoom, room }) => {
 
     // const [isDone, setIsDone] = useState(false)
 
-    const toggleIsDone = (idx) => {
+    const toggleIsDone = (ev,idx) => {   
+        ev.stopPropagation()     
         note.data[idx].isDone = !note.data[idx].isDone
         console.log('isDone', note.data[idx].isDone);
-        saveRoom(room)
         SocketService.emit("todoUpdated", ({ room }));
-
+        // saveRoom(room)
     }
 
 
@@ -29,7 +29,7 @@ const NoteTodo = ({ note, saveRoom, room }) => {
             <ul>
                 {!!note.data.length && note.data.map((todo, idx) => {
                     return (
-                        <li className={todo.isDone ? 'done' : ''} key={todo.text} onClick={(ev) => toggleIsDone(idx)}>
+                        <li className={todo.isDone ? 'done' : ''} key={todo.text} onClick={(ev) => toggleIsDone(ev,idx)}>
                             {todo.text}
                         </li>
                     )
