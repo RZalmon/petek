@@ -15,6 +15,8 @@ const NoteTodo = ({ note, saveRoom, room }) => {
     }
 
 
+
+
     return (
         <div className="note-todo">
             {note.header && <h4>{note.header}</h4>}

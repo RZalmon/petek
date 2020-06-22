@@ -27,10 +27,12 @@ const App = (props) => {
   const connectSockets =  (id) => {
     SocketService.setup()
     if(room) {
-      SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom }) => {
+      SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, isDeleted }) => {
+        console.log('balssssss');
         
         // let newRoom = await props.saveRoom(updatedRoom)        
-        if(updatedRoom.notes[0].createdBy._id !== loggedinUser._id){          
+        console.log(isDeleted);         
+        if(updatedRoom.notes[0].createdBy._id !== loggedinUser._id || isDeleted  ){    
           props.loadRoomById(updatedRoom._id)
         }
         
@@ -71,8 +73,6 @@ const App = (props) => {
       }
      };
 
-    // props.getUser()
-    // Update the document title using the browser API
   });
 
 
