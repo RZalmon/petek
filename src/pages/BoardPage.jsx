@@ -73,7 +73,7 @@ const BoardPage = (props) => {
 
     const onHandleSubmit = async (ev) => {
         console.log('invoked');
-        
+
         const { user } = props
         if (ev) ev.preventDefault()
         newNote._id = UtilService.makeId(24)
@@ -91,6 +91,12 @@ const BoardPage = (props) => {
         setIsUploading(false)
     }
 
+    const removeNote = (noteId) => {
+        let idx = props.room.notes.findIndex(note => note._id === noteId)
+        props.room.notes.splice(idx, 1)
+        props.saveRoom(props.room)
+        SocketService.emit("updateRoom", (props.room));
+    }
 
     useEffect(() => {
         if ((noteData && noteType === 'NoteImg') || noteType === 'NoteVideo') {
@@ -119,7 +125,7 @@ const BoardPage = (props) => {
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} onUploadImgHandler={onUploadImgHandler} />
             </div>
             {notes && <div>
-                {!!notes.length && <NoteList notes={notes} userId={props.user._id} />}
+                {!!notes.length && <NoteList notes={notes} userId={props.user._id} removeNote={removeNote} />}
             </div>}
         </div>
     );
