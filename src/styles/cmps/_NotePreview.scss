@@ -6,9 +6,9 @@
         width: 30px;
         align-self: flex-end;
         fill: white;
-        &:hover {
+        &:hover{
             fill: white;
-            transition: 0.3s;
+            transition: .3s;
             filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%);
         }
     }
@@ -35,6 +35,7 @@
             border-radius: 5px 20px 20px 5px;
             padding: 10px;
             margin: 5px;
+           
         }
     }
 
@@ -52,6 +53,8 @@
             border-radius: 20px 5px 5px 20px;
             padding: 10px;
             margin: 5px;
+           
         }
+     
     }
 }

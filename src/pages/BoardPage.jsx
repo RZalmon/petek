@@ -82,7 +82,6 @@ const BoardPage = (props) => {
         newNote.createdBy = minimalUser
         const friend = user.friends.find(friend => { return friend.roomId === props.match.params.id })
         console.log('newNote is:', newNote);
-
         props.room.notes.unshift(newNote)
         props.saveRoom(props.room)
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
@@ -95,7 +94,7 @@ const BoardPage = (props) => {
     const removeNote = (noteId) => {
         let idx = props.room.notes.findIndex(note => note._id === noteId)
         props.room.notes.splice(idx, 1)
-        props.saveRoom(props.room)
+        props.saveRoom(props.room)        
         SocketService.emit("updateRoom", (props.room));
     }
 
@@ -107,7 +106,7 @@ const BoardPage = (props) => {
 
 
     useEffect(() => {
-        loadRoom()
+        loadRoom()        
         return () => { props.resetCurrRoom() };
     }, []);
 

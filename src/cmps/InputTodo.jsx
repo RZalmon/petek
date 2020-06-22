@@ -5,7 +5,6 @@ import PlusIcon from '../assets/svg/plus.svg'
 
 export default ({ setNoteHeader, setNoteData, handleSubmit, noteData }) => {
     const [currTodo, setCurrTodo] = useState('');
-    const [todos, setTodos] = useState([]);
 
     const textInput = React.useRef();
 

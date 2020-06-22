@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import SocketService from '../../services/SocketService'
 
@@ -8,18 +8,12 @@ const NoteTodo = ({ note, saveRoom, room }) => {
 
     // const [isDone, setIsDone] = useState(false)
 
-    const toggleIsDone = (idx) => {
+    const toggleIsDone = async (idx) => {
         note.data[idx].isDone = !note.data[idx].isDone
-        saveRoom(room) 
+        await saveRoom(room)
         SocketService.emit("roomUpdated", ({ room }));
     }
 
-
-
-    // useEffect(() => {
-    //     // loadRoomById(room._id)
-    //     // console.log('AAAAAFFFFFEEEEECCCCCTTTTT');
-    // }, [isDone])
 
     return (
         <div className="note-todo">
