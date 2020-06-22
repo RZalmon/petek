@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react'
-=======
 import React, { useEffect, useState, createRef } from 'react'
->>>>>>> 79caabc9aa21fc795e0e97a2fb8ba50d44d4e066
 import { connect } from 'react-redux';
 import SocketService from '../../services/SocketService'
 
@@ -20,16 +16,6 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
         SocketService.emit("roomUpdated", { room, userId });
     }
 
-<<<<<<< HEAD
-    const editTodo = (idx, text) => {
-        note.data[idx].text = text
-    }
-
-    useEffect(() => {
-      
-    }, [newTodo])
-
-=======
     // const editTodo = (idx) => {
     //     note.data[idx].text = newTodo
     // }
@@ -42,7 +28,6 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
         if (inputRef.current) inputRef.current.focus()
         if (currTodoIdx && inputRef.current) note.data[currTodoIdx].text = inputRef.current.value
     }, [inputRef, currTodoIdx])
->>>>>>> 79caabc9aa21fc795e0e97a2fb8ba50d44d4e066
 
     return (
         <div className="note-todo">
@@ -57,11 +42,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
                             }
                         }}>
                             {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} onClick={(ev) => toggleIsDone(idx)}>{todo.text}</span>}
-<<<<<<< HEAD
-                            {(isEdit && currTodoIdx === idx) && <input type="text" value={newTodo} onChange={(e) => {setNewTodo(e.target.value)}} />}
-=======
                             {(isEdit && currTodoIdx === idx) && <input type="text" value={newTodo} ref={inputRef} onChange={(e) => { setNewTodo(e.target.value); }} />}
->>>>>>> 79caabc9aa21fc795e0e97a2fb8ba50d44d4e066
                         </li>
                     )
                 })}
