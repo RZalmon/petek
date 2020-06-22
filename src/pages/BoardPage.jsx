@@ -95,7 +95,7 @@ const BoardPage = (props) => {
         let idx = props.room.notes.findIndex(note => note._id === noteId)
         props.room.notes.splice(idx, 1)
        await  props.saveRoom(props.room)        
-        SocketService.emit("roomUpdated", { room: props.room, isDeleted:true });
+        SocketService.emit("roomUpdated", { room: props.room, userId:props.user._id });
     }
 
     useEffect(() => {

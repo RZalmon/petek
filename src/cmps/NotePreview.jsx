@@ -26,7 +26,7 @@ export default ({ note, userId, removeNote }) => {
                     <div className="date">
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
-                    <NoteType note={note} />
+                    <NoteType note={note} userId={userId} />
                 </div>
             </div>
         </div>

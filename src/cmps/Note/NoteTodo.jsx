@@ -2,16 +2,15 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import SocketService from '../../services/SocketService'
 
-import { saveRoom, loadRoomById } from '../../actions/RoomActions';
+import { saveRoom } from '../../actions/RoomActions';
 
-const NoteTodo = ({ note, saveRoom, room }) => {
+const NoteTodo = ({ note, saveRoom, room,userId }) => {
 
-    // const [isDone, setIsDone] = useState(false)
 
     const toggleIsDone = async (idx) => {           
         note.data[idx].isDone = !note.data[idx].isDone
        await saveRoom(room)
-        SocketService.emit("roomUpdated", ({ room }));
+        SocketService.emit("roomUpdated", { room, userId });
     }
     
 
@@ -41,7 +40,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     saveRoom,
-    loadRoomById
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoteTodo);
