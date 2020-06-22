@@ -28,8 +28,9 @@ const App = (props) => {
     SocketService.setup()
     if(room) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom }) => {
-        // let newRoom = await props.saveRoom(updatedRoom)
-        if(updatedRoom.notes[0].createdBy._id !== loggedinUser._id ){          
+        
+        // let newRoom = await props.saveRoom(updatedRoom)        
+        if(updatedRoom.notes[0].createdBy._id !== loggedinUser._id){          
           props.loadRoomById(updatedRoom._id)
         }
         
@@ -40,6 +41,11 @@ const App = (props) => {
       SocketService.on(`updateUser ${loggedinUser._id}`, updateUser);
       SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => {props.updateUser(user)})
     }
+  }
+
+ const disconnectSockets = () =>{
+  SocketService.off(`updateRoom ${room._id}`)
+  SocketService.off(`updateUser ${loggedinUser._id}`)
   }
   
   const updateUser = (updatedUser) => {
@@ -59,11 +65,17 @@ const App = (props) => {
   useEffect(() => {
     connectSockets()
     
-    // props.getUser()
-    
+    return () => {
+      if(room && loggedinUser){
+        disconnectSockets()
+      }
+     };
 
+    // props.getUser()
     // Update the document title using the browser API
   });
+
+
   return (
     <div className="App">
       <Router history={history}>

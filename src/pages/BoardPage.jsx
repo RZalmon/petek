@@ -94,7 +94,7 @@ const BoardPage = (props) => {
     const removeNote = (noteId) => {
         let idx = props.room.notes.findIndex(note => note._id === noteId)
         props.room.notes.splice(idx, 1)
-        props.saveRoom(props.room)
+        props.saveRoom(props.room)        
         SocketService.emit("updateRoom", (props.room));
     }
 
