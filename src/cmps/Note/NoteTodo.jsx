@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import SocketService from '../../services/SocketService'
 
@@ -17,9 +17,13 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit }) => {
         SocketService.emit("roomUpdated", { room, userId });
     }
 
-    const editTodo = (idx) => {
-        note.data[idx].text = newTodo
+    const editTodo = (idx, text) => {
+        note.data[idx].text = text
     }
+
+    useEffect(() => {
+      
+    }, [newTodo])
 
 
     return (
@@ -35,11 +39,10 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit }) => {
                             }
                         }}>
                             {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} onClick={(ev) => toggleIsDone(idx)}>{todo.text}</span>}
-                            {(isEdit && currTodoIdx === idx) && <input type="text" value={newTodo} onChange={(e) => { setNewTodo(e.target.value); editTodo(idx) }} />}
+                            {(isEdit && currTodoIdx === idx) && <input type="text" value={newTodo} onChange={(e) => {setNewTodo(e.target.value)}} />}
                         </li>
                     )
                 })}
-                <button onClick={() => console.log('test:', newTodo)}>Test</button>
             </ul>
         </div>
     )
