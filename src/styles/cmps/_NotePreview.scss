@@ -1,20 +1,19 @@
 .note-preview {
     max-width: 420px;
-    p{
+
+    p {
         margin: unset;
         text-align: start;
     }
 
-
-    .date{
+    .date {
         text-align: left;
     }
 
-
-    .friend-container{
+    .friend-container {
         display: flex;
         margin: 5px;
-        .note-container{
+        .note-container {
             width: fit-content;
             height: fit-content;
             background-color: lightblue;
@@ -23,14 +22,15 @@
             padding: 10px;
             margin: 5px;
         }
-        
     }
-    
-    .user-container{
+
+    .user-container {
         margin: 5px;
         display: flex;
         flex-direction: row-reverse;
-        .note-container{
+        .note-container {
+            display: flex;
+            flex-direction: column;
             width: fit-content;
             height: fit-content;
             background-color: lightskyblue;
@@ -38,7 +38,17 @@
             border-radius: 20px 5px 5px 20px;
             padding: 10px;
             margin: 5px;
+            .remove-btn {
+                cursor: pointer;
+                width: 30px;
+                align-self: flex-end;
+                fill: white;
+                &:hover{
+                    fill: white;
+                    transition: .3s;
+                    filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%);
+                }
+            }
         }
-
     }
 }
