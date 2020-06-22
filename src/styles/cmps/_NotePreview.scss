@@ -14,6 +14,8 @@
         display: flex;
         margin: 5px;
         .note-container {
+            display: flex;
+            flex-direction: column;
             width: fit-content;
             height: fit-content;
             background-color: lightblue;
@@ -21,6 +23,17 @@
             border-radius: 5px 20px 20px 5px;
             padding: 10px;
             margin: 5px;
+            .remove-btn {
+                cursor: pointer;
+                width: 30px;
+                align-self: flex-end;
+                fill: white;
+                &:hover{
+                    fill: white;
+                    transition: .3s;
+                    filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%);
+                }
+            }
         }
     }
 
