@@ -27,12 +27,12 @@ const App = (props) => {
   const connectSockets =  (id) => {
     SocketService.setup()
     if(room) {
-      SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, isDeleted }) => {
-        console.log('balssssss');
+      SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
+        console.log('here?');
         
         // let newRoom = await props.saveRoom(updatedRoom)        
-        console.log(isDeleted);         
-        if(updatedRoom.notes[0].createdBy._id !== loggedinUser._id || isDeleted  ){    
+        if(updatedRoom.notes[0].createdBy._id !== loggedinUser._id || userId !== loggedinUser._id ){    
+          
           props.loadRoomById(updatedRoom._id)
         }
         
