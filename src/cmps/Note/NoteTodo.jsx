@@ -10,8 +10,8 @@ const NoteTodo = ({ note, saveRoom, room }) => {
 
     const toggleIsDone = (idx) => {
         note.data[idx].isDone = !note.data[idx].isDone
-        saveRoom(room)
-        SocketService.emit("updateRoom", ({ room }));
+        saveRoom(room) 
+        SocketService.emit("roomUpdated", ({ room }));
     }
 
 
