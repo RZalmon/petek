@@ -1,14 +1,17 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react'
+=======
+import React, { useEffect, useState, createRef } from 'react'
+>>>>>>> 79caabc9aa21fc795e0e97a2fb8ba50d44d4e066
 import { connect } from 'react-redux';
 import SocketService from '../../services/SocketService'
 
 import { saveRoom } from '../../actions/RoomActions';
 
 
-const NoteTodo = ({ note, saveRoom, room, userId, isEdit }) => {
-    const [currTodoIdx, setCurrTodoIdx] = useState('');
+const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTodoIdx }) => {
     const [newTodo, setNewTodo] = useState('');
-
+    const inputRef = createRef();
 
     const toggleIsDone = async (idx) => {
         if (isEdit) return
@@ -17,6 +20,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit }) => {
         SocketService.emit("roomUpdated", { room, userId });
     }
 
+<<<<<<< HEAD
     const editTodo = (idx, text) => {
         note.data[idx].text = text
     }
@@ -25,6 +29,20 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit }) => {
       
     }, [newTodo])
 
+=======
+    // const editTodo = (idx) => {
+    //     note.data[idx].text = newTodo
+    // }
+
+
+
+    useEffect(() => {
+        // console.log('$@#!NOTE#@!$#@', note);
+        // inputRef.current.focus()
+        if (inputRef.current) inputRef.current.focus()
+        if (currTodoIdx && inputRef.current) note.data[currTodoIdx].text = inputRef.current.value
+    }, [inputRef, currTodoIdx])
+>>>>>>> 79caabc9aa21fc795e0e97a2fb8ba50d44d4e066
 
     return (
         <div className="note-todo">
@@ -39,7 +57,11 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit }) => {
                             }
                         }}>
                             {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} onClick={(ev) => toggleIsDone(idx)}>{todo.text}</span>}
+<<<<<<< HEAD
                             {(isEdit && currTodoIdx === idx) && <input type="text" value={newTodo} onChange={(e) => {setNewTodo(e.target.value)}} />}
+=======
+                            {(isEdit && currTodoIdx === idx) && <input type="text" value={newTodo} ref={inputRef} onChange={(e) => { setNewTodo(e.target.value); }} />}
+>>>>>>> 79caabc9aa21fc795e0e97a2fb8ba50d44d4e066
                         </li>
                     )
                 })}
