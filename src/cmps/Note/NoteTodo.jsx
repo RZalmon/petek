@@ -2,6 +2,8 @@ import React, { useEffect, useState, createRef } from 'react'
 import { connect } from 'react-redux';
 import SocketService from '../../services/SocketService'
 
+import PlusIcon from '../../assets/svg/plus.svg'
+
 import { saveRoom } from '../../actions/RoomActions';
 
 
@@ -16,22 +18,26 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
         SocketService.emit("roomUpdated", { room, userId });
     }
 
-    // const editTodo = (idx) => {
-    //     note.data[idx].text = newTodo
-    // }
-
+   const addTodo = async () =>{
+    setCurrTodoIdx(note.data.length)
+    //    note.data.unshift({text:'Add new Todo', isDone:false}) 
+    //    await saveRoom(room)
+    //    if (inputRef.current) inputRef.current.focus()
+       console.log('adddd', currTodoIdx);
+   }
 
 
     useEffect(() => {
-        // console.log('$@#!NOTE#@!$#@', note);
-        // inputRef.current.focus()
         if (inputRef.current) inputRef.current.focus()
-        if (currTodoIdx && inputRef.current) note.data[currTodoIdx].text = inputRef.current.value
-    }, [inputRef, currTodoIdx])
+        if (currTodoIdx !== '' && inputRef.current) note.data[currTodoIdx].text = newTodo
+    }, [newTodo, currTodoIdx])
 
     return (
         <div className="note-todo">
+            <div className="todo-header">
             {note.header && <h4>{note.header}</h4>}
+           {isEdit && <img src={PlusIcon} className="add-todo-button" onClick={() =>{addTodo()}} />}
+            </div>
             <ul>
                 {!!note.data.length && note.data.map((todo, idx) => {
                     return (

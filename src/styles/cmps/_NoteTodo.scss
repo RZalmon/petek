@@ -1,9 +1,29 @@
-li {
-    cursor: pointer;
-    .edit-icon {
+
+.note-todo{
+
+    h4{
+        margin: unset;
+    }
+
+    li {
+        cursor: pointer;
+        .edit-icon {
+            width: 30px;
+        }
+    }
+    .done {
+        text-decoration: line-through;
+    }
+    .add-todo-button{
         width: 30px;
     }
-}
-.done {
-    text-decoration: line-through;
+
+    .todo-header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 30px;
+        margin: 5px 0 5px 0;;
+    }
+
 }
