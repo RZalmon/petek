@@ -72,7 +72,7 @@ onAddFriend = (ev,friendId) => {
     return (
       <div>
         {user &&
-          <div>
+          <div className="home-page">
             {user.userName && <h2>Hi There {this.capitalize(user.userName)}</h2>}
             <AvatarEdit imgUrl={user.imgUrl} onUploadImg={this.onUploadImg} isLoading={isLoading} />
             <h6>Let's add contacts veze</h6>
