@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 
 import { UtilService } from '../services/UtilService'
@@ -26,7 +26,6 @@ const BoardPage = (props) => {
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
 
-    const inputRef = createRef();
 
 
     const newNote = {

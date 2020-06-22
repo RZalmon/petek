@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, createRef } from 'react'
 import { connect } from 'react-redux';
 import SocketService from '../../services/SocketService'
 
 import { saveRoom } from '../../actions/RoomActions';
 
 
-const NoteTodo = ({ note, saveRoom, room, userId, isEdit }) => {
-    const [currTodoIdx, setCurrTodoIdx] = useState('');
+const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTodoIdx }) => {
     const [newTodo, setNewTodo] = useState('');
-
+    const inputRef = createRef();
 
     const toggleIsDone = async (idx) => {
         if (isEdit) return
@@ -17,10 +16,18 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit }) => {
         SocketService.emit("roomUpdated", { room, userId });
     }
 
-    const editTodo = (idx) => {
-        note.data[idx].text = newTodo
-    }
+    // const editTodo = (idx) => {
+    //     note.data[idx].text = newTodo
+    // }
 
+
+
+    useEffect(() => {
+        // console.log('$@#!NOTE#@!$#@', note);
+        // inputRef.current.focus()
+        if (inputRef.current) inputRef.current.focus()
+        if (currTodoIdx && inputRef.current) note.data[currTodoIdx].text = inputRef.current.value
+    }, [inputRef, currTodoIdx])
 
     return (
         <div className="note-todo">
@@ -35,7 +42,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit }) => {
                             }
                         }}>
                             {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} onClick={(ev) => toggleIsDone(idx)}>{todo.text}</span>}
-                            {(isEdit && currTodoIdx === idx) && <input type="text" value={newTodo} onChange={(e) => { setNewTodo(e.target.value); editTodo(idx) }} />}
+                            {(isEdit && currTodoIdx === idx) && <input type="text" value={newTodo} ref={inputRef} onChange={(e) => { setNewTodo(e.target.value); }} />}
                         </li>
                     )
                 })}
