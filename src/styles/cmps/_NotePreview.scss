@@ -1,22 +1,36 @@
 .note-preview {
     max-width: 420px;
 
-    h4{
+    h4 {
         text-align: start;
     }
-
 
     .remove-btn {
         cursor: pointer;
         width: 30px;
         align-self: flex-end;
-        fill: white;
-        margin-left:10px;
-        
-        &:hover{
-            fill: white;
-            transition: .3s;
+        fill: white;//not working
+        margin-left: 10px;
+
+        &:hover {
+            fill: white;//not working
+            transition: 0.3s;//not working
             filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%);
+        }
+    }
+
+    .edit-btn,
+    .save-btn {
+        cursor: pointer;
+        width: 30px;
+        align-self: flex-end;
+        fill: white;//not working
+        margin-left: 10px;
+
+        &:hover {
+            fill: white;//not working
+            transition: 0.3s;//not working
+            filter: invert(12%) sepia(83%) saturate(5841%) hue-rotate(244deg) brightness(87%) contrast(153%);
         }
     }
 
@@ -31,7 +45,6 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 10px;
-
     }
 
     .friend-container {
@@ -47,7 +60,6 @@
             border-radius: 5px 20px 20px 5px;
             padding: 10px;
             margin: 5px;
-           
         }
     }
 
@@ -65,8 +77,6 @@
             border-radius: 20px 5px 5px 20px;
             padding: 10px;
             margin: 5px;
-           
         }
-     
     }
 }

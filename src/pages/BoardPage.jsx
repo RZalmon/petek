@@ -51,12 +51,11 @@ const BoardPage = (props) => {
     }
 
 
-    // if (props.room) var { notes } = props.room
+    const saveTodoEdit = async () => {
+        console.log('saving', props.room.notes);
+        await props.saveRoom(props.room)
+    }
 
-    // const onUploadImgHandler = () => {
-    //     inputRef.current.click()
-    //     setNoteType('NoteImg');
-    // }
 
     const onUploadImg = async (ev) => {
         if (noteType === 'NoteImg') {
@@ -125,7 +124,7 @@ const BoardPage = (props) => {
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} />
             </div>
             {notes && <div>
-                {!!notes.length && <NoteList notes={notes} userId={props.user._id} removeNote={removeNote} />}
+                {!!notes.length && <NoteList notes={notes} userId={props.user._id} removeNote={removeNote} saveTodoEdit={saveTodoEdit} />}
             </div>}
         </div>
     );

@@ -1,6 +1,9 @@
 li {
-    cursor: pointer;  
+    cursor: pointer;
+    .edit-icon {
+        width: 30px;
+    }
 }
 .done {
     text-decoration: line-through;
-}  
+}

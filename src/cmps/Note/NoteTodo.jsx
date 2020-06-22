@@ -1,19 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import SocketService from '../../services/SocketService'
 
 import { saveRoom } from '../../actions/RoomActions';
 
-const NoteTodo = ({ note, saveRoom, room,userId }) => {
+
+const NoteTodo = ({ note, saveRoom, room, userId, isEdit }) => {
+    const [currTodoIdx, setCurrTodoIdx] = useState('');
+    const [newTodo, setNewTodo] = useState('');
 
 
     const toggleIsDone = async (idx) => {
+        if (isEdit) return
         note.data[idx].isDone = !note.data[idx].isDone
-       await saveRoom(room)
+        await saveRoom(room)
         SocketService.emit("roomUpdated", { room, userId });
     }
 
-
+    const editTodo = (idx) => {
+        note.data[idx].text = newTodo
+    }
 
 
     return (
@@ -22,11 +28,18 @@ const NoteTodo = ({ note, saveRoom, room,userId }) => {
             <ul>
                 {!!note.data.length && note.data.map((todo, idx) => {
                     return (
-                        <li className={todo.isDone ? 'done' : ''} key={todo.text} onClick={(ev) => toggleIsDone(idx)}>
-                            {todo.text}
+                        <li key={todo.text} onClick={() => {
+                            if (isEdit) {
+                                setCurrTodoIdx(idx);
+                                setNewTodo(todo.text)
+                            }
+                        }}>
+                            {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} onClick={(ev) => toggleIsDone(idx)}>{todo.text}</span>}
+                            {(isEdit && currTodoIdx === idx) && <input type="text" value={newTodo} onChange={(e) => { setNewTodo(e.target.value); editTodo(idx) }} />}
                         </li>
                     )
                 })}
+                <button onClick={() => console.log('test:', newTodo)}>Test</button>
             </ul>
         </div>
     )
