@@ -106,7 +106,7 @@ const BoardPage = (props) => {
 
 
     useEffect(() => {
-        loadRoom()
+        loadRoom()        
         return () => { props.resetCurrRoom() };
     }, []);
 

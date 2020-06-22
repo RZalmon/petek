@@ -12,7 +12,7 @@ const NoteTodo = ({ note, saveRoom, room }) => {
         ev.stopPropagation()     
         note.data[idx].isDone = !note.data[idx].isDone
         saveRoom(room)
-        SocketService.emit("updateRoom", ({ room }));
+        SocketService.emit("roomUpdated", ({ room }));
     }
 
 
