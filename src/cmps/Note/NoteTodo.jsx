@@ -7,12 +7,12 @@ import { saveRoom } from '../../actions/RoomActions';
 const NoteTodo = ({ note, saveRoom, room,userId }) => {
 
 
-    const toggleIsDone = async (idx) => {           
+    const toggleIsDone = async (idx) => {
         note.data[idx].isDone = !note.data[idx].isDone
        await saveRoom(room)
         SocketService.emit("roomUpdated", { room, userId });
     }
-    
+
 
 
 

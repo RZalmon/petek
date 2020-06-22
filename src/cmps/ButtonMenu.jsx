@@ -41,7 +41,7 @@ export default ({ setNoteType, onUploadImgHandler, setNoteInputType }) => {
                 icon={<ImageIcon style={{ fontSize: 20, fill: '#28b5f2' }} nativecolor="black" />}
                 backgroundColor="white"
                 size={40}
-                onClick={() => { onUploadImgHandler(); setIsOpen(!isOpen); }}
+                onClick={() => { setNoteType('NoteImg'); setIsOpen(!isOpen); setNoteInputType('InputImg')}}
             />
             <ChildButton
                 icon={<VideocamIcon style={{ fontSize: 20, fill: '#ff0000' }} nativecolor="black" />}

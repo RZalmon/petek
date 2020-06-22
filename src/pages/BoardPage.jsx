@@ -13,6 +13,7 @@ import ButtonMenu from '../cmps/ButtonMenu'
 import NoteList from '../cmps/NoteList'
 
 import InputText from '../cmps/InputText'
+import InputImg from '../cmps/InputImg'
 import InputVideo from '../cmps/InputVideo'
 import InputTodo from '../cmps/InputTodo'
 
@@ -36,6 +37,7 @@ const BoardPage = (props) => {
 
     const cmps = {
         InputText,
+        InputImg,
         InputVideo,
         InputTodo
     }
@@ -51,10 +53,10 @@ const BoardPage = (props) => {
 
     // if (props.room) var { notes } = props.room
 
-    const onUploadImgHandler = () => {
-        inputRef.current.click()
-        setNoteType('NoteImg');
-    }
+    // const onUploadImgHandler = () => {
+    //     inputRef.current.click()
+    //     setNoteType('NoteImg');
+    // }
 
     const onUploadImg = async (ev) => {
         if (noteType === 'NoteImg') {
@@ -91,8 +93,8 @@ const BoardPage = (props) => {
     const removeNote = async (noteId) => {
         let idx = props.room.notes.findIndex(note => note._id === noteId)
         props.room.notes.splice(idx, 1)
-       await  props.saveRoom(props.room)        
-        SocketService.emit("roomUpdated", { room: props.room, userId:props.user._id });
+        await props.saveRoom(props.room)
+        SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
     }
 
     useEffect(() => {
@@ -103,7 +105,7 @@ const BoardPage = (props) => {
 
 
     useEffect(() => {
-        loadRoom()        
+        loadRoom()
         return () => { props.resetCurrRoom() };
     }, []);
 
@@ -112,14 +114,15 @@ const BoardPage = (props) => {
     return (
         <div className="board-page">
             <div className="note-add">
-                <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden />
+                {/* <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden /> */}
                 {noteType && <InputType
                     addVideo={onAddVideo}
+                    onUploadImg={onUploadImg}
                     handleSubmit={onHandleSubmit}
                     setNoteHeader={setNoteHeader}
                     setNoteData={setNoteData}
                     noteData={noteData} />}
-                <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} onUploadImgHandler={onUploadImgHandler} />
+                <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} />
             </div>
             {notes && <div>
                 {!!notes.length && <NoteList notes={notes} userId={props.user._id} removeNote={removeNote} />}
