@@ -26,6 +26,7 @@ export default ({ setNoteHeader, setNoteData, handleSubmit, noteData }) => {
         <div className="input-todo">
             <input type="text" placeholder="Header?" className="input-header" onChange={e => setNoteHeader(e.target.value)} />
             <ul>
+                {!noteData.length && <h5>No Todo's Added</h5>}
                 {!!noteData.length && noteData.map((todo, idx) => {
                     return (
                         <li className="todo" key={todo.text}>

@@ -1,9 +1,36 @@
-li {
-    cursor: pointer;
-    .edit-icon {
-        width: 30px;
+.note-todo {
+    h4 {
+        margin: unset;
     }
-}
-.done {
-    text-decoration: line-through;
+
+    li {
+        cursor: pointer;
+        .edit-icon {
+            width: 30px;
+        }
+    }
+    .done {
+        text-decoration: line-through;
+    }
+    .new-todo-btn, .add-todo-btn {
+        cursor: pointer;
+        width: 30px;
+        &:hover {
+            filter: invert(43%) sepia(96%) saturate(1237%) hue-rotate(88deg) brightness(128%) contrast(119%);
+        }
+    }
+    .remove-todo-btn{
+        cursor: pointer;
+        width: 30px;
+        &:hover {
+            filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%);
+        }
+    }
+    .todo-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 30px;
+        margin: 5px 0 5px 0;
+    }
 }

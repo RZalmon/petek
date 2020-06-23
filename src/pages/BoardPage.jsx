@@ -51,8 +51,9 @@ const BoardPage = (props) => {
 
 
     const saveTodoEdit = async () => {
-        console.log('saving', props.room.notes);
         await props.saveRoom(props.room)
+        SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
+
     }
 
 
