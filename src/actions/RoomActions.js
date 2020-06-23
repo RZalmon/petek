@@ -42,6 +42,7 @@ export function resetCurrRoom() {
 
 // UPDATE + CREATE
 export function saveRoom(room) {
+console.log(room.notes);
 
     return async dispatch => {
         const isEdit = !!room._id;
