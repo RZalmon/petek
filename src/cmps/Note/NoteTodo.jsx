@@ -16,17 +16,9 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
         SocketService.emit("roomUpdated", { room, userId });
     }
 
-    // const editTodo = (idx) => {
-    //     note.data[idx].text = newTodo
-    // }
-
-
-
     useEffect(() => {
-        // console.log('$@#!NOTE#@!$#@', note);
-        // inputRef.current.focus()
         if (inputRef.current) inputRef.current.focus()
-        if (currTodoIdx && inputRef.current) note.data[currTodoIdx].text = inputRef.current.value
+        if (currTodoIdx !== '' && inputRef.current) note.data[currTodoIdx].text = inputRef.current.value
     }, [inputRef, currTodoIdx])
 
     return (
