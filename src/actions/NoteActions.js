@@ -38,6 +38,7 @@ export function resetCurrNote() {
 
 // UPDATE + CREATE
 export function saveNote(note) {
+    
     return async dispatch => {
         const isEdit = !!note._id
         note = await NoteService.save(note);

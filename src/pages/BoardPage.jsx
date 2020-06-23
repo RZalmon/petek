@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { UtilService } from '../services/UtilService'
@@ -25,13 +25,14 @@ const BoardPage = (props) => {
     const [noteData, setNoteData] = useState('');
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
+    const [isPinned, setIsPinned] = useState(false);
 
 
 
     const newNote = {
         header: noteHeader,
         data: noteData,
-        type: noteType
+        type: noteType,
     }
 
     const cmps = {
@@ -76,7 +77,8 @@ const BoardPage = (props) => {
         const { user } = props
         if (ev) ev.preventDefault()
         newNote._id = UtilService.makeId(24)
-        newNote.createdAt = Date.now()
+        newNote.createdAt = Date.now() //maybe server side should handle it
+        newNote.isPinned = false  //maybe server side should handle it
         let minimalUser = await UserService.getMinimalUser(user._id, user.imgUrl)
         newNote.createdBy = minimalUser
         const friend = user.friends.find(friend => { return friend.roomId === props.match.params.id })
@@ -88,6 +90,18 @@ const BoardPage = (props) => {
         setNoteType('')
         setIsUploading(false)
     }
+
+    const togglePinned = (note) => {
+        //WORKS ONLY ON FIRST CLICK
+        //  setIsPinned(isPinned ? false : true)
+        console.log('note.data', note.data);
+
+        note.isPinned = !note.isPinned
+        props.saveRoom(props.room)
+        console.log('note', note.isPinned);
+
+    }
+
 
     const removeNote = async (noteId) => {
         let idx = props.room.notes.findIndex(note => note._id === noteId)
@@ -124,8 +138,9 @@ const BoardPage = (props) => {
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} />
             </div>
             {notes && <div>
-                {!!notes.length && <NoteList notes={notes} userId={props.user._id} removeNote={removeNote} saveTodoEdit={saveTodoEdit} />}
+                {!!notes.length && <NoteList notes={notes} userId={props.user._id} removeNote={removeNote} saveTodoEdit={saveTodoEdit} togglePinned={togglePinned} isPinned={isPinned} />}
             </div>}
+            {props.room && <button onClick={() => { console.log(props.room.notes) }}>print</button>}
         </div>
     );
 };

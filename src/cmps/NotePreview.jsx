@@ -9,9 +9,10 @@ import NoteText from './Note/NoteText'
 import NoteImg from './Note/NoteImg'
 import NoteVideo from './Note/NoteVideo'
 import NoteTodo from './Note/NoteTodo'
+import Features from '../cmps/Features'
 
 
-export default ({ note, userId, removeNote, saveTodoEdit }) => {
+export default ({ note, userId, removeNote, saveTodoEdit, togglePinned, isPinned }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [isNewTodo, setIsNewTodo] = useState(false);
     const [currTodoIdx, setCurrTodoIdx] = useState('');
@@ -36,6 +37,7 @@ export default ({ note, userId, removeNote, saveTodoEdit }) => {
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
                     <NoteType note={note} userId={userId} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} setIsNewTodo={setIsNewTodo} isNewTodo={isNewTodo}/>
+                    <Features togglePinned={togglePinned} isPinned={isPinned} note={note}/>
                 </div>
             </div>
         </div>

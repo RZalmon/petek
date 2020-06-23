@@ -7,7 +7,7 @@ import MinusIcon from '../../assets/svg/minus.svg'
 import ArrowIcon from '../../assets/svg/arrow.svg'
 
 import { saveRoom } from '../../actions/RoomActions';
-//TODO: IMPROVE EDIT INPUT AND MINUS UI
+//TODO: IMPROVE EDIT INPUT AND MINUS UI +++ reflect trough socket
 
 const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTodoIdx, setIsNewTodo, isNewTodo }) => {
     const [editedTodo, setEditedTodo] = useState('');
