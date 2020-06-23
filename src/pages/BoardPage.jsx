@@ -91,6 +91,7 @@ const BoardPage = (props) => {
     }
 
     const togglePinned =  (note) =>{
+        //WORKS ONLY ON FIRST CLICK
         //  setIsPinned(isPinned ? false : true)
         console.log('note.data',note.data);
         
