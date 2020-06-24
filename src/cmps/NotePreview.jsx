@@ -14,6 +14,7 @@ import Features from '../cmps/Features'
 
 export default ({ note, userId, removeNote, saveTodoEdit, togglePinned, isPinned }) => {
     const [isEdit, setIsEdit] = useState(false);
+    const [isNewTodo, setIsNewTodo] = useState(false);
     const [currTodoIdx, setCurrTodoIdx] = useState('');
 
     const cmps = {
@@ -31,11 +32,11 @@ export default ({ note, userId, removeNote, saveTodoEdit, togglePinned, isPinned
                 <div className="note-container" >
                     <div className="note-header">
                         <img src={xMark} className="remove-btn" onClick={() => removeNote(note._id)} />
-                        {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <img src={editIcon} alt="edit note" className="edit-btn" onClick={() => setIsEdit(true)} />}
-                        {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <img src={saveIcon} alt="save note" className="save-btn" onClick={() => { setIsEdit(false); saveTodoEdit(); setCurrTodoIdx('') }} />}
+                        {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <img src={editIcon} alt="Edit note" className="edit-btn" onClick={() => setIsEdit(true)} />}
+                        {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <img src={saveIcon} alt="Save changes" className="save-btn" onClick={() => { setIsEdit(false); saveTodoEdit(); setCurrTodoIdx('') }} />}
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
-                    <NoteType note={note} userId={userId} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} />
+                    <NoteType note={note} userId={userId} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} setIsNewTodo={setIsNewTodo} isNewTodo={isNewTodo}/>
                     <Features togglePinned={togglePinned} isPinned={isPinned} note={note}/>
                 </div>
             </div>
