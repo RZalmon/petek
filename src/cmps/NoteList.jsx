@@ -2,23 +2,18 @@ import React, {useEffect, useState} from 'react'
 import NotePreview from './NotePreview'
 import Loading from '../cmps/Loading'
 
-export default ({ notes, userId, removeNote, saveTodoEdit, togglePinned, isPinned }) => {
+export default ({ notes, user, removeNote, saveTodoEdit, togglePinned, isPinned }) => {
     
     const [notesForDisplay, setNotesForDisplay] = useState([])
 
-    useEffect(() => { 
+    useEffect(() => {
+        
         const fixedNotes = []
-
-        const unPinnedNotes = notes.filter(note =>{
-            return !note.isPinned
+        notes.map(note =>{
+            user.pinnedNotes.find(id =>{return id === note._id })  ? 
+            fixedNotes.unshift(note) : fixedNotes.push(note)       
         })
-        
-        const pinnedNotes = notes.filter(note =>{
-            return note.isPinned
-        })
-        
-        fixedNotes.push(...unPinnedNotes)
-        fixedNotes.unshift(...pinnedNotes)
+     
         setNotesForDisplay(fixedNotes)
         }, [notes])
 
@@ -27,7 +22,7 @@ export default ({ notes, userId, removeNote, saveTodoEdit, togglePinned, isPinne
         <div className="note-list">
             {notesForDisplay.length ? notesForDisplay.map(note => {
                 return (
-                    <NotePreview note={note} key={note._id} userId={userId} removeNote={removeNote} saveTodoEdit={saveTodoEdit} togglePinned={togglePinned} isPinned={isPinned} />
+                    <NotePreview note={note} key={note._id} user={user} removeNote={removeNote} saveTodoEdit={saveTodoEdit} togglePinned={togglePinned} isPinned={isPinned} />
                 )
             }) : <Loading/>}
         </div>

@@ -8,6 +8,7 @@ import CloudinaryService from '../../src/services/CloudinaryService'
 
 
 import { loadRoomById, saveRoom, resetCurrRoom } from '../actions/RoomActions';
+import { updateUser} from '../actions/UserActions';
 
 import ButtonMenu from '../cmps/ButtonMenu'
 import NoteList from '../cmps/NoteList'
@@ -78,12 +79,13 @@ const BoardPage = (props) => {
         if (ev) ev.preventDefault()
         newNote._id = UtilService.makeId(24)
         newNote.createdAt = Date.now() //maybe server side should handle it
-        newNote.isPinned = false  //maybe server side should handle it
         let minimalUser = await UserService.getMinimalUser(user._id, user.imgUrl)
         newNote.createdBy = minimalUser
         const friend = user.friends.find(friend => { return friend.roomId === props.match.params.id })
         props.room.notes.unshift(newNote)
         props.saveRoom(props.room)
+        console.log('newNote',newNote);
+        
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
         setNoteHeader('')
         setNoteData('')
@@ -92,15 +94,13 @@ const BoardPage = (props) => {
     }
 
     const togglePinned = (note) => {
-        //WORKS ONLY ON FIRST CLICK
-        //  setIsPinned(isPinned ? false : true)
-        console.log('note.data', note.data);
-        note.isPinned = !note.isPinned
+        //  note.isPinned = !note.isPinned
+       let choosenNote =  props.user.pinnedNotes.find(id => note._id === id)
+       !choosenNote ? props.user.pinnedNotes.push(note._id) :  props.user.pinnedNotes.splice(note._id,1)
         let idx = props.room.notes.findIndex(currNote => note._id === currNote._id)
         props.room.notes.splice(idx, 1, note)
         props.saveRoom(props.room)
-        console.log('note', note.isPinned);
-
+        props.updateUser(props.user)
     }
 
 
@@ -139,7 +139,7 @@ const BoardPage = (props) => {
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} />
             </div>
             {notes && <div>
-                {!!notes.length && <NoteList notes={notes} userId={props.user._id} removeNote={removeNote} saveTodoEdit={saveTodoEdit} togglePinned={togglePinned} isPinned={isPinned} />}
+                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveTodoEdit={saveTodoEdit} togglePinned={togglePinned} isPinned={isPinned} />}
             </div>}
             {props.room && <button onClick={() => { console.log(props.room.notes) }}>print</button>}
         </div>
@@ -158,6 +158,7 @@ const mapDispatchToProps = {
     loadRoomById,
     saveRoom,
     resetCurrRoom,
+    updateUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardPage);

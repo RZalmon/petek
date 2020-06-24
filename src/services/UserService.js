@@ -16,11 +16,15 @@ async function signUp(credentials) {
         userName: credentials.userName,
         fullName: credentials.fullName,
         password: credentials.password,
-        friends: [],
+        pinnedNotes: [],
         notifications: [],
+        pinnedNotes : [],
         imgUrl: credentials.imgUrl ? credentials.imgUrl : avatarImg,
-        joinedAt: Date.now()
+        joinedAt: Date.now(),
+        friends:[]
     };
+    console.log('USER', USER);
+    
     USER = await HttpService.post('auth/signup', USER)
     StorageService.save(KEY, USER);
     // getUser()
