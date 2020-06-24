@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { loadContacts } from '../actions/ContactActions';
 
-import ContactFilter from '../cmps/ContactFilter'
+import Filter from '../cmps/Filter'
 import ContactList from '../cmps/ContactList'
 
 class ContactPage extends Component {
@@ -50,10 +50,10 @@ class ContactPage extends Component {
         return (
             <div>
                 {user && <div>
-                    <ContactFilter
+                    <Filter
                         filterBy={this.state.filterBy}
                         onFilter={this.onFilterHandler}
-                        moveToContact={this.handleKeyPress}></ContactFilter>
+                        moveToContact={this.handleKeyPress}/>
                     {!!contacts && <ContactList onMoveToRoom={this.onMoveToRoom} loggedinUser={user} contacts={user.friends}></ContactList>}
                 </div>
                 }

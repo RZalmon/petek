@@ -6,7 +6,6 @@ export default ({togglePinned, note, user}) => {
       
 
     useEffect(() => {
-       console.log(note);
        
     }, [note])
     

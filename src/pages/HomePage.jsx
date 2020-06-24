@@ -7,7 +7,7 @@ import { loadContacts } from '../actions/ContactActions';
 
 import {AvatarEdit} from '../cmps/User/AvatarEdit'
 import ContactList from '../cmps/ContactList'
-import ContactFilter from '../cmps/ContactFilter'
+import Filter from '../cmps/Filter'
 
 import SocketService from '../services/SocketService'
 import CloudinaryService from '../../src/services/CloudinaryService'
@@ -76,7 +76,7 @@ onAddFriend = (ev,friendId) => {
             {user.userName && <h2>Hi There {this.capitalize(user.userName)}</h2>}
             <AvatarEdit imgUrl={user.imgUrl} onUploadImg={this.onUploadImg} isLoading={isLoading} />
             <h6>Let's add contacts veze</h6>
-            <ContactFilter filterBy={this.state.filterBy} onFilter={this.onFilterHandler} ></ContactFilter>
+            <Filter filterBy={this.state.filterBy} onFilter={this.onFilterHandler} />
             {contacts && <ContactList onMoveToRoom={this.onMoveToRoom} contacts={contacts} onAddFriend={this.onAddFriend} loggedinUser={user} />}
           </div>
         }

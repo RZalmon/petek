@@ -83,9 +83,7 @@ const BoardPage = (props) => {
         newNote.createdBy = minimalUser
         const friend = user.friends.find(friend => { return friend.roomId === props.match.params.id })
         props.room.notes.unshift(newNote)
-        props.saveRoom(props.room)
-        console.log('newNote',newNote);
-        
+        props.saveRoom(props.room)        
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
         setNoteHeader('')
         setNoteData('')
@@ -94,7 +92,6 @@ const BoardPage = (props) => {
     }
 
     const togglePinned = (note) => {
-        //  note.isPinned = !note.isPinned
        let choosenNote =  props.user.pinnedNotes.find(id => note._id === id)
        !choosenNote ? props.user.pinnedNotes.push(note._id) :  props.user.pinnedNotes.splice(note._id,1)
         let idx = props.room.notes.findIndex(currNote => note._id === currNote._id)

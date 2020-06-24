@@ -30,7 +30,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
         setNewTodo('')
         newTodoInputRef.current.value = ''
     };
-
+    
     const removeTodo = (idx) => {
         note.data.splice(idx, 1)
     }
