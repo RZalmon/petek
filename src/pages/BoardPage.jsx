@@ -95,8 +95,9 @@ const BoardPage = (props) => {
         //WORKS ONLY ON FIRST CLICK
         //  setIsPinned(isPinned ? false : true)
         console.log('note.data', note.data);
-
         note.isPinned = !note.isPinned
+        let idx = props.room.notes.findIndex(currNote => note._id === currNote._id)
+        props.room.notes.splice(idx, 1, note)
         props.saveRoom(props.room)
         console.log('note', note.isPinned);
 

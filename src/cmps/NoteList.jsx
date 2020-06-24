@@ -21,7 +21,7 @@ export default ({ notes, userId, removeNote, saveTodoEdit, togglePinned, isPinne
         fixedNotes.push(...unPinnedNotes)
         fixedNotes.unshift(...pinnedNotes)
         setNotesForDisplay(fixedNotes)
-        }, [])
+        }, [notes])
 
     return (
         
