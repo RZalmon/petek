@@ -6,8 +6,7 @@ export default ({ notes, userId, removeNote, saveTodoEdit, togglePinned, isPinne
     
     const [notesForDisplay, setNotesForDisplay] = useState([])
 
-    useEffect(() => {
-        
+    useEffect(() => { 
         const fixedNotes = []
 
         const unPinnedNotes = notes.filter(note =>{
@@ -21,7 +20,7 @@ export default ({ notes, userId, removeNote, saveTodoEdit, togglePinned, isPinne
         fixedNotes.push(...unPinnedNotes)
         fixedNotes.unshift(...pinnedNotes)
         setNotesForDisplay(fixedNotes)
-        }, [])
+        }, [notes])
 
     return (
         

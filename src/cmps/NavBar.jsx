@@ -1,6 +1,5 @@
 import React ,{useState} from 'react';
 
-// import { NavLink } from 'react-router-dom';
 
 import BurgerMenu from './BurgerMenu';
 
@@ -21,7 +20,7 @@ export default (props) => {
 
   return (
      <nav className="NavBar">
-       {user && !!user.notifications.length && !isClicked && <span className="notification-count nav-count">{user.notifications.length}</span>}
+       {user && !!user.notifications.length && <span className="notification-count nav-count">{user.notifications.length}</span>}
    <BurgerMenu onOpenMenu={onOpenMenu}  />
     </nav>
   );

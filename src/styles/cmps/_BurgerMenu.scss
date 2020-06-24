@@ -43,6 +43,7 @@
     background: #373a47;
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
+    z-index: 1002;
   }
   
   /* Morph shape necessary with bubble or elastic */
@@ -77,5 +78,4 @@
     width: 25px;
     height: 25px;
     background-color: red;
-
   }
