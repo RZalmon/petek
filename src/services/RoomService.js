@@ -11,10 +11,30 @@ function query(critirea) {
     const params = new URLSearchParams(critirea);
     return HttpService.get(`room?${params}`);
 }
-function getById(id) {
-    console.log(id);
-    return HttpService.get(`room/${id}`);
+
+
+function getById(filterBy) {
+    const queryParams = new URLSearchParams();
+    if (filterBy) {
+        for (const property in filterBy) {
+            if (filterBy[property]){
+                queryParams.set(property, filterBy[property])
+            }
+        } 
+        return HttpService.get(`room?${queryParams}`);
+    }
 }
+
+
+
+// function getById(filterBy) {
+//     console.log(id);
+//     return HttpService.get(`room/${id}`);
+// }
+
+
+
+
 function remove(id) {
     return HttpService.delete(`room/${id}`);
 }

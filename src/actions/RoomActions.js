@@ -13,12 +13,12 @@ export function loadRooms(filterBy) {
 }
 
 // READ
-export function loadRoomById(id) {
+export function loadRoomById(filterBy) {
+    console.log('filterBy in actions',filterBy);
+    
     return async dispatch => {
         try {
-            const room = await RoomService.getById(id);
-            console.log('room in actions', room);
-
+            const room = await RoomService.getById(filterBy);
             dispatch({ type: 'SET_CURR_ROOM', room })
         } catch (err) {
             console.log('ERROR', err)

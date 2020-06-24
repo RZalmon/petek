@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { DebounceInput } from 'react-debounce-input';
 
-export default class ContactFilter extends Component {
+export default class Filter extends Component {
     state = { term: '' };
 
     constructor(props) {
@@ -10,6 +10,7 @@ export default class ContactFilter extends Component {
     }
 
     onChangeHandler = (ev) => {
+        
         const { value, name } = ev.target;
         
         this.setState({ [name]: value }, () => {

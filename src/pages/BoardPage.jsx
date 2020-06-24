@@ -12,6 +12,7 @@ import { updateUser} from '../actions/UserActions';
 
 import ButtonMenu from '../cmps/ButtonMenu'
 import NoteList from '../cmps/NoteList'
+import Filter from '../cmps/Filter'
 
 import InputText from '../cmps/InputText'
 import InputImg from '../cmps/InputImg'
@@ -27,7 +28,7 @@ const BoardPage = (props) => {
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
     const [isPinned, setIsPinned] = useState(false);
-
+    const [filterBy, setfilterBy] = useState('');
 
 
     const newNote = {
@@ -48,7 +49,7 @@ const BoardPage = (props) => {
 
     const loadRoom = async () => {
         const roomId = props.match.params.id;
-        await props.loadRoomById(roomId);
+        await props.loadRoomById({term:filterBy.term, roomId});
     }
 
 
@@ -72,8 +73,12 @@ const BoardPage = (props) => {
         setNoteData(videoId)
         setIsUploading(true)
     }
+    
+   const onFilterHandler =  (filterBy) => {
+         setfilterBy(filterBy)         
+    };
 
-
+    
     const onHandleSubmit = async (ev) => {
         const { user } = props
         if (ev) ev.preventDefault()
@@ -109,16 +114,20 @@ const BoardPage = (props) => {
     }
 
     useEffect(() => {
+        loadRoom()
+        return () => { props.resetCurrRoom() };
+    },[]);
+
+    useEffect(() => {
         if ((noteData && noteType === 'NoteImg') || noteType === 'NoteVideo') {
             onHandleSubmit()
         }
     }, [isUploading]);
 
-
     useEffect(() => {
         loadRoom()
-        return () => { props.resetCurrRoom() };
-    }, []);
+    },[filterBy]);
+
 
     if (props.room) var { notes } = props.room
 
@@ -126,6 +135,7 @@ const BoardPage = (props) => {
         <div className="board-page">
             <div className="note-add">
                 {/* <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden /> */}
+                <Filter filterBy={filterBy} onFilter={onFilterHandler}/>
                 {noteType && <InputType
                     addVideo={onAddVideo}
                     onUploadImg={onUploadImg}

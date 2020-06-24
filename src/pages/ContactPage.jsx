@@ -26,7 +26,6 @@ class ContactPage extends Component {
 
     onFilterHandler = (filterBy) => {
         this.setState((prevState) => {
-            // debugger
             return {
                 filterBy: {
                     ...prevState.filterBy,
