@@ -19,7 +19,7 @@ export default ({ togglePinned, note, user, setNoteColor }) => {
         <div className="features-container">
             <img src={user.pinnedNotes.find(id => { return id === note._id }) ? star : emptyStar} alt="star" onClick={() => togglePinned(note)} />
             <div className="color-pallete">
-                <img src={colorPallete} alt="Change Color" onClick={() => setIsPalleteOpen(!isPalleteOpen)} />
+                <img src={colorPallete} alt="Change Color" className="color-pallete-icon" onClick={() => setIsPalleteOpen(!isPalleteOpen)} />
                 {isPalleteOpen && <div className="colors-container">
                     <img src={splashOrange} className="color1" onClick={() => setNoteColor('#ffa350')} />
                     <img src={splashPink} className="color2" onClick={() => setNoteColor('#f78888')} />

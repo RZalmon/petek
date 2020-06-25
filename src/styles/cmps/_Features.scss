@@ -1,12 +1,24 @@
 .features-container {
-    margin-top: 5px;
+    margin: 5px 0 5px 0;
     display: flex;
     align-items: center;
-    img {
+
+    img{
         width: 30px;
     }
+    .color-pallete-icon {
+        margin:0 5px 0 5px;
+    }
 
-    .color-pallete {
+    .colors-container{
+        img{
+            padding:0 3px 0 3px;
+            width: 34px;
+        }
+    }
+
+    .color-pallete{
         display: flex;
+        min-width: 220px;
     }
 }

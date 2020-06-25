@@ -52,9 +52,11 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned, isPinne
                 <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" />
                 <div className="note-container" ref={noteRef}>
                     <div className="note-header">
+                        <div>
                         <img src={xMark} className="remove-btn" onClick={() => removeNote(note._id)} alt="Delete" />
                         {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <img src={editIcon} alt="Edit note" className="edit-btn" onClick={() => setIsEdit(true)} />}
                         {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <img src={saveIcon} alt="Save changes" className="save-btn" onClick={() => { setIsEdit(false); saveRoomChanges(); setCurrTodoIdx('') }} />}
+                        </div>
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
                     <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} setIsNewTodo={setIsNewTodo} isNewTodo={isNewTodo} />
