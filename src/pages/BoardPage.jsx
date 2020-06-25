@@ -13,6 +13,8 @@ import { updateUser} from '../actions/UserActions';
 import ButtonMenu from '../cmps/ButtonMenu'
 import NoteList from '../cmps/NoteList'
 import Filter from '../cmps/Filter'
+import Loading from '../cmps/Loading'
+
 
 import InputText from '../cmps/InputText'
 import InputImg from '../cmps/InputImg'
@@ -133,9 +135,9 @@ const BoardPage = (props) => {
 
     return (
         <div className="board-page">
-            <div className="note-add">
+            {notes && notes.length ? <div className="note-add">
                 {/* <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden /> */}
-                <Filter filterBy={filterBy} onFilter={onFilterHandler}/>
+                <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"}/>
                 {noteType && <InputType
                     addVideo={onAddVideo}
                     onUploadImg={onUploadImg}
@@ -144,11 +146,11 @@ const BoardPage = (props) => {
                     setNoteData={setNoteData}
                     noteData={noteData} />}
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} />
-            </div>
+            </div> : <Loading/> }
             {notes && <div>
                 {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveTodoEdit={saveTodoEdit} togglePinned={togglePinned} isPinned={isPinned} />}
             </div>}
-            {props.room && <button onClick={() => { console.log(props.room.notes) }}>print</button>}
+            {/* {props.room && <button onClick={() => { console.log(props.room.notes) }}>print</button>} */}
         </div>
     );
 };
