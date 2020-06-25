@@ -5,7 +5,7 @@ import React from 'react';
 
 const Loading = () => {
     return <div>
-         <img src={loading} alt="loading" className="avatar avatar-m"/>
+         <img src={loading} alt="loading" className="loading"/>
     </div>;
 }
 

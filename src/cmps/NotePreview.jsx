@@ -31,7 +31,7 @@ export default ({ note, user, removeNote, saveTodoEdit, togglePinned, isPinned }
                 <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" />
                 <div className="note-container" >
                     <div className="note-header">
-                        <img src={xMark} className="remove-btn" onClick={() => removeNote(note._id)} />
+                        <img src={xMark} className="remove-btn" onClick={() => removeNote(note._id)} alt="Delete" />
                         {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <img src={editIcon} alt="Edit note" className="edit-btn" onClick={() => setIsEdit(true)} />}
                         {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <img src={saveIcon} alt="Save changes" className="save-btn" onClick={() => { setIsEdit(false); saveTodoEdit(); setCurrTodoIdx('') }} />}
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>

@@ -5,9 +5,16 @@
 
     li {
         cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         .edit-icon {
             width: 30px;
         }
+    }
+
+    ul{
+        padding: unset;
     }
     .done {
         text-decoration: line-through;
@@ -21,7 +28,8 @@
     }
     .remove-todo-btn{
         cursor: pointer;
-        width: 30px;
+        width: 16px;
+        margin-right: 7px;
         &:hover {
             filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%);
         }

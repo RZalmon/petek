@@ -32,6 +32,7 @@ export default class Filter extends Component {
             <form>
                 <DebounceInput
                     minLength={0}
+                    className="filter-input"
                     debounceTimeout={300}
                     type="text"
                     placeholder={placeHolder ? placeHolder: 'Search Contacts'}
@@ -40,14 +41,6 @@ export default class Filter extends Component {
                     value={this.state.term}
                     onKeyDown={this.onKeyHandler}
                      />
-                {/* <input
-                    type="text"
-                    placeholder="Contact Name"
-                    onChange={this.onChangeHandler}
-                    name="term"
-                    value={this.state.term}
-                    onKeyDown={this.onKeyHandler}
-                /> */}
             </form>
         )
     }
