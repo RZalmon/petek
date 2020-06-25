@@ -1,12 +1,14 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
-    position: absolute;
+    position: fixed;
     width: 36px;
     height: 30px;
     right: 0;
     top: 0;
     margin: 15px 10px 0 0 ;
   }
+ 
+
   
   /* Color/shape of burger icon bars */
   .bm-burger-bars {
@@ -22,6 +24,7 @@
   .bm-cross-button {
     height: 24px;
     width: 24px;
+    z-index: 1002;
   }
   
   /* Color/shape of close button cross */
@@ -36,6 +39,7 @@
   .bm-menu-wrap {
     position: fixed;
     height: 100%;
+    width: 100%;
   }
   
   /* General sidebar styles */
@@ -44,6 +48,9 @@
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
     z-index: 1002;
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
   }
   
   /* Morph shape necessary with bubble or elastic */
@@ -67,6 +74,11 @@
   /* Styling of overlay */
   .bm-overlay {
     background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+
+  
   }
   
   .notification-count{
@@ -79,3 +91,4 @@
     height: 25px;
     background-color: red;
   }
+

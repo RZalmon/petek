@@ -3,9 +3,22 @@
 }
 
 .NavBar{
-    position: relative;
+    position: sticky;
+    top: 0;
+    width: 100%;
     background-color: yellow;
     height: 60px;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+
+    .logo{
+        height: 80px;
+        width: 80px;
+        position: absolute;
+        left: -3%;
+    }
+
 
     .nav-count{
         position: absolute;

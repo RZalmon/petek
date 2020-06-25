@@ -1,6 +1,6 @@
 import React ,{useState} from 'react';
 
-
+import logo from '../../src/assets/png/petek-logo.png'
 import BurgerMenu from './BurgerMenu';
 
 
@@ -20,8 +20,9 @@ export default (props) => {
 
   return (
      <nav className="NavBar">
+        <img src={logo} alt="logo" className="logo"/>
        {user && !!user.notifications.length && <span className="notification-count nav-count">{user.notifications.length}</span>}
-   <BurgerMenu onOpenMenu={onOpenMenu}  />
+       <BurgerMenu onOpenMenu={onOpenMenu}/>
     </nav>
   );
 };
