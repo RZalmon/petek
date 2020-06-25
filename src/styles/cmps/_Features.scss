@@ -1,8 +1,12 @@
-.features-container{
+.features-container {
     margin-top: 5px;
     display: flex;
     align-items: center;
-    img{
-        width: 25px;
+    img {
+        width: 30px;
+    }
+
+    .color-pallete {
+        display: flex;
     }
 }

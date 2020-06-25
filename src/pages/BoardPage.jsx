@@ -53,7 +53,7 @@ const BoardPage = (props) => {
     }
 
 
-    const saveTodoEdit = async () => {
+    const saveRoomChanges = async () => {
         await props.saveRoom(props.room)
         SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
 
@@ -146,7 +146,7 @@ const BoardPage = (props) => {
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} />
             </div>
             {notes && <div>
-                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveTodoEdit={saveTodoEdit} togglePinned={togglePinned} isPinned={isPinned} />}
+                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} isPinned={isPinned} />}
             </div>}
             {props.room && <button onClick={() => { console.log(props.room.notes) }}>print</button>}
         </div>
