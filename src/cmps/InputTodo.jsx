@@ -42,7 +42,6 @@ export default ({ setNoteHeader, setNoteData, handleSubmit, noteData }) => {
                 <input type="text" placeholder="task?" className="input-task" ref={textInput} onChange={e => setCurrTodo(e.target.value)} />
                 <img src={PlusIcon} className="add-button" onClick={() => addTodo()} alt="Plus Icon" />
             </div>
-
                 <img src={saveIcon} className="add-button" onClick={handleSubmit} alt="Plus Icon" />
         </div>
     )
