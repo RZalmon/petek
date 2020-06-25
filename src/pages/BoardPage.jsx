@@ -136,7 +136,6 @@ const BoardPage = (props) => {
     return (
         <div className="board-page">
             {notes && notes.length ? <div className="note-add">
-                {/* <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden /> */}
                 <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"}/>
                 {noteType && <InputType
                     addVideo={onAddVideo}
@@ -148,9 +147,8 @@ const BoardPage = (props) => {
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} />
             </div> : <Loading/> }
             {notes && <div>
-                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveTodoEdit={saveTodoEdit} togglePinned={togglePinned} isPinned={isPinned} />}
+                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveTodoEdit={saveTodoEdit} togglePinned={togglePinned} setNoteType={setNoteType} isPinned={isPinned} />}
             </div>}
-            {/* {props.room && <button onClick={() => { console.log(props.room.notes) }}>print</button>} */}
         </div>
     );
 };
