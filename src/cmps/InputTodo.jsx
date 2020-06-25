@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 
 import xMark from '../assets/svg/x-mark.svg'
 import PlusIcon from '../assets/svg/plus.svg'
+import saveIcon from '../assets/svg/save.svg'
+
 
 export default ({ setNoteHeader, setNoteData, handleSubmit, noteData }) => {
     const [currTodo, setCurrTodo] = useState('');
@@ -40,7 +42,8 @@ export default ({ setNoteHeader, setNoteData, handleSubmit, noteData }) => {
                 <input type="text" placeholder="task?" className="input-task" ref={textInput} onChange={e => setCurrTodo(e.target.value)} />
                 <img src={PlusIcon} className="add-button" onClick={() => addTodo()} alt="Plus Icon" />
             </div>
-            <button onClick={handleSubmit}>Save</button>
+
+                <img src={saveIcon} className="add-button" onClick={handleSubmit} alt="Plus Icon" />
         </div>
     )
 }

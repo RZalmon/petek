@@ -8,11 +8,13 @@ import CloudinaryService from '../../src/services/CloudinaryService'
 
 
 import { loadRoomById, saveRoom, resetCurrRoom } from '../actions/RoomActions';
-import { updateUser} from '../actions/UserActions';
+import { updateUser } from '../actions/UserActions';
 
 import ButtonMenu from '../cmps/ButtonMenu'
 import NoteList from '../cmps/NoteList'
 import Filter from '../cmps/Filter'
+import Loading from '../cmps/Loading'
+
 
 import InputText from '../cmps/InputText'
 import InputImg from '../cmps/InputImg'
@@ -49,7 +51,7 @@ const BoardPage = (props) => {
 
     const loadRoom = async () => {
         const roomId = props.match.params.id;
-        await props.loadRoomById({term:filterBy.term, roomId});
+        await props.loadRoomById({ term: filterBy.term, roomId });
     }
 
 
@@ -73,12 +75,12 @@ const BoardPage = (props) => {
         setNoteData(videoId)
         setIsUploading(true)
     }
-    
-   const onFilterHandler =  (filterBy) => {
-         setfilterBy(filterBy)         
+
+    const onFilterHandler = (filterBy) => {
+        setfilterBy(filterBy)
     };
 
-    
+
     const onHandleSubmit = async (ev) => {
         const { user } = props
         if (ev) ev.preventDefault()
@@ -88,7 +90,7 @@ const BoardPage = (props) => {
         newNote.createdBy = minimalUser
         const friend = user.friends.find(friend => { return friend.roomId === props.match.params.id })
         props.room.notes.unshift(newNote)
-        props.saveRoom(props.room)        
+        props.saveRoom(props.room)
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
         setNoteHeader('')
         setNoteData('')
@@ -97,8 +99,8 @@ const BoardPage = (props) => {
     }
 
     const togglePinned = (note) => {
-       let choosenNote =  props.user.pinnedNotes.find(id => note._id === id)
-       !choosenNote ? props.user.pinnedNotes.push(note._id) :  props.user.pinnedNotes.splice(note._id,1)
+        let choosenNote = props.user.pinnedNotes.find(id => note._id === id)
+        !choosenNote ? props.user.pinnedNotes.push(note._id) : props.user.pinnedNotes.splice(note._id, 1)
         let idx = props.room.notes.findIndex(currNote => note._id === currNote._id)
         props.room.notes.splice(idx, 1, note)
         props.saveRoom(props.room)
@@ -116,7 +118,7 @@ const BoardPage = (props) => {
     useEffect(() => {
         loadRoom()
         return () => { props.resetCurrRoom() };
-    },[]);
+    }, []);
 
     useEffect(() => {
         if ((noteData && noteType === 'NoteImg') || noteType === 'NoteVideo') {
@@ -126,16 +128,15 @@ const BoardPage = (props) => {
 
     useEffect(() => {
         loadRoom()
-    },[filterBy]);
+    }, [filterBy]);
 
 
     if (props.room) var { notes } = props.room
 
     return (
         <div className="board-page">
-            <div className="note-add">
-                {/* <input type="file" onChange={(ev) => { onUploadImg(ev); setNoteType('NoteImg'); }} ref={inputRef} hidden /> */}
-                <Filter filterBy={filterBy} onFilter={onFilterHandler}/>
+            <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
+            {notes && notes.length ? <div className="note-add">
                 {noteType && <InputType
                     addVideo={onAddVideo}
                     onUploadImg={onUploadImg}
@@ -144,11 +145,10 @@ const BoardPage = (props) => {
                     setNoteData={setNoteData}
                     noteData={noteData} />}
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} />
-            </div>
+            </div> : <Loading />}
             {notes && <div>
-                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} isPinned={isPinned} />}
+                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} isPinned={isPinned} />}
             </div>}
-            {props.room && <button onClick={() => { console.log(props.room.notes) }}>print</button>}
         </div>
     );
 };

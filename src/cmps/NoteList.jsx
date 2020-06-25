@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import NotePreview from './NotePreview'
 import Loading from '../cmps/Loading'
 
-export default ({ notes, user, removeNote, saveRoomChanges, togglePinned, isPinned }) => {
+export default ({ notes, user, removeNote,  saveRoomChanges, togglePinned, isPinned, setNoteType }) => {
     
     const [notesForDisplay, setNotesForDisplay] = useState([])
 
@@ -19,7 +19,7 @@ export default ({ notes, user, removeNote, saveRoomChanges, togglePinned, isPinn
 
     return (
         
-        <div className="note-list">
+        <div className="note-list" onClick={()=>setNoteType('')}>
             {notesForDisplay.length ? notesForDisplay.map(note => {
                 return (
                     <NotePreview note={note} key={note._id} user={user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} isPinned={isPinned} />

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SocketService from '../../services/SocketService'
 
 import PlusIcon from '../../assets/svg/plus.svg'
-import MinusIcon from '../../assets/svg/minus.svg'
+import xmark from '../../assets/svg/cross.svg'
 import ArrowIcon from '../../assets/svg/arrow.svg'
 
 import { saveRoom } from '../../actions/RoomActions';
@@ -38,7 +38,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
     useEffect(() => {
         if (editInputRef.current) editInputRef.current.focus()
         if (currTodoIdx !== '' && editInputRef.current) note.data[currTodoIdx].text = editedTodo
-    }, [editedTodo, currTodoIdx])
+    }, [editedTodo, currTodoIdx],)
 
     return (
         <div className="note-todo">
@@ -56,7 +56,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
                             }
                         }}>
                             {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} onClick={(ev) => toggleIsDone(idx)}>{todo.text}</span>}
-                            {isEdit && <img src={MinusIcon} className="remove-todo-btn" onClick={() => removeTodo(idx)} />}
+                            {isEdit && <img src={xmark} className="remove-todo-btn" onClick={() => removeTodo(idx)} />}
                             {(isEdit && currTodoIdx === idx) && <input type="text" value={editedTodo} ref={editInputRef} onChange={(e) => { setEditedTodo(e.target.value); }} />
                             }
                         </li>

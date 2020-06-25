@@ -19,14 +19,16 @@ export default ({ addVideo, setNoteHeader }) => {
 
     return (
         <section className="input-video">
+            <input className="input-header" placeholder="Note Header" type="text" onChange={e => setNoteHeader(e.target.value)} />
             <DebounceInput
+            className="search-input"
                 minLength={0}
                 debounceTimeout={500}
                 type="text"
                 placeholder="Search Video"
                 onChange={e => searchYoutubeVideos(e.target.value)}
             />
-            <input className="input-header" placeholder="Note Header" type="text" onChange={e => setNoteHeader(e.target.value)} />
+            {!!videos.length &&<h1>Add video!</h1>}
             {!!videos.length && videos.map(video => {
                 return (
                     <div className="video-card" key={video.id.videoId}>

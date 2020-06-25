@@ -12,10 +12,19 @@
         height: 60px;
         font-size: 18px;
         background-color: $clr-input;
-        // width: 85%;
-        // position: fixed;
-        // bottom: 2.5%;
-        // left: 10%;
+        width: rem(250px);
+        &.input-header{
+            position: fixed;
+            top: 78%;
+            left: 7.5%;
+            width: 88%;
+        }
+        &.input-data{
+            position: fixed;
+            top: 88%;
+            left: 7.5%;
+            width: 88%;
+        }
     }
 
 }
