@@ -33,17 +33,17 @@ export default ({ setNoteHeader, setNoteData, handleSubmit, noteData }) => {
                     return (
                         <li className="todo" key={todo.text}>
                             <span>{todo.text}</span>
-                            <img src={xMark} onClick={() => handleRemoveTodo(idx)} className="x-mark" alt="x Icon" />
+                            <img src={xMark} onClick={() => handleRemoveTodo(idx)} className="x-mark" alt="Remove Todo" />
                         </li>
                     )
                 })}
             </ul>
             <div className="add-todo-container">
                 <input type="text" placeholder="task?" className="input-task" ref={textInput} onChange={e => setCurrTodo(e.target.value)} />
-                <img src={PlusIcon} className="add-button" onClick={() => addTodo()} alt="Plus Icon" />
+                <img src={PlusIcon} className="add-button" onClick={() => addTodo()} alt="Add todo" />
             </div>
 
-                <img src={saveIcon} className="add-button" onClick={handleSubmit} alt="Plus Icon" />
+                <img src={saveIcon} className="add-button" onClick={handleSubmit} alt="Save" />
         </div>
     )
 }
