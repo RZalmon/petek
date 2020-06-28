@@ -17,15 +17,15 @@ export default ({ togglePinned, note, user, setNoteColor }) => {
 
     return (
         <div className="features-container">
-            <img src={user.pinnedNotes.find(id => { return id === note._id }) ? star : emptyStar} alt="star" onClick={() => togglePinned(note)} />
+            <img className="pin-btn" src={user.pinnedNotes.find(id => { return id === note._id }) ? star : emptyStar} alt="Pin Note" onClick={() => togglePinned(note)} />
             <div className="color-pallete">
                 <img src={colorPallete} alt="Change Color" className="color-pallete-icon" onClick={() => setIsPalleteOpen(!isPalleteOpen)} />
                 {isPalleteOpen && <div className="colors-container">
-                    <img src={splashOrange} className="color1" onClick={() => setNoteColor('#ffa350')} />
-                    <img src={splashPink} className="color2" onClick={() => setNoteColor('#f78888')} />
-                    <img src={splashYellow} className="color3" onClick={() => setNoteColor('#f3d250')} />
-                    <img src={splashBlue} className="color4" onClick={() => setNoteColor('#90ccf4')} />
-                    <img src={splashGreen} className="color5" onClick={() => setNoteColor('#4caf50')} />
+                    <img src={splashOrange} className="color1" onClick={() => { setNoteColor('#ffa350'); setIsPalleteOpen(false) }} />
+                    <img src={splashPink} className="color2" onClick={() => { setNoteColor('#f78888'); setIsPalleteOpen(false) }} />
+                    <img src={splashYellow} className="color3" onClick={() => { setNoteColor('#f3d250'); setIsPalleteOpen(false) }} />
+                    <img src={splashBlue} className="color4" onClick={() => { setNoteColor('#90ccf4'); setIsPalleteOpen(false) }} />
+                    <img src={splashGreen} className="color5" onClick={() => { setNoteColor('#4caf50'); setIsPalleteOpen(false) }} />
                 </div>}
             </div>
         </div>

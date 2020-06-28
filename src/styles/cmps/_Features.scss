@@ -3,21 +3,26 @@
     display: flex;
     align-items: center;
 
-    img{
+    img {
         width: 30px;
     }
     .color-pallete-icon {
-        margin:0 5px 0 5px;
+        margin: 0 5px 0 5px;
+    }
+    .pin-btn {
+        &:hover {
+            filter: invert(71%) sepia(80%) saturate(876%) hue-rotate(353deg) brightness(102%) contrast(102%);
+        }
     }
 
-    .colors-container{
-        img{
-            padding:0 3px 0 3px;
+    .colors-container {
+        img {
+            padding: 0 3px 0 3px;
             width: 34px;
         }
     }
 
-    .color-pallete{
+    .color-pallete {
         display: flex;
         min-width: 220px;
     }
