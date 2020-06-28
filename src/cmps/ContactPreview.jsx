@@ -39,8 +39,8 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom }) => {
         <div className="contact-preview" onClick={(ev) => {if(isFriend) moveToRoom(ev,roomId) }}>
             <img src={contact.imgUrl} alt={`${contact.userName}`} className="avatar avatar-s" />
             <div className="user-name-container">
+                <span>Full Name: {contact.fullName}</span>
                 <span>User Name: {contact.userName}</span>
-                <span>full Name: {contact.fullName}</span>
             </div>
             {!contact.roomId &&
                 <img src={isFriendSent || isFriend ? friendReqSent : addFriendImg}
