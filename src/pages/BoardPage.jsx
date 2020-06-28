@@ -135,8 +135,8 @@ const BoardPage = (props) => {
 
     return (
         <div className="board-page">
-            <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
             {notes && notes.length ? <div className="note-add">
+            <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
                 {noteType && <InputType
                     addVideo={onAddVideo}
                     onUploadImg={onUploadImg}
@@ -145,7 +145,7 @@ const BoardPage = (props) => {
                     setNoteData={setNoteData}
                     noteData={noteData} />}
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} />
-            </div> : <Loading />}
+            </div> :  <Loading />}
             {notes && <div>
                 {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} isPinned={isPinned} />}
             </div>}
