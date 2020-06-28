@@ -1,8 +1,8 @@
-.active{
+.active {
     border-bottom: 1.5px solid lightseagreen;
 }
 
-.NavBar{
+.NavBar {
     position: sticky;
     top: 0;
     width: 100%;
@@ -10,20 +10,19 @@
     height: 60px;
     display: flex;
     align-items: center;
-    overflow-x: auto;
+    overflow: hidden;
 
-    .logo{
+    .logo {
         height: 80px;
         width: 80px;
         position: absolute;
         left: -3%;
     }
 
-
-    .nav-count{
+    .nav-count {
         position: absolute;
         top: 10%;
         left: 92%;
         z-index: 1001;
-       }
+    }
 }
