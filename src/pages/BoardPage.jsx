@@ -135,7 +135,7 @@ const BoardPage = (props) => {
 
     return (
         <div className="board-page">
-            {notes && notes.length ? <div className="note-add">
+            {notes ? <div className="note-add">
             <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
                 {noteType && <InputType
                     addVideo={onAddVideo}
