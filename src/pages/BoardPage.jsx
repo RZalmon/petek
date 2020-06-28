@@ -14,7 +14,7 @@ import ButtonMenu from '../cmps/ButtonMenu'
 import NoteList from '../cmps/NoteList'
 import Filter from '../cmps/Filter'
 import Loading from '../cmps/Loading'
-
+import SplashIcon from '../cmps/icons/SplashIcon'
 
 import InputText from '../cmps/InputText'
 import InputImg from '../cmps/InputImg'
