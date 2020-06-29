@@ -4,6 +4,7 @@ import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 
+import { UtilService } from '../services/UtilService'
 import { getUser } from '../actions/UserActions'
 import { logout } from '../actions/UserActions'
 
@@ -12,23 +13,29 @@ import { logout } from '../actions/UserActions'
 class BurgerMenu extends React.Component {
   state = {
     menuOpen: false,
+    imgObj: {}
   };
 
+ 
+  
   closeMenu = (ev) => {
     if (ev) {
       this.handleLogout()
     }
     this.setState({ menuOpen: false });
   };
-
-
+  
+  
   handleLogout = async () => {
+ 
     await this.props.logout()
     this.props.history.push('/signup')
   }
 
 
-  handleStateChange(state) {
+  async handleStateChange(state) {
+    let imgObj = await UtilService.getRandomMeme()
+    this.setState({ imgObj }); 
     this.setState({ menuOpen: state.isOpen });
     this.props.onOpenMenu(state.isOpen)
   }
@@ -36,7 +43,7 @@ class BurgerMenu extends React.Component {
 
   render() {
 
-    const { menuOpen } = this.state
+    const { menuOpen, imgObj } = this.state
     const { user } = this.props
     if (!user) return ''
 
@@ -55,6 +62,10 @@ class BurgerMenu extends React.Component {
         <NavLink activeClassName="active" to="/signup" exact onClick={() => this.closeMenu(logout)}  >
           Logout
         </NavLink>
+        <div className="menu-footer">
+         <h5>{imgObj.imgHeader}</h5>
+        <img src={imgObj.imgUrl} alt=""/>
+        </div>
       </Menu>
     );
   }

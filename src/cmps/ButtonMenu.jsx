@@ -14,7 +14,7 @@ import ListIcon from '@material-ui/icons/List';
 // import SvgIcon from '@material-ui/core/SvgIcon';    //PROBABLY NOT NEEDED
 // import styled from 'styled-components' //PROBABLY NOT NEEDED
 
-export default ({ setNoteType, setNoteInputType }) => {
+export default ({ setNoteType, setNoteInputType, setNoteData }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <FloatingMenu
@@ -57,7 +57,7 @@ export default ({ setNoteType, setNoteInputType }) => {
                 backgroundColor="white"
                 size={40}
                 className={!isOpen && 'hidden'}
-                onClick={() => { setNoteType('NoteTodo'); setIsOpen(!isOpen); setNoteInputType('InputTodo'); }}
+                onClick={() => { setNoteType('NoteTodo'); setIsOpen(!isOpen); setNoteInputType('InputTodo'); setNoteData([])}}
             />
         </FloatingMenu>
     )

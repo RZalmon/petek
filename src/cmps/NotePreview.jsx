@@ -39,6 +39,11 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned, isPinne
 
     useEffect(() => {
         paintNote()
+        if(note.createdBy._id !== user._id) return
+        if (note.createdBy.imgUrl !== user.imgUrl){
+            note.createdBy.imgUrl = user.imgUrl
+            saveRoomChanges()
+        } 
     }, []);
 
 

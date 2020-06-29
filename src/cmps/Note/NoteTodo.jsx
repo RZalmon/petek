@@ -23,9 +23,11 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
     }
 
 
-    const addTodo = () => {
+    const addTodo =  () => {
+        
         let todoToAdd = { text: newTodo, isDone: false }
-        note.data.push(todoToAdd);
+        
+         note.data.push(todoToAdd);
         setIsNewTodo(false)
         setNewTodo('')
         newTodoInputRef.current.value = ''
@@ -65,7 +67,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
             </ul>
             {isNewTodo && <div>
                 <input type="text" placeholder="New Todo" ref={newTodoInputRef} onChange={e => setNewTodo(e.target.value)} />
-                <img src={ArrowIcon} className="add-todo-btn" onClick={() => { addTodo() }} />
+                <img src={ArrowIcon} className="add-todo-btn" onClick={() =>  addTodo() } />
             </div>}
 
         </div>

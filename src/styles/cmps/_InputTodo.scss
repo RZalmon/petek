@@ -37,13 +37,22 @@
         font-size: 18px;
     }
     .add-todo-container {
+        display: flex;
+        justify-content: center;
+        min-width: 100%;
+        
+        
+        input{
+            position: absolute;
+        }
        
         .add-button {
             cursor: pointer;
             max-width: 30px;
-            position: fixed;
-            right: 20vw;
-            top: 144.5vw;
+            position: relative;
+            right: -26%;
+            margin-top:15px;
+            top: 52%;
         }
     }
 

@@ -144,7 +144,7 @@ const BoardPage = (props) => {
                     setNoteHeader={setNoteHeader}
                     setNoteData={setNoteData}
                     noteData={noteData} />}
-                <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} />
+                <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData}/>
             </div> :  <Loading />}
             {notes && <div>
                 {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} isPinned={isPinned} />}
