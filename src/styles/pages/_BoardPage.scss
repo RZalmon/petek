@@ -1,6 +1,8 @@
-.board-page{
+.board-page {
     min-height: 100%;
-}
-.test{
-    fill: red;
+    & .test-svg {
+        width: 40px;
+        fill: red;
+        stroke: saddlebrown;
+    }
 }
