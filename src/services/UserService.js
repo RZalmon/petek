@@ -7,13 +7,13 @@ import avatarImg from '../assets/png/user.png'
 // var USER = { userName: 'Ramus', fullName: 'Rami Davidov', password: '123456', friends: [] };
 const KEY = 'user';
 
-async function getById() {
+//if func will stay like that we should change the name (getById)
+async function getById() { 
     var USER = StorageService.load(KEY);
     console.log('in service? dono');
     
     if(!USER) return
     USER = await HttpService.get(`user/${USER._id}`)
-    
     return USER 
 
 }

@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import audioNotification from '../src/assets/sound/notification.mp3'
+import audioNotification from '../src/assets/sound/sp-tune.mp3'
 
 import SocketService from './services/SocketService'
 import { updateUser } from '../src/actions/UserActions';

@@ -10,39 +10,41 @@ import InboxPage from './pages/InboxPage'
 import ContactPage from './pages/ContactPage'
 import BoardPage from './pages/BoardPage'
 import SignUp from './pages/SignUp'
+
+import Loading from './cmps/Loading'
 class RoutePage extends React.Component {
 
-  async  componentDidMount() {
-    
-     await this.props.getUser();    
-      if(!this.isInSignupPage && !this.props.user){
-        this.props.history.push('/signup')
-      }
-    }
+  async componentDidMount() {
 
-    get isInSignupPage(){
-      return this.props.location.pathname === "/signup";
+    await this.props.getUser();
+    if (!this.isInSignupPage && !this.props.user) {
+      this.props.history.push('/signup')
     }
+  }
+
+  get isInSignupPage() {
+    return this.props.location.pathname === "/signup";
+  }
 
 
-    async componentDidUpdate(prevProps, prevState) {
-      if (
-        this.props.location !== prevProps.location &&
-        !this.props.user &&
-        !this.isInSignupPage
-      ) {
-        this.props.history.push("/signup");
-      }
+  async componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.location !== prevProps.location &&
+      !this.props.user &&
+      !this.isInSignupPage
+    ) {
+      this.props.history.push("/signup");
     }
+  }
 
   render() {
-    // if(!this.isInSignupPage && !this.props.user ) return <h1>Nothing for you here</h1>
+    if (!this.isInSignupPage && !this.props.user) return <Loading />
 
     return (
       <div className="router-page">
         <main>
           <Switch>
-            <Route path="/signup" exact render={(routerProps)=><SignUp {...routerProps} onConnectSocket={this.props.onConnectSocket}/>} />
+            <Route path="/signup" exact render={(routerProps) => <SignUp {...routerProps} onConnectSocket={this.props.onConnectSocket} />} />
             <Route path="/" exact component={HomePage} />
             <Route path="/contact" component={ContactPage} />
             <Route path="/board/:id" component={BoardPage} />

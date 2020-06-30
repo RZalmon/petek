@@ -136,7 +136,7 @@ const BoardPage = (props) => {
     return (
         <div className="board-page">
             {notes ? <div className="note-add">
-            <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
+                <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
                 {noteType && <InputType
                     addVideo={onAddVideo}
                     onUploadImg={onUploadImg}
@@ -144,11 +144,12 @@ const BoardPage = (props) => {
                     setNoteHeader={setNoteHeader}
                     setNoteData={setNoteData}
                     noteData={noteData} />}
-                <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData}/>
-            </div> :  <Loading />}
+                <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData} />
+            </div> : <Loading />}
             {notes && <div>
                 {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} isPinned={isPinned} />}
             </div>}
+            <SplashIcon className="splash-icon" />
         </div>
     );
 };

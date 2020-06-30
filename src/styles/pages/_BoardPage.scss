@@ -1,9 +1,12 @@
 .board-page {
     min-height: 100%;
 
-    & .test-svg {
-        width: 40px;
-        fill: red;
-        stroke: saddlebrown;
+    & .splash-icon {
+        // width: 40px;
+        // fill: red;
+        // stroke: saddlebrown;
+        & path {
+            fill: blue;
+        }
     }
 }
