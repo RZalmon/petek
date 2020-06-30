@@ -25,7 +25,7 @@ class RoutePage extends React.Component {
     }
 
 
-    componentDidUpdate(prevProps, prevState) {
+    async componentDidUpdate(prevProps, prevState) {
       if (
         this.props.location !== prevProps.location &&
         !this.props.user &&

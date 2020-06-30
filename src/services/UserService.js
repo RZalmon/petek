@@ -7,9 +7,15 @@ import avatarImg from '../assets/png/user.png'
 // var USER = { userName: 'Ramus', fullName: 'Rami Davidov', password: '123456', friends: [] };
 const KEY = 'user';
 
-function getUser() {
-    const USER = StorageService.load(KEY);
-    return USER ? USER : null;
+async function getById() {
+    var USER = StorageService.load(KEY);
+    console.log('in service? dono');
+    
+    if(!USER) return
+    USER = await HttpService.get(`user/${USER._id}`)
+    
+    return USER 
+
 }
 async function signUp(credentials) {
     let USER = {
@@ -40,8 +46,8 @@ async function login(credentials) {
 
 
 async function logout() {
-    const msg = await HttpService.post('auth/logout');
     localStorage.removeItem(KEY)
+    const msg = await HttpService.post('auth/logout');
     return (msg)
 }
 
@@ -59,7 +65,7 @@ async function getMinimalUser(_id, imgUrl){
 }
 
 export const UserService = {
-    getUser,
+    getById,
     signUp,
     update,
     login,

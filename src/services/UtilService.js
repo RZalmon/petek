@@ -4,7 +4,8 @@ import axios from 'axios';
 
 export const UtilService = {
     makeId,
-    getRandomMeme
+    getRandomChuck
+    // getRandomMeme
 }
 
 function makeId(length = 12) {
@@ -16,8 +17,12 @@ function makeId(length = 12) {
     return txt
 }
 
-async function getRandomMeme(){
-    const res = await axios.get(`https://meme-api.herokuapp.com/gimme/dankmemes/1`);
-     let imgObj = {imgUrl:res.data.memes[0].url, imgHeader:res.data.memes[0].title }
-     return imgObj
+async function getRandomChuck(){
+    const res = await axios.get(`https://api.chucknorris.io/jokes/random`);
+    return res.data.value
 }
+// async function getRandomMeme(){
+//     const res = await axios.get(`https://meme-api.herokuapp.com/gimme/dankmemes/1`);
+//      let imgObj = {imgUrl:res.data.memes[0].url, imgHeader:res.data.memes[0].title }
+//      return imgObj
+// }

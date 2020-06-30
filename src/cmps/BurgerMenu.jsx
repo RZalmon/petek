@@ -13,29 +13,37 @@ import { logout } from '../actions/UserActions'
 class BurgerMenu extends React.Component {
   state = {
     menuOpen: false,
-    imgObj: {}
+    chuckJoke: ''
   };
+
+  async componentDidMount () {
+
+    let chuckJoke = await UtilService.getRandomChuck()
+    this.setState({ chuckJoke });     
+  }
 
  
   
-  closeMenu = (ev) => {
+  closeMenu = async (ev) => {
     if (ev) {
       this.handleLogout()
     }
     this.setState({ menuOpen: false });
+    let chuckJoke = await UtilService.getRandomChuck()
+    this.setState({ chuckJoke }); 
+    console.log('buggg');
   };
   
   
   handleLogout = async () => {
- 
     await this.props.logout()
+    // await this.props.getUser()
     this.props.history.push('/signup')
   }
 
 
   async handleStateChange(state) {
-    let imgObj = await UtilService.getRandomMeme()
-    this.setState({ imgObj }); 
+   
     this.setState({ menuOpen: state.isOpen });
     this.props.onOpenMenu(state.isOpen)
   }
@@ -43,7 +51,7 @@ class BurgerMenu extends React.Component {
 
   render() {
 
-    const { menuOpen, imgObj } = this.state
+    const { menuOpen, chuckJoke } = this.state
     const { user } = this.props
     if (!user) return ''
 
@@ -63,8 +71,8 @@ class BurgerMenu extends React.Component {
           Logout
         </NavLink>
         <div className="menu-footer">
-         <h5>{imgObj.imgHeader}</h5>
-        <img src={imgObj.imgUrl} alt=""/>
+         <h5>{chuckJoke}</h5>
+        {/* <img src={imgObj.imgUrl} alt=""/> */}
         </div>
       </Menu>
     );

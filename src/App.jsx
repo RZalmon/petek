@@ -26,14 +26,15 @@ const App = (props) => {
 
   const connectSockets =  (id) => {
     SocketService.setup()
-    if(room) {
+    if(room && loggedinUser) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
         console.log('here?');
         
         // let newRoom = await props.saveRoom(updatedRoom)        
-        if(updatedRoom.notes[0].createdBy._id !== loggedinUser._id || userId !== loggedinUser._id ){    
+        if(userId !== loggedinUser._id ){    
+          console.log('updated that shit',updatedRoom);
           
-          props.loadRoomById(updatedRoom._id)
+          props.loadRoomById({ roomId:updatedRoom._id })
         }
         
       });

@@ -22,7 +22,7 @@ export function logout() {
 
 export function getUser() {
     return async dispatch => {
-        const user = await UserService.getUser();
+        const user = await UserService.getById();
         dispatch({ type: 'GET_USER', user })
     }
 }
