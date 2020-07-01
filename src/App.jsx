@@ -19,27 +19,24 @@ import NavBar from './cmps/NavBar';
 
 const history = createBrowserHistory();
 
-const App = (props) => {
-
-  console.log(props);
-  
+const App = (props) => {  
  
   const loggedinUser = props.user;
   const room = props.room
 
-  const connectSockets =  (id) => {
+  const connectSockets = (id) => {
     SocketService.setup()
-    if(room && loggedinUser) {
+    if (room && loggedinUser) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
         console.log('here?');
-        
+
         // let newRoom = await props.saveRoom(updatedRoom)        
-        if(userId !== loggedinUser._id ){    
-          console.log('updated that shit',updatedRoom);
-          
-          props.loadRoomById({ roomId:updatedRoom._id })
+        if (userId !== loggedinUser._id) {
+          console.log('updated that shit', updatedRoom);
+
+          props.loadRoomById({ roomId: updatedRoom._id })
         }
-        
+
       });
     }
     if(loggedinUser) { 
@@ -81,7 +78,7 @@ const App = (props) => {
         console.log('disconnecet sockets', loggedinUser);  
         disconnectSockets()
       }
-     };
+    };
 
   },[]);
 
@@ -101,7 +98,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.loggedinUser,
     contacts: state.contact.contacts,
-    room:state.room.currRoom
+    room: state.room.currRoom
   };
 };
 
