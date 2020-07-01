@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import UserAvatar from 'react-user-avatar'
+import Avatar from 'react-avatar';
 
 import { getUser } from '../actions/UserActions';
 import { updateUser } from '../actions/UserActions';
@@ -83,7 +84,10 @@ class HomePage extends Component {
           </div>
         }
         {/* <MyEditor imgUrl={this.props.user.imgUrl}/> */}
-        <UserAvatar name={this.props.user.userName} size="150" src={this.props.user.imgUrl}/>
+        <h1>UserAvatar LIB:</h1>
+        <UserAvatar name={this.props.user.userName} size="150" src={this.props.user.imgUrl} />
+        <h1>REACT-AVATAR LIB:</h1>
+        <Avatar size="150" round="75px" name={this.props.user.userName} src={this.props.user.imgUrl} />
       </div>
     )
   }
