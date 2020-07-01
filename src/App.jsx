@@ -20,45 +20,45 @@ import NavBar from './cmps/NavBar';
 const history = createBrowserHistory();
 
 const App = (props) => {
- 
+
   const loggedinUser = props.user;
   const room = props.room
 
-  const connectSockets =  (id) => {
+  const connectSockets = (id) => {
     SocketService.setup()
-    if(room && loggedinUser) {
+    if (room && loggedinUser) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
         console.log('here?');
-        
+
         // let newRoom = await props.saveRoom(updatedRoom)        
-        if(userId !== loggedinUser._id ){    
-          console.log('updated that shit',updatedRoom);
-          
-          props.loadRoomById({ roomId:updatedRoom._id })
+        if (userId !== loggedinUser._id) {
+          console.log('updated that shit', updatedRoom);
+
+          props.loadRoomById({ roomId: updatedRoom._id })
         }
-        
+
       });
     }
-    if(loggedinUser) {
-      
+    if (loggedinUser) {
+
       SocketService.on(`updateUser ${loggedinUser._id}`, updateUser);
-      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => {props.updateUser(user)})
+      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => { props.updateUser(user) })
     }
   }
 
- const disconnectSockets = () =>{
-  SocketService.off(`updateRoom ${room._id}`)
-  SocketService.off(`updateUser ${loggedinUser._id}`)
-  SocketService.off(`updateUserWithoutAudio ${loggedinUser._id}`)
+  const disconnectSockets = () => {
+    SocketService.off(`updateRoom ${room._id}`)
+    SocketService.off(`updateUser ${loggedinUser._id}`)
+    SocketService.off(`updateUserWithoutAudio ${loggedinUser._id}`)
   }
-  
+
   const updateUser = (updatedUser) => {
     let audio = new Audio(audioNotification);
     if (updatedUser) {
       props.updateUser(updatedUser)
       audio.play()
       console.log('notifications');
-      
+
 
     } else {
       console.log("ERROR IN UPDATE USER");
@@ -68,12 +68,12 @@ const App = (props) => {
 
   useEffect(() => {
     connectSockets()
-    
+
     return () => {
-      if(room && loggedinUser){
+      if (room && loggedinUser) {
         disconnectSockets()
       }
-     };
+    };
 
   });
 
@@ -93,7 +93,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.loggedinUser,
     contacts: state.contact.contacts,
-    room:state.room.currRoom
+    room: state.room.currRoom
   };
 };
 

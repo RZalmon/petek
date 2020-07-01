@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import UserAvatar from 'react-user-avatar'
 
 import { getUser } from '../actions/UserActions';
 import { updateUser } from '../actions/UserActions';
 import { loadContacts } from '../actions/ContactActions';
 
-import {AvatarEdit} from '../cmps/User/AvatarEdit'
+import MyEditor from '../cmps/User/MyEditor'
+import { AvatarEdit } from '../cmps/User/AvatarEdit'
 import ContactList from '../cmps/ContactList'
 import Filter from '../cmps/Filter'
 
@@ -36,12 +38,12 @@ class HomePage extends Component {
     this.setState({ isLoading: false })
   }
 
-onAddFriend = (ev,friendId) => {
-  
-  ev.preventDefault()
-  const {user} = this.props
-  SocketService.emit('Add Friend', {friendId, _id: user._id, userName:user.userName, fullName:user.fullName, type:'NotificationFriend',imgUrl:user.imgUrl })
-}
+  onAddFriend = (ev, friendId) => {
+
+    ev.preventDefault() //maybe delete
+    const { user } = this.props
+    SocketService.emit('Add Friend', { friendId, _id: user._id, userName: user.userName, fullName: user.fullName, type: 'NotificationFriend', imgUrl: user.imgUrl })
+  }
 
   onFilterHandler = (filterBy) => {
     this.setState((prevState) => {
@@ -55,11 +57,11 @@ onAddFriend = (ev,friendId) => {
 
   };
 
-  onMoveToRoom = (ev,roomId) => {   
-    console.log(ev);    
+  onMoveToRoom = (ev, roomId) => {
+    console.log(ev);
     ev.stopPropagation()
     this.props.history.push(`/board/${roomId}`);
-}
+  }
 
   capitalize = (name) => {
     return name.charAt(0).toUpperCase() + name.slice(1);
@@ -80,6 +82,8 @@ onAddFriend = (ev,friendId) => {
             {contacts && <ContactList onMoveToRoom={this.onMoveToRoom} contacts={contacts} onAddFriend={this.onAddFriend} loggedinUser={user} />}
           </div>
         }
+        {/* <MyEditor imgUrl={this.props.user.imgUrl}/> */}
+        <UserAvatar name={this.props.user.userName} size="150" src={this.props.user.imgUrl}/>
       </div>
     )
   }
