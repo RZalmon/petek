@@ -19,8 +19,8 @@ import NavBar from './cmps/NavBar';
 
 const history = createBrowserHistory();
 
-const App = (props) => {
-
+const App = (props) => {  
+ 
   const loggedinUser = props.user;
   const room = props.room
 
@@ -39,26 +39,30 @@ const App = (props) => {
 
       });
     }
-    if (loggedinUser) {
-
-      SocketService.on(`updateUser ${loggedinUser._id}`, updateUser);
-      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => { props.updateUser(user) })
+    if(loggedinUser) { 
+      console.log(loggedinUser._id);
+      
+      SocketService.on(`updateUser ${loggedinUser._id}`, (updatedUser) =>{
+        console.log(updatedUser);
+        
+        updateUser(updatedUser)
+      });
+      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => {props.updateUser(user)})
     }
   }
-
-  const disconnectSockets = () => {
-    SocketService.off(`updateRoom ${room._id}`)
+  
+  const disconnectSockets = () =>{
+   if(room) SocketService.off(`updateRoom ${room._id}`)
     SocketService.off(`updateUser ${loggedinUser._id}`)
     SocketService.off(`updateUserWithoutAudio ${loggedinUser._id}`)
   }
-
-  const updateUser = (updatedUser) => {
+  
+  const updateUser = (updatedUser) => {    
     let audio = new Audio(audioNotification);
     if (updatedUser) {
       props.updateUser(updatedUser)
       audio.play()
-      console.log('notifications');
-
+      
 
     } else {
       console.log("ERROR IN UPDATE USER");
@@ -68,14 +72,15 @@ const App = (props) => {
 
   useEffect(() => {
     connectSockets()
-
+    console.log('connect sockets',loggedinUser);
     return () => {
-      if (room && loggedinUser) {
+      if(loggedinUser){
+        console.log('disconnecet sockets', loggedinUser);  
         disconnectSockets()
       }
     };
 
-  });
+  },[]);
 
 
   return (
