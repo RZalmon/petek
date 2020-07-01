@@ -149,7 +149,7 @@ const BoardPage = (props) => {
             {notes && <div>
                 {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} isPinned={isPinned} />}
             </div>}
-            <SplashIcon className="splash-icon" />
+            {/* <SplashIcon className="splash-icon" /> */}
         </div>
     );
 };

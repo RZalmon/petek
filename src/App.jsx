@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import audioNotification from '../src/assets/sound/sp-tune.mp3'
 
 import SocketService from './services/SocketService'
-import { updateUser } from '../src/actions/UserActions';
+import { updateUser, getUser } from '../src/actions/UserActions';
 import { saveRoom, loadRoomById } from '../src/actions/RoomActions';
 // import { getUser } from '../src/actions/UserActions';
 
@@ -40,7 +40,6 @@ const App = (props) => {
       });
     }
     if(loggedinUser) { 
-      console.log(loggedinUser._id);
       
       SocketService.on(`updateUser ${loggedinUser._id}`, (updatedUser) =>{
         console.log(updatedUser);
@@ -72,15 +71,14 @@ const App = (props) => {
 
   useEffect(() => {
     connectSockets()
-    console.log('connect sockets',loggedinUser);
+   if(loggedinUser) console.log('connect sockets',loggedinUser._id);
     return () => {
       if(loggedinUser){
-        console.log('disconnecet sockets', loggedinUser);  
+        console.log('disconnecet sockets', loggedinUser._id);  
         disconnectSockets()
       }
     };
-
-  },[]);
+  },[loggedinUser]);
 
 
   return (
@@ -88,6 +86,8 @@ const App = (props) => {
       <Router history={history}>
         <NavBar user={props.user} />
         <RoutePage onConnectSocket={connectSockets} />
+        <button onClick={()=>{console.log(props);
+        }}>PTEST</button>
       </Router>
     </div>
   );
@@ -103,7 +103,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  // getUser,
+  getUser,
   updateUser,
   saveRoom,
   loadRoomById,

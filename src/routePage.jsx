@@ -15,16 +15,19 @@ import Loading from './cmps/Loading'
 class RoutePage extends React.Component {
 
   async componentDidMount() {
-
+   console.log('hi');
+   
     await this.props.getUser();
     if (!this.isInSignupPage && !this.props.user) {
-      this.props.history.push('/signup')
+    this.props.history.push('/signup')
     }
   }
 
   get isInSignupPage() {
     return this.props.location.pathname === "/signup";
   }
+
+
 
 
   async componentDidUpdate(prevProps, prevState) {
