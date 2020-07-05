@@ -33,7 +33,6 @@ class SignUp extends Component {
 
   getLoggedinUser = async () => {
     await this.props.getUser()
-
     if (this.props.user) this.props.history.push('/')
   }
 

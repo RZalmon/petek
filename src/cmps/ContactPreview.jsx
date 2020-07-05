@@ -30,7 +30,7 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom }) => {
     }
 
     const handelClick = (ev) => {
-        onAddFriend(ev, contact._id);
+        onAddFriend(contact._id);
         toggleIsFriend(ev)
     }
 

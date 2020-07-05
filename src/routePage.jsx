@@ -16,7 +16,7 @@ class RoutePage extends React.Component {
 
   async componentDidMount() {
 
-    await this.props.getUser();
+    await this.props.getUser(); 
     if (!this.isInSignupPage && !this.props.user) {
       this.props.history.push('/signup')
     }
@@ -25,7 +25,6 @@ class RoutePage extends React.Component {
   get isInSignupPage() {
     return this.props.location.pathname === "/signup";
   }
-
 
   async componentDidUpdate(prevProps, prevState) {
     if (
@@ -49,9 +48,6 @@ class RoutePage extends React.Component {
             <Route path="/contact" component={ContactPage} />
             <Route path="/board/:id" component={BoardPage} />
             <Route path="/inbox/:id" exact component={InboxPage} />
-            {/* <Route path="/contact/edit/:id?" component={ContactEdit} /> */}
-            {/* <Route path="/contact/:id" component={ContactDetails} /> */}
-            {/* <Route path="/statistics" component={Statistics} /> */}
           </Switch>
         </main>
       </div>

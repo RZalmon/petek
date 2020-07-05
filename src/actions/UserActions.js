@@ -27,19 +27,10 @@ export function getUser() {
     }
 }
 export function updateUser(user) {
-    console.log('user in actions', user);
-
+    console.log('@@@UPDATE ACTION INVOKED@@@');
     return async dispatch => {
         const updatedUser = await UserService.update(user);
         dispatch({ type: 'SET_USER', user: updatedUser })
     }
 }
 
-
-//ADD Move
-// export function addMove(contact, amount){
-//     return async dispatch => {
-//       const user = await UserService.addMove(contact,amount);
-//       dispatch({ type: 'SET_USER', user })
-//     }
-// }
