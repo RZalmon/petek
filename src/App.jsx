@@ -19,6 +19,8 @@ import NavBar from './cmps/NavBar';
 const history = createBrowserHistory();
 
 const App = (props) => {
+  console.log( props.user);
+  
 
   const loggedinUser = props.user;
   const room = props.room
@@ -76,8 +78,6 @@ const App = (props) => {
       <Router history={history}>
         <NavBar user={props.user} />
         <RoutePage onConnectSocket={connectSockets} />
-        <button onClick={()=>{console.log(props);
-        }}>PTEST</button>
       </Router>
     </div>
   );
@@ -95,7 +95,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   updateUser,
   saveRoom,
-  loadRoomById
+  loadRoomById,
+  getUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

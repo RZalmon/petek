@@ -9,7 +9,6 @@ const KEY = 'user';
 
 async function getById() { 
     var USER = StorageService.load(KEY);
-    
     if(!USER) return null
     USER = await HttpService.get(`user/${USER._id}`)
     return USER 

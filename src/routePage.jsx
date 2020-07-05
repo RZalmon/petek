@@ -15,7 +15,6 @@ import Loading from './cmps/Loading'
 class RoutePage extends React.Component {
 
   async componentDidMount() {
-
     await this.props.getUser(); 
     if (!this.isInSignupPage && !this.props.user) {
     this.props.history.push('/signup')
