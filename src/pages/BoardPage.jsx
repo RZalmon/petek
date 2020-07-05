@@ -16,10 +16,10 @@ import Filter from '../cmps/Filter'
 import Loading from '../cmps/Loading'
 import SplashIcon from '../cmps/icons/SplashIcon'
 
-import InputText from '../cmps/InputText'
-import InputImg from '../cmps/InputImg'
-import InputVideo from '../cmps/InputVideo'
-import InputTodo from '../cmps/InputTodo'
+import InputText from '../cmps/Note/InputText'
+import InputImg from '../cmps/Note/InputImg'
+import InputVideo from '../cmps/Note/InputVideo'
+import InputTodo from '../cmps/Note/InputTodo'
 
 import { UserService } from '../services/UserService';
 

@@ -9,7 +9,6 @@ import audioNotification from '../src/assets/sound/sp-tune.mp3'
 import SocketService from './services/SocketService'
 import { updateUser, getUser } from '../src/actions/UserActions';
 import { saveRoom, loadRoomById } from '../src/actions/RoomActions';
-// import { getUser } from '../src/actions/UserActions';
 
 
 
@@ -19,44 +18,37 @@ import NavBar from './cmps/NavBar';
 
 const history = createBrowserHistory();
 
-const App = (props) => {  
-   console.log(props.user);
-   
+const App = (props) => {
+
   const loggedinUser = props.user;
   const room = props.room
+  // const loggedinUser = useSelector((state) => state.user.loggedinUser) ***we should study why bar suggested it
 
   const connectSockets = (id) => {
     getUser()
     SocketService.setup()
     if (room && loggedinUser) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
-        // let newRoom = await props.saveRoom(updatedRoom)        
         if (userId !== loggedinUser._id) {
-          console.log('updated that shit', updatedRoom);
           props.loadRoomById({ roomId: updatedRoom._id })
         }
-
       });
     }
-    if(loggedinUser) { 
-            SocketService.on(`updateUser ${loggedinUser._id}`, (data) => {
-        // const updatedUser = data.user
-        console.log(props.user);
-        console.log('updatedUser balls', data);
-        
-        updateUser(data)
+    if (loggedinUser) {
+      SocketService.on(`updateUser ${loggedinUser._id}`, (updatedUser) => {
+        updateUser(updatedUser)
       });
-      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => {props.updateUser(user)})
+      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => { props.updateUser(user) })
     }
   }
-  
-  const disconnectSockets = () =>{
-   if(room) SocketService.off(`updateRoom ${room._id}`)
+
+  const disconnectSockets = () => {
+    if (room) SocketService.off(`updateRoom ${room._id}`)
     SocketService.off(`updateUser ${loggedinUser._id}`)
     SocketService.off(`updateUserWithoutAudio ${loggedinUser._id}`)
   }
-  
-  const updateUser = (updatedUser) => {    
+
+  const updateUser = (updatedUser) => {
     let audio = new Audio(audioNotification);
     if (updatedUser) {
       props.updateUser(updatedUser)
@@ -101,10 +93,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  getUser,
   updateUser,
   saveRoom,
-  loadRoomById,
+  loadRoomById
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
