@@ -36,10 +36,8 @@ class BurgerMenu extends React.Component {
   
   handleLogout = async () => {
     await this.props.logout()
-    await this.props.getUser()
-    console.log(this.props.user);
-    
-    this.props.history.push('/signup')
+    // await this.props.getUser()    
+    // this.props.history.push('/signup')
   }
 
 

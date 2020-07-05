@@ -20,31 +20,31 @@ import NavBar from './cmps/NavBar';
 const history = createBrowserHistory();
 
 const App = (props) => {  
- 
+   console.log(props.user);
+   
   const loggedinUser = props.user;
   const room = props.room
 
   const connectSockets = (id) => {
+    getUser()
     SocketService.setup()
     if (room && loggedinUser) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
-        console.log('here?');
-
         // let newRoom = await props.saveRoom(updatedRoom)        
         if (userId !== loggedinUser._id) {
           console.log('updated that shit', updatedRoom);
-
           props.loadRoomById({ roomId: updatedRoom._id })
         }
 
       });
     }
     if(loggedinUser) { 
-      
-      SocketService.on(`updateUser ${loggedinUser._id}`, (updatedUser) =>{
-        console.log(updatedUser);
+            SocketService.on(`updateUser ${loggedinUser._id}`, (data) => {
+        // const updatedUser = data.user
+        console.log(props.user);
+        console.log('updatedUser balls', data);
         
-        updateUser(updatedUser)
+        updateUser(data)
       });
       SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => {props.updateUser(user)})
     }
@@ -61,8 +61,6 @@ const App = (props) => {
     if (updatedUser) {
       props.updateUser(updatedUser)
       audio.play()
-      
-
     } else {
       console.log("ERROR IN UPDATE USER");
     }
