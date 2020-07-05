@@ -60,12 +60,14 @@ const App = (props) => {
 
   useEffect(() => {
     connectSockets()
+   if(loggedinUser) console.log('connect sockets',loggedinUser._id);
     return () => {
-      if (loggedinUser) {
+      if(loggedinUser){
+        console.log('disconnect sockets', loggedinUser._id);  
         disconnectSockets()
       }
     };
-  }, []);
+  },[loggedinUser]);
 
 
   return (
