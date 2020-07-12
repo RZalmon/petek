@@ -20,6 +20,7 @@ import InputText from '../cmps/Note/InputText'
 import InputImg from '../cmps/Note/InputImg'
 import InputVideo from '../cmps/Note/InputVideo'
 import InputTodo from '../cmps/Note/InputTodo'
+import InputSound from '../cmps/Note/InputSound'
 
 import { UserService } from '../services/UserService';
 
@@ -29,7 +30,6 @@ const BoardPage = (props) => {
     const [noteData, setNoteData] = useState('');
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
-    const [isPinned, setIsPinned] = useState(false);
     const [filterBy, setfilterBy] = useState('');
 
 
@@ -43,7 +43,8 @@ const BoardPage = (props) => {
         InputText,
         InputImg,
         InputVideo,
-        InputTodo
+        InputTodo,
+        InputSound,
     }
 
     const InputType = cmps[noteInputType];
@@ -56,6 +57,8 @@ const BoardPage = (props) => {
 
 
     const saveRoomChanges = async () => {
+        console.log('**Props.room**', props.room);
+        console.log('**props.user._id**', props.user._id);
         await props.saveRoom(props.room)
         SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
 
@@ -140,18 +143,21 @@ const BoardPage = (props) => {
             {notes ? <div className="note-add">
                 <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
                 {noteType && <InputType
+                    isMarkerShown={true}
                     addVideo={onAddVideo}
                     onUploadImg={onUploadImg}
                     handleSubmit={onHandleSubmit}
                     setNoteHeader={setNoteHeader}
                     setNoteData={setNoteData}
-                    noteData={noteData} />}
+                    noteData={noteData} 
+                    />}
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData} />
             </div> : <Loading />}
             {notes && <div>
-                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} isPinned={isPinned} />}
+                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} />}
             </div>}
             {/* <SplashIcon className="splash-icon" /> */}
+            <button onClick={() => { { console.log('room:', props.room); } }}>Test</button>
         </div>
     );
 };

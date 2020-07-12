@@ -7,10 +7,9 @@ import { connect } from 'react-redux';
 import audioNotification from '../src/assets/sound/sp-tune.mp3'
 
 import SocketService from './services/SocketService'
+import { StorageService } from './services/StorageService'
 import { updateUser, getUser } from '../src/actions/UserActions';
 import { saveRoom, loadRoomById } from '../src/actions/RoomActions';
-
-
 
 import RoutePage from './RoutePage'
 import NavBar from './cmps/NavBar';
@@ -19,28 +18,30 @@ import NavBar from './cmps/NavBar';
 const history = createBrowserHistory();
 
 const App = (props) => {
-  console.log( props.room);
-  
-
   const loggedinUser = props.user;
   const room = props.room
-  // const loggedinUser = useSelector((state) => state.user.loggedinUser) ***we should study why bar suggested it
 
-  const connectSockets = () => {
+  const connectSockets = (id) => {
+    // getUser()
     SocketService.setup()
-    if (room && loggedinUser) {      
-      SocketService.on(`updateRoom ${props.room._id}`,({ updatedRoom, userId}) => {
-        
-        console.log(updatedRoom);
-        if (loggedinUser._id !== userId) {
-          console.log('balls');
+
+    if (room && loggedinUser) {
+      SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
+        console.log('&&&&&UPDATE ROOM INVOKED');
+        if (userId !== loggedinUser._id) {
+          console.log('&&&&&after condition updatedRoom._id');
           props.loadRoomById({ roomId: updatedRoom._id })
         }
       });
     }
     if (loggedinUser) {
       SocketService.on(`updateUser ${loggedinUser._id}`, (updatedUser) => {
-        updateUser(updatedUser)
+        // console.log('TEST',updatedUser);
+        // console.log('$$UPDATED USER FROM SOCKET$$', updatedUser);
+        // console.log('$$USER$$:', loggedinUser.userName)
+        let user = StorageService.load('user')
+        console.log('Storage:', user.userName)
+        if (loggedinUser._id === user._id) updateUser(updatedUser)
       });
       SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => { props.updateUser(user) })
     }
@@ -63,20 +64,20 @@ const App = (props) => {
   }
 
 
+
   useEffect(() => {
     connectSockets()
-   if(loggedinUser) console.log('connect user sockets',loggedinUser._id);
-   if(room) console.log('connect room sockets',room._id);
-   return () => {
-     if(loggedinUser){
-       console.log('disconnecet user sockets', loggedinUser._id);  
-       if(room) console.log('disconnecet room sockets',room._id);
+    if (loggedinUser) console.log('connect user sockets', loggedinUser._id);
+    if (room) console.log('connect room sockets', room._id);
+    return () => {
+      if (loggedinUser) {
+        console.log('disconnecet user sockets', loggedinUser._id);
+        if (room) console.log('disconnecet room sockets', room._id);
         disconnectSockets()
         SocketService.terminate()
       }
     };
-  },[loggedinUser, room]);
-
+  }, [loggedinUser, room]);
 
 
   return (
@@ -84,6 +85,7 @@ const App = (props) => {
       <Router history={history}>
         <NavBar user={props.user} />
         <RoutePage onConnectSocket={connectSockets} />
+        <button onClick={() => { console.log('IM LOGGEDINUSER', loggedinUser.userName) }}>TEST</button>
       </Router>
     </div>
   );

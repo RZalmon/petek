@@ -27,7 +27,7 @@ export function getUser() {
     }
 }
 export function updateUser(user) {
-    console.log('user in actions', user);
+    console.log('@@@user in actions@@@', user);
     return async dispatch => {
         const updatedUser = await UserService.update(user);
         dispatch({ type: 'SET_USER', user: updatedUser })

@@ -12,7 +12,6 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom }) => {
     const [roomId, setRoomId] = useState('')
 
     useEffect(() => {
-        // console.log('cmon',roomId);
         if (!loggedinUser) return
         let friend = loggedinUser.friends.find(friend => { return friend._id === contact._id })
         if (friend) {
