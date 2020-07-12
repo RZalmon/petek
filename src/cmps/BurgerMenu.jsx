@@ -16,8 +16,7 @@ class BurgerMenu extends React.Component {
     chuckJoke: ''
   };
 
-  async componentDidMount () {
-
+  async componentDidMount () {    
     let chuckJoke = await UtilService.getRandomChuck()
     this.setState({ chuckJoke });     
   }
@@ -34,8 +33,8 @@ class BurgerMenu extends React.Component {
     };
   
   
-  handleLogout = async () => {
-    await this.props.logout()
+  handleLogout =  () => {
+     this.props.logout()
     // this.props.history.push('/signup')
   }
 

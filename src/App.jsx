@@ -19,19 +19,21 @@ import NavBar from './cmps/NavBar';
 const history = createBrowserHistory();
 
 const App = (props) => {
-  console.log( props.user);
+  console.log( props.room);
   
 
   const loggedinUser = props.user;
   const room = props.room
   // const loggedinUser = useSelector((state) => state.user.loggedinUser) ***we should study why bar suggested it
 
-  const connectSockets = (id) => {
-    getUser()
+  const connectSockets = () => {
     SocketService.setup()
-    if (room && loggedinUser) {
-      SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
-        if (userId !== loggedinUser._id) {
+    if (room && loggedinUser) {      
+      SocketService.on(`updateRoom ${props.room._id}`,({ updatedRoom, userId}) => {
+        
+        console.log(updatedRoom);
+        if (loggedinUser._id !== userId) {
+          console.log('balls');
           props.loadRoomById({ roomId: updatedRoom._id })
         }
       });
@@ -63,14 +65,18 @@ const App = (props) => {
 
   useEffect(() => {
     connectSockets()
-   if(loggedinUser) console.log('connect sockets',loggedinUser._id);
-    return () => {
-      if(loggedinUser){
-        console.log('disconnecet sockets', loggedinUser._id);  
+   if(loggedinUser) console.log('connect user sockets',loggedinUser._id);
+   if(room) console.log('connect room sockets',room._id);
+   return () => {
+     if(loggedinUser){
+       console.log('disconnecet user sockets', loggedinUser._id);  
+       if(room) console.log('disconnecet room sockets',room._id);
         disconnectSockets()
+        SocketService.terminate()
       }
     };
-  },[loggedinUser]);
+  },[loggedinUser, room]);
+
 
 
   return (

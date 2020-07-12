@@ -133,6 +133,8 @@ const BoardPage = (props) => {
 
     if (props.room) var { notes } = props.room
 
+
+
     return (
         <div className="board-page">
             {notes ? <div className="note-add">

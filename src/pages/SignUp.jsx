@@ -28,6 +28,8 @@ class SignUp extends Component {
   }
 
   componentDidMount() {
+    console.log('hi from signUp', this.state.newUser);
+    
     this.getLoggedinUser();
   }
 
@@ -50,7 +52,9 @@ class SignUp extends Component {
     this.setState({
       newUser: {
         userName: '',
-        password: ''
+      fullName: '',
+      password: '',
+      imgUrl: '',
       }
     })
   }

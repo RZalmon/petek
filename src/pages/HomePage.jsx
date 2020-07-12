@@ -22,6 +22,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
+    this.props.getUser()
     if (!this.props.user) this.props.history.push("/signup")
     this.loadContacts()
   }
