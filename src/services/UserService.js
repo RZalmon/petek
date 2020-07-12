@@ -7,12 +7,9 @@ import avatarImg from '../assets/png/user.png'
 // var USER = { userName: 'Ramus', fullName: 'Rami Davidov', password: '123456', friends: [] };
 const KEY = 'user';
 
-//if func will stay like that we should change the name (getById)
 async function getById() { 
     var USER = StorageService.load(KEY);
-    console.log('in service? dono');
-    
-    if(!USER) return
+    if(!USER) return null
     USER = await HttpService.get(`user/${USER._id}`)
     return USER 
 
@@ -29,7 +26,6 @@ async function signUp(credentials) {
         joinedAt: Date.now(),
         friends:[]
     };
-    console.log('USER', USER);
     
     USER = await HttpService.post('auth/signup', USER)
     StorageService.save(KEY, USER);
@@ -39,7 +35,7 @@ async function signUp(credentials) {
 
 async function login(credentials) {
     const USER = await HttpService.post('auth/login', credentials)
-    if (!USER) return
+    if (!USER) return null
     StorageService.save(KEY, USER);
     return USER;
 }

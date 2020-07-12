@@ -12,7 +12,7 @@ import NoteTodo from './Note/NoteTodo'
 import Features from '../cmps/Features'
 
 
-export default ({ note, user, removeNote, saveRoomChanges, togglePinned, isPinned }) => {
+export default ({ note, user, removeNote, saveRoomChanges, togglePinned}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [isNewTodo, setIsNewTodo] = useState(false);
     const [currTodoIdx, setCurrTodoIdx] = useState('');
@@ -65,7 +65,7 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned, isPinne
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
                     <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} setIsNewTodo={setIsNewTodo} isNewTodo={isNewTodo} />
-                    <Features togglePinned={togglePinned} isPinned={isPinned} note={note} user={user} setNoteColor={setNoteColor} />
+                    <Features togglePinned={togglePinned} note={note} user={user} setNoteColor={setNoteColor} />
                 </div>
             </div>
         </div>

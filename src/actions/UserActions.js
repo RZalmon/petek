@@ -8,8 +8,8 @@ export function signUp(user) {
 }
 export function login(user) {
     return async dispatch => {
-        const newUser = await UserService.login(user);
-        dispatch({ type: 'SET_USER', newUser })
+        const newUser = await UserService.login(user);                
+        dispatch({ type: 'SET_USER', user:newUser })
     }
 }
 export function logout() {
@@ -27,10 +27,18 @@ export function getUser() {
     }
 }
 export function updateUser(user) {
-    console.log('@@@UPDATE ACTION INVOKED@@@');
+    console.log('@@@user in actions@@@', user);
     return async dispatch => {
         const updatedUser = await UserService.update(user);
         dispatch({ type: 'SET_USER', user: updatedUser })
     }
 }
 
+
+//ADD Move
+// export function addMove(contact, amount){
+//     return async dispatch => {
+//       const user = await UserService.addMove(contact,amount);
+//       dispatch({ type: 'SET_USER', user })
+//     }
+// }

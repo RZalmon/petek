@@ -1,11 +1,5 @@
 
 import { HttpService } from './HttpService';
-// import { StorageService } from './StorageService';
-
-
-// const ROOM_KEY = 'notes';
-
-
 
 function query(critirea) {
     const params = new URLSearchParams(critirea);
@@ -50,15 +44,6 @@ async function save(room) {
     return res;
 }
 
-// function getEmptyRoom() {
-//     return {
-//         roomId: '',
-//         notes: [],
-//         createdAt: ''
-//     }
-// }
-
-
 
 export const RoomService = {
     query,
@@ -67,14 +52,5 @@ export const RoomService = {
     remove,
 }
 
-
-// function getEmptyCritirea() {
-//     return {
-//         txt: '',
-//         searchIn: '',
-//         page: '',
-//         sortBy: ''
-//     }
-// }
 
 

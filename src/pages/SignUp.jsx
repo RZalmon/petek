@@ -87,7 +87,7 @@ class SignUp extends Component {
     if (!this.props.user) {
       Swal.fire({
         title: 'Wrong password or Username.',
-        width: 300,
+      width: 300,
         confirmButtonText: "Say what?",
         confirmButtonColor: "yellow",
         padding: '1em',

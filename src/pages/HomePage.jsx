@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-
 import Avatar from 'react-avatar';
 
 import { getUser } from '../actions/UserActions';
@@ -41,16 +40,15 @@ class HomePage extends Component {
   }
 
   onAddFriend = (friendId) => {
-    const {userName, fullName, _id, imgUrl} = this.props.user
+    const { userName, fullName, _id, imgUrl } = this.props.user
+    let userId = _id
     let notification = {
-      friendId,
-      _id,
       userName,
       fullName,
       type: 'NotificationFriend',
       imgUrl
     }
-    SocketService.emit('Add Friend', notification)
+    SocketService.emit('Add Friend', { notification, userId, friendId })
   }
 
   onFilterHandler = (filterBy) => {

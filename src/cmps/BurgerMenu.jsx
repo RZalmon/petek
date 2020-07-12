@@ -31,14 +31,12 @@ class BurgerMenu extends React.Component {
     this.setState({ menuOpen: false });
     let chuckJoke = await UtilService.getRandomChuck()
     this.setState({ chuckJoke }); 
-    console.log('buggg');
-  };
+    };
   
   
   handleLogout = async () => {
     await this.props.logout()
-    // await this.props.getUser()
-    this.props.history.push('/signup')
+    // this.props.history.push('/signup')
   }
 
 

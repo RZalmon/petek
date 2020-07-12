@@ -10,6 +10,7 @@ import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import ListIcon from '@material-ui/icons/List';
+import MicIcon from '@material-ui/icons/Mic';
 
 // import SvgIcon from '@material-ui/core/SvgIcon';    //PROBABLY NOT NEEDED
 // import styled from 'styled-components' //PROBABLY NOT NEEDED
@@ -57,7 +58,14 @@ export default ({ setNoteType, setNoteInputType, setNoteData }) => {
                 backgroundColor="white"
                 size={40}
                 className={!isOpen && 'hidden'}
-                onClick={() => { setNoteType('NoteTodo'); setIsOpen(!isOpen); setNoteInputType('InputTodo'); setNoteData([])}}
+                onClick={() => { setNoteType('NoteTodo'); setIsOpen(!isOpen); setNoteInputType('InputTodo'); setNoteData([]) }}
+            />
+            <ChildButton
+                icon={<MicIcon style={{ fontSize: 20, fill: '#7027c3' }} nativecolor="black" />}
+                backgroundColor="white"
+                size={40}
+                className={!isOpen && 'hidden'}
+                onClick={() => { setNoteType('NoteSound'); setIsOpen(!isOpen); setNoteInputType('InputSound'); setNoteData('') }}
             />
         </FloatingMenu>
     )
