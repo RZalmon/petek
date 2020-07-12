@@ -86,7 +86,7 @@ const BoardPage = (props) => {
         if (ev) ev.preventDefault()
         newNote._id = UtilService.makeId(24)
         newNote.createdAt = Date.now() //maybe server side should handle it
-        let minimalUser = await UserService.getMinimalUser(user._id, user.imgUrl)
+        let minimalUser =  UserService.getMinimalUser(user._id, user.imgUrl)
         newNote.createdBy = minimalUser
         const friend = user.friends.find(friend => { return friend.roomId === props.match.params.id })
         props.room.notes.unshift(newNote)

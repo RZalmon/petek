@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Avatar from 'react-avatar';
 
-import { getUser } from '../actions/UserActions';
-import { updateUser } from '../actions/UserActions';
+import { getUser,updateUser } from '../actions/UserActions';
 import { loadContacts } from '../actions/ContactActions';
 
 import { AvatarEdit } from '../cmps/User/AvatarEdit'
@@ -11,6 +10,7 @@ import ContactList from '../cmps/ContactList'
 import Filter from '../cmps/Filter'
 
 import SocketService from '../services/SocketService'
+import {UserService} from '../services/UserService'
 import CloudinaryService from '../../src/services/CloudinaryService'
 
 
@@ -37,6 +37,7 @@ class HomePage extends Component {
     let userImgUrl = await CloudinaryService.uploadImg(ev)
     const updatedUser = Object.assign(user, { imgUrl: userImgUrl.secure_url })
     this.props.updateUser(updatedUser)
+    UserService.updateImgAtContacts(user._id, userImgUrl.secure_url)
     this.setState({ isLoading: false })
   }
 

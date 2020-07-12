@@ -2,6 +2,7 @@
 import { StorageService } from './StorageService'
 import { HttpService } from './HttpService.js'
 import avatarImg from '../assets/png/user.png'
+import BoardPage from '../pages/BoardPage';
 
 
 // var USER = { userName: 'Ramus', fullName: 'Rami Davidov', password: '123456', friends: [] };
@@ -53,7 +54,13 @@ async function update(user) {
     return updatedUser
 }
 
-async function getMinimalUser(_id, imgUrl){
+async function updateImgAtContacts(userId, imgUrl){
+  await HttpService.put(`user/${userId}/update`, {userId,imgUrl})
+}
+
+
+
+ function getMinimalUser(_id, imgUrl){
     return{
         _id,
         imgUrl
@@ -66,5 +73,6 @@ export const UserService = {
     update,
     login,
     logout,
-    getMinimalUser
+    getMinimalUser,
+    updateImgAtContacts
 }
