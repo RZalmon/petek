@@ -13,6 +13,7 @@ const InboxPage = (props) => {
   const { user } = props
 
   const onApprove = (notification) => {
+    
     onDeleteNotification(notification)
     SocketService.emit("approve", { notification,user });
 

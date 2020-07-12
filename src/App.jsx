@@ -36,14 +36,14 @@ const App = (props) => {
     }
     if (loggedinUser) {
       SocketService.on(`updateUser ${loggedinUser._id}`, (updatedUser) => {
-        // console.log('TEST',updatedUser);
+        console.log('TEST',updatedUser);
         // console.log('$$UPDATED USER FROM SOCKET$$', updatedUser);
         // console.log('$$USER$$:', loggedinUser.userName)
         let user = StorageService.load('user')
         console.log('Storage:', user.userName)
         if (loggedinUser._id === user._id) updateUser(updatedUser)
       });
-      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ({ user }) => { props.updateUser(user) })
+      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ( updatedUser ) => { props.updateUser(updatedUser) })
     }
   }
 
@@ -89,6 +89,7 @@ const App = (props) => {
       </Router>
     </div>
   );
+  
 }
 
 
