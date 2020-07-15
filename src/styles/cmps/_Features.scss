@@ -3,25 +3,31 @@
     display: flex;
     align-items: center;
 
-    img {
-        width: 30px;
-    }
-    .color-pallete-icon {
-        margin: 0 5px 0 5px;
-    }
+    // img {
+    //     width: 30px;
+    // }
+    // .color-pallete-icon {
+    //     margin: 0 5px 0 5px;
+    // }
     // .pin-btn {
     //     &:hover {
     //         filter: invert(71%) sepia(80%) saturate(876%) hue-rotate(353deg) brightness(102%) contrast(102%);
     //     }
     // }
 
-    .colors-container {
-        transition: .3s;
-        // & svg {
-        //     padding: 0 3px 0 3px;
-        //     width: 34px;
-        // }
-    }
+    // .colors-container {
+    //     transition: 0.3s;
+    //     // display: none;
+    //     opacity: 0;
+    //     &.shown {
+    //         // display: block;
+    //         opacity: 1;
+    //     }
+    //     // & svg {
+    //     //     padding: 0 3px 0 3px;
+    //     //     width: 34px;
+    //     // }
+    // }
 
     .color-pallete {
         display: flex;
