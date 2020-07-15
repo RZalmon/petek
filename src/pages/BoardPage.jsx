@@ -134,6 +134,7 @@ const BoardPage = (props) => {
     }, [filterBy]);
 
 
+
     if (props.room) var { notes } = props.room
 
 
