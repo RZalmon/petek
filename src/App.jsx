@@ -85,7 +85,6 @@ const App = (props) => {
       <Router history={history}>
         <NavBar user={props.user} />
         <RoutePage onConnectSocket={connectSockets} />
-        <button onClick={() => { console.log('IM LOGGEDINUSER', loggedinUser.userName) }}>TEST</button>
       </Router>
     </div>
   );

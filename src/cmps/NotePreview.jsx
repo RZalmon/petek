@@ -1,18 +1,23 @@
 import React, { useEffect, useState, createRef } from 'react'
 import Moment from 'react-moment';
 
-import xMark from '../assets/svg/x-mark.svg'
-import editIcon from '../assets/svg/edit.svg'
-import saveIcon from '../assets/svg/save.svg'
+// import xMark from '../assets/svg/x-mark.svg'
+// import editIcon from '../assets/svg/edit.svg'
+// import saveIcon from '../assets/svg/save.svg'
 
 import NoteText from './Note/NoteText'
 import NoteImg from './Note/NoteImg'
 import NoteVideo from './Note/NoteVideo'
 import NoteTodo from './Note/NoteTodo'
+import NoteLoc from './Note/NoteLoc'
 import Features from '../cmps/Features'
 
+import RemoveIcon from '../cmps/icons/RemoveIcon'
+import EditIcon from '../cmps/icons/EditIcon'
+import SaveIcon from '../cmps/icons/SaveIcon'
+import SplashIcon from '../cmps/icons/SplashIcon'
 
-export default ({ note, user, removeNote, saveRoomChanges, togglePinned}) => {
+export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [isNewTodo, setIsNewTodo] = useState(false);
     const [currTodoIdx, setCurrTodoIdx] = useState('');
@@ -21,7 +26,8 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned}) => {
         NoteText,
         NoteImg,
         NoteVideo,
-        NoteTodo
+        NoteTodo,
+        NoteLoc
     }
     const NoteType = cmps[note.type];
 
@@ -36,14 +42,18 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned}) => {
         if (note.bgColor) noteRef.current.style.backgroundColor = note.bgColor
     }
 
+    const saveTodoEdits = () => {
+        saveRoomChanges();
+        setCurrTodoIdx('')
+    }
 
     useEffect(() => {
         paintNote()
-        if(note.createdBy._id !== user._id) return
-        if (note.createdBy.imgUrl !== user.imgUrl){
+        if (note.createdBy._id !== user._id) return
+        if (note.createdBy.imgUrl !== user.imgUrl) {
             note.createdBy.imgUrl = user.imgUrl
             saveRoomChanges()
-        } 
+        }
     }, []);
 
 
@@ -58,9 +68,11 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned}) => {
                 <div className="note-container" ref={noteRef}>
                     <div className="note-header">
                         <div>
-                            {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <img src={editIcon} alt="Edit note" className="edit-btn" onClick={() => setIsEdit(true)} />}
-                            {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <img src={saveIcon} alt="Save changes" className="save-btn" onClick={() => { setIsEdit(false); saveRoomChanges(); setCurrTodoIdx('') }} />}
-                            <img src={xMark} className="remove-btn" onClick={() => removeNote(note._id)} alt="Delete" />
+                            {/* {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <img src={editIcon} alt="Edit note" className="edit-btn" onClick={() => setIsEdit(true)} />} */}
+                            {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <i onClick={() => setIsEdit(true)}><EditIcon /></i>}
+                            {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <i onClick={() => { setIsEdit(false); saveTodoEdits() }}><SaveIcon /></i>}
+                            {/* {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <img src={saveIcon} alt="Save changes" className="save-btn" onClick={() => { setIsEdit(false); saveRoomChanges(); setCurrTodoIdx('') }} />} */}
+                            <i onClick={() => removeNote(note._id)}><RemoveIcon /></i>
                         </div>
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>

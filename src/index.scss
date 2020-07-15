@@ -7,6 +7,16 @@
 //BASE
 @import './styles/basics/helpers';
 @import './styles/basics/layout';
+@import './styles/basics/reset';
+
+//ICONS
+@import './styles/cmps/icons/RemoveIcon';
+@import './styles/cmps/icons/EditIcon';
+@import './styles/cmps/icons/SaveIcon';
+@import './styles/cmps/icons/StarIcon';
+@import './styles/cmps/icons/SplashIcon';
+
+
 
 //CMPS
 @import './styles/cmps/NavBar';
@@ -23,10 +33,10 @@
 @import './styles/cmps/InputVideo.scss';
 @import './styles/cmps/InputTodo.scss';
 @import './styles/cmps/InputImg.scss';
-@import './styles/cmps/InputSound.scss';
 @import './styles/cmps/ButtonMenu.scss';
 @import './styles/cmps/Loading.scss';
 @import './styles/cmps/Filter.scss';
+
 
 //PAGES
 @import './styles/pages/SignUp';

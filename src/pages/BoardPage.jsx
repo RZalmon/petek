@@ -20,7 +20,7 @@ import InputText from '../cmps/Note/InputText'
 import InputImg from '../cmps/Note/InputImg'
 import InputVideo from '../cmps/Note/InputVideo'
 import InputTodo from '../cmps/Note/InputTodo'
-import InputSound from '../cmps/Note/InputSound'
+import InputLoc from '../cmps/Note/InputLoc'
 
 import { UserService } from '../services/UserService';
 
@@ -44,7 +44,7 @@ const BoardPage = (props) => {
         InputImg,
         InputVideo,
         InputTodo,
-        InputSound,
+        InputLoc
     }
 
     const InputType = cmps[noteInputType];
@@ -89,9 +89,9 @@ const BoardPage = (props) => {
         if (ev) ev.preventDefault()
         newNote._id = UtilService.makeId(24)
         newNote.createdAt = Date.now() //maybe server side should handle it
-        let minimalUser =  UserService.getMinimalUser(user._id, user.imgUrl)
+        let minimalUser = UserService.getMinimalUser(user._id, user.imgUrl)
         newNote.createdBy = minimalUser
-        const friend = user.friends.find(friend => { return friend.roomId === props.match.params.id })
+        const friend = user.friends.find(currFriend => currFriend.roomId === props.match.params.id)
         props.room.notes.unshift(newNote)
         props.saveRoom(props.room)
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
@@ -149,15 +149,13 @@ const BoardPage = (props) => {
                     handleSubmit={onHandleSubmit}
                     setNoteHeader={setNoteHeader}
                     setNoteData={setNoteData}
-                    noteData={noteData} 
-                    />}
+                    noteData={noteData}
+                />}
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData} />
             </div> : <Loading />}
             {notes && <div>
                 {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} />}
             </div>}
-            {/* <SplashIcon className="splash-icon" /> */}
-            <button onClick={() => { { console.log('room:', props.room); } }}>Test</button>
         </div>
     );
 };

@@ -1,0 +1,18 @@
+.star-icon {
+    cursor: pointer;
+    width: 30px;
+    fill: transparent;
+    stroke-width: 3%;
+    stroke: #000000;
+    @include hover-supported {
+        fill: #f3d250;
+        transition: 0.3s;
+    }
+    &.pinned {
+        fill: #f3d250;
+        @include hover-supported {
+            fill: transparent;
+            transition: 0.3s;
+        }
+    }
+}

@@ -1,5 +1,7 @@
 import React, { useEffect, useState, createRef } from 'react'
 import { connect } from 'react-redux';
+import ProgressBar from '@ramonak/react-progress-bar';
+
 import SocketService from '../../services/SocketService'
 
 import PlusIcon from '../../assets/svg/plus.svg'
@@ -12,6 +14,7 @@ import { saveRoom } from '../../actions/RoomActions';
 const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTodoIdx, setIsNewTodo, isNewTodo }) => {
     const [editedTodo, setEditedTodo] = useState('');
     const [newTodo, setNewTodo] = useState('');
+    const [progress, setProgress] = useState(0)
     const editInputRef = createRef();
     const newTodoInputRef = createRef()
 
@@ -23,24 +26,38 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
     }
 
 
-    const addTodo =  () => {
-        
+    const addTodo = () => {
+
         let todoToAdd = { text: newTodo, isDone: false }
-        
-         note.data.push(todoToAdd);
+
+        note.data.push(todoToAdd);
         setIsNewTodo(false)
         setNewTodo('')
         newTodoInputRef.current.value = ''
     };
-    
+
     const removeTodo = (idx) => {
         note.data.splice(idx, 1)
     }
 
+    const culcProgress = () => {
+        let doneTodosCount = note.data.reduce((acc, todo) => {
+            if (todo.isDone) acc++
+            return acc;
+        }, 0);
+        let prog = parseInt(doneTodosCount / note.data.length * 100)
+        setProgress(prog)
+    }
+
+    useEffect(() => {
+        culcProgress()
+    });
+
+
     useEffect(() => {
         if (editInputRef.current) editInputRef.current.focus()
         if (currTodoIdx !== '' && editInputRef.current) note.data[currTodoIdx].text = editedTodo
-    }, [editedTodo, currTodoIdx],)
+    }, [editedTodo, currTodoIdx])
 
     return (
         <div className="note-todo">
@@ -57,23 +74,25 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
                                 setEditedTodo(todo.text)
                             }
                         }}>
-                            {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} onClick={(ev) => toggleIsDone(idx)}>{todo.text}</span>}
-                            {isEdit && <img src={xmark} className="remove-todo-btn" onClick={() => removeTodo(idx)} />}
+                            <input type="checkbox" onClick={(ev) => toggleIsDone(idx)} checked={todo.isDone} readOnly />
+                            {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} >{todo.text}</span>}
                             {(isEdit && currTodoIdx === idx) && <input type="text" value={editedTodo} ref={editInputRef} onChange={(e) => { setEditedTodo(e.target.value); }} />
                             }
+                            {isEdit && <img src={xmark} className="remove-todo-btn" onClick={() => removeTodo(idx)} />}
                         </li>
                     )
                 })}
             </ul>
+            <ProgressBar completed={progress} />
             {isNewTodo && <div>
                 <input type="text" placeholder="New Todo" ref={newTodoInputRef} onChange={e => setNewTodo(e.target.value)} />
-                <img src={ArrowIcon} className="add-todo-btn" onClick={() =>  addTodo() } />
+                <img src={ArrowIcon} className="add-todo-btn" onClick={() => addTodo()} />
             </div>}
 
         </div>
     )
 }
-
+//checkbox read only prop makes error go away, we will let it stay for a while
 const mapStateToProps = (state) => {
     return {
         room: state.room.currRoom,
