@@ -4,29 +4,35 @@
     }
 
     li {
-        cursor: pointer;
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         align-items: center;
+        font-size: 1.5rem;
+        input[type="checkbox"] {
+            zoom: 1.5;
+            margin: 0 5px 0 5px;
+            cursor: pointer;
+        }
         .edit-icon {
             width: 30px;
         }
     }
 
-    ul{
+    ul {
         padding: unset;
     }
     .done {
         text-decoration: line-through;
     }
-    .new-todo-btn, .add-todo-btn {
+    .new-todo-btn,
+    .add-todo-btn {
         cursor: pointer;
         width: 30px;
         &:hover {
             filter: invert(43%) sepia(96%) saturate(1237%) hue-rotate(88deg) brightness(128%) contrast(119%);
         }
     }
-    .remove-todo-btn{
+    .remove-todo-btn {
         cursor: pointer;
         width: 16px;
         margin-right: 7px;

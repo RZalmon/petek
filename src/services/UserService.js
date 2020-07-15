@@ -1,44 +1,47 @@
-// import { UtilService } from './UtilService'
 import { StorageService } from './StorageService'
 import { HttpService } from './HttpService.js'
 import avatarImg from '../assets/png/user.png'
 import BoardPage from '../pages/BoardPage';
 
 
-// var USER = { userName: 'Ramus', fullName: 'Rami Davidov', password: '123456', friends: [] };
 const KEY = 'user';
 
-async function getById() { 
-    var USER = StorageService.load(KEY);
-    if(!USER) return null
-    USER = await HttpService.get(`user/${USER._id}`)
-    return USER 
-
+async function getLoggedinUser() {
+    var user = StorageService.load(KEY);
+    if (!user) return null
+    user = await HttpService.get(`user/${user._id}`)
+    return user
 }
+
+async function getById(id) {
+    const user = await HttpService.get(`user/${id}`)
+    return user
+}
+
 async function signUp(credentials) {
-    let USER = {
+    let user = {
         userName: credentials.userName,
         fullName: credentials.fullName,
         password: credentials.password,
         pinnedNotes: [],
         notifications: [],
-        pinnedNotes : [],
+        pinnedNotes: [],
         imgUrl: credentials.imgUrl ? credentials.imgUrl : avatarImg,
         joinedAt: Date.now(),
-        friends:[]
+        friends: []
     };
-    
-    USER = await HttpService.post('auth/signup', USER)
-    StorageService.save(KEY, USER);
+
+    user = await HttpService.post('auth/signup', user)
+    StorageService.save(KEY, user);
     // getUser()
-    return USER;
+    return user;
 }
 
 async function login(credentials) {
-    const USER = await HttpService.post('auth/login', credentials)
-    if (!USER) return null
-    StorageService.save(KEY, USER);
-    return USER;
+    const user = await HttpService.post('auth/login', credentials)
+    if (!user) return null
+    StorageService.save(KEY, user);
+    return user;
 }
 
 
@@ -54,14 +57,14 @@ async function update(user) {
     return updatedUser
 }
 
-async function updateImgAtContacts(userId, imgUrl){
-  await HttpService.put(`user/${userId}/update`, {userId,imgUrl})
+async function updateImgAtContacts(userId, imgUrl) {
+    await HttpService.put(`user/${userId}/update`, { userId, imgUrl })
 }
 
 
 
- function getMinimalUser(_id, imgUrl){
-    return{
+function getMinimalUser(_id, imgUrl) {
+    return {
         _id,
         imgUrl
     }
@@ -74,5 +77,6 @@ export const UserService = {
     login,
     logout,
     getMinimalUser,
-    updateImgAtContacts
+    updateImgAtContacts,
+    getLoggedinUser
 }
