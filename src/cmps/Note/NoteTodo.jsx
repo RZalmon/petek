@@ -74,8 +74,10 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
                                 setEditedTodo(todo.text)
                             }
                         }}>
+                            <div>
                             <input type="checkbox" onClick={(ev) => toggleIsDone(idx)} checked={todo.isDone} readOnly />
                             {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} >{todo.text}</span>}
+                            </div>
                             {(isEdit && currTodoIdx === idx) && <input type="text" value={editedTodo} ref={editInputRef} onChange={(e) => { setEditedTodo(e.target.value); }} />
                             }
                             {isEdit && <img src={xmark} className="remove-todo-btn" onClick={() => removeTodo(idx)} />}
@@ -83,7 +85,9 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
                     )
                 })}
             </ul>
-            <ProgressBar completed={progress} />
+            <div className="progress-bar">
+            <ProgressBar completed={progress} labelSize={!progress ? 0 : 12 }/>
+            </div>
             {isNewTodo && <div>
                 <input type="text" placeholder="New Todo" ref={newTodoInputRef} onChange={e => setNewTodo(e.target.value)} />
                 <img src={ArrowIcon} className="add-todo-btn" onClick={() => addTodo()} />

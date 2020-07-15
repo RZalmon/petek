@@ -19,7 +19,17 @@ class BurgerMenu extends React.Component {
   async componentDidMount () {    
     let chuckJoke = await UtilService.getRandomChuck()
     this.setState({ chuckJoke });     
+   
   }
+
+ async  componentWillUpdate () {
+    if(this.props.isClicked && !this.state.menuOpen ) {
+      this.setState({ menuOpen: true });
+    }
+
+    
+  }
+   
 
  
   
@@ -27,6 +37,7 @@ class BurgerMenu extends React.Component {
     if (ev) {
       this.handleLogout()
     }
+    
     this.setState({ menuOpen: false });
     let chuckJoke = await UtilService.getRandomChuck()
     this.setState({ chuckJoke }); 
@@ -40,9 +51,9 @@ class BurgerMenu extends React.Component {
 
 
   async handleStateChange(state) {
-   
+
     this.setState({ menuOpen: state.isOpen });
-    this.props.onOpenMenu(state.isOpen)
+    // this.props.onOpenMenu(state.isOpen)
   }
 
 

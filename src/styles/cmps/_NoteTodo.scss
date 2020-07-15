@@ -3,11 +3,20 @@
         margin: unset;
     }
 
+    .progress-bar{
+        background-color: unset;
+        span{
+        padding:2px !important
+        }
+    }
+
     li {
         display: flex;
         // justify-content: space-between;
         align-items: center;
         font-size: 1.5rem;
+        justify-content: space-between;
+        font-size: 1.2rem;
         input[type="checkbox"] {
             zoom: 1.5;
             margin: 0 5px 0 5px;

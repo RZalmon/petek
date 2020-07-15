@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React ,{useState ,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
 
@@ -11,22 +11,21 @@ export default (props) => {
 
   const { user } = props
   const [isClicked, toggleClick] = useState(false)
+   
+  useEffect(() => {
+    return () => {
+      toggleClick(false)
+    };
+  }, [isClicked])
   
-  const onOpenMenu = (term) =>{
-    (!term) ? setTimeout(() => {
-      toggleClick(term)
-    }, 450) : 
-    toggleClick(term)
-  }
-
 
   return (
      <nav className="NavBar">
         <Link to={`/`} className="home-link" >
         <img src={logo} alt="logo" className="logo"/>
         </Link>
-       {user && !!user.notifications.length && <span className="notification-count nav-count" >{user.notifications.length}</span>}
-       <BurgerMenu onOpenMenu={onOpenMenu}/>
+       {user && !!user.notifications.length && <span className="notification-count nav-count" onClick={() => {toggleClick(true)}} >{user.notifications.length}</span>}
+       <BurgerMenu isClicked={isClicked} />
     </nav>
   );
 };
