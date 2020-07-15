@@ -5,34 +5,34 @@
         text-align: start;
     }
 
-    .remove-btn {
-        cursor: pointer;
-        width: 30px;
-        align-self: flex-end;
-        fill: white;//not working
-        margin-left: 10px;
+    // .remove-btn {
+    //     cursor: pointer;
+    //     width: 30px;
+    //     align-self: flex-end;
+    //     fill: white;//not working
+    //     margin-left: 10px;
 
-        &:hover {
-            fill: white;//not working
-            transition: 0.3s;//not working
-            filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%);
-        }
-    }
+    //     &:hover {
+    //         fill: white;//not working
+    //         transition: 0.3s;//not working
+    //         filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%);
+    //     }
+    // }
 
-    .edit-btn,
-    .save-btn {
-        cursor: pointer;
-        width: 30px;
-        align-self: flex-end;
-        fill: white;//not working
-        margin-left: 10px;
+    // .edit-btn,
+    // .save-btn {
+    //     cursor: pointer;
+    //     width: 30px;
+    //     align-self: flex-end;
+    //     fill: white;//not working
+    //     margin-left: 10px;
 
-        &:hover {
-            fill: white;//not working
-            transition: 0.3s;//not working
-            filter: invert(12%) sepia(83%) saturate(5841%) hue-rotate(244deg) brightness(87%) contrast(153%);
-        }
-    }
+    //     &:hover {
+    //         fill: white;//not working
+    //         transition: 0.3s;//not working
+    //         filter: invert(12%) sepia(83%) saturate(5841%) hue-rotate(244deg) brightness(87%) contrast(153%);
+    //     }
+    // }
 
     p {
         margin: unset;

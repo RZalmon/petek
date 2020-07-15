@@ -1,9 +1,6 @@
 import React, { useEffect, useState, createRef } from 'react'
 import Moment from 'react-moment';
 
-// import xMark from '../assets/svg/x-mark.svg'
-// import editIcon from '../assets/svg/edit.svg'
-// import saveIcon from '../assets/svg/save.svg'
 
 import NoteText from './Note/NoteText'
 import NoteImg from './Note/NoteImg'
@@ -15,7 +12,6 @@ import Features from '../cmps/Features'
 import RemoveIcon from '../cmps/icons/RemoveIcon'
 import EditIcon from '../cmps/icons/EditIcon'
 import SaveIcon from '../cmps/icons/SaveIcon'
-import SplashIcon from '../cmps/icons/SplashIcon'
 
 export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
     const [isEdit, setIsEdit] = useState(false);
