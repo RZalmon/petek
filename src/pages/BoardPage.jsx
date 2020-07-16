@@ -70,12 +70,18 @@ const BoardPage = (props) => {
             setNoteData(imgUrl.secure_url)
             setIsUploading(true)
         }
-
     }
 
     const onAddVideo = (videoId) => {
         setNoteData(videoId)
         setIsUploading(true)
+    }
+
+    const onAddLoc = (loc) =>{
+        setNoteData(loc)
+        setIsUploading(true)
+        console.log(isUploading);
+
     }
 
     const onFilterHandler = (filterBy) => {
@@ -109,6 +115,8 @@ const BoardPage = (props) => {
         props.updateUser(props.user)
     }
 
+    
+
 
     const removeNote = async (noteId) => {
         let idx = props.room.notes.findIndex(note => note._id === noteId)
@@ -123,8 +131,10 @@ const BoardPage = (props) => {
     }, []);
 
     useEffect(() => {
-        if ((noteData && noteType === 'NoteImg') || noteType === 'NoteVideo') {
-            onHandleSubmit()
+        if ((noteData && noteType === 'NoteImg') ||
+         noteType === 'NoteVideo' || noteType === 'NoteLoc' ) {
+            console.log(noteData);
+            // onHandleSubmit()
         }
     }, [isUploading]);
 
@@ -144,8 +154,9 @@ const BoardPage = (props) => {
                 <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
                 {noteType && <InputType
                     isMarkerShown={true}
-                    addVideo={onAddVideo}
                     onUploadImg={onUploadImg}
+                    addVideo={onAddVideo}
+                    onAddLoc={onAddLoc}
                     handleSubmit={onHandleSubmit}
                     setNoteHeader={setNoteHeader}
                     setNoteData={setNoteData}
