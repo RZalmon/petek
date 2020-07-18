@@ -65,7 +65,7 @@ export default ({ setNoteType, setNoteInputType, setNoteData }) => {
                 backgroundColor="white"
                 size={40}
                 className={!isOpen && 'hidden'}
-                onClick={() => { setNoteType('NoteLoc'); setIsOpen(!isOpen); setNoteInputType('InputLoc'); setNoteData([]) }}
+                onClick={() => { setNoteType('NoteLoc'); setIsOpen(!isOpen); setNoteInputType('InputLoc'); setNoteData(null) }}
             />
         </FloatingMenu>
     )

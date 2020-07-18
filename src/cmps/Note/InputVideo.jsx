@@ -7,7 +7,6 @@ import PlusIcon from '../../assets/svg/plus.svg'
 
 export default ({ addVideo, setNoteHeader }) => {
     const [videos, setVideos] = useState([]);
-
     const searchYoutubeVideos = async (queryStr) => {
         if (!queryStr) {
             setVideos([])

@@ -77,12 +77,11 @@ const BoardPage = (props) => {
         setIsUploading(true)
     }
 
-    const onAddLoc = (loc) =>{
-        setNoteData(loc)
-        setIsUploading(true)
-        console.log(isUploading);
+    // const onAddLoc = (loc) => {
+    //     setNoteData(loc)
+    //     setIsUploading(true)
 
-    }
+    // }
 
     const onFilterHandler = (filterBy) => {
         setfilterBy(filterBy)
@@ -115,7 +114,7 @@ const BoardPage = (props) => {
         props.updateUser(props.user)
     }
 
-    
+
 
 
     const removeNote = async (noteId) => {
@@ -132,9 +131,8 @@ const BoardPage = (props) => {
 
     useEffect(() => {
         if ((noteData && noteType === 'NoteImg') ||
-         noteType === 'NoteVideo' || noteType === 'NoteLoc' ) {
-            console.log(noteData);
-            // onHandleSubmit()
+            noteType === 'NoteVideo') {
+            onHandleSubmit()
         }
     }, [isUploading]);
 
@@ -156,7 +154,6 @@ const BoardPage = (props) => {
                     isMarkerShown={true}
                     onUploadImg={onUploadImg}
                     addVideo={onAddVideo}
-                    onAddLoc={onAddLoc}
                     handleSubmit={onHandleSubmit}
                     setNoteHeader={setNoteHeader}
                     setNoteData={setNoteData}

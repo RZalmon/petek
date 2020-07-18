@@ -1,0 +1,9 @@
+.gps-icon {
+    cursor: pointer;
+    width: 30px;
+    @include hover-supported {
+        fill: #ff0000;
+        stroke: #ff0000;
+        transition: .3s;
+    }
+}
