@@ -1,69 +1,66 @@
 //SETUP
-@import './styles/setup/functions';
-@import './styles/setup/mixins';
-@import './styles/setup/typography';
-@import './styles/setup/variables';
+@import "./styles/setup/functions";
+@import "./styles/setup/mixins";
+@import "./styles/setup/typography";
+@import "./styles/setup/variables";
 
 //BASE
-@import './styles/basics/helpers';
-@import './styles/basics/layout';
-@import './styles/basics/reset';
+@import "./styles/basics/helpers";
+@import "./styles/basics/layout";
+@import "./styles/basics/reset";
 
 //ICONS
-@import './styles/cmps/icons/RemoveIcon';
-@import './styles/cmps/icons/EditIcon';
-@import './styles/cmps/icons/SaveIcon';
-@import './styles/cmps/icons/StarIcon';
-@import './styles/cmps/icons/CircleIcon';
-@import './styles/cmps/icons/ColorPalleteIcon';
-
+@import "./styles/cmps/icons/RemoveIcon";
+@import "./styles/cmps/icons/EditIcon";
+@import "./styles/cmps/icons/SaveIcon";
+@import "./styles/cmps/icons/StarIcon";
+@import "./styles/cmps/icons/CircleIcon";
+@import "./styles/cmps/icons/ColorPalleteIcon";
+@import "./styles/cmps/icons/GpsIcon";
+@import "./styles/cmps/icons/PinIcon";
 
 
 //CMPS
-@import './styles/cmps/NavBar';
-@import './styles/cmps/BurgerMenu';
-@import './styles/cmps/ContactPreview';
-@import './styles/cmps/AvatarEdit.scss';
-@import './styles/cmps/NotePreview.scss';
-@import './styles/cmps/Features.scss';
-@import './styles/cmps/NoteList.scss';
-@import './styles/cmps/NoteImg.scss';
-@import './styles/cmps/NoteTodo.scss';
-@import './styles/cmps/NotificationPreview.scss';
-@import './styles/cmps/InputText.scss';
-@import './styles/cmps/InputVideo.scss';
-@import './styles/cmps/InputTodo.scss';
-@import './styles/cmps/InputImg.scss';
-@import './styles/cmps/ButtonMenu.scss';
-@import './styles/cmps/Loading.scss';
-@import './styles/cmps/Filter.scss';
-
+@import "./styles/cmps/NavBar";
+@import "./styles/cmps/BurgerMenu";
+@import "./styles/cmps/ContactPreview";
+@import "./styles/cmps/AvatarEdit.scss";
+@import "./styles/cmps/NotePreview.scss";
+@import "./styles/cmps/Features.scss";
+@import "./styles/cmps/NoteList.scss";
+@import "./styles/cmps/NoteImg.scss";
+@import "./styles/cmps/NoteTodo.scss";
+@import "./styles/cmps/NotificationPreview.scss";
+@import "./styles/cmps/InputText.scss";
+@import "./styles/cmps/InputVideo.scss";
+@import "./styles/cmps/InputTodo.scss";
+@import "./styles/cmps/InputLoc.scss";
+@import "./styles/cmps/InputImg.scss";
+@import "./styles/cmps/ButtonMenu.scss";
+@import "./styles/cmps/Loading.scss";
+@import "./styles/cmps/Filter.scss";
 
 //PAGES
-@import './styles/pages/SignUp';
-@import './styles/pages/BoardPage';
-
-
+@import "./styles/pages/SignUp";
+@import "./styles/pages/BoardPage";
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .swal2-title {
-  font-size: 19px !important
+  font-size: 19px !important;
 }
 
-.swal2-styled.swal2-confirm{
+.swal2-styled.swal2-confirm {
   font-size: 15px;
-  color: rgba(0, 0, 123, 0.4) !important
+  color: rgba(0, 0, 123, 0.4) !important;
 }
