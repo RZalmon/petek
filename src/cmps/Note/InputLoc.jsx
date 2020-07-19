@@ -43,7 +43,7 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
 
     useEffect(() => {
         fetchUserCoords()
-    }, [])
+    }, [selectedLoc])
 
 
     return (
