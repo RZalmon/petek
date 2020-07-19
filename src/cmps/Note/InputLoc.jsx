@@ -51,6 +51,9 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
         setSelectedLoc(null)
         addressInputRef.current.value = ''
     }
+    useEffect(() => {
+        fetchUserCoords()
+    }, [selectedLoc])
 
 
     return (

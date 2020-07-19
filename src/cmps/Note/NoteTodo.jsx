@@ -86,7 +86,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
                 })}
             </ul>
             <div className="progress-bar">
-            <ProgressBar completed={progress} labelSize={!progress ? 0 : 12 }/>
+            <ProgressBar completed={progress} labelSize={!progress ? '0' : '0.75rem' }/>
             </div>
             {isNewTodo && <div>
                 <input type="text" placeholder="New Todo" ref={newTodoInputRef} onChange={e => setNewTodo(e.target.value)} />
