@@ -41,6 +41,10 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
 
     }
 
+    useEffect(() => {
+        fetchUserCoords()
+    }, [])
+
 
     return (
         <div className="input-loc" >
