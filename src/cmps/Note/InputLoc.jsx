@@ -46,7 +46,7 @@ export default ({ onAddLoc, setNoteHeader }) => {
                     </div>
                 )
             })}
-            {selectedLoc && <div style={{ height: '30vh', width: '30vh' }}>
+            {selectedLoc && <div style={{ height: '30vh', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyDGBQTVrw0MAb3SQ9UbI1sMEz9UNedEXzA' }}
                     defaultCenter={selectedLoc}
