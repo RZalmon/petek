@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { DebounceInput } from 'react-debounce-input';
 
@@ -12,8 +12,13 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
 
     const [locs, setLocs] = useState([]);
     const [selectedLoc, setSelectedLoc] = useState(null)
+    const addressInputRef = createRef();
 
     const searchLoc = async (queryStr) => {
+        if (!queryStr) {
+            setLocs([])
+            return
+        }
         let locations = await MapService.searchLocs(queryStr)
         setLocs(locations)
     }
@@ -41,6 +46,12 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
 
     }
 
+    const saveNoteLoc = () => {
+        handleSubmit()
+        setSelectedLoc(null)
+        addressInputRef.current.value = ''
+    }
+
 
     return (
         <div className="input-loc" >
@@ -52,6 +63,7 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
                 type="text"
                 placeholder="Search Location"
                 onChange={e => searchLoc(e.target.value)}
+                ref={addressInputRef}
             />
             <i onClick={() => fetchUserCoords()}><GpsIcon /></i>
             {!!locs.length && locs.map(loc => {
@@ -65,6 +77,7 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyDGBQTVrw0MAb3SQ9UbI1sMEz9UNedEXzA' }}
                     center={selectedLoc}
+                    distanceToMouse={() => { }}
                     yesIWantToUseGoogleMapApiInternal
                     defaultZoom={18}>
                     <PinIcon
@@ -73,7 +86,7 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
                     />
                 </GoogleMapReact>
             </div>}
-            {noteData && <i onClick={() => handleSubmit()}><SaveIcon /></i>}
+            {noteData && <i onClick={() => saveNoteLoc()}><SaveIcon /></i>}
         </div>
     )
 }
