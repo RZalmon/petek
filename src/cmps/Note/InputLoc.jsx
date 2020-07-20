@@ -65,7 +65,6 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
                 debounceTimeout={500}
                 type="text"
                 placeholder="Search Location"
-                onChange={e => searchLoc(e.target.value)}
                 ref={addressInputRef}
             />
             <i onClick={() => fetchUserCoords()}><GpsIcon /></i>

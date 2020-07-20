@@ -8,7 +8,7 @@ export default ({ note }) => {
         <div className="note-loc">
             {note.header && <h4>{note.header}</h4>}
             {note.data.name && <h6>{note.data.name}</h6>}
-            <div style={{ height: '30vh', width: '100%' }}>
+           {note && <div style={{ height: '30vh', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyDGBQTVrw0MAb3SQ9UbI1sMEz9UNedEXzA' }}
                     center={note.data.coords}
@@ -19,7 +19,7 @@ export default ({ note }) => {
                         lng={note.data.coords.lng}
                     />
                 </GoogleMapReact>
-            </div>
+            </div>}
         </div>
     )
 }

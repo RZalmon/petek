@@ -12,8 +12,10 @@ class ContactPage extends Component {
     }
 
     componentDidMount() {
+        console.log('balls');
         // this.loadContacts()
     }
+    
 
     onMoveToRoom = (ev,roomId) => {   
         console.log(ev);    

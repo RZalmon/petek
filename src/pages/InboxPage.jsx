@@ -33,6 +33,7 @@ const InboxPage = (props) => {
 
 
 
+
   return (
     (!user) ? <h1>Inbox is empty</h1> :
       <div>

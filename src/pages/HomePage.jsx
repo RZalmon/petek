@@ -75,6 +75,8 @@ class HomePage extends Component {
     return name.charAt(0).toUpperCase() + name.slice(1);
   };
 
+
+
   render() {
     const { user, contacts } = this.props;
     const { isLoading } = this.state
