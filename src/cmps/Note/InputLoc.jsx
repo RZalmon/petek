@@ -76,20 +76,24 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
                     </div>
                 )
             })}
+            {/* {noteData.name && <h6>{noteData.name}</h6>} */}
             {selectedLoc && <div style={{ height: '30vh', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyDGBQTVrw0MAb3SQ9UbI1sMEz9UNedEXzA' }}
                     center={selectedLoc}
                     distanceToMouse={() => { }}
                     yesIWantToUseGoogleMapApiInternal
-                    defaultZoom={18}>
+                    defaultZoom={18}
+                    >
                     <PinIcon
                         lat={selectedLoc.lat}
                         lng={selectedLoc.lng}
+                        text="Marker"
                     />
                 </GoogleMapReact>
             </div>}
             {noteData && <i onClick={() => saveNoteLoc()}><SaveIcon /></i>}
+            <button onClick={() => console.log('noteData:', noteData)}>Test</button>
         </div>
     )
 }
