@@ -11,10 +11,10 @@ function getById(filterBy) {
     const queryParams = new URLSearchParams();
     if (filterBy) {
         for (const property in filterBy) {
-            if (filterBy[property]){
+            if (filterBy[property]) {
                 queryParams.set(property, filterBy[property])
             }
-        } 
+        }
         return HttpService.get(`room?${queryParams}`);
     }
 }
@@ -45,11 +45,18 @@ async function save(room) {
 }
 
 
+async function handleForbiddenUser(userId, roomId) {
+    const isForbidden = HttpService.get(`room/${roomId}/validate`, { userId, roomId })
+    return isForbidden
+}
+
+
 export const RoomService = {
     query,
     getById,
     save,
     remove,
+    handleForbiddenUser
 }
 
 

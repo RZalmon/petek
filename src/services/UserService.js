@@ -62,7 +62,6 @@ async function updateImgAtContacts(userId, imgUrl) {
 }
 
 
-
 function getMinimalUser(_id, imgUrl) {
     return {
         _id,

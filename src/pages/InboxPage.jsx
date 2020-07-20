@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { updateUser } from '../actions/UserActions';
@@ -9,13 +9,13 @@ import SocketService from '../services/SocketService'
 import NotificationList from '../cmps/Notification/NotificationList';
 
 const InboxPage = (props) => {
-  
+
   const { user } = props
 
   const onApprove = (notification) => {
-    
+
     onDeleteNotification(notification)
-    SocketService.emit("approve", { notification,user });
+    SocketService.emit("approve", { notification, user });
 
   }
   const onDecline = (notification) => {
@@ -28,11 +28,17 @@ const InboxPage = (props) => {
       currNotification => currNotification._id === notification._id
     );
     user.notifications.splice(idx, 1);
-      props.updateUser(user)
+    props.updateUser(user)
   }
 
+  const handleForbiddenUser = () => {
+    if(props.match.params.id !== user._id) props.history.push('/')
+  }
 
-
+  useEffect(() => {
+    handleForbiddenUser()
+  }, [])
+  
 
   return (
     (!user) ? <h1>Inbox is empty</h1> :

@@ -22,6 +22,7 @@ import InputTodo from '../cmps/Note/InputTodo'
 import InputLoc from '../cmps/Note/InputLoc'
 
 import { UserService } from '../services/UserService';
+import { RoomService } from '../services/RoomService';
 
 const BoardPage = (props) => {
     const [noteType, setNoteType] = useState('');
@@ -30,6 +31,7 @@ const BoardPage = (props) => {
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
     const [filterBy, setfilterBy] = useState('');
+    if (props.room) var { notes } = props.room
 
 
     const newNote = {
@@ -56,8 +58,6 @@ const BoardPage = (props) => {
 
 
     const saveRoomChanges = async () => {
-        console.log('**Props.room**', props.room);
-        console.log('**props.user._id**', props.user._id);
         await props.saveRoom(props.room)
         SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
 
@@ -124,10 +124,23 @@ const BoardPage = (props) => {
         SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
     }
 
+    const handleForbiddenUser = async () => {
+        const { user, room } = props
+        console.log('ROOM:', room._id);
+        console.log('USER:', user._id);
+        let isForbidden = await RoomService.handleForbiddenUser(user._id, room._id)
+        console.log('is Forbidden:', isForbidden);
+        // if (isForbidden) props.history.push('/')
+    }
+
     useEffect(() => {
         loadRoom()
         return () => { props.resetCurrRoom() };
     }, []);
+
+    useEffect(() => {
+        handleForbiddenUser()
+    }, [props.room]);
 
     useEffect(() => {
         if ((noteData && noteType === 'NoteImg') ||
@@ -142,7 +155,7 @@ const BoardPage = (props) => {
 
 
 
-    if (props.room) var { notes } = props.room
+    // if (props.room) var { notes } = props.room
 
 
 
