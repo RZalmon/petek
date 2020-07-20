@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { MDBInput } from "mdbreact";
+import Loading from "../cmps/Loading";
 
 import Swal from 'sweetalert2'
 
@@ -24,7 +25,8 @@ class SignUp extends Component {
       imgUrl: '',
     },
     isSignUp: false,
-    isLoading: false
+    isLoading: false,
+    isDone:false
   }
 
   componentDidMount() {
@@ -83,7 +85,7 @@ class SignUp extends Component {
 
   onHandleSubmit = async (ev) => {
     ev.preventDefault();
-
+    this.setState({ isDone: true })
     this.state.isSignUp ?
       await this.props.signUp({ ...this.state.newUser })
       : await this.props.login({ ...this.state.newUser })
@@ -91,36 +93,38 @@ class SignUp extends Component {
     if (!this.props.user) {
       Swal.fire({
         title: 'Wrong password or Username.',
-      width: 300,
+        width: 300,
         confirmButtonText: "Say what?",
         confirmButtonColor: "yellow",
         padding: '1em',
         background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
         backdrop: `
-          rgba(0,0,123,0.4)
-          url("https://sweetalert2.github.io/images/nyan-cat.gif")
-          left top
-          no-repeat
+        rgba(0,0,123,0.4)
+        url("https://sweetalert2.github.io/images/nyan-cat.gif")
+        left top
+        no-repeat
         `
       })
       this.props.history.push("/signup")
       this.resetInput()
+      this.setState({ isDone: false })
       return
     }
     this.connectSockets(this.props.user._id)
     this.props.history.push("/")
+
   }
 
 
 
   render() {
-    const { isSignUp, isLoading } = this.state
+    const { isSignUp, isLoading, isDone } = this.state
     const { imgUrl } = this.state.newUser
     return (
+      isDone ? <Loading/> :  
       <div className="signup-form">
         <form onSubmit={this.onHandleSubmit}>
-          {!isSignUp && <h1>Login</h1>}
-          {isSignUp && <h1>SignUp</h1>}
+          {isSignUp ? <h1>SignUp</h1> :<h1>Login</h1> }
           {isSignUp && <AvatarEdit onUploadImg={this.onUploadImg} imgUrl={imgUrl} isLoading={isLoading} />}
           {isSignUp && <MDBInput label="Full Name" name="fullName" value={this.state.newUser.fullName || ''} onChange={this.onChangeHandler} />}
           <MDBInput label="UserName" type="text" name="userName" value={this.state.newUser.userName || ''} onChange={this.onChangeHandler} />
