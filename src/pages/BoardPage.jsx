@@ -30,7 +30,7 @@ const BoardPage = (props) => {
     const newNote = {
         header: noteHeader,
         data: noteData,
-        type: noteType,
+        type: noteType
     }
     const cmps = {
         InputText,
@@ -101,6 +101,7 @@ const BoardPage = (props) => {
         let isValid = await RoomService.checkIsValidUser(user._id, room._id)
         isValid ? setIsValidUser(true) : props.history.push('/')
     }
+  
     useEffect(() => {
         loadRoom()
         return () => { props.resetCurrRoom() };
@@ -117,6 +118,11 @@ const BoardPage = (props) => {
     useEffect(() => {
         loadRoom()
     }, [filterBy]);
+
+
+
+
+
     return (
         <div className="board-page">
             {(isValidUser && notes) ? <div className="note-add">
