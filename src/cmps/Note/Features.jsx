@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-// import emptyStar from '../assets/svg/empty-star.svg'
-// import star from '../assets/svg/star.svg'
-// import colorPallete from '../assets/svg/paint.svg'
 
-import StarIcon from './icons/StarIcon'
-import CircleIcon from './icons/CircleIcon'
-import ColorPalleteIcon from './icons/ColorPaletteIcon'
+import StarIcon from '../icons/StarIcon'
+import CircleIcon from '../icons/CircleIcon'
+import ColorPalleteIcon from '../icons/ColorPaletteIcon'
 
 export default ({ togglePinned, note, user, setNoteColor }) => {
     const [isPalleteOpen, setIsPalleteOpen] = useState(false)
