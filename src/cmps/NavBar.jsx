@@ -20,7 +20,7 @@ export default (props) => {
   
 
   return (
-     <nav className="NavBar">
+     <nav className="main-navbar">
         <Link to={`/`} className="home-link" >
         <img src={logo} alt="logo" className="logo"/>
         </Link>

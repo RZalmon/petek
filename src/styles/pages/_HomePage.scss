@@ -1,0 +1,16 @@
+.home-page {
+    .mobile {
+        @include for-normal-layout {
+            display: none;
+        }
+    }
+
+    .desktop {
+        @include for-mini-mobile-layout {
+            display: none;
+        }
+        @include for-normal-layout {
+            display: block;
+        }
+    }
+}

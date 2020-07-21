@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Avatar from 'react-avatar';
-
+import ContactPage from '../pages/ContactPage'
+import BoardPage from '../pages/BoardPage'
+ 
 import { getUser,updateUser } from '../actions/UserActions';
 import { loadContacts } from '../actions/ContactActions';
 
@@ -25,6 +27,10 @@ class HomePage extends Component {
     this.props.getUser()
     if (!this.props.user) this.props.history.push("/signup")
     this.loadContacts()
+  }
+
+  componentDidUpdate () {
+    console.log('this.props', this.props);
   }
 
   loadContacts = async () => {
@@ -78,20 +84,28 @@ class HomePage extends Component {
 
 
   render() {
-    const { user, contacts } = this.props;
+    const { user, contacts, room } = this.props;
     const { isLoading } = this.state
 
     return (
       <div>
         {user &&
           <div className="home-page">
+            <div className="mobile">
             {user.userName && <h2>Hi There {this.capitalize(user.userName)}</h2>}
             <AvatarEdit imgUrl={user.imgUrl} onUploadImg={this.onUploadImg} isLoading={isLoading} />
             <h6>Let's add contacts veze</h6>
             <Filter filterBy={this.state.filterBy} onFilter={this.onFilterHandler} />
             {contacts && <ContactList onMoveToRoom={this.onMoveToRoom} contacts={contacts} onAddFriend={this.onAddFriend} loggedinUser={user} />}
-          </div>
-        }
+            </div>
+        <div className="desktop">
+        <ContactPage/>
+        {room && <section className="board-page-desktop">
+        <BoardPage/>
+        </section>}
+        </div>
+        </div>
+      }
       </div>
     )
   }
@@ -101,6 +115,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.loggedinUser,
     contacts: state.contact.contacts,
+    room:state.room.currRoom
   };
 };
 

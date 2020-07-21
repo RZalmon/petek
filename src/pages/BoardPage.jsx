@@ -40,7 +40,12 @@ const BoardPage = (props) => {
         InputLoc
     }
     const InputType = cmps[noteInputType];
+
     const loadRoom = async () => {
+        if(props.room){
+          checkIsValidUser()
+          return  
+        } 
         const roomId = props.match.params.id;
         await props.loadRoomById({ term: filterBy.term, roomId });
     }
@@ -73,7 +78,7 @@ const BoardPage = (props) => {
         newNote.createdAt = Date.now()    //maybe server side should handle it
         let minimalUser = UserService.getMinimalUser(user._id, user.imgUrl)
         newNote.createdBy = minimalUser
-        const friend = user.friends.find(currFriend => currFriend.roomId === props.match.params.id)
+        const friend = user.friends.find(currFriend => currFriend.roomId === !props.room._id ? props.match.params.id : props.room._id  )
         props.room.notes.unshift(newNote)
         props.saveRoom(props.room)
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
@@ -126,6 +131,7 @@ const BoardPage = (props) => {
     return (
         <div className="board-page">
             {(isValidUser && notes) ? <div className="note-add">
+                <h1>balls</h1>
                 <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
                 {noteType && <InputType
                     isMarkerShown={true}
@@ -139,7 +145,7 @@ const BoardPage = (props) => {
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData} />
             </div> : <Loading />}
             {(isValidUser && notes) && <div>
-                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} />}
+                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType}/>}
             </div>}
         </div>
     );

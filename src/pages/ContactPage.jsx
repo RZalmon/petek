@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 import { loadContacts } from '../actions/ContactActions';
+import { loadRoomById } from '../actions/RoomActions';
 
 import Filter from '../cmps/Filter'
 import ContactList from '../cmps/ContactList'
@@ -11,17 +12,18 @@ class ContactPage extends Component {
         filterBy: { term: '', roomId: '' }
     }
 
-    componentDidMount() {
-        console.log('balls');
-        // this.loadContacts()
-    }
-    
 
-    onMoveToRoom = (ev,roomId) => {   
+
+    onMoveToRoom = async (ev,roomId) => {   
         console.log(ev);    
         ev.stopPropagation()
+        if(!this.props.history){
+        await this.props.loadRoomById({  roomId });
+        return
+        } 
         this.props.history.push(`/board/${roomId}`);
     }
+
     loadContacts = async () => {
         await this.props.loadContacts(this.state.filterBy);
     };
@@ -75,6 +77,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     loadContacts,
+    loadRoomById
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactPage);
