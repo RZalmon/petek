@@ -4,6 +4,7 @@ import { DebounceInput } from 'react-debounce-input';
 
 import { MapService } from '../../services/MapService'
 
+import PinIcon from '../../assets/svg/pin.svg'
 import SaveIcon from '../icons/SaveIcon'
 import GpsIcon from '../icons/GpsIcon'
 
@@ -21,6 +22,15 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
         let locations = await MapService.searchLocs(queryStr)
         setLocs(locations)
     }
+
+    const renderMarkers = (map, maps) => {
+        let marker = new maps.Marker({
+        position: { lat: selectedLoc.lat, lng: selectedLoc.lng},
+        map,
+        icon:PinIcon
+        });
+        return marker;
+       };
 
 
     const setLocNote = (loc) => {
@@ -65,6 +75,7 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
                 type="text"
                 placeholder="Search Location"
                 ref={addressInputRef}
+                onChange={e => searchLoc(e.target.value)}
             />
             <i onClick={() => fetchUserCoords()}><GpsIcon /></i>
             {!!locs.length && locs.map(loc => {
@@ -80,8 +91,10 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
                     bootstrapURLKeys={{ key: 'AIzaSyDGBQTVrw0MAb3SQ9UbI1sMEz9UNedEXzA' }}
                     center={selectedLoc}
                     distanceToMouse={() => { }}
-                    yesIWantToUseGoogleMapApiInternal
+                    yesIWantToUseGoogleMapApiInternals={true}
                     defaultZoom={18}
+                    onGoogleApiLoaded={({ map, maps }) => renderMarkers(map, maps)}
+
                     >
                 </GoogleMapReact>
             </div>}
