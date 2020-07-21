@@ -38,7 +38,7 @@ const BoardPage = (props) => {
     const newNote = {
         header: noteHeader,
         data: noteData,
-        type: noteType,
+        type: noteType
     }
 
     const cmps = {

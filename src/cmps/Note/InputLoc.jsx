@@ -6,7 +6,6 @@ import { MapService } from '../../services/MapService'
 
 import SaveIcon from '../icons/SaveIcon'
 import GpsIcon from '../icons/GpsIcon'
-import PinIcon from '../icons/PinIcon'
 
 export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
 
@@ -66,6 +65,7 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
                 type="text"
                 placeholder="Search Location"
                 ref={addressInputRef}
+                onChange={e => searchLoc(e.target.value)}
             />
             <i onClick={() => fetchUserCoords()}><GpsIcon /></i>
             {!!locs.length && locs.map(loc => {
@@ -84,11 +84,6 @@ export default ({ setNoteHeader, setNoteData, noteData, handleSubmit }) => {
                     yesIWantToUseGoogleMapApiInternal
                     defaultZoom={18}
                     >
-                    <PinIcon
-                        lat={selectedLoc.lat}
-                        lng={selectedLoc.lng}
-                        text="Marker"
-                    />
                 </GoogleMapReact>
             </div>}
             {noteData && <i onClick={() => saveNoteLoc()}><SaveIcon /></i>}
