@@ -45,9 +45,8 @@ async function save(room) {
 }
 
 
-async function handleForbiddenUser(userId, roomId) {
-    const isForbidden = HttpService.get(`room/${roomId}/validate`, { userId, roomId })
-    return isForbidden
+async function checkIsValidUser(userId, roomId) {
+    return HttpService.post(`room/${roomId}/validate`, { userId, roomId })
 }
 
 
@@ -56,7 +55,7 @@ export const RoomService = {
     getById,
     save,
     remove,
-    handleForbiddenUser
+    checkIsValidUser
 }
 
 

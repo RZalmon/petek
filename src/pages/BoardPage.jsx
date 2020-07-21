@@ -31,6 +31,7 @@ const BoardPage = (props) => {
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
     const [filterBy, setfilterBy] = useState('');
+    const [isValidUser, setIsValidUser] = useState(null)
     if (props.room) var { notes } = props.room
 
 
@@ -124,22 +125,19 @@ const BoardPage = (props) => {
         SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
     }
 
-    const handleForbiddenUser = async () => {
+    const checkIsValidUser = async () => {
         const { user, room } = props
-        console.log('ROOM:', room._id);
-        console.log('USER:', user._id);
-        let isForbidden = await RoomService.handleForbiddenUser(user._id, room._id)
-        console.log('is Forbidden:', isForbidden);
-        // if (isForbidden) props.history.push('/')
+        let isValid = await RoomService.checkIsValidUser(user._id, room._id)
+        isValid ? setIsValidUser(true) : props.history.push('/')
     }
-
+  
     useEffect(() => {
         loadRoom()
         return () => { props.resetCurrRoom() };
     }, []);
 
     useEffect(() => {
-        handleForbiddenUser()
+        if (props.room) checkIsValidUser()
     }, [props.room]);
 
     useEffect(() => {
@@ -155,13 +153,11 @@ const BoardPage = (props) => {
 
 
 
-    // if (props.room) var { notes } = props.room
-
 
 
     return (
         <div className="board-page">
-            {notes ? <div className="note-add">
+            {(isValidUser && notes) ? <div className="note-add">
                 <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
                 {noteType && <InputType
                     isMarkerShown={true}
@@ -174,7 +170,7 @@ const BoardPage = (props) => {
                 />}
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData} />
             </div> : <Loading />}
-            {notes && <div>
+            {(isValidUser && notes) && <div>
                 {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} />}
             </div>}
         </div>
