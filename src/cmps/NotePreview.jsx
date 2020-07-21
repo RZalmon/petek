@@ -7,7 +7,7 @@ import NoteImg from './Note/NoteImg'
 import NoteVideo from './Note/NoteVideo'
 import NoteTodo from './Note/NoteTodo'
 import NoteLoc from './Note/NoteLoc'
-import Features from '../cmps/Features'
+import Features from './Note/Features'
 
 import RemoveIcon from '../cmps/icons/RemoveIcon'
 import EditIcon from '../cmps/icons/EditIcon'

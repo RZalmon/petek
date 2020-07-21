@@ -1,47 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { DebounceInput } from 'react-debounce-input';
 
-export default class Filter extends Component {
-    state = { term: '' };
+export default ({ filterBy, setFilterBy, moveToContact, placeHolder }) => {
 
-    constructor(props) {
-        super(props);
-        this.state = { ...props.filterBy };
-    }
-
-    onChangeHandler = (ev) => {
-        
-        const { value, name } = ev.target;
-        
-        this.setState({ [name]: value }, () => {
-            this.props.onFilter({ ...this.state });
-        });
-    };
-    onKeyHandler = (ev) => {
+    const onKeyHandler = (ev) => {
         if (ev.keyCode === 13) {
             ev.preventDefault()
-            this.props.moveToContact()
+            moveToContact()
         }
     }
 
-    render() {
+    return (
+        <form>
+            <DebounceInput
+                minLength={0}
+                className="filter-input"
+                debounceTimeout={300}
+                type="text"
+                placeholder={placeHolder ? placeHolder : 'Search Contacts'}
+                onChange={e => setFilterBy({ ...filterBy, term: e.target.value })}
+                onKeyDown={onKeyHandler}
+            />
+        </form>
+    )
 
-        const {placeHolder} = this.props
-        
-        return (
-            <form>
-                <DebounceInput
-                    minLength={0}
-                    className="filter-input"
-                    debounceTimeout={300}
-                    type="text"
-                    placeholder={placeHolder ? placeHolder: 'Search Contacts'}
-                    onChange={this.onChangeHandler}
-                    name="term"
-                    value={this.state.term}
-                    onKeyDown={this.onKeyHandler}
-                     />
-            </form>
-        )
-    }
 }
