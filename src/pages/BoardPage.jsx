@@ -30,7 +30,9 @@ const BoardPage = (props) => {
     const [noteData, setNoteData] = useState('');
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
+    const [isForbidden, setIsForbidden] = useState(null);
     const [filterBy, setfilterBy] = useState('');
+
     if (props.room) var { notes } = props.room
 
 
@@ -126,9 +128,9 @@ const BoardPage = (props) => {
 
     const handleForbiddenUser = async () => {
         const { user, room } = props
-        console.log('ROOM:', room._id);
-        console.log('USER:', user._id);
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',room._id);
         let isForbidden = await RoomService.handleForbiddenUser(user._id, room._id)
+        setIsForbidden(isForbidden)
         console.log('is Forbidden:', isForbidden);
         // if (isForbidden) props.history.push('/')
     }
@@ -139,6 +141,7 @@ const BoardPage = (props) => {
     }, []);
 
     useEffect(() => {
+      if(props.room)
         handleForbiddenUser()
     }, [props.room]);
 

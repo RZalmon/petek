@@ -19,7 +19,6 @@ export const HttpService =  {
         return ajax(endpoint, 'POST', data)
     },
     put(endpoint, data){
-        console.log('http service data:', data);
         return ajax(endpoint, 'PUT', data)
     },
     delete(endpoint, data){

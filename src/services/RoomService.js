@@ -46,6 +46,7 @@ async function save(room) {
 
 
 async function handleForbiddenUser(userId, roomId) {
+    console.log('roomId in service fronttttttttttttttttttttt',roomId);
     const isForbidden = HttpService.get(`room/${roomId}/validate`, { userId, roomId })
     return isForbidden
 }
