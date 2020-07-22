@@ -4,13 +4,19 @@
             display: none;
         }
     }
-
     .desktop {
         @include for-mini-mobile-layout {
             display: none;
         }
         @include for-normal-layout {
-            display: block;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+        .contact-page-desktop{
+            width: 33%;
+        }
+        .board-page-desktop{
+            width: 67%;
         }
     }
 }

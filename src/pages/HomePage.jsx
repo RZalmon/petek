@@ -62,6 +62,7 @@ const HomePage = (props) => {
 
   useEffect(() => {
     props.getUser()
+    console.log('balsssssssssssssss@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
     if (!props.user) props.history.push("/signup")
     loadContacts()
   }, [])
@@ -85,7 +86,9 @@ const HomePage = (props) => {
             {contacts && <ContactList onMoveToRoom={onMoveToRoom} contacts={contacts} onAddFriend={onAddFriend} loggedinUser={user} />}
             </div>
         <div className="desktop">
+          <section className="contact-page-desktop">
         <ContactPage/>
+          </section>
         {room && <section className="board-page-desktop">
         <BoardPage/>
         </section>}

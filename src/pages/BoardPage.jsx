@@ -131,7 +131,6 @@ const BoardPage = (props) => {
     return (
         <div className="board-page">
             {(isValidUser && notes) ? <div className="note-add">
-                <h1>balls</h1>
                 <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
                 {noteType && <InputType
                     isMarkerShown={true}
