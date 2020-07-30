@@ -24,7 +24,7 @@ const BoardPage = (props) => {
     const [noteData, setNoteData] = useState('');
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
-    const [filterBy, setfilterBy] = useState('');
+    const [filterBy, setFilterBy] = useState('');
     const [isValidUser, setIsValidUser] = useState(null)
     if (props.room) var { notes } = props.room
     const newNote = {
@@ -69,7 +69,7 @@ const BoardPage = (props) => {
     //     setIsUploading(true)
     // }
     const onFilterHandler = (filterBy) => {
-        setfilterBy(filterBy)
+        setFilterBy(filterBy)
     };
     const onHandleSubmit = async (ev) => {
         const { user } = props
@@ -120,7 +120,9 @@ const BoardPage = (props) => {
             onHandleSubmit()
         }
     }, [isUploading]);
+
     useEffect(() => {
+        console.log(filterBy.term);
         loadRoom()
     }, [filterBy]);
 
@@ -131,7 +133,7 @@ const BoardPage = (props) => {
     return (
         <div className="board-page">
             {(isValidUser && notes) ? <div className="note-add">
-                <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
+                <Filter filterBy={filterBy} setFilterBy={setFilterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
                 {noteType && <InputType
                     isMarkerShown={true}
                     onUploadImg={onUploadImg}
