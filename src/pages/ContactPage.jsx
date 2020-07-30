@@ -24,7 +24,8 @@ const ContactPage = (props) => {
     }
 
     const loadContacts = async () => {
-        await props.loadContacts(filterBy);
+        console.log(props);
+        await props.loadContacts(filterBy, user);
     };
 
     const handleKeyPress = () => {
@@ -46,7 +47,7 @@ const ContactPage = (props) => {
                     filterBy={filterBy}
                     setFilterBy={setFilterBy}
                     moveToContact={handleKeyPress} />
-                {!!contacts && <ContactList onMoveToRoom={onMoveToRoom} loggedinUser={user} contacts={user.friends}></ContactList>}
+                {!!contacts && <ContactList onMoveToRoom={onMoveToRoom} loggedinUser={user} contacts={contacts.length ? contacts : user.friends}></ContactList>}
             </div>
             }
         </div>
