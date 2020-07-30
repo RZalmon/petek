@@ -24,7 +24,7 @@ const BoardPage = (props) => {
     const [noteData, setNoteData] = useState('');
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
-    const [filterBy, setfilterBy] = useState('');
+    const [filterBy, setFilterBy] = useState('');
     const [isValidUser, setIsValidUser] = useState(null)
     if (props.room) var { notes } = props.room
     const newNote = {
@@ -42,13 +42,16 @@ const BoardPage = (props) => {
     const InputType = cmps[noteInputType];
 
     const loadRoom = async () => {
+        const roomId = props.room ? props.room._id : props.match.params.id;
         if(props.room){
           checkIsValidUser()
-          return  
+           await props.loadRoomById({ term: filterBy.term, roomId })
+           return  
         } 
-        const roomId = props.match.params.id;
         await props.loadRoomById({ term: filterBy.term, roomId });
     }
+
+    
     const saveRoomChanges = async () => {
         await props.saveRoom(props.room)
         SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
@@ -69,7 +72,7 @@ const BoardPage = (props) => {
     //     setIsUploading(true)
     // }
     const onFilterHandler = (filterBy) => {
-        setfilterBy(filterBy)
+        setFilterBy(filterBy)
     };
     const onHandleSubmit = async (ev) => {
         const { user } = props
@@ -131,7 +134,11 @@ const BoardPage = (props) => {
     return (
         <div className="board-page">
             {(isValidUser && notes) ? <div className="note-add">
-                <Filter filterBy={filterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
+                <Filter 
+                 filterBy={filterBy}
+                 setFilterBy={setFilterBy}
+                 onFilter={onFilterHandler} 
+                 placeHolder={"Search for notes"} />
                 {noteType && <InputType
                     isMarkerShown={true}
                     onUploadImg={onUploadImg}

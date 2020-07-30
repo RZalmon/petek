@@ -22,6 +22,7 @@ const ContactPage = (props) => {
         } 
         props.history.push(`/board/${roomId}`);
     }
+
     const loadContacts = async () => {
         await props.loadContacts(filterBy);
     };
