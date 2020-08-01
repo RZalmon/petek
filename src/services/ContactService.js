@@ -53,14 +53,23 @@ var contacts = [{
 //     })
 // }
 function query(filterBy, user) {
-    if (filterBy.term) {
+    if (filterBy.term && user) {
         var filteredFriends = user.friends.filter(friend => {
             return friend.userName.includes(filterBy.term) || friend.fullName.includes(filterBy.term)
         })
         return filteredFriends.length ? filteredFriends : ''
     }
-    return HttpService.get(`user`);
-    // return HttpService.get('user');
+    const queryParams = new URLSearchParams();
+        if (filterBy) {
+            for (const property in filterBy) {
+                if (filterBy[property]) {
+                    queryParams.set(property, filterBy[property])
+                }
+            }
+            console.log(queryParams);
+            return HttpService.get(`user?${queryParams}`);
+        }
+
 }
 // function query(filterBy, user) {
 //     console.log(filterBy);
