@@ -42,13 +42,16 @@ const BoardPage = (props) => {
     const InputType = cmps[noteInputType];
 
     const loadRoom = async () => {
-        if(props.room){
-          checkIsValidUser()
-          return  
-        } 
-        const roomId = props.match.params.id;
+        const roomId = props.room ? props.room._id : props.match.params.id;
+        if (props.room) {
+            checkIsValidUser()
+            await props.loadRoomById({ term: filterBy.term, roomId })
+            return
+        }
         await props.loadRoomById({ term: filterBy.term, roomId });
     }
+
+
     const saveRoomChanges = async () => {
         await props.saveRoom(props.room)
         SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
@@ -74,11 +77,11 @@ const BoardPage = (props) => {
     const onHandleSubmit = async (ev) => {
         const { user } = props
         if (ev) ev.preventDefault()
-        newNote._id = UtilService    .makeId(24)
+        newNote._id = UtilService.makeId(24)
         newNote.createdAt = Date.now()    //maybe server side should handle it
         let minimalUser = UserService.getMinimalUser(user._id, user.imgUrl)
         newNote.createdBy = minimalUser
-        const friend = user.friends.find(currFriend => currFriend.roomId === !props.room._id ? props.match.params.id : props.room._id  )
+        const friend = user.friends.find(currFriend => currFriend.roomId === !props.room._id ? props.match.params.id : props.room._id)
         props.room.notes.unshift(newNote)
         props.saveRoom(props.room)
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
@@ -106,7 +109,7 @@ const BoardPage = (props) => {
         let isValid = await RoomService.checkIsValidUser(user._id, room._id)
         isValid ? setIsValidUser(true) : props.history.push('/')
     }
-  
+
     useEffect(() => {
         loadRoom()
         return () => { props.resetCurrRoom() };
@@ -133,7 +136,11 @@ const BoardPage = (props) => {
     return (
         <div className="board-page">
             {(isValidUser && notes) ? <div className="note-add">
-                <Filter filterBy={filterBy} setFilterBy={setFilterBy} onFilter={onFilterHandler} placeHolder={"Search for notes"} />
+                <Filter
+                    filterBy={filterBy}
+                    setFilterBy={setFilterBy}
+                    onFilter={onFilterHandler}
+                    placeHolder={"Search for notes"} />
                 {noteType && <InputType
                     isMarkerShown={true}
                     onUploadImg={onUploadImg}
@@ -146,7 +153,7 @@ const BoardPage = (props) => {
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData} />
             </div> : <Loading />}
             {(isValidUser && notes) && <div>
-                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType}/>}
+                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} />}
             </div>}
         </div>
     );

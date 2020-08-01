@@ -5,8 +5,7 @@ import { HttpService } from './HttpService.js'
 
 const CONTACT_KEY = 'contacts';
 
-var contacts = [
-    {
+var contacts = [{
         "_id": "aa56640269f443a5d64b32ca",
         "fullName": "Eyal Golan",
         "userName": "Eyalush",
@@ -53,19 +52,33 @@ var contacts = [
 //         contactsToReturn ? resolve(sort(contactsToReturn)) : reject(`Contacts not found!`)
 //     })
 // }
-function query(filterBy) {
-    // if (!filterBy.term) return []
-    const queryParams = new URLSearchParams();
-    if (filterBy) {
-        for (const property in filterBy) {
-            if (filterBy[property]) {
-                queryParams.set(property, filterBy[property])
-            }
-        }
-        return HttpService.get(`user?${queryParams}`);
+function query(filterBy, user) {
+    if (filterBy.term) {
+        filterBy.term = filterBy.term.toLowerCase()
+        var filteredFriends = user.friends.filter(friend => {
+            return friend.userName.toLowerCase().includes(filterBy.term) || friend.fullName.toLowerCase().includes(filterBy.term)
+        })
+        return filteredFriends.length ? filteredFriends : ''
     }
+    return HttpService.get(`user`);
     // return HttpService.get('user');
 }
+// function query(filterBy, user) {
+//     console.log(filterBy);
+//     console.log(user);
+//     // if (!filterBy.term) return []
+//     const queryParams = new URLSearchParams();
+//     if (filterBy) {
+//         for (const property in filterBy) {
+//             if (filterBy[property]) {
+//                 queryParams.set(property, filterBy[property])
+//             }
+//         }
+//         console.log(queryParams);
+//         return HttpService.get(`user?${queryParams}`);
+//     }
+//     // return HttpService.get('user');
+// }
 
 
 
@@ -104,7 +117,7 @@ function _addContact(contact) {
     return new Promise((resolve, reject) => {
         contact._id = UtilService.makeId()
         contacts.push(contact)
-        // console.log('(ADD)Contacts after push ', contacts)
+            // console.log('(ADD)Contacts after push ', contacts)
         StorageService.save(CONTACT_KEY, contacts)
         resolve(contact)
     })
