@@ -55,20 +55,20 @@ var contacts = [{
 function query(filterBy, user) {
     if (filterBy.term && user) {
         var filteredFriends = user.friends.filter(friend => {
-            return friend.userName.includes(filterBy.term) || friend.fullName.includes(filterBy.term)
+            return friend.userName.toLowerCase().includes(filterBy.term.toLowerCase()) || friend.fullName.toLowerCase().includes(filterBy.term.toLowerCase())
         })
         return filteredFriends.length ? filteredFriends : ''
     }
     const queryParams = new URLSearchParams();
-        if (filterBy) {
-            for (const property in filterBy) {
-                if (filterBy[property]) {
-                    queryParams.set(property, filterBy[property])
-                }
+    if (filterBy) {
+        for (const property in filterBy) {
+            if (filterBy[property]) {
+                queryParams.set(property, filterBy[property])
             }
-            console.log(queryParams);
-            return HttpService.get(`user?${queryParams}`);
         }
+        console.log(queryParams);
+        return HttpService.get(`user?${queryParams}`);
+    }
 
 }
 // function query(filterBy, user) {

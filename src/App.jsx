@@ -90,7 +90,7 @@ const App = (props) => {
   return (
     <div className="App">
       <Router history={history}>
-        <NavBar user={props.user} />
+        <NavBar user={loggedinUser} />
         <RoutePage onConnectSocket={connectSockets} />
       </Router>
     </div>

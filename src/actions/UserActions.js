@@ -8,8 +8,8 @@ export function signUp(user) {
 }
 export function login(user) {
     return async dispatch => {
-        const newUser = await UserService.login(user);                
-        dispatch({ type: 'SET_USER', user:newUser })
+        const newUser = await UserService.login(user);
+        dispatch({ type: 'SET_USER', user: newUser })
     }
 }
 export function logout() {
@@ -23,9 +23,21 @@ export function logout() {
 export function getUser() {
     return async dispatch => {
         const user = await UserService.getLoggedinUser();
+        console.log('user in actions');
+        dispatch({ type: 'GET_USER', user })
+        // const latestUser = await UserService.getUpdatedUser();
+        // dispatch({ type: 'GET_USER', latestUser })
+    }
+}
+
+export function getUpdatedUser() {
+    return async dispatch => {
+        const user = await UserService.getUpdatedUser();
+        console.log('user in actions');
         dispatch({ type: 'GET_USER', user })
     }
 }
+
 export function updateUser(user) {
     console.log('@@@user in actions@@@', user);
     return async dispatch => {

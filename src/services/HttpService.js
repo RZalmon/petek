@@ -6,30 +6,29 @@ var axios = Axios.create({
     withCredentials: true
 });
 
-const BASE_URL = process.env.NODE_ENV !== 'development'
-    ? '/api/'
-    : '//localhost:3030/api/'
+const BASE_URL = process.env.NODE_ENV !== 'development' ?
+    '/api/' :
+    '//localhost:3030/api/'
 
 
-export const HttpService =  {
-    get(endpoint, data){
+export const HttpService = {
+    get(endpoint, data) {
         return ajax(endpoint, 'GET', data)
     },
-    post(endpoint, data){
+    post(endpoint, data) {
         return ajax(endpoint, 'POST', data)
     },
-    put(endpoint, data){
+    put(endpoint, data) {
         return ajax(endpoint, 'PUT', data)
     },
-    delete(endpoint, data){
+    delete(endpoint, data) {
         return ajax(endpoint, 'DELETE', data)
     }
 }
 
 
-async function ajax(endpoint, method='get', data=null) {
+async function ajax(endpoint, method = 'get', data = null) {
     try {
-        console.log('httpservice data:', data);
         const res = await axios({
             method,
             url: `${BASE_URL}${endpoint}`,
@@ -39,9 +38,8 @@ async function ajax(endpoint, method='get', data=null) {
     } catch (err) {
         if (err.response.status === 401) {
             return false
-            // throw new Error('error:  http.service page')
-            // router.push('/');
+                // throw new Error('error:  http.service page')
+                // router.push('/');
         }
     }
 }
-

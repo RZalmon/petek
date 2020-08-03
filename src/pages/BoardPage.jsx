@@ -26,7 +26,9 @@ const BoardPage = (props) => {
     const [isUploading, setIsUploading] = useState(false);
     const [filterBy, setFilterBy] = useState('');
     const [isValidUser, setIsValidUser] = useState(null)
+
     if (props.room) var { notes } = props.room
+    
     const newNote = {
         header: noteHeader,
         data: noteData,
@@ -91,8 +93,8 @@ const BoardPage = (props) => {
         setIsUploading(false)
     }
     const togglePinned = (note) => {
-        let choosenNote = props.user.pinnedNotes.find(id => note._id === id)
-        !choosenNote ? props.user.pinnedNotes.push(note._id) : props.user.pinnedNotes.splice(note._id, 1)
+        var choosenNoteIdx = props.user.pinnedNotes.findIndex(id => note._id === id)
+        choosenNoteIdx === -1 ? props.user.pinnedNotes.push(note._id) : props.user.pinnedNotes.splice(choosenNoteIdx, 1)
         let idx = props.room.notes.findIndex(currNote => note._id === currNote._id)
         props.room.notes.splice(idx, 1, note)
         props.saveRoom(props.room)

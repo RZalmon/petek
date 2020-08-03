@@ -13,10 +13,11 @@ export default (props) => {
   const [isClicked, toggleClick] = useState(false)
    
   useEffect(() => {
+    console.log(props);
     return () => {
       toggleClick(false)
     };
-  }, [isClicked])
+  }, [isClicked, user])
   
 
   return (

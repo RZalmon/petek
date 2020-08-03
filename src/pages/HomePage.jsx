@@ -19,7 +19,7 @@ import CloudinaryService from '../../src/services/CloudinaryService'
 const HomePage = (props) => {
   const [filterBy, setFilterBy] = useState({ term: '' })
   const [isLoading, setIsLoading] = useState(false)
-  const { user, contacts,room } = props;
+  const { user, contacts,room,getUpdatedUser } = props;
 
 
   const loadContacts = async () => {
@@ -68,7 +68,6 @@ const HomePage = (props) => {
   }, [])
 
 
-
   useEffect(() => {
     loadContacts()
   }, [filterBy])
@@ -112,6 +111,7 @@ const mapDispatchToProps = {
   getUser,
   updateUser,
   loadContacts,
+  
 
 };
 

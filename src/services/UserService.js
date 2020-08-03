@@ -8,10 +8,14 @@ const KEY = 'user';
 
 async function getLoggedinUser() {
     var user = StorageService.load(KEY);
-    if (!user) return null
-    user = await HttpService.get(`user/${user._id}`)
-    return user
+    return !user ? null : await HttpService.get(`user/${user._id}`)
 }
+
+// async function getUpdatedUser() {
+//     var user = StorageService.load(KEY);
+//     return
+
+
 
 async function getById(id) {
     const user = await HttpService.get(`user/${id}`)
@@ -77,5 +81,5 @@ export const UserService = {
     logout,
     getMinimalUser,
     updateImgAtContacts,
-    getLoggedinUser
+    getLoggedinUser,
 }
