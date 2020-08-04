@@ -29,9 +29,20 @@
           console.log(err);
         });
       });
+      
     } else {
       console.log('Service Worker is not supported by browser.');
     }
+    //PUSH
+    async function subscribe(){
+      let sw = await navigator.serviceWorker.ready;
+      let push =  await sw.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: 'BC0eDE92338RKYDyfdZvVpgOHRdWvYosUIJKNPv9OQnM2RkEtDt-BR2tZRqDd1GkdQ_8ZxdmO3W-YoDnE0jpFck'
+      })
+      console.log(JSON.stringify('PUSH!!!',push))
+    }
+        //PUSHEND
   </script>
 </body>
 

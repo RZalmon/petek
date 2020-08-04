@@ -5,7 +5,6 @@ export function loadContacts(filterBy,user) {
     return async dispatch => {
         try {
             const contacts = await ContactService.query(filterBy,user);
-            console.log('contacts in actions', contacts);
             dispatch({ type: 'SET_CONTACTS', contacts })
         } catch (err) {
             console.log('ERROR', err)

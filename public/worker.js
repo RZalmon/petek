@@ -15,7 +15,11 @@ self.addEventListener('install', event => {
       })
   );
 });
-
+//PUSH
+self.addEventListener('push', () => {
+  self.registration.sendNotification('test message', {})
+})
+//PUSHEND
 // Cache and return requests
 self.addEventListener('fetch', event => {
 

@@ -24,7 +24,7 @@ const ContactPage = (props) => {
     }
 
     const loadContacts = async () => {
-        console.log(props);
+        console.log('contact page loading contacts');
         await props.loadContacts(filterBy, user);
     };
 

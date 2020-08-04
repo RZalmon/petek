@@ -111,12 +111,16 @@ const BoardPage = (props) => {
     }
 
     useEffect(() => {
-        loadRoom()
-        return () => { props.resetCurrRoom() };
+        loadRoom()//created
+        return () => { props.resetCurrRoom() }; //onDestroy
     }, []);
+
+    //watcher
     useEffect(() => {
         if (props.room) checkIsValidUser()
     }, [props.room]);
+
+    
     useEffect(() => {
         if ((noteData && noteType === 'NoteImg') ||
             noteType === 'NoteVideo') {
