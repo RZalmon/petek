@@ -1,5 +1,8 @@
 .home-page {
     .mobile {
+        .user-name{
+            text-transform: capitalize;
+        }
         @include for-normal-layout {
             display: none;
         }
@@ -15,7 +18,7 @@
         .contact-page-desktop{
             width: 33%;
         }
-        .board-page-desktop{
+        .room-page-desktop{
             width: 67%;
         }
     }

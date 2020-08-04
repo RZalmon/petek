@@ -1,0 +1,32 @@
+.signup-form{
+    padding: 5px 0px;
+    .md-form{
+        display: flex;
+        justify-content: center;
+        label{
+            margin: 10px 0 0 10%;
+        }
+        .form-control{
+            width: 80%;
+            padding-bottom: 0;
+            padding-top: 20px;
+            font-size: 25px;
+        }
+    }
+    .signup-login-btn{
+        border-radius: 10rem;
+        border: 1px solid darken($color:yellow, $amount: 5);
+        font-size: 1.2rem;
+        background-color: yellow;
+        padding: 0.6rem 1.5rem;
+        text-transform: uppercase;
+        @include hover-supported {
+            background-color: darken($color:yellow, $amount: 10);
+            transition: .5s;
+        }
+    }
+    .toggle-btn{
+        color: #03A9F4;
+        cursor: pointer;
+    }
+}

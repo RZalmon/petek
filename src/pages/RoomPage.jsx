@@ -6,7 +6,7 @@ import CloudinaryService from '../../src/services/CloudinaryService'
 import { loadRoomById, saveRoom, resetCurrRoom } from '../actions/RoomActions';
 import { updateUser } from '../actions/UserActions';
 import ButtonMenu from '../cmps/ButtonMenu'
-import NoteList from '../cmps/NoteList'
+import NoteList from '../cmps/Note/NoteList'
 import Filter from '../cmps/Filter'
 import Loading from '../cmps/Loading'
 import InputText from '../cmps/Note/InputText'
@@ -18,7 +18,7 @@ import { UserService } from '../services/UserService';
 import { RoomService } from '../services/RoomService';
 
 
-const BoardPage = (props) => {
+const RoomPage = (props) => {
     const [noteType, setNoteType] = useState('');
     const [noteHeader, setNoteHeader] = useState('');
     const [noteData, setNoteData] = useState('');
@@ -26,7 +26,9 @@ const BoardPage = (props) => {
     const [isUploading, setIsUploading] = useState(false);
     const [filterBy, setFilterBy] = useState('');
     const [isValidUser, setIsValidUser] = useState(null)
+
     if (props.room) var { notes } = props.room
+    
     const newNote = {
         header: noteHeader,
         data: noteData,
@@ -91,8 +93,8 @@ const BoardPage = (props) => {
         setIsUploading(false)
     }
     const togglePinned = (note) => {
-        let choosenNote = props.user.pinnedNotes.find(id => note._id === id)
-        !choosenNote ? props.user.pinnedNotes.push(note._id) : props.user.pinnedNotes.splice(note._id, 1)
+        var choosenNoteIdx = props.user.pinnedNotes.findIndex(id => note._id === id)
+        choosenNoteIdx === -1 ? props.user.pinnedNotes.push(note._id) : props.user.pinnedNotes.splice(choosenNoteIdx, 1)
         let idx = props.room.notes.findIndex(currNote => note._id === currNote._id)
         props.room.notes.splice(idx, 1, note)
         props.saveRoom(props.room)
@@ -138,7 +140,7 @@ const BoardPage = (props) => {
 
 
     return (
-        <div className="board-page">
+        <div className="room-page">
             {(isValidUser && notes) ? <div className="note-add">
                 <Filter
                     filterBy={filterBy}
@@ -174,4 +176,4 @@ const mapDispatchToProps = {
     resetCurrRoom,
     updateUser
 };
-export default connect(mapStateToProps, mapDispatchToProps)(BoardPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);

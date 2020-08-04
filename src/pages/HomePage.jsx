@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { getUser, updateUser } from '../actions/UserActions';
 import ContactPage from '../pages/ContactPage'
-import BoardPage from '../pages/BoardPage'
+import RoomPage from '../pages/RoomPage'
 import { loadContacts } from '../actions/ContactActions';
 
 import { AvatarEdit } from '../cmps/User/AvatarEdit'
@@ -19,7 +19,7 @@ import CloudinaryService from '../../src/services/CloudinaryService'
 const HomePage = (props) => {
   const [filterBy, setFilterBy] = useState({ term: '' })
   const [isLoading, setIsLoading] = useState(false)
-  const { user, contacts,room } = props;
+  const { user, contacts,room,getUpdatedUser } = props;
 
 
   const loadContacts = async () => {
@@ -52,21 +52,14 @@ const HomePage = (props) => {
   const onMoveToRoom = (ev, roomId) => {
     console.log(ev);
     ev.stopPropagation()
-    props.history.push(`/board/${roomId}`);
+    props.history.push(`/room/${roomId}`);
   }
-
-  const capitalize = (name) => {
-    return name.charAt(0).toUpperCase() + name.slice(1);
-  };
-
 
   useEffect(() => {
     props.getUser()
-    console.log('balsssssssssssssss@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
     if (!props.user) props.history.push("/signup")
     loadContacts()
   }, [])
-
 
 
   useEffect(() => {
@@ -79,7 +72,7 @@ const HomePage = (props) => {
         {user &&
           <div className="home-page">
             <div className="mobile">
-            {user.userName && <h2>Hi There {capitalize(user.userName)}</h2>}
+            {user.userName && <h2>Hi There <span className="user-name">{user.userName}</span></h2>}
             <AvatarEdit imgUrl={user.imgUrl} onUploadImg={onUploadImg} isLoading={isLoading} />
             <h6>Let's add contacts veze</h6>
             <Filter filterBy={filterBy} setFilterBy={setFilterBy} />
@@ -89,8 +82,8 @@ const HomePage = (props) => {
           <section className="contact-page-desktop">
         <ContactPage/>
           </section>
-        {room && <section className="board-page-desktop">
-        <BoardPage/>
+        {room && <section className="room-page-desktop">
+        <RoomPage/>
         </section>}
         </div>
         </div>
@@ -112,6 +105,7 @@ const mapDispatchToProps = {
   getUser,
   updateUser,
   loadContacts,
+  
 
 };
 

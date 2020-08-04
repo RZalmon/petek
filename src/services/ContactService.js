@@ -61,15 +61,15 @@ function query(filterBy, user) {
         return filteredFriends.length ? filteredFriends : ''
     }
     const queryParams = new URLSearchParams();
-        if (filterBy) {
-            for (const property in filterBy) {
-                if (filterBy[property]) {
-                    queryParams.set(property, filterBy[property])
-                }
+    if (filterBy) {
+        for (const property in filterBy) {
+            if (filterBy[property]) {
+                queryParams.set(property, filterBy[property])
             }
-            console.log(queryParams);
-            return HttpService.get(`user?${queryParams}`);
         }
+        console.log(queryParams);
+        return HttpService.get(`user?${queryParams}`);
+    }
 
 }
 // function query(filterBy, user) {

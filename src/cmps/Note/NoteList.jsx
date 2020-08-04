@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NotePreview from './NotePreview'
-import Loading from '../cmps/Loading'
+import Loading from '../Loading'
 
 export default ({ notes, user, removeNote, saveRoomChanges, togglePinned, setNoteType }) => {
 

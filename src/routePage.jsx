@@ -8,8 +8,8 @@ import HomePage from "./pages/HomePage";
 import InboxPage from './pages/InboxPage'
 
 import ContactPage from './pages/ContactPage'
-import BoardPage from './pages/BoardPage'
-import SignUp from './pages/SignUp'
+import RoomPage from './pages/RoomPage'
+import SignupPage from './pages/SignupPage'
 
 import Loading from './cmps/Loading'
 class RoutePage extends React.Component {
@@ -42,10 +42,10 @@ class RoutePage extends React.Component {
       <div className="router-page">
         <main>
           <Switch>
-            <Route path="/signup" exact render={(routerProps) => <SignUp {...routerProps} onConnectSocket={this.props.onConnectSocket} />} />
+            <Route path="/signup" exact render={(routerProps) => <SignupPage {...routerProps} onConnectSocket={this.props.onConnectSocket} />} />
             <Route path="/" exact component={HomePage} />
             <Route path="/contact" component={ContactPage} />
-            <Route path="/board/:id" component={BoardPage} />
+            <Route path="/room/:id" component={RoomPage} />
             <Route path="/inbox/:id" exact component={InboxPage} />
           </Switch>
         </main>

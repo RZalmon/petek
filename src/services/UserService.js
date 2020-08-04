@@ -1,17 +1,25 @@
 import { StorageService } from './StorageService'
 import { HttpService } from './HttpService.js'
 import avatarImg from '../assets/png/user.png'
-import BoardPage from '../pages/BoardPage';
 
 
 const KEY = 'user';
 
+// async function getLoggedinUser() {
+//     var user = StorageService.load(KEY);
+//     return !user ? null : await HttpService.get(`user/${user._id}`)
+// }
 async function getLoggedinUser() {
     var user = StorageService.load(KEY);
     if (!user) return null
     user = await HttpService.get(`user/${user._id}`)
     return user
 }
+// async function getUpdatedUser() {
+//     var user = StorageService.load(KEY);
+//     return
+
+
 
 async function getById(id) {
     const user = await HttpService.get(`user/${id}`)
@@ -77,5 +85,5 @@ export const UserService = {
     logout,
     getMinimalUser,
     updateImgAtContacts,
-    getLoggedinUser
+    getLoggedinUser,
 }

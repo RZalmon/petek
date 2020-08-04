@@ -2,16 +2,16 @@ import React, { useEffect, useState, createRef } from 'react'
 import Moment from 'react-moment';
 
 
-import NoteText from './Note/NoteText'
-import NoteImg from './Note/NoteImg'
-import NoteVideo from './Note/NoteVideo'
-import NoteTodo from './Note/NoteTodo'
-import NoteLoc from './Note/NoteLoc'
-import Features from './Note/Features'
+import NoteText from './NoteText'
+import NoteImg from './NoteImg'
+import NoteVideo from './NoteVideo'
+import NoteTodo from './NoteTodo'
+import NoteLoc from './NoteLoc'
+import Features from './Features'
 
-import RemoveIcon from '../cmps/icons/RemoveIcon'
-import EditIcon from '../cmps/icons/EditIcon'
-import SaveIcon from '../cmps/icons/SaveIcon'
+import RemoveIcon from '../../cmps/icons/RemoveIcon'
+import EditIcon from '../../cmps/icons/EditIcon'
+import SaveIcon from '../../cmps/icons/SaveIcon'
 
 export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
     const [isEdit, setIsEdit] = useState(false);

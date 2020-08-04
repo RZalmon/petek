@@ -20,7 +20,7 @@ const ContactPage = (props) => {
         await props.loadRoomById({ roomId });
         return
         } 
-        props.history.push(`/board/${roomId}`);
+        props.history.push(`/room/${roomId}`);
     }
 
     const loadContacts = async () => {
@@ -31,7 +31,7 @@ const ContactPage = (props) => {
     const handleKeyPress = () => {
         if (props.contacts.length === 1) {
             let id = props.contacts[0]._id
-            props.history.push(`/board/${id}`);
+            props.history.push(`/room/${id}`);
         }
     }
 
