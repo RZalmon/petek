@@ -21,9 +21,7 @@ const App = (props) => {
   const loggedinUser = props.user;
   const room = props.room
 
-  const connectSockets = (id) => {
-    // getUser()
-    SocketService.setup()
+  const connectSockets = (id) => {   
 
     if (room && loggedinUser) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
@@ -48,12 +46,16 @@ const App = (props) => {
   }
 
   const disconnectSockets = () => {
+    console.log('disconnect sockets');
     if (room) SocketService.off(`updateRoom ${room._id}`)
-    SocketService.off(`updateUser ${loggedinUser._id}`)
-    SocketService.off(`updateUserWithoutAudio ${loggedinUser._id}`)
+    if(loggedinUser){
+      SocketService.off(`updateUser ${loggedinUser._id}`)
+      SocketService.off(`updateUserWithoutAudio ${loggedinUser._id}`)
+    }
   }
 
   const updateUser = (updatedUser) => {
+    console.log('update that user!');
     let audio = new Audio(audioNotification);
     if (updatedUser) {
       props.updateUser(updatedUser)
@@ -70,6 +72,7 @@ const App = (props) => {
     if (loggedinUser) console.log('connect user sockets', loggedinUser._id);
     if (room) console.log('connect room sockets', room._id);
     return () =>{
+      disconnectSockets()
           if (room) SocketService.off(`updateRoom ${room._id}`)
 
     }
@@ -77,6 +80,7 @@ const App = (props) => {
   }, [loggedinUser, room]);
 
   useEffect(() => {
+     SocketService.setup()
     return () => {
         console.log('disconnecet user sockets', loggedinUser._id);
         if (room) console.log('disconnecet room sockets', room._id);

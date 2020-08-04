@@ -30,13 +30,13 @@ export function getUser() {
     }
 }
 
-export function getUpdatedUser() {
-    return async dispatch => {
-        const user = await UserService.getUpdatedUser();
-        console.log('user in actions');
-        dispatch({ type: 'GET_USER', user })
-    }
-}
+// export function getUpdatedUser() {
+//     return async dispatch => {
+//         const user = await UserService.getUpdatedUser();
+//         console.log('user in actions');
+//         dispatch({ type: 'GET_USER', user })
+//     }
+// }
 
 export function updateUser(user) {
     console.log('@@@user in actions@@@', user);
