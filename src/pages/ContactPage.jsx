@@ -14,8 +14,7 @@ const ContactPage = (props) => {
 
 
     const onMoveToRoom = async (ev,roomId) => {   
-        console.log(ev);    
-        ev.stopPropagation()
+       
         if(!props.history){
         await props.loadRoomById({ roomId });
         return

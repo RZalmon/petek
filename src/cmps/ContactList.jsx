@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 
 import ContactPreview from './ContactPreview'
 export default (props) => {
-    const { onAddFriend, loggedinUser, onMoveToRoom } = props
+    const { onAddFriend, loggedinUser, onMoveToRoom, isHome } = props
 
 
     return (
@@ -15,6 +15,7 @@ export default (props) => {
                         loggedinUser={loggedinUser}
                         key={contact._id}
                         moveToRoom={onMoveToRoom}
+                        isHome={isHome}
                     />
                 )
             })}
