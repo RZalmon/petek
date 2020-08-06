@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 
 import ContactPreview from './ContactPreview'
 export default (props) => {
