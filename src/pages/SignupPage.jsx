@@ -57,7 +57,8 @@ const SignupPage = (props) => {
     setIsDone(true)
     isSignup ? await props.signUp({ ...newUser }) : await props.login({ ...newUser })
     await getLoggedinUser()
-    loggedinUser = { ...props.user }
+    loggedinUser = {...props.user} 
+    console.log(loggedinUser);
     if (!loggedinUser) {
       Swal.fire({
         title: 'Wrong password or Username.',

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 
 import { getUser, updateUser } from '../actions/UserActions';
+
+
 import ContactPage from '../pages/ContactPage'
 import RoomPage from '../pages/RoomPage'
 import { loadContacts } from '../actions/ContactActions';
@@ -52,11 +54,14 @@ const HomePage = (props) => {
 
 
 
-  const onMoveToRoom = (ev, roomId) => {
-    console.log(ev);
+  const onMoveToRoom = (ev, contact) => {
+    const roomId = UserService.getRoomIdFromContact(user,contact).roomId
+    console.log('roomId', roomId);
+
     ev.stopPropagation()
     props.history.push(`/room/${roomId}`);
   }
+
 
   useEffect(() => {
     props.getUser()

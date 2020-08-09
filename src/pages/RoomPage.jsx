@@ -114,7 +114,7 @@ const RoomPage = (props) => {
 
     useEffect(() => {
         loadRoom()//created
-        return () => { props.resetCurrRoom() }; //onDestroy
+        return () => { props.resetCurrRoom()  }; //onDestroy
     }, []);
 
     //watcher
@@ -131,7 +131,6 @@ const RoomPage = (props) => {
     }, [isUploading]);
 
     useEffect(() => {
-        console.log(filterBy.term);
         loadRoom()
     }, [filterBy]);
 

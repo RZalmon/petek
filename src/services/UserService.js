@@ -47,7 +47,7 @@ async function signUp(credentials) {
 
 async function login(credentials) {
     const user = await HttpService.post('auth/login', credentials)
-    if (!user) return null
+    if (!user) return null;
     StorageService.save(KEY, user);
     return user;
 }
@@ -77,6 +77,11 @@ function getMinimalUser(_id, imgUrl) {
     }
 }
 
+function getRoomIdFromContact(loggedinUser, contact) {
+    return loggedinUser.friends.find(friend => { return friend._id === contact._id })
+
+}
+
 export const UserService = {
     getById,
     signUp,
@@ -86,4 +91,5 @@ export const UserService = {
     getMinimalUser,
     updateImgAtContacts,
     getLoggedinUser,
+    getRoomIdFromContact
 }
