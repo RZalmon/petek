@@ -87,6 +87,7 @@ const RoomPage = (props) => {
         props.room.notes.unshift(newNote)
         props.saveRoom(props.room)
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
+        props.showNotification('Note added successfully! So Excited', 'success')
         setNoteHeader('')
         setNoteData('')
         setNoteType('')
@@ -105,6 +106,8 @@ const RoomPage = (props) => {
         props.room.notes.splice(idx, 1)
         await props.saveRoom(props.room)
         SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
+         props.showNotification('Note Deleted successfully!', 'error')
+
     }
     const checkIsValidUser = async () => {
         const { user, room } = props
@@ -140,6 +143,7 @@ const RoomPage = (props) => {
 
     return (
         <div className="room-page">
+            
             {(isValidUser && notes) ? <div className="note-add">
                 <Filter
                     filterBy={filterBy}
@@ -155,7 +159,7 @@ const RoomPage = (props) => {
                     setNoteData={setNoteData}
                     noteData={noteData}
                 />}
-                <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData} />
+                <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData} /> 
             </div> : <Loading />}
             {(isValidUser && notes) && <div>
                 {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} />}

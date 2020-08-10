@@ -3,12 +3,10 @@
 @import "./styles/setup/mixins";
 @import "./styles/setup/typography";
 @import "./styles/setup/variables";
-
 //BASE
 @import "./styles/basics/helpers";
 @import "./styles/basics/layout";
 @import "./styles/basics/reset";
-
 //ICONS
 @import "./styles/cmps/icons/RemoveIcon";
 @import "./styles/cmps/icons/EditIcon";
@@ -18,8 +16,6 @@
 @import "./styles/cmps/icons/ColorPalleteIcon";
 @import "./styles/cmps/icons/GpsIcon";
 @import "./styles/cmps/icons/PinIcon";
-
-
 //CMPS
 @import "./styles/cmps/NavBar";
 @import "./styles/cmps/BurgerMenu";
@@ -40,29 +36,30 @@
 @import "./styles/cmps/ButtonMenu.scss";
 @import "./styles/cmps/Loading.scss";
 @import "./styles/cmps/Filter.scss";
-
 //PAGES
 @import "./styles/pages/SignupPage";
 @import "./styles/pages/RoomPage";
 @import "./styles/pages/HomePage";
+@import "~noty/src/noty.scss";
+@import "~noty/src/themes/bootstrap-v4.scss";
+
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .swal2-title {
-  font-size: 19px !important;
+    font-size: 19px !important;
 }
 
 .swal2-styled.swal2-confirm {
-  font-size: 15px;
-  color: rgba(0, 0, 123, 0.4) !important;
+    font-size: 15px;
+    color: rgba(0, 0, 123, 0.4) !important;
 }

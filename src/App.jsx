@@ -4,6 +4,11 @@ import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import Noty from 'noty';
+ 
+
+ 
+
 import audioNotification from '../src/assets/sound/sp-tune.mp3'
 
 import SocketService from './services/SocketService'
@@ -65,6 +70,21 @@ const App = (props) => {
     }
   }
 
+  const showNotification = (text, type) =>{
+    console.log('clciked');
+    new Noty({
+    text,
+    type,
+     theme: 'bootstrap-v4',
+      layout: 'topRight',
+    animation: {
+        open: 'animated bounceInRight', // Animate.css class names
+        close: 'animated bounceOutRight' // Animate.css class names
+    },
+    timeout:1500
+  }).show();
+  }
+
 
 
   useEffect(() => {
@@ -79,8 +99,10 @@ const App = (props) => {
  
   }, [loggedinUser, room]);
 
-  useEffect(() => {
+useEffect(() => {
      SocketService.setup()
+    
+
     return () => {
         console.log('disconnecet user sockets', loggedinUser._id);
         if (room) console.log('disconnecet room sockets', room._id);
@@ -94,8 +116,8 @@ const App = (props) => {
   return (
     <div className="App">
       <Router history={history}>
-        <NavBar user={loggedinUser} />
-        <RoutePage onConnectSocket={connectSockets} />
+        <NavBar user={loggedinUser} showNotification={showNotification} />
+        <RoutePage onConnectSocket={connectSockets} showNotification={showNotification} />
       </Router>
     </div>
   );

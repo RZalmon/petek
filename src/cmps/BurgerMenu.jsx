@@ -46,6 +46,9 @@ class BurgerMenu extends React.Component {
   
   handleLogout =  () => {
      this.props.logout()
+     this.props.showNotification('Logged out successfully :)', 'success')
+
+
     // this.props.history.push('/signup')
   }
 
