@@ -83,11 +83,12 @@ const RoomPage = (props) => {
         newNote.createdAt = Date.now()    //maybe server side should handle it
         let minimalUser = UserService.getMinimalUser(user._id, user.imgUrl)
         newNote.createdBy = minimalUser
-        const friend = user.friends.find(currFriend => currFriend.roomId === !props.room._id ? props.match.params.id : props.room._id)
+        const friend = user.friends.find(currFriend => currFriend.roomId ===  props.room._id)
         props.room.notes.unshift(newNote)
         props.saveRoom(props.room)
         SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
-        props.showNotification('Note added successfully! So Excited', 'success')
+        // props.showNotification('Note added successfully! So Excited', 'success')
+        //Need to find way to transfer that prop on desktop
         setNoteHeader('')
         setNoteData('')
         setNoteType('')
@@ -101,12 +102,15 @@ const RoomPage = (props) => {
         props.saveRoom(props.room)
         props.updateUser(props.user)
     }
+
     const removeNote = async (noteId) => {
         let idx = props.room.notes.findIndex(note => note._id === noteId)
         props.room.notes.splice(idx, 1)
         await props.saveRoom(props.room)
         SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
-         props.showNotification('Note Deleted successfully!', 'error')
+        // props.showNotification('Note Deleted successfully!', 'error')
+         //Need to find way to transfer that prop on desktop
+
 
     }
     const checkIsValidUser = async () => {
