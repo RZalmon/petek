@@ -7,6 +7,7 @@ export const AvatarEdit = (props) => {
 
   // var [{imgUrl}] = useState(props)
   const { imgUrl, isLoading } = props
+  
   return <div className="avatar-edit">
     <label>
       <input type="file" onChange={(ev) => props.onUploadImg(ev)} hidden />

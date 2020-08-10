@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 
 import { getUser, updateUser } from '../actions/UserActions';
+
+
 import ContactPage from '../pages/ContactPage'
 import RoomPage from '../pages/RoomPage'
 import { loadContacts } from '../actions/ContactActions';
@@ -19,6 +21,9 @@ import CloudinaryService from '../../src/services/CloudinaryService'
 const HomePage = (props) => {
   const [filterBy, setFilterBy] = useState({ term: '' })
   const [isLoading, setIsLoading] = useState(false)
+  const [isHome, setIsHome] = useState(true)
+
+
   const { user, contacts,room,getUpdatedUser } = props;
 
 
@@ -49,16 +54,22 @@ const HomePage = (props) => {
 
 
 
-  const onMoveToRoom = (ev, roomId) => {
-    console.log(ev);
+  const onMoveToRoom = (ev, contact) => {
+    const roomId = UserService.getRoomIdFromContact(user,contact).roomId
+    console.log('roomId', roomId);
+
     ev.stopPropagation()
     props.history.push(`/room/${roomId}`);
   }
+
 
   useEffect(() => {
     props.getUser()
     if (!props.user) props.history.push("/signup")
     loadContacts()
+    return () =>{
+      setIsHome(false)
+    }
   }, [])
 
 
@@ -76,7 +87,7 @@ const HomePage = (props) => {
             <AvatarEdit imgUrl={user.imgUrl} onUploadImg={onUploadImg} isLoading={isLoading} />
             <h6>Let's add contacts veze</h6>
             <Filter filterBy={filterBy} setFilterBy={setFilterBy} />
-            {contacts && <ContactList onMoveToRoom={onMoveToRoom} contacts={contacts} onAddFriend={onAddFriend} loggedinUser={user} />}
+            {contacts && <ContactList onMoveToRoom={onMoveToRoom} contacts={contacts} onAddFriend={onAddFriend} loggedinUser={user} isHome={isHome} />}
             </div>
         <div className="desktop">
           <section className="contact-page-desktop">

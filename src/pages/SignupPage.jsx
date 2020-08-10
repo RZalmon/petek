@@ -28,6 +28,7 @@ const SignupPage = (props) => {
   const getLoggedinUser = async () => {
     await props.getUser()
     if (props.user) props.history.push('/')
+    return props.user
   }
 
 
@@ -56,8 +57,8 @@ const SignupPage = (props) => {
     ev.preventDefault();
     setIsDone(true)
     isSignup ? await props.signUp({ ...newUser }) : await props.login({ ...newUser })
-    await getLoggedinUser()
-    loggedinUser = { ...props.user }
+     await getLoggedinUser()
+    loggedinUser = {...props.user}
     if (!loggedinUser) {
       Swal.fire({
         title: 'Wrong password or Username.',
@@ -78,13 +79,14 @@ const SignupPage = (props) => {
       setIsDone(false)
       return
     }
+    props.showNotification('Logged in successfully :)', 'success')
     connectSockets(loggedinUser._id)
+    console.log(loggedinUser);
     props.history.push("/")
   }
 
   useEffect(() => {
     getLoggedinUser()
-
   }, [])
 
   return (

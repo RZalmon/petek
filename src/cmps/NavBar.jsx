@@ -9,7 +9,7 @@ import BurgerMenu from './BurgerMenu';
 
 export default (props) => {
 
-  const { user } = props
+  const { user,showNotification } = props
   const [isClicked, toggleClick] = useState(false)
    
   useEffect(() => {
@@ -25,7 +25,7 @@ export default (props) => {
         <img src={logo} alt="logo" className="logo"/>
         </Link>
        {user && !!user.notifications.length && <span className="notification-count nav-count" onClick={() => {toggleClick(true)}} >{user.notifications.length}</span>}
-       <BurgerMenu isClicked={isClicked} />
+       <BurgerMenu isClicked={isClicked} showNotification={showNotification} />
     </nav>
   );
 };
