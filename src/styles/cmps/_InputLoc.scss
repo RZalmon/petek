@@ -1,4 +1,15 @@
-.input-loc{
+.input-loc {
     display: flex;
     flex-direction: column;
+    .save-btn {
+        cursor: pointer;
+        align-self: flex-end;
+        width: 30px;
+        margin-left: rem(10px);
+        @include hover-supported {
+            fill: #2e47fd;
+            stroke: #2e47fd;
+            transition: 0.3s;
+        }
+    }
 }
