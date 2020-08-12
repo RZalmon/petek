@@ -22,8 +22,6 @@ export default ({ filterBy, setFilterBy, }) => {
                 <option value="NoteTodo">Todos</option>
                 <option value="NoteLoc">Location</option>
             </select>
-            <h1>{filterBy.term}</h1>
-            <h1>{filterBy.type}</h1>
         </section >
     )
 
