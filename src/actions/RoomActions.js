@@ -14,11 +14,10 @@ export function loadRooms(filterBy) {
 
 // READ
 export function loadRoomById(filterBy) {
-    console.log('filterBy in actions',filterBy);
-    
     return async dispatch => {
         try {
             const room = await RoomService.getById(filterBy);
+            console.log('Notes.length', room.notes.length)
             dispatch({ type: 'SET_CURR_ROOM', room })
         } catch (err) {
             console.log('ERROR', err)

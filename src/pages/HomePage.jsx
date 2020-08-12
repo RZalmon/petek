@@ -94,7 +94,7 @@ const HomePage = (props) => {
         <ContactPage/>
           </section>
         {room && <section className="room-page-desktop">
-        <RoomPage/>
+        <RoomPage history={props.history}/>
         </section>}
         </div>
         </div>

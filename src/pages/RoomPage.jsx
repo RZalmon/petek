@@ -7,7 +7,7 @@ import { loadRoomById, saveRoom, resetCurrRoom } from '../actions/RoomActions';
 import { updateUser } from '../actions/UserActions';
 import ButtonMenu from '../cmps/ButtonMenu'
 import NoteList from '../cmps/Note/NoteList'
-import Filter from '../cmps/Filter'
+import NoteFilter from '../cmps/Note/NoteFilter'
 import Loading from '../cmps/Loading'
 import InputText from '../cmps/Note/InputText'
 import InputImg from '../cmps/Note/InputImg'
@@ -24,8 +24,12 @@ const RoomPage = (props) => {
     const [noteData, setNoteData] = useState('');
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
-    const [filterBy, setFilterBy] = useState('');
     const [isValidUser, setIsValidUser] = useState(null)
+    const [filterBy, setFilterBy] = useState({
+        term: '',
+        type: '',
+        by:'all'
+    });
 
     if (props.room) var { notes } = props.room
     
@@ -46,11 +50,11 @@ const RoomPage = (props) => {
     const loadRoom = async () => {
         const roomId = props.room ? props.room._id : props.match.params.id;
         if (props.room) {
+            await props.loadRoomById({ ...filterBy, roomId })
             checkIsValidUser()
-            await props.loadRoomById({ term: filterBy.term, roomId })
             return
         }
-        await props.loadRoomById({ term: filterBy.term, roomId });
+        await props.loadRoomById({ ...filterBy, roomId })
     }
 
 
@@ -115,6 +119,7 @@ const RoomPage = (props) => {
     }
     const checkIsValidUser = async () => {
         const { user, room } = props
+        if(!user || !room) return
         let isValid = await RoomService.checkIsValidUser(user._id, room._id)
         isValid ? setIsValidUser(true) : props.history.push('/')
     }
@@ -149,7 +154,7 @@ const RoomPage = (props) => {
         <div className="room-page">
             
             {(isValidUser && notes) ? <div className="note-add">
-                <Filter
+                <NoteFilter
                     filterBy={filterBy}
                     setFilterBy={setFilterBy}
                     onFilter={onFilterHandler}
@@ -184,3 +189,13 @@ const mapDispatchToProps = {
     updateUser
 };
 export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
+
+// const loadRoom = async () => {
+//     const roomId = props.room ? props.room._id : props.match.params.id;
+//     if (props.room) {
+//         checkIsValidUser()
+//         await props.loadRoomById({ term: filterBy.term, roomId })
+//         return
+//     }
+//     await props.loadRoomById({ term: filterBy.term, roomId });
+// }

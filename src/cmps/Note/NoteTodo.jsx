@@ -75,8 +75,8 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
                             }
                         }}>
                             <div>
-                            <input type="checkbox" onClick={(ev) => toggleIsDone(idx)} checked={todo.isDone} readOnly />
-                            {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} >{todo.text}</span>}
+                                <input type="checkbox" onClick={(ev) => toggleIsDone(idx)} checked={todo.isDone} readOnly />
+                                {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} >{todo.text}</span>}
                             </div>
                             {(isEdit && currTodoIdx === idx) && <input type="text" value={editedTodo} ref={editInputRef} onChange={(e) => { setEditedTodo(e.target.value); }} />
                             }
@@ -85,14 +85,14 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
                     )
                 })}
             </ul>
-            <div className="progress-bar">
-            <ProgressBar completed={progress} labelSize={!progress ? '0' : '0.75rem' }/>
-            </div>
-            {isNewTodo && <div>
-                <input type="text" placeholder="New Todo" ref={newTodoInputRef} onChange={e => setNewTodo(e.target.value)} />
+
+            {isNewTodo && <div className="add-todo-container">
+                <input type="text" className="add-todo-input" placeholder="New Todo" ref={newTodoInputRef} onChange={e => setNewTodo(e.target.value)} />
                 <img src={ArrowIcon} className="add-todo-btn" onClick={() => addTodo()} />
             </div>}
-
+            <div className="progress-bar">
+                <ProgressBar completed={progress} labelSize={!progress ? '0' : '0.75rem'} />
+            </div>
         </div>
     )
 }

@@ -3,10 +3,10 @@
         margin: unset;
     }
 
-    .progress-bar{
+    .progress-bar {
         background-color: unset;
-        span{
-        padding:2px !important
+        span {
+            padding: 2px !important;
         }
     }
 
@@ -55,5 +55,16 @@
         justify-content: space-between;
         height: 30px;
         margin: 5px 0 5px 0;
+    }
+    .add-todo-container {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 10px;
+        .add-todo-input {
+            border: 1px solid transparent;
+            border-radius: 5%;
+            font-size: 18px;
+            background-color: $clr-input;
+        }
     }
 }

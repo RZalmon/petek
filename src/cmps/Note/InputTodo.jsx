@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import xMark from '../../assets/svg/x-mark.svg'
 import PlusIcon from '../../assets/svg/plus.svg'
 import saveIcon from '../../assets/svg/save.svg'
-import SaveIcon from '../icons/SaveIcon'
+
 
 export default ({ setNoteHeader, setNoteData, handleSubmit, noteData }) => {
     const [currTodo, setCurrTodo] = useState('');
@@ -40,9 +40,9 @@ export default ({ setNoteHeader, setNoteData, handleSubmit, noteData }) => {
             </ul>
             <div className="add-todo-container">
                 <input type="text" placeholder="task?" className="input-task" ref={textInput} onChange={e => setCurrTodo(e.target.value)} />
-                <img src={PlusIcon} className="add-btn" onClick={() => addTodo()} alt="Add todo" />
+                <img src={PlusIcon} className="add-button" onClick={() => addTodo()} alt="Add todo" />
             </div>
-            <SaveIcon className="save-btn" onClick={handleSubmit} alt="Save" />
+            <img src={saveIcon} className="add-button" onClick={handleSubmit} alt="Save" />
         </div>
     )
 }
