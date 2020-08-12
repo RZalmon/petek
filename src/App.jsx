@@ -73,10 +73,10 @@ const App = (props) => {
   const showNotification = (text, type) =>{
     console.log('clciked');
     new Noty({
-    text,
-    type,
+     text,
+     type,
      theme: 'bootstrap-v4',
-      layout: 'topRight',
+     layout: 'topRight',
     animation: {
         open: 'animated bounceInRight', // Animate.css class names
         close: 'animated bounceOutRight' // Animate.css class names
