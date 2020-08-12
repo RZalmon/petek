@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 
 import { loadContacts } from '../actions/ContactActions';
 import { loadRoomById } from '../actions/RoomActions';
+import { updateUser } from '../actions/UserActions';
+
+import { UserService } from '../services/UserService'
+
 
 import Filter from '../cmps/Filter'
 import ContactList from '../cmps/ContactList'
@@ -14,7 +18,7 @@ const ContactPage = (props) => {
 
 
     const onMoveToRoom = async (ev,roomId) => {   
-       
+        console.log('clicked!');
         if(!props.history){
         await props.loadRoomById({ roomId });
         return
@@ -34,6 +38,13 @@ const ContactPage = (props) => {
         }
     }
 
+    const onDeleteFriend = (friendId) =>{
+        let friendIdx = user.friends.findIndex(friend => friend._id === friendId)
+        user.friends.splice(friendIdx,1)
+        props.updateUser(user)
+        UserService.updateFriend(user._id, friendId)
+    }
+
     useEffect(() => {
         loadContacts()
     }, [filterBy])
@@ -46,7 +57,7 @@ const ContactPage = (props) => {
                     filterBy={filterBy}
                     setFilterBy={setFilterBy}
                     moveToContact={handleKeyPress} />
-                {!!contacts && <ContactList onMoveToRoom={onMoveToRoom} loggedinUser={user} contacts={contacts.length ? contacts : user.friends}></ContactList>}
+                {!!contacts && <ContactList onDeleteFriend={onDeleteFriend} onMoveToRoom={onMoveToRoom} loggedinUser={user} contacts={contacts.length ? contacts : user.friends}/>}
             </div>
             }
         </div>
@@ -66,7 +77,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     loadContacts,
-    loadRoomById
+    loadRoomById,
+    updateUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactPage);

@@ -8,7 +8,7 @@ import deleteUser from '../assets/svg/delete.svg'
 
 import ContactPreview from './ContactPreview'
 export default (props) => {
-    const { onAddFriend, loggedinUser, onMoveToRoom, isHome } = props
+    const { onAddFriend, loggedinUser, onMoveToRoom, isHome, onDeleteFriend } = props
     
         const [roomId, setRoomId] = useState('')
 
@@ -23,7 +23,7 @@ export default (props) => {
               {!isHome ? <SwipeableListItem 
               swipeLeft={{
                      content:<img className="swipe-content-left" src={deleteUser}/>,
-                     action: (ev) => {console.log('balls');},
+                     action: (ev) => {onDeleteFriend(contact._id)},
                        
                        
                     }}

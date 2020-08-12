@@ -13,7 +13,7 @@ export default ({ filterBy, setFilterBy, }) => {
                 placeholder={'Search Notes'}
                 onChange={e => setFilterBy({ ...filterBy, term: e.target.value })}
             />
-            <label for="type-select">Type</label>
+            <label htmlFor="type-select">Type</label>
             <select id="type-select" onChange={e => setFilterBy({ ...filterBy, type: e.target.value })}>
                 <option value="">All</option>
                 <option value="NoteText">Text</option>

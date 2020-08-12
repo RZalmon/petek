@@ -69,6 +69,13 @@ async function updateImgAtContacts(userId, imgUrl) {
     await HttpService.put(`user/${userId}/update`, { userId, imgUrl })
 }
 
+async function updateFriend(userId, friendId) {
+    let friend = await getById(friendId)
+    let userIdx = friend.friends.findIndex(user => user._id === userId)
+    friend.friends.splice(userIdx, 1)
+    await HttpService.put(`user/${friend._id}`, friend)
+}
+
 
 function getMinimalUser(_id, imgUrl) {
     return {
@@ -91,5 +98,6 @@ export const UserService = {
     getMinimalUser,
     updateImgAtContacts,
     getLoggedinUser,
-    getRoomIdFromContact
+    getRoomIdFromContact,
+    updateFriend
 }
