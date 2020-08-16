@@ -19,14 +19,11 @@ export default (props) => {
                     <div key={contact._id}>
                         {!isHome ? <SwipeableListItem
                             swipeLeft={{
-                                content: <img className="swipe-content-left" src={deleteUser} />,
-                                action: (ev) => { showNotification(contact.userName, contact._id) },
-                                // action: (ev) => { onDeleteFriend(contact._id) },
-
-
+                                content: <div className="delete-btn-container"><img className="swipe-content-left" src={deleteUser} /></div>,
+                                action: () => { showNotification(contact.userName, contact._id) },
                             }}
                             swipeRight={{
-                                content: <img className="swipe-content-right" src={addNote} />,
+                                content: <div className="add-btn-container"><img className="swipe-content-right" src={addNote} /></div>,
                                 action: (ev) => { onMoveToRoom(ev, contact.roomId) },
                                 key: contact._id
 

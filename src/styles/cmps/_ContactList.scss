@@ -2,19 +2,44 @@
     //change vh to % or something else but relative
     max-height: 80vh;
     overflow: scroll;
+
+
 }
 
 .swipe-container {
-    .swipe-content-left {
-        width: 50px;
-        padding: 0 5px;
+    .delete-btn-container {
+        background-color: #d9534f;
+        box-sizing: border-box;
+        color: white;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 4px 8px;
+        justify-content: flex-end;
+        .swipe-content-left {
+            width: 55px;
+            padding: 0 5px;
+        }
     }
-    .swipe-content-right {
-        width: 50px;
-        padding: 0 5px;
+    .add-btn-container {
+        background-color: #5cb85c;
+        box-sizing: border-box;
+        color: white;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 4px 8px;
+        // width: 100%;
+        .swipe-content-right {
+            width: 55px;
+            padding: 0 5px;
+        }
     }
+
     .swipeable-list-item__content {
-        background-color: unset;
+        // background-color: unset;
     }
 }
 

@@ -5,6 +5,11 @@
     align-items: center;
     padding: 5px 0;
     border-bottom: 1px solid purple;
+    background-color: $clr-white;
+    &:nth-child(2) {
+        background-color: darken($color: $clr-white, $amount: 100);
+    }
+
     .user-name-container {
         display: flex;
         flex-direction: column;
@@ -12,4 +17,3 @@
         margin: 5px;
     }
 }
-
