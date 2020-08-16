@@ -2,6 +2,7 @@ import React, { useEffect, useState, createRef } from 'react'
 import { connect } from 'react-redux';
 import ProgressBar from '@ramonak/react-progress-bar';
 
+import { UtilService } from '../../services/UtilService'
 import SocketService from '../../services/SocketService'
 
 import PlusIcon from '../../assets/svg/plus.svg'
@@ -28,7 +29,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
 
     const addTodo = () => {
 
-        let todoToAdd = { text: newTodo, isDone: false }
+        let todoToAdd = { text: newTodo, isDone: false, _id: UtilService.makeId(5) }
 
         note.data.push(todoToAdd);
         setIsNewTodo(false)
@@ -68,7 +69,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
             <ul>
                 {!!note.data.length && note.data.map((todo, idx) => {
                     return (
-                        <li key={todo.text} onClick={() => {
+                        <li key={todo._id} onClick={() => {
                             if (isEdit) {
                                 setCurrTodoIdx(idx);
                                 setEditedTodo(todo.text)

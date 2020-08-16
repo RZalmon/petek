@@ -43,8 +43,11 @@
 @import "./styles/pages/SignupPage";
 @import "./styles/pages/RoomPage";
 @import "./styles/pages/HomePage";
+
+//NOTY LIB
 @import "~noty/src/noty.scss";
 @import "~noty/src/themes/bootstrap-v4.scss";
+@import "~noty/src/themes/sunset.scss";
 
 
 body {

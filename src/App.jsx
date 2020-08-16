@@ -5,9 +5,9 @@ import { Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Noty from 'noty';
- 
 
- 
+
+
 
 import audioNotification from '../src/assets/sound/sp-tune.mp3'
 
@@ -26,7 +26,7 @@ const App = (props) => {
   const loggedinUser = props.user;
   const room = props.room
 
-  const connectSockets = (id) => {   
+  const connectSockets = (id) => {
 
     if (room && loggedinUser) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
@@ -39,21 +39,21 @@ const App = (props) => {
     }
     if (loggedinUser) {
       SocketService.on(`updateUser ${loggedinUser._id}`, (updatedUser) => {
-        console.log('TEST',updatedUser);
+        console.log('TEST', updatedUser);
         // console.log('$$UPDATED USER FROM SOCKET$$', updatedUser);
         // console.log('$$USER$$:', loggedinUser.userName)
         let user = StorageService.load('user')
         console.log('Storage:', user.userName)
         if (loggedinUser._id === user._id) updateUser(updatedUser)
       });
-      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, ( updatedUser ) => { props.updateUser(updatedUser) })
+      SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, (updatedUser) => { props.updateUser(updatedUser) })
     }
   }
 
   const disconnectSockets = () => {
     console.log('disconnect sockets');
     if (room) SocketService.off(`updateRoom ${room._id}`)
-    if(loggedinUser){
+    if (loggedinUser) {
       SocketService.off(`updateUser ${loggedinUser._id}`)
       SocketService.off(`updateUserWithoutAudio ${loggedinUser._id}`)
     }
@@ -70,19 +70,19 @@ const App = (props) => {
     }
   }
 
-  const showNotification = (text, type) =>{
+  const showNotification = (text, type) => {
     console.log('clciked');
     new Noty({
-     text,
-     type,
-     theme: 'bootstrap-v4',
-     layout: 'topRight',
-    animation: {
+      text,
+      type,
+      theme: 'bootstrap-v4',
+      layout: 'topRight',
+      animation: {
         open: 'animated bounceInRight', // Animate.css class names
         close: 'animated bounceOutRight' // Animate.css class names
-    },
-    timeout:1500
-  }).show();
+      },
+      timeout: 1500
+    }).show();
   }
 
 
@@ -91,24 +91,24 @@ const App = (props) => {
     connectSockets()
     if (loggedinUser) console.log('connect user sockets', loggedinUser._id);
     if (room) console.log('connect room sockets', room._id);
-    return () =>{
+    return () => {
       disconnectSockets()
-          if (room) SocketService.off(`updateRoom ${room._id}`)
+      if (room) SocketService.off(`updateRoom ${room._id}`)
 
     }
- 
+
   }, [loggedinUser, room]);
 
-useEffect(() => {
-     SocketService.setup()
-    
+  useEffect(() => {
+    SocketService.setup()
+
 
     return () => {
-        console.log('disconnecet user sockets', loggedinUser._id);
-        if (room) console.log('disconnecet room sockets', room._id);
-        disconnectSockets()
-        SocketService.terminate()
-      
+      console.log('disconnecet user sockets', loggedinUser._id);
+      if (room) console.log('disconnecet room sockets', room._id);
+      disconnectSockets()
+      SocketService.terminate()
+
     };
   }, [])
 
@@ -121,7 +121,7 @@ useEffect(() => {
       </Router>
     </div>
   );
-  
+
 }
 
 

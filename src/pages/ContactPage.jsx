@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
+import Noty from 'noty';
 
 import { loadContacts } from '../actions/ContactActions';
 import { loadRoomById } from '../actions/RoomActions';
@@ -17,12 +18,12 @@ const ContactPage = (props) => {
 
 
 
-    const onMoveToRoom = async (ev,roomId) => {   
+    const onMoveToRoom = async (ev, roomId) => {
         console.log('clicked!');
-        if(!props.history){
-        await props.loadRoomById({ roomId });
-        return
-        } 
+        if (!props.history) {
+            await props.loadRoomById({ roomId });
+            return
+        }
         props.history.push(`/room/${roomId}`);
     }
 
@@ -38,9 +39,36 @@ const ContactPage = (props) => {
         }
     }
 
-    const onDeleteFriend = (friendId) =>{
+    const showNotification = (friendName, friendId) => {
+        //bgc 
+        let n = new Noty({
+            text: `Remove ${friendName} from your contact list?`,
+            layout: 'center',
+            theme: 'sunset',
+            type: 'alert',
+            // theme: 'bootstrap-v4',
+
+            animation: {
+                open: 'animated bounceInRight', // Animate.css class names
+                close: 'animated bounceOutRight' // Animate.css class names
+            },
+            buttons: [
+                Noty.button('YES', 'btn btn-danger', () => {
+                    onDeleteFriend(friendId)
+                    n.close();
+                }, { id: 'button1', 'data-status': 'ok' }),
+
+                Noty.button('NO', 'btn btn-error', () => {
+                    n.close();
+                })
+            ]
+        });
+        n.show()
+    }
+
+    const onDeleteFriend = (friendId) => {
         let friendIdx = user.friends.findIndex(friend => friend._id === friendId)
-        user.friends.splice(friendIdx,1)
+        user.friends.splice(friendIdx, 1)
         props.updateUser(user)
         UserService.updateFriend(user._id, friendId)
     }
@@ -57,7 +85,7 @@ const ContactPage = (props) => {
                     filterBy={filterBy}
                     setFilterBy={setFilterBy}
                     moveToContact={handleKeyPress} />
-                {!!contacts && <ContactList onDeleteFriend={onDeleteFriend} onMoveToRoom={onMoveToRoom} loggedinUser={user} contacts={contacts.length ? contacts : user.friends}/>}
+                {!!contacts && <ContactList showNotification={showNotification} onDeleteFriend={onDeleteFriend} onMoveToRoom={onMoveToRoom} loggedinUser={user} contacts={contacts.length ? contacts : user.friends} />}
             </div>
             }
         </div>
