@@ -6,14 +6,15 @@
     padding: 5px 0;
     border-bottom: 1px solid purple;
     background-color: $clr-white;
-    &:nth-child(2) {
-        background-color: darken($color: $clr-white, $amount: 100);
-    }
-
+    
     .user-name-container {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         margin: 5px;
     }
+}
+
+.contact-preview:nth-of-type(2){
+    background-color: red;
 }

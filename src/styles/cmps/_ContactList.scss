@@ -2,8 +2,7 @@
     //change vh to % or something else but relative
     max-height: 80vh;
     overflow: scroll;
-
-
+  
 }
 
 .swipe-container {
@@ -37,9 +36,10 @@
             padding: 0 5px;
         }
     }
-
     .swipeable-list-item__content {
-        // background-color: unset;
+        &:nth-child(2){
+            background-color: red;
+        }
     }
 }
 

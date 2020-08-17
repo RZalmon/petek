@@ -1,0 +1,13 @@
+.avatar-loader {
+    border-radius: 50%;
+    // background-color: $clr1;
+    transition: background-color .3s;
+    object-fit: cover;
+    margin: 5px;
+    height: 65px;
+    width: 65px;
+    &.home {
+        width: 150px;
+        height: 150px;
+    }
+}
