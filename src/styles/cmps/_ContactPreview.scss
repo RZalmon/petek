@@ -2,19 +2,15 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    flex-direction: row-reverse;
     align-items: center;
     padding: 5px 0;
     border-bottom: 1px solid purple;
     background-color: $clr-white;
-    
     .user-name-container {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         margin: 5px;
     }
-}
-
-.contact-preview:nth-of-type(2){
-    background-color: red;
 }

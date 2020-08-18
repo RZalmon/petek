@@ -2,10 +2,10 @@
     //change vh to % or something else but relative
     max-height: 80vh;
     overflow: scroll;
-  
 }
 
 .swipe-container {
+   
     .delete-btn-container {
         background-color: #d9534f;
         box-sizing: border-box;
@@ -34,11 +34,6 @@
         .swipe-content-right {
             width: 55px;
             padding: 0 5px;
-        }
-    }
-    .swipeable-list-item__content {
-        &:nth-child(2){
-            background-color: red;
         }
     }
 }

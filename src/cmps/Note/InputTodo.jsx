@@ -21,6 +21,7 @@ export default ({ setNoteHeader, setNoteData, handleSubmit, noteData }) => {
             }])
         setCurrTodo('')
         textInput.current.value = ''
+        textInput.current.focus()
     };
 
     const handleRemoveTodo = (todoId) => {
