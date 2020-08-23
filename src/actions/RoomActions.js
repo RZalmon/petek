@@ -17,7 +17,6 @@ export function loadRoomById(filterBy) {
     return async dispatch => {
         try {
             const room = await RoomService.getById(filterBy);
-            console.log('Notes.length', room.notes.length)
             dispatch({ type: 'SET_CURR_ROOM', room })
         } catch (err) {
             console.log('ERROR', err)

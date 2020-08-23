@@ -19,7 +19,6 @@ const ContactPage = (props) => {
 
 
     const onMoveToRoom = async (ev, roomId) => {
-        console.log('clicked!');
         if (!props.history) {
             await props.loadRoomById({ roomId });
             return
@@ -28,7 +27,6 @@ const ContactPage = (props) => {
     }
 
     const loadContacts = async () => {
-        console.log('contact page loading contacts');
         await props.loadContacts(filterBy, user);
     };
 

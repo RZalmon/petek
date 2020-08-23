@@ -4,26 +4,7 @@ import { HttpService } from './HttpService.js'
 
 
 const CONTACT_KEY = 'contacts';
-
-var contacts = [{
-        "_id": "aa56640269f443a5d64b32ca",
-        "fullName": "Eyal Golan",
-        "userName": "Eyalush",
-        "friends": []
-    },
-    {
-        "_id": "ba56640269f443a5d64b32cb",
-        "fullName": "Omer Adam",
-        "userName": "Omerush",
-        "friends": []
-    },
-    {
-        "_id": "ca56640269f443a5d64b32cc",
-        "fullName": "Zohar Argov",
-        "userName": "Ha Melech",
-        "friends": []
-    }
-];
+var contacts = []
 
 // function sort(arr) {
 //     return arr.sort((a, b) => {
@@ -67,7 +48,6 @@ function query(filterBy, user) {
                 queryParams.set(property, filterBy[property])
             }
         }
-        console.log(queryParams);
         return HttpService.get(`user?${queryParams}`);
     }
 
@@ -115,25 +95,21 @@ function _updateContact(contact) {
         if (index !== -1) {
             contacts[index] = contact
         }
-        // console.log('(edit)Contacts after replace ', contacts)
         StorageService.save(CONTACT_KEY, contacts)
         resolve(contact)
     })
 }
 
 function _addContact(contact) {
-    // console.log('add contact')
     return new Promise((resolve, reject) => {
         contact._id = UtilService.makeId()
         contacts.push(contact)
-            // console.log('(ADD)Contacts after push ', contacts)
         StorageService.save(CONTACT_KEY, contacts)
         resolve(contact)
     })
 }
 
 function saveContact(contact) {
-    // console.log('save contact', contact)
     return contact._id ? _updateContact(contact) : _addContact(contact)
 }
 

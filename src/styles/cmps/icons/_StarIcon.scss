@@ -6,13 +6,15 @@
     stroke: #000000;
     @include hover-supported {
         fill: #f3d250;
-        transition: 0.3s;
+        stroke: white;
+        transition: .5s;
     }
     &.pinned {
         fill: #f3d250;
         @include hover-supported {
             fill: transparent;
-            transition: 0.3s;
+            stroke: black;
+            transition: 0.5s;
         }
     }
 }

@@ -23,7 +23,6 @@ export function logout() {
 export function getUser() {
     return async dispatch => {
         const user = await UserService.getLoggedinUser();
-        console.log('user in actions', user);
         dispatch({ type: 'GET_USER', user })
         // const latestUser = await UserService.getUpdatedUser();
         // dispatch({ type: 'GET_USER', latestUser })
@@ -40,7 +39,6 @@ export function getUser() {
 // }
 
 export function updateUser(user) {
-    console.log('@@@user in actions@@@', user);
     return async dispatch => {
         const updatedUser = await UserService.update(user);
         dispatch({ type: 'SET_USER', user: updatedUser })

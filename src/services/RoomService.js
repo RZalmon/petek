@@ -7,7 +7,6 @@ function query(critirea) {
 
 
 function getById(filterBy) {
-    console.log('ID IS:', filterBy.roomId);
     const queryParams = new URLSearchParams();
     if (filterBy) {
         for (const property in filterBy) {
