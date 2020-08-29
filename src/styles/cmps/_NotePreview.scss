@@ -79,4 +79,28 @@
             margin: 5px;
         }
     }
+    &-appear {
+        transform: scale(0.1);
+    }
+    &-appear-active {
+        transform: scale(1);
+        transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    &-exit-active {
+        transform: rotateY(90deg) rotateX(45deg);
+        transition: transform 0.8s cubic-bezier(0.5, 0, 0.75, 0);
+    }
 }
+
+// .note-preview-appear {
+//     transform: scale(0.1);
+// }
+// .note-preview-appear-active {
+//     transform: scale(1);
+//     transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+// }
+
+// .note-preview-exit-active {
+//     transform: rotateY(90deg) rotateX(45deg);
+//     transition: transform 0.8s cubic-bezier(0.5, 0, 0.75, 0);
+// }

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import StarIcon from '../icons/StarIcon'
+import NotePinIcon from '../icons/NotePinIcon'
 import CircleIcon from '../icons/CircleIcon'
 import ColorPalleteIcon from '../icons/ColorPaletteIcon'
 
 export default ({ togglePinned, note, user, setNoteColor }) => {
     const [isPalleteOpen, setIsPalleteOpen] = useState(false)
+    const colors = ['#ffa350', '#f78888', '#fff59d', '#90ccf4', '#4caf50']
 
 
     const changeColor = (color) => {
@@ -14,13 +15,11 @@ export default ({ togglePinned, note, user, setNoteColor }) => {
         setIsPalleteOpen(false)
     }
 
-    const colors = ['#ffa350', '#f78888', '#fff59d', '#90ccf4', '#4caf50']
 
     return (
         <div className="features-container">
-            <i onClick={() => togglePinned(note)}><StarIcon isPinned={user.pinnedNotes.find(id => id === note._id) ? true : false} /></i>
+            <i onClick={() => togglePinned(note)}><NotePinIcon isPinned={note.isPinned} /></i>
             <div className="color-pallete">
-                {/* <img src={colorPallete} alt="Change Color" className="color-pallete-icon" onClick={() => setIsPalleteOpen(!isPalleteOpen)} /> */}
                 <i onClick={() => setIsPalleteOpen(!isPalleteOpen)}><ColorPalleteIcon /></i>
 
                 {isPalleteOpen && <div className="colors-container">{
@@ -29,7 +28,7 @@ export default ({ togglePinned, note, user, setNoteColor }) => {
                             key={idx}
                             classNames="fade"
                             timeout={300}
-                            in={true}
+                            in={isPalleteOpen}
                             appear={true}>
                             <i onClick={() => changeColor(color)}><CircleIcon fill={color} /></i>
                         </CSSTransition>

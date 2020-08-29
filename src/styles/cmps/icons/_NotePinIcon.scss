@@ -1,0 +1,50 @@
+.note-pin-icon {
+    cursor: pointer;
+    width: 30px;
+    & .clr {
+        fill: transparent;
+    }
+    @include hover-supported {
+        .clr {
+            transition: 0.3s;
+        }
+        .clr-1 {
+            fill: #fb5252;
+        }
+        .clr-2 {
+            fill: #f04141;
+        }
+        .clr-3 {
+            fill: #ff4a3c;
+        }
+        .clr-4 {
+            fill: #b1dbfc;
+        }
+        .clr-5 {
+            fill: #dfebfa;
+        }
+    }
+    &.pinned {
+        .clr-1 {
+            fill: #fb5252;
+        }
+        .clr-2 {
+            fill: #f04141;
+        }
+        .clr-3 {
+            fill: #ff4a3c;
+        }
+        .clr-4 {
+            fill: #b1dbfc;
+        }
+        .clr-5 {
+            fill: #dfebfa;
+        }
+        @include hover-supported {
+            transition: 0.3s;
+            .clr {
+                fill: transparent;
+            }
+        }
+    }
+}

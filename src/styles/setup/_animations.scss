@@ -19,6 +19,38 @@
     opacity: 0;
 }
 
+.alert-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+}
+.alert-exit {
+    opacity: 1;
+}
+.alert-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.note-item{
+    &-enter{
+        transform: rotateX(-90deg);
+        &-active{
+            transform: rotateX(0);
+            transition: transform .8s cubic-bezier(0.34, 1.56, 0.64, 1)
+        }
+    }
+
+    &-exit{
+        &-active{
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity .5s, transform .5s cubic-bezier(0.55, 0, 1, 0.45)
+        }
+    }
+}
+
 // .slide-enter {
 //     opacity: 0;
 //     transform: scale(0.97) translateY(5px);
