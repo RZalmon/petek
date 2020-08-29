@@ -35,6 +35,8 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
         setIsNewTodo(false)
         setNewTodo('')
         newTodoInputRef.current.value = ''
+
+
     };
 
     const removeTodo = (idx) => {

@@ -29,6 +29,7 @@
 @import "./styles/cmps/ContactPreview";
 @import "./styles/cmps/ContactList";
 @import "./styles/cmps/AvatarEdit.scss";
+@import "./styles/cmps/AvatarLoader.scss";
 @import "./styles/cmps/NotePreview.scss";
 @import "./styles/cmps/Features.scss";
 @import "./styles/cmps/NoteList.scss";
@@ -47,13 +48,10 @@
 @import "./styles/pages/SignupPage";
 @import "./styles/pages/RoomPage";
 @import "./styles/pages/HomePage";
-
 //NOTY LIB
 @import "~noty/src/noty.scss";
 @import "~noty/src/themes/bootstrap-v4.scss";
 @import "~noty/src/themes/sunset.scss";
-
-
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -63,6 +61,18 @@ body {
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.noty_buttons {
+    display: flex;
+    justify-content: space-around;
+    .btn-error {
+        background-color: #5cb85c;
+    }
+}
+
+.noty_body {
+    text-align: center;
 }
 
 .swal2-title {

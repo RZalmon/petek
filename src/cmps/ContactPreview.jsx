@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 
-
+import AvatarLoader from './AvatarLoader'
 
 import addFriendImg from '../assets/svg/friends.svg'
 import friendReqSent from '../assets/svg/ok.svg'
@@ -12,6 +12,12 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom,setRoomId,roomI
 
     const [isFriendSent, setIsFriendSent] = useState(false)
     const [isFriend, setIsFriend] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false)
+
+  const onLoad = useCallback(() => {
+    console.log('loaded');
+    setIsLoaded(true);
+    }, [])
 
     useEffect(() => {
         if (!loggedinUser) return
@@ -40,7 +46,8 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom,setRoomId,roomI
 
     return (
       <div className="contact-preview" onClick={(ev) => {if(isFriend) contact.roomId ?  moveToRoom(ev,contact.roomId) : moveToRoom(ev,contact)  }}>    
-          <img src={contact.imgUrl} alt={`${contact.userName}`} className="avatar avatar-s" />
+           <img  onLoad={onLoad} src={contact.imgUrl} alt={`${contact.userName}`} className="avatar avatar-s" style={{display: isLoaded? 'block': 'none'}}/> 
+          {!isLoaded && <AvatarLoader/>}
             <div className="user-name-container">
                 <span>Full Name: {contact.fullName}</span>
                 <span>User Name: {contact.userName}</span>
