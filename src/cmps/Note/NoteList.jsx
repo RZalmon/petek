@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 import NotePreview from './NotePreview'
 import Loading from '../Loading'
 
-export default ({ notes, user, removeNote, saveRoomChanges, togglePinned, setNoteType }) => {
+export default ({ notes, pinnedNotes, user, removeNote, saveRoomChanges, togglePinned, setNoteType }) => {
 
     const [notesForDisplay, setNotesForDisplay] = useState([])
 
@@ -18,17 +20,22 @@ export default ({ notes, user, removeNote, saveRoomChanges, togglePinned, setNot
     return (
 
         <div className="note-list" onClick={() => setNoteType('')}>
-            {notesForDisplay.length ? notesForDisplay.map(note => {
-                return (
-                    <NotePreview
-                     note={note} 
-                     key={note._id} 
-                     user={user} 
-                     removeNote={removeNote} 
-                     saveRoomChanges={saveRoomChanges} 
-                     togglePinned={togglePinned} />
-                )
-            }) : <Loading />}
+            <TransitionGroup component={null}>
+                {notes.map((note) =>
+                    <CSSTransition 
+                    key={note._id}
+                    timeout={{enter: 800, exit: 500}}
+                    classNames={'note-item'}
+                    >
+                        <NotePreview
+                            note={note}
+                            key={note._id}
+                            user={user}
+                            removeNote={removeNote}
+                            saveRoomChanges={saveRoomChanges}
+                            togglePinned={togglePinned} />
+                    </CSSTransition>)}
+            </TransitionGroup>
         </div>
     )
 }

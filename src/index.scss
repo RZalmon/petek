@@ -3,6 +3,9 @@
 @import "./styles/setup/mixins";
 @import "./styles/setup/typography";
 @import "./styles/setup/variables";
+@import "./styles/setup/animations";
+
+
 //BASE
 @import "./styles/basics/helpers";
 @import "./styles/basics/layout";
@@ -17,6 +20,9 @@
 @import "./styles/cmps/icons/GpsIcon";
 @import "./styles/cmps/icons/PinIcon";
 @import "./styles/cmps/icons/PlusIcon";
+@import "./styles/cmps/icons/NotePinIcon";
+
+
 //CMPS
 @import "./styles/cmps/NavBar";
 @import "./styles/cmps/BurgerMenu";

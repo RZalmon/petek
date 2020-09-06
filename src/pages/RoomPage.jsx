@@ -36,8 +36,11 @@ const RoomPage = (props) => {
     const newNote = {
         header: noteHeader,
         data: noteData,
-        type: noteType
+        type: noteType,
+        bgColor: '#87cefa',
+        isPinned: false
     }
+    
     const cmps = {
         InputText,
         InputImg,
@@ -81,16 +84,17 @@ const RoomPage = (props) => {
         setFilterBy(filterBy)
     };
     const onHandleSubmit = async (ev) => {
-        const { user } = props
+        const { user, room } = props
         if (ev) ev.preventDefault()
         newNote._id = UtilService.makeId(24)
         newNote.createdAt = Date.now()    //maybe server side should handle it
         let minimalUser = UserService.getMinimalUser(user._id, user.imgUrl)
         newNote.createdBy = minimalUser
-        const friend = user.friends.find(currFriend => currFriend.roomId ===  props.room._id)
-        props.room.notes.unshift(newNote)
-        props.saveRoom(props.room)
-        SocketService.emit("added note", ({ room: props.room, user: props.user, friendId: friend._id }));
+        const friend = user.friends.find(currFriend => currFriend.roomId ===  room._id)
+        let idx = room.notes.findIndex(note => !note.isPinned)
+        room.notes.splice(idx, 0, newNote)
+        props.saveRoom(room)
+        SocketService.emit("added note", ({ room, user, friendId: friend._id }));
         // props.showNotification('Note added successfully! So Excited', 'success')
         //Need to find way to transfer that prop on desktop
         setNoteHeader('')
@@ -98,13 +102,30 @@ const RoomPage = (props) => {
         setNoteType('')
         setIsUploading(false)
     }
+    
     const togglePinned = (note) => {
-        var choosenNoteIdx = props.user.pinnedNotes.findIndex(id => note._id === id)
-        choosenNoteIdx === -1 ? props.user.pinnedNotes.push(note._id) : props.user.pinnedNotes.splice(choosenNoteIdx, 1)
+        note.isPinned = !note.isPinned
         let idx = props.room.notes.findIndex(currNote => note._id === currNote._id)
-        props.room.notes.splice(idx, 1, note)
+        props.room.notes.splice(idx, 1)
+        note.isPinned ? handleNotePin(note) : handleNoteUnpin(note)
         props.saveRoom(props.room)
-        props.updateUser(props.user)
+        SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
+        // var choosenNoteIdx = props.user.pinnedNotes.findIndex(id => note._id === id)
+        // choosenNoteIdx === -1 ? props.user.pinnedNotes.push(note._id) : props.user.pinnedNotes.splice(choosenNoteIdx, 1)
+        // let idx = props.room.notes.findIndex(currNote => note._id === currNote._id)
+        // props.room.notes.splice(idx, 1, note)
+        // props.saveRoom(props.room)
+        // props.updateUser(props.user)
+    }
+
+
+    const handleNotePin = (note) => {
+        props.room.notes.splice(0, 0, note)
+    }
+
+    const handleNoteUnpin = (note) => {
+        let idx = props.room.notes.findIndex(note => !note.isPinned)
+        props.room.notes.splice(idx, 0, note)
     }
 
     const removeNote = async (noteId) => {
@@ -123,6 +144,7 @@ const RoomPage = (props) => {
         let isValid = await RoomService.checkIsValidUser(user._id, room._id)
         isValid ? setIsValidUser(true) : props.history.push('/')
     }
+    
 
     useEffect(() => {
         loadRoom()//created

@@ -11,7 +11,6 @@ export default function RoomReducer(state = initialState, action) {
         case 'SET_CURR_ROOM':
             return { ...state, currRoom: action.room }
         case 'UPDATE_ROOM':
-            console.log('UPDATE_ROOM invoked rooms:', state.rooms)
             return {
                 ...state,
                 rooms: state.rooms.map(room => {
@@ -32,7 +31,6 @@ export default function RoomReducer(state = initialState, action) {
                 })
             }
         case 'ADD_ROOM':
-            console.log('UPDATE_ROOM ', action.room);
             return {
                 ...state,
                 rooms: [...state.rooms, action.room]

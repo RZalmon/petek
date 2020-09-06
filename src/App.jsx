@@ -30,20 +30,14 @@ const App = (props) => {
 
     if (room && loggedinUser) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
-        console.log('&&&&&UPDATE ROOM INVOKED');
         if (userId !== loggedinUser._id) {
-          console.log('&&&&&after condition updatedRoom._id');
           props.loadRoomById({ roomId: updatedRoom._id })
         }
       });
     }
     if (loggedinUser) {
       SocketService.on(`updateUser ${loggedinUser._id}`, (updatedUser) => {
-        console.log('TEST', updatedUser);
-        // console.log('$$UPDATED USER FROM SOCKET$$', updatedUser);
-        // console.log('$$USER$$:', loggedinUser.userName)
         let user = StorageService.load('user')
-        console.log('Storage:', user.userName)
         if (loggedinUser._id === user._id) updateUser(updatedUser)
       });
       SocketService.on(`updateUserWithoutAudio ${loggedinUser._id}`, (updatedUser) => { props.updateUser(updatedUser) })
@@ -60,7 +54,6 @@ const App = (props) => {
   }
 
   const updateUser = (updatedUser) => {
-    console.log('update that user!');
     let audio = new Audio(audioNotification);
     if (updatedUser) {
       props.updateUser(updatedUser)
@@ -71,7 +64,6 @@ const App = (props) => {
   }
 
   const showNotification = (text, type) => {
-    console.log('clciked');
     new Noty({
       text,
       type,

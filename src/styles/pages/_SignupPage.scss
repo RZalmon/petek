@@ -20,8 +20,11 @@
         background-color: yellow;
         padding: 0.6rem 1.5rem;
         text-transform: uppercase;
+        text-align: center;
+        width: 105px;
         @include hover-supported {
             background-color: darken($color:yellow, $amount: 10);
+            width: 25%;
             transition: .5s;
         }
     }
