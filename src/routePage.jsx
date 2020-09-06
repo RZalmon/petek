@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { Route, Switch, withRouter } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import InboxPage from './pages/InboxPage'
+import RandomGame from './pages/RandomGame'
 
 import ContactPage from './pages/ContactPage'
 import RoomPage from './pages/RoomPage'
@@ -45,6 +46,7 @@ class RoutePage extends React.Component {
             <Route path="/signup" exact render={(routerProps) => <SignupPage {...routerProps} onConnectSocket={this.props.onConnectSocket} showNotification={this.props.showNotification} />} />
             <Route path="/" exact component={HomePage} />
             <Route path="/contact" component={ContactPage} />
+            <Route path="/random-game" exact component={RandomGame} />
             <Route path="/room/:id" exact render={(routerProps) => <RoomPage {...routerProps} showNotification={this.props.showNotification} />} />
             {/* <Route path="/room/:id" component={RoomPage} showNotification={this.props.showNotification} /> */}
             <Route path="/inbox/:id" exact component={InboxPage} />
