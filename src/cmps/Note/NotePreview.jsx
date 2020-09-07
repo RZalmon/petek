@@ -1,24 +1,29 @@
-import React, { useEffect, useState, createRef } from 'react'
+import React, { useEffect, useState, createRef, useCallback } from 'react'
+import { CSSTransition } from 'react-transition-group';
 
 import Moment from 'react-moment';
 
+import NoteText from "./NoteText";
+import NoteImg from "./NoteImg";
+import NoteVideo from "./NoteVideo";
+import NoteTodo from "./NoteTodo";
+import NoteLoc from "./NoteLoc";
+import Features from "./Features";
 
-import NoteText from './NoteText'
-import NoteImg from './NoteImg'
-import NoteVideo from './NoteVideo'
-import NoteTodo from './NoteTodo'
-import NoteLoc from './NoteLoc'
-import Features from './Features'
+import RemoveIcon from "../../cmps/icons/RemoveIcon";
+import EditIcon from "../../cmps/icons/EditIcon";
+import SaveIcon from "../../cmps/icons/SaveIcon";
 
-import RemoveIcon from '../../cmps/icons/RemoveIcon'
-import EditIcon from '../../cmps/icons/EditIcon'
-import SaveIcon from '../../cmps/icons/SaveIcon'
+import AvatarLoader from '../AvatarLoader'
+
 
 export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [isNewTodo, setIsNewTodo] = useState(false);
     const [currTodoIdx, setCurrTodoIdx] = useState('');
     const [textEdit, setTextEdit] = useState('')
+    const [isLoaded, setIsLoaded] = useState(false);
+
 
     const cmps = {
         NoteText,
@@ -32,9 +37,9 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
     const noteRef = createRef();
 
     const setNoteColor = (color) => {
-        note.bgColor = color
-        saveRoomChanges()
-    }
+        note.bgColor = color;
+        saveRoomChanges();
+    };
 
     const paintNote = () => {
         if (note.bgColor && noteRef.current) noteRef.current.style.backgroundColor = note.bgColor
@@ -45,6 +50,10 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
         saveRoomChanges();
     }
 
+    const onLoad = useCallback(() => {
+        console.log("loaded");
+        setIsLoaded(true);
+    }, []);
 
 
 
@@ -56,15 +65,24 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
         }
     }, []);
 
+    useEffect(() => {
+        paintNote();
+        if (note.createdBy._id !== user._id) return;
+        if (note.createdBy.imgUrl !== user.imgUrl) {
+            note.createdBy.imgUrl = user.imgUrl;
+            saveRoomChanges();
+        }
+    }, []);
 
     useEffect(() => {
-        paintNote()
+        paintNote();
     }, [note.bgColor]);
 
     return (
         <div className="note-preview" style={{ backgroudColor: note.bgColor }}>
             <div className={user._id === note.createdBy._id ? 'user-container' : 'friend-container'}>
-                <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" />
+                <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" onLoad={onLoad}/>
+                {!isLoaded && <AvatarLoader />}
                 <div className="note-container" ref={noteRef}>
                     <div className="note-header">
                         <div>
