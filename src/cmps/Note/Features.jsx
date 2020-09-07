@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import NotePinIcon from '../icons/NotePinIcon'
 import CircleIcon from '../icons/CircleIcon'
@@ -26,7 +26,7 @@ export default ({ togglePinned, note, user, setNoteColor }) => {
                     colors.map((color, idx) => {
                         return (<CSSTransition
                             key={idx}
-                            classNames="fade"
+                            classNames={'fade'}
                             timeout={300}
                             in={isPalleteOpen}
                             appear={true}>
@@ -43,43 +43,17 @@ export default ({ togglePinned, note, user, setNoteColor }) => {
 
 
 
-//second try after looking in doc https://github.com/reactjs/react-transition-group/blob/master/Migration.md
-// return (
-//     <div className="features-container">
-//         <i onClick={() => togglePinned(note)}><StarIcon isPinned={user.pinnedNotes.find(id => id === note._id) ? true : false} /></i>
-//         <div className="color-pallete">
-//             {/* <img src={colorPallete} alt="Change Color" className="color-pallete-icon" onClick={() => setIsPalleteOpen(!isPalleteOpen)} /> */}
-//             <i onClick={() => setIsPalleteOpen(!isPalleteOpen)}><ColorPalleteIcon /></i>
-
-//             {isPalleteOpen && <div className="colors-container">{
-//                 colors.map((color, idx) => {
-//                     return (<CSSTransition
-//                         key={idx}
-//                         classNames="example"
-//                         timeout={{ enter: 500, exit: 300 }}>
-//                         <i onClick={() => changeColor(color)}><CircleIcon fill={color} /></i>
-//                     </CSSTransition>
-//                     )
-//                 })
-//             }
-//             </div>}
-//         </div>
-//     </div >
-// )
-// }
-
-
-
-//before started with animations
+//***TRIED HERE WITH THE "PROPER WAY" USING TRANSITION GROUP BUT WE STILL CAN SEE THE PALLATE OPEN ALTOUGH IN STATE ITS FALSE  **** */
 // import React, { useState } from 'react';
-// import ReactCSSTransitionGroup from 'react-transition-group';
+// import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-// import StarIcon from '../icons/StarIcon'
+// import NotePinIcon from '../icons/NotePinIcon'
 // import CircleIcon from '../icons/CircleIcon'
 // import ColorPalleteIcon from '../icons/ColorPaletteIcon'
 
 // export default ({ togglePinned, note, user, setNoteColor }) => {
 //     const [isPalleteOpen, setIsPalleteOpen] = useState(false)
+//     const colors = ['#ffa350', '#f78888', '#fff59d', '#90ccf4', '#4caf50']
 
 
 //     const changeColor = (color) => {
@@ -90,18 +64,25 @@ export default ({ togglePinned, note, user, setNoteColor }) => {
 
 //     return (
 //         <div className="features-container">
-//             <i onClick={() => togglePinned(note)}><StarIcon isPinned={user.pinnedNotes.find(id => id === note._id) ? true : false} /></i>
+//             <i onClick={() => togglePinned(note)}><NotePinIcon isPinned={note.isPinned} /></i>
 //             <div className="color-pallete">
-//                 {/* <img src={colorPallete} alt="Change Color" className="color-pallete-icon" onClick={() => setIsPalleteOpen(!isPalleteOpen)} /> */}
 //                 <i onClick={() => setIsPalleteOpen(!isPalleteOpen)}><ColorPalleteIcon /></i>
-//                 {isPalleteOpen && <div className="colors-container">
-//                     <i onClick={() => changeColor('#ffa350')}><CircleIcon fill="#ffa350" /></i>
-//                     <i onClick={() => changeColor('#f78888')}><CircleIcon fill="#f78888" /></i>
-//                     <i onClick={() => changeColor('#fff59d')}><CircleIcon fill="#fff59d" /></i>
-//                     <i onClick={() => changeColor('#90ccf4')}><CircleIcon fill="#90ccf4" /></i>
-//                     <i onClick={() => changeColor('#4caf50')}><CircleIcon fill="#4caf50" /></i>
-//                 </div>}
+
+//                 <TransitionGroup component={null}><div className="colors-container">{
+//                     colors.map((color, idx) =>
+//                         (<CSSTransition
+//                             key={idx}
+//                             classNames="fade"
+//                             in={isPalleteOpen}
+//                             timeout={{enter: 800, exit: 500}}>
+//                             <i onClick={() => changeColor(color)}><CircleIcon fill={color} /></i>
+//                         </CSSTransition>
+//                         )
+//                     )
+//                 }
+//                 </div></TransitionGroup>
 //             </div>
-//         </div>
+//         </div >
 //     )
 // }
+

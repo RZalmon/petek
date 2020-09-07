@@ -2,7 +2,7 @@ import React from 'react';
 
 
 export default ({ isPinned }) => {
-    return <svg className={isPinned ? 'note-pin-icon pinned' : 'note-pin-icon'}  enable-background="new 0 0 494.982 494.982" viewBox="0 0 494.982 494.982"  xmlns="http://www.w3.org/2000/svg">
+    return <svg className={isPinned ? 'note-pin-icon pinned' : 'note-pin-icon'}  enableBackground="new 0 0 494.982 494.982" viewBox="0 0 494.982 494.982"  xmlns="http://www.w3.org/2000/svg">
     <g>
     <g>
     <path className="clr clr-5" d="m15.871 486.565 28.585-18.848c26.039-17.169 50.274-36.934 72.332-58.992l106.088-106.088-30.521-30.521-106.087 106.089c-22.058 22.058-41.824 46.293-58.992 72.332l-18.848 28.585c-3.227 4.894 2.549 10.67 7.443 7.443z" />

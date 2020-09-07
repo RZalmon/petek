@@ -76,13 +76,13 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
                                 setCurrTodoIdx(idx);
                                 setEditedTodo(todo.text)
                             }
+                            //later remove this func from template to so called "methods"
                         }}>
                             <div>
                                 <input type="checkbox" onClick={(ev) => toggleIsDone(idx)} checked={todo.isDone} readOnly />
                                 {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} >{todo.text}</span>}
                             </div>
-                            {(isEdit && currTodoIdx === idx) && <input type="text" value={editedTodo} ref={editInputRef} onChange={(e) => { setEditedTodo(e.target.value); }} />
-                            }
+                            {(isEdit && currTodoIdx === idx) && <input type="text" value={editedTodo} ref={editInputRef} onChange={(e) => { setEditedTodo(e.target.value); }} />}
                             {isEdit && <img src={xmark} className="remove-todo-btn" onClick={() => removeTodo(idx)} />}
                         </li>
                     )

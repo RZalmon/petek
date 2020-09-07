@@ -27,14 +27,15 @@ async function getById(id) {
 }
 
 async function signUp(credentials) {
+    let { userName, fullName, password, imgUrl } = credentials
     let user = {
-        userName: credentials.userName,
-        fullName: credentials.fullName,
-        password: credentials.password,
+        userName,
+        fullName,
+        password,
         pinnedNotes: [],
         notifications: [],
         pinnedNotes: [],
-        imgUrl: credentials.imgUrl ? credentials.imgUrl : avatarImg,
+        imgUrl: imgUrl ? imgUrl : avatarImg,
         joinedAt: Date.now(),
         friends: []
     };

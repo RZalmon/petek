@@ -30,8 +30,6 @@ class SignupPage extends Component {
   }
 
   componentDidMount() {
-    console.log('hi from signUp', this.state.newUser);
-
     this.getLoggedinUser();
   }
 
@@ -130,7 +128,7 @@ class SignupPage extends Component {
             {isSignUp && <MDBInput label="Full Name" name="fullName" value={this.state.newUser.fullName || ''} onChange={this.onChangeHandler} />}
             <MDBInput label="UserName" type="text" name="userName" value={this.state.newUser.userName || ''} onChange={this.onChangeHandler} />
             <MDBInput label="Password" type="password" name="password" value={this.state.newUser.password || ''} onChange={this.onChangeHandler} />
-            <button className="signup-login-btn">{isSignUp ? 'Sign up' : 'Login'}</button>
+            <button className="signup-login-btn">{isSignUp ? 'Signup' : 'Login'}</button>
             {!isSignUp && <h2 >Don't Have an account?<span className="toggle-btn" onClick={this.toggleSignUp}> Sign up!</span></h2>}
             {isSignUp && <h2 >Head Back to <span className="toggle-btn" onClick={this.toggleSignUp}>Login</span></h2>}
           </form>
