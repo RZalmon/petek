@@ -2,20 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import NotePreview from './NotePreview'
-import Loading from '../Loading'
 
-export default ({ notes, pinnedNotes, user, removeNote, saveRoomChanges, togglePinned, setNoteType }) => {
+export default ({ notes, user, removeNote, saveRoomChanges, togglePinned, setNoteType,toggleStarred }) => {
 
-    const [notesForDisplay, setNotesForDisplay] = useState([])
+    // const [notesForDisplay, setNotesForDisplay] = useState([])
 
-    useEffect(() => {
-        const fixedNotes = []
-        notes.map(note => {
-            user.pinnedNotes.find(id => id === note._id) ?
-                fixedNotes.unshift(note) : fixedNotes.push(note)
-        })
-        setNotesForDisplay(fixedNotes)
-    }, [notes])
+    // useEffect(() => {
+    //     const fixedNotes = []
+    //     notes.map(note => {
+    //         user.pinnedNotes.find(id => id === note._id) ?
+    //             fixedNotes.unshift(note) : fixedNotes.push(note)
+    //     })
+    //     setNotesForDisplay(fixedNotes)
+    // }, [notes])
 
     return (
 
@@ -33,7 +32,8 @@ export default ({ notes, pinnedNotes, user, removeNote, saveRoomChanges, toggleP
                             user={user}
                             removeNote={removeNote}
                             saveRoomChanges={saveRoomChanges}
-                            togglePinned={togglePinned} />
+                            togglePinned={togglePinned}
+                            toggleStarred={toggleStarred} />
                     </CSSTransition>)}
             </TransitionGroup>
         </div>

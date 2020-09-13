@@ -17,7 +17,7 @@ import SaveIcon from "../../cmps/icons/SaveIcon";
 import AvatarLoader from '../AvatarLoader'
 
 
-export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
+export default ({ note, user, removeNote, saveRoomChanges, togglePinned,toggleStarred }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [isNewTodo, setIsNewTodo] = useState(false);
     const [currTodoIdx, setCurrTodoIdx] = useState('');
@@ -81,7 +81,7 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
     return (
         <div className="note-preview" style={{ backgroudColor: note.bgColor }}>
             <div className={user._id === note.createdBy._id ? 'user-container' : 'friend-container'}>
-                <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" onLoad={onLoad}/>
+                <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" onLoad={onLoad} style={{display: isLoaded? 'block': 'none'}}/>
                 {!isLoaded && <AvatarLoader />}
                 <div className="note-container" ref={noteRef}>
                     <div className="note-header">
@@ -93,7 +93,7 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
                     <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} setIsNewTodo={setIsNewTodo} isNewTodo={isNewTodo} textEdit={textEdit} setTextEdit={setTextEdit} />
-                    <Features togglePinned={togglePinned} note={note} user={user} setNoteColor={setNoteColor} />
+                    <Features togglePinned={togglePinned} note={note} user={user} setNoteColor={setNoteColor} toggleStarred={toggleStarred} />
                 </div>
             </div>
         </div>

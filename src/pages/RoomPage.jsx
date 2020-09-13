@@ -111,6 +111,28 @@ const RoomPage = (props) => {
         await props.saveRoom(JSON.parse(JSON.stringify(props.room)))
         SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
     }
+    const toggleStarred = async (note) => {
+        props.user.starredNotes ? handleStarredNote(note) : props.user.starredNotes = new Array(note)
+        
+        // note.isPinned = !note.isPinned
+        // let idx = props.room.notes.findIndex(currNote => note._id === currNote._id)
+        // props.room.notes.splice(idx, 1)
+        // note.isPinned ? handleNotePin(note) : handleNoteUnpin(note)
+        // await props.saveRoom(JSON.parse(JSON.stringify(props.room)))
+        // SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
+    }
+    
+    const handleStarredNote = (note) =>{
+        let idx =  props.user.starredNotes.findIndex(starredNote => starredNote._id === note._id)
+        idx === -1 ? props.user.starredNotes.unshift(note) : props.user.starredNotes.splice(idx, 1)
+        console.log(idx);
+        console.log(props.user);
+        props.updateUser(props.user)
+
+
+        // props.user.starredNotes.find(srarredNote => srarredNote)
+    }
+
 
     const handleNotePin = (note) => {
         props.room.notes.unshift(note)
@@ -139,6 +161,7 @@ const RoomPage = (props) => {
 
     useEffect(() => {
         loadRoom()//created
+        console.log(props.user);
         return () => { props.resetCurrRoom() }; //onDestroy
     }, []);
 
@@ -184,7 +207,7 @@ const RoomPage = (props) => {
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData} />
             </div> : <Loading />}
             {(isValidUser && notes) && <div>
-                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} />}
+                {!!notes.length && <NoteList notes={notes} user={props.user} removeNote={removeNote} saveRoomChanges={saveRoomChanges} togglePinned={togglePinned} setNoteType={setNoteType} toggleStarred={toggleStarred} />}
             </div>}
         </div>
     );
@@ -202,13 +225,3 @@ const mapDispatchToProps = {
     updateUser
 };
 export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
-
-// const loadRoom = async () => {
-//     const roomId = props.room ? props.room._id : props.match.params.id;
-//     if (props.room) {
-//         checkIsValidUser()
-//         await props.loadRoomById({ term: filterBy.term, roomId })
-//         return
-//     }
-//     await props.loadRoomById({ term: filterBy.term, roomId });
-// }

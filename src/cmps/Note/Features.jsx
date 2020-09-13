@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect  } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
+import StarIcon from '../../assets/svg/star.svg'
+import EmptyStarIcon from '../../assets/svg/empty-star.svg'
 
 import NotePinIcon from '../icons/NotePinIcon'
 import CircleIcon from '../icons/CircleIcon'
 import ColorPalleteIcon from '../icons/ColorPaletteIcon'
 
-export default ({ togglePinned, note, user, setNoteColor }) => {
+export default ({ togglePinned, note, user, setNoteColor,toggleStarred }) => {
     const [isPalleteOpen, setIsPalleteOpen] = useState(false)
+    const [starSrc, setStarSrc] = useState(EmptyStarIcon)
+    
     const colors = ['#ffa350', '#f78888', '#fff59d', '#90ccf4', '#4caf50']
 
 
@@ -15,9 +20,19 @@ export default ({ togglePinned, note, user, setNoteColor }) => {
         setIsPalleteOpen(false)
     }
 
+    const checkIsStarred = (note) => {
+      return !user.starredNotes ? setStarSrc(EmptyStarIcon) : user.starredNotes.find(starredNote =>{return starredNote._id === note._id ? setStarSrc(StarIcon) : setStarSrc(EmptyStarIcon)  })
+    }
+
+    useEffect(() => {
+        checkIsStarred(note)
+        console.log('hiiiiiiiiiii');
+    }, [])
+
 
     return (
         <div className="features-container">
+            <i onClick={() => toggleStarred(note)}><img src={starSrc} alt=""/></i>
             <i onClick={() => togglePinned(note)}><NotePinIcon isPinned={note.isPinned} /></i>
             <div className="color-pallete">
                 <i onClick={() => setIsPalleteOpen(!isPalleteOpen)}><ColorPalleteIcon /></i>

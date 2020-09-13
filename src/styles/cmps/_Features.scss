@@ -2,10 +2,22 @@
     margin: 5px 0 5px 0;
     display: flex;
     align-items: center;
-
-    // img {
-    //     width: 30px;
-    // }
+    max-width: 70vw;
+    .colors-container {
+        margin: 0 20px 0 -10px;
+        align-self: flex-end;
+        svg {
+            width: 15%;
+            height: 100%;
+        }
+    }
+    img {
+        width: 30px;
+    }
+    .color-pallete {
+        display: flex;
+        min-width: 220px;
+    }
     // .color-pallete-icon {
     //     margin: 0 5px 0 5px;
     // }
@@ -14,7 +26,6 @@
     //         filter: invert(71%) sepia(80%) saturate(876%) hue-rotate(353deg) brightness(102%) contrast(102%);
     //     }
     // }
-
     // .colors-container {
     //     transition: 0.3s;
     //     // display: none;
@@ -28,9 +39,4 @@
     //     //     width: 34px;
     //     // }
     // }
-
-    .color-pallete {
-        display: flex;
-        min-width: 220px;
-    }
 }
