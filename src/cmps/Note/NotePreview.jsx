@@ -81,7 +81,7 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
     return (
         <div className="note-preview" style={{ backgroudColor: note.bgColor }}>
             <div className={user._id === note.createdBy._id ? 'user-container' : 'friend-container'}>
-                <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" onLoad={onLoad}/>
+                <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" onLoad={onLoad} />
                 {!isLoaded && <AvatarLoader />}
                 <div className="note-container" ref={noteRef}>
                     <div className="note-header">
