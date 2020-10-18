@@ -65,6 +65,7 @@ const RoomPage = (props) => {
     const InputType = cmps[noteInputType];
 
     const loadRoom = async () => {
+        console.log('@#$!%$#@#%^^%^');
         const roomId = props.room ? props.room._id : props.match.params.id;
         if (props.room) {
             await props.loadRoomById({ ...filterBy, roomId })
@@ -196,12 +197,13 @@ const RoomPage = (props) => {
 
 
 
-    //********************************* */
+    //********************************* */S
     //NEED A FIX, INGAGING NON STOP WHEN SECOND USER CONNECTS TO THE ROOM!!!!
-    // useEffect(() => {
-    //     //Watching for changes on room and updates with socket
-    //     if (props.room && props.user) updateFriend()
-    // }, [props.room]);
+    useEffect(() => {
+        console.log(props.room);
+        //Watching for changes on room and updates with socket
+        if (props.room && props.user) updateFriend()
+    }, [props.room]);
 
     //********************************* */
 
