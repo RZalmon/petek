@@ -26,7 +26,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
         let noteCopy = JSON.parse(JSON.stringify(note))
         noteCopy.data[idx].isDone = !noteCopy.data[idx].isDone
         await updateNote(room._id, noteCopy)
-        updateMembers()
+        // updateMembers()
     }
     //*********CHECKPOINT */
 
@@ -41,7 +41,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
         let noteCopy = JSON.parse(JSON.stringify(note))
         noteCopy.data.push(todoToAdd);
         await updateNote(room._id, noteCopy)
-        updateMembers()
+        // updateMembers()
         setIsNewTodo(false)
         setNewTodo('')
     };
@@ -50,7 +50,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
         let noteCopy = JSON.parse(JSON.stringify(note))
         noteCopy.data.splice(idx, 1)
         await updateNote(room._id, noteCopy)
-        updateMembers()
+        // updateMembers()
     }
 
     const culcProgress = () => {

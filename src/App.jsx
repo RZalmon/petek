@@ -27,7 +27,6 @@ const App = (props) => {
   const room = props.room
 
   const connectSockets = (id) => {
-
     if (room && loggedinUser) {
       SocketService.on(`updateRoom ${room._id}`, async ({ updatedRoom, userId }) => {
         if (userId !== loggedinUser._id) {

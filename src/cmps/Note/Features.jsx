@@ -33,7 +33,7 @@ export default ({ room, togglePinned, note, user, setNoteColor, toggleStarred, c
     return (
         <div className="features-container">
             <i onClick={() => toggleStarred(note)}><img src={starSrc} alt="" /></i>
-            <i onClick={async () => { await toggleNotePin(room._id, note._id); updateMembers() }}><NotePinIcon isPinned={note.isPinned} /></i>
+            <i onClick={async () => { await toggleNotePin(room._id, note._id); }}><NotePinIcon isPinned={note.isPinned} /></i>
             <div className="color-pallete">
                 <i onClick={() => setIsPalleteOpen(!isPalleteOpen)}><ColorPalleteIcon /></i>
 
@@ -45,7 +45,7 @@ export default ({ room, togglePinned, note, user, setNoteColor, toggleStarred, c
                             in={isPalleteOpen}
                             timeout={{ enter: 300, exit: 300 }}
                             unmountOnExit>
-                            <i onClick={async () => { await changeNoteColor(room._id, note._id, color); updateMembers(); setIsPalleteOpen(false) }}><CircleIcon fill={color} /></i>
+                            <i onClick={async () => { await changeNoteColor(room._id, note._id, color); setIsPalleteOpen(false) }}><CircleIcon fill={color} /></i>
                         </CSSTransition>
                         )
                     )

@@ -51,7 +51,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
         let noteCopy = JSON.parse(JSON.stringify(note));
         (type === 'NoteText' && textEdit) ? noteCopy.data = textEdit : setCurrTodoIdx('');
         await updateNote(room._id, noteCopy);
-        updateMembers();
+        // updateMembers();
     }
 
     const onLoad = useCallback(() => {
@@ -92,7 +92,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
                         <div>
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <i onClick={() => setIsEdit(true)}><EditIcon /></i>}
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <i onClick={() => { setIsEdit(false); saveNoteEdits(note.type) }}><SaveIcon /></i>}
-                            <i onClick={async () => { await removeNote(room._id, note._id); updateMembers() }}><RemoveIcon /></i>
+                            <i onClick={async () => { await removeNote(room._id, note._id); }}><RemoveIcon /></i>
 
                         </div>
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
