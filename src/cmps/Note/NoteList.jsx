@@ -3,7 +3,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import NotePreview from './NotePreview'
 
-export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, setNoteType, toggleStarred, changeNoteColor, toggleNotePin, updateNote, updateMembers }) => {
+export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, setNoteType, toggleStarredNote, changeNoteColor, toggleNotePin, updateNote, updateMembers }) => {
 
     // const [notesForDisplay, setNotesForDisplay] = useState([])
 
@@ -33,12 +33,12 @@ export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, 
                             user={user}
                             saveRoomChanges={saveRoomChanges}
                             togglePinned={togglePinned}
-                            toggleStarred={toggleStarred} 
                             removeNote={removeNote}
                             toggleNotePin={toggleNotePin}
                             changeNoteColor={changeNoteColor}
                             updateNote={updateNote}
-                            updateMembers={updateMembers}/>
+                            updateMembers={updateMembers}
+                            toggleStarredNote={toggleStarredNote}/>
                     </CSSTransition>)}
             </TransitionGroup>
         </div>

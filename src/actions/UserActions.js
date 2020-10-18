@@ -29,6 +29,18 @@ export function getUser() {
     }
 }
 
+export function toggleStarredNote(userId, roomId, noteId) {
+    return async dispatch => {
+        try {
+            let user = await UserService.toggleStarredNote(userId, roomId, noteId);
+            dispatch({ type: 'SET_USER', user })
+        } catch (err) {
+            console.log('ERROR', err)
+        }
+    }
+}
+
+
 
 // export function getUpdatedUser() {
 //     return async dispatch => {

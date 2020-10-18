@@ -72,7 +72,7 @@ export function removeNote(roomId, noteId) {
 }
 
 
-export function changeNoteColor(roomId, noteId, color){
+export function changeNoteColor(roomId, noteId, color) {
     return async dispatch => {
         try {
             let room = await RoomService.changeNoteColor(roomId, noteId, color);
@@ -83,7 +83,7 @@ export function changeNoteColor(roomId, noteId, color){
     }
 }
 
-export function toggleNotePin(roomId, noteId){
+export function toggleNotePin(roomId, noteId) {
     return async dispatch => {
         try {
             let room = await RoomService.toggleNotePin(roomId, noteId);
@@ -94,7 +94,7 @@ export function toggleNotePin(roomId, noteId){
     }
 }
 
-export function updateNote(roomId, note){
+export function updateNote(roomId, note) {
     return async dispatch => {
         try {
             let room = await RoomService.updateNote(roomId, note);
@@ -105,49 +105,15 @@ export function updateNote(roomId, note){
     }
 }
 
-// export function deleteNote(room, noteId) {
-//     return dispatch => {
-//         console.log('$$$Dispatched$$$');
-//         const updatedRoom = RoomService.deleteNote(room, noteId);
-//         dispatch({ type: 'SET_CURR_ROOM', updatedRoom })
-//     }
-// }
-
-
-
-
-
-// const saveNote = (payload) => {
-//     // do API request for the BE.
-// };
-
-
-
-//import getNote from './selectors'
-// const updateNote = ({ id, text, subject }) => { // mock action
-//     return (dispatch, getState) => {
-//         const state = getState();
-//         const note = getNote({ state, id, roomId });
-
-//         const updatedNote = {
-//             ...note,
-//             text,
-//             subject,
-//         };
-
-//         dispatch(saveNote(updateNote)).then(() => {
-//             dispatch(fetchNotes({ id: roomId }));
-//         })
-//     }
-// };
-
-
-// const updateNoteAndShowNotification = ({ ...rest }) => {
-//     return dispatch => {
-//         updateNote({ ...rest }).then(() => {
-//             // show notification
-//         })
-//     }
-// }
-
+export function getStarredNotes(userId) {
+    return async dispatch => {
+        try {
+            let notes = await RoomService.getStarredNotes(userId);
+            let room = { notes }
+            dispatch({ type: 'SET_CURR_ROOM', room })
+        } catch (err) {
+            console.log('ERROR', err)
+        }
+    }
+}
 
