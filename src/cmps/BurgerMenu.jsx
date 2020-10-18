@@ -81,7 +81,7 @@ class BurgerMenu extends React.Component {
         <NavLink activeClassName="active" to={`/random-game`} exact onClick={() => this.closeMenu()}>
           Play Random Game
         </NavLink>
-        <NavLink activeClassName="active" to="/starred-notes" exact onClick={() => this.closeMenu()}  >
+        <NavLink activeClassName="active" to="/starred" exact onClick={() => this.closeMenu()}  >
           Starred 
         </NavLink>
         <NavLink activeClassName="active" to="/signup" exact onClick={() => this.closeMenu(logout)}  >

@@ -63,6 +63,10 @@ async function checkIsValidUser(userId, roomId) {
     return HttpService.post(`room/${roomId}/validate`, { userId, roomId })
 }
 
+async function getStarredNotes(userId){
+    const params = new URLSearchParams(userId);
+    return HttpService.get(`room/starredNotes/?${params}`);
+}
 
 export const RoomService = {
     query,
@@ -73,7 +77,8 @@ export const RoomService = {
     removeNote,
     changeNoteColor,
     toggleNotePin,
-    updateNote
+    updateNote,
+    getStarredNotes
 }
 
 

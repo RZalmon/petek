@@ -32,9 +32,8 @@ async function signUp(credentials) {
         userName,
         fullName,
         password,
-        pinnedNotes: [],
         notifications: [],
-        pinnedNotes: [],
+        starredNotes: [],
         imgUrl: imgUrl ? imgUrl : avatarImg,
         joinedAt: Date.now(),
         friends: []
@@ -77,6 +76,11 @@ async function updateFriend(userId, friendId) {
     await HttpService.put(`user/${friend._id}`, friend)
 }
 
+async function toggleStarredNote(userId, roomId, noteId) {
+    return await HttpService.put(`user/toggleStar`, {userId, roomId, noteId})
+}
+
+
 
 function getMinimalUser(_id, imgUrl) {
     return {
@@ -100,5 +104,6 @@ export const UserService = {
     updateImgAtContacts,
     getLoggedinUser,
     getRoomIdFromContact,
-    updateFriend
+    updateFriend,
+    toggleStarredNote
 }

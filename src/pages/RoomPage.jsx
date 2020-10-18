@@ -77,14 +77,6 @@ const RoomPage = (props) => {
     }
 
 
-    // const saveRoomChanges = async () => {
-    //     await props.saveRoom(props.room)
-    //     SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
-    // }
-    const updateFriend = () => {
-        if (props.room.members.length > 1) SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
-    }
-
     const onUploadImg = async (ev) => {
         if (noteType === 'NoteImg') {
             const imgUrl = await CloudinaryService.uploadImg(ev)
@@ -122,59 +114,8 @@ const RoomPage = (props) => {
         setIsUploading(false)
     }
 
-    const togglePinned = async (note) => {  //DELETE
-
-        // pinNote({ id, isPinned }); //BAR
 
 
-        note.isPinned = !note.isPinned
-        let idx = props.room.notes.findIndex(currNote => note._id === currNote._id)
-        props.room.notes.splice(idx, 1)
-        note.isPinned ? handleNotePin(note) : handleNoteUnpin(note)
-        await props.saveRoom(JSON.parse(JSON.stringify(props.room)))
-        SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
-    }
-
-    const toggleStarred = async (note) => {
-        props.user.starredNotes ? handleStarredNote(note) : props.user.starredNotes = new Array(note)
-
-        // note.isPinned = !note.isPinned
-        // let idx = props.room.notes.findIndex(currNote => note._id === currNote._id)
-        // props.room.notes.splice(idx, 1)
-        // note.isPinned ? handleNotePin(note) : handleNoteUnpin(note)
-        // await props.saveRoom(JSON.parse(JSON.stringify(props.room)))
-        // SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
-    }
-
-    const handleStarredNote = (note) => {
-        let idx = props.user.starredNotes.findIndex(starredNote => starredNote._id === note._id)
-        idx === -1 ? props.user.starredNotes.unshift(note) : props.user.starredNotes.splice(idx, 1)
-        console.log(idx);
-        console.log(props.user);
-        props.updateUser(props.user)
-
-
-        // props.user.starredNotes.find(srarredNote => srarredNote)
-    }
-
-
-    const handleNotePin = (note) => {  //DELETE
-        props.room.notes.unshift(note)
-    }
-
-    const handleNoteUnpin = (note) => { //DELETE
-        let idx = props.room.notes.findIndex(currNote => (!currNote.isPinned && currNote.createdAt <= note.createdAt))
-        idx === -1 ? props.room.notes.push(note) : props.room.notes.splice(idx, 0, note)
-    }
-
-    // const removeNote = async (noteId) => { DELETE
-    //     let idx = props.room.notes.findIndex(note => note._id === noteId)
-    //     props.room.notes.splice(idx, 1)
-    //     await props.saveRoom(props.room)
-    //     SocketService.emit("roomUpdated", { room: props.room, userId: props.user._id });
-    //     // props.showNotification('Note Deleted successfully!', 'error')
-    //     //Need to find way to transfer that prop on desktop
-    // }
 
     const checkIsValidUser = async () => { //FIX
         const { user, room } = props
@@ -196,16 +137,6 @@ const RoomPage = (props) => {
     // }, [props.room]);
 
 
-
-    //********************************* */S
-    //NEED A FIX, INGAGING NON STOP WHEN SECOND USER CONNECTS TO THE ROOM!!!!
-    useEffect(() => {
-        console.log(props.room);
-        //Watching for changes on room and updates with socket
-        if (props.room && props.user) updateFriend()
-    }, [notes]);
-
-    //********************************* */
 
     useEffect(() => {
         if ((noteData && noteType === 'NoteImg') ||

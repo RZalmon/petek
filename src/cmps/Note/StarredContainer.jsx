@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import SocketService from '../../services/SocketService'
 
 import { loadRoomById, saveRoom, resetCurrRoom, removeNote, changeNoteColor, toggleNotePin, updateNote } from '../../actions/RoomActions';
-import { toggleStarredNote } from '../../actions/UserActions'
 
 import NoteFilter from './NoteFilter'
 import NoteList from './NoteList'
@@ -14,42 +13,30 @@ import { UserService } from '../../services/UserService';
 import { RoomService } from '../../services/RoomService';
 
 
-const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote, toggleStarredNote }) => {
+const StarredContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote }) => {
     const [filterBy, setFilterBy] = useState({
         term: '',
         type: '',
         by: 'all'
     });
 
-    if (room) var { notes } = room
 
 
     const onFilterHandler = (filterBy) => {
         setFilterBy(filterBy)
     };
 
-    const saveRoomChanges = async () => {
-        await saveRoom(room)
-        SocketService.emit("roomUpdated", { room, userId: user._id });
-    }
-
-
-
-    const updateMembers = () => {
-        if (room.members.length > 1) SocketService.emit("roomUpdated", { room, userId: user._id });
-    }
-
-
     return (
-        <div className="notes-container">
-            <NoteFilter
+        <div className="starred-container">
+            <h1>Container</h1>
+            {/* <NoteFilter
                 filterBy={filterBy}
                 setFilterBy={setFilterBy}
                 onFilter={onFilterHandler}
-                placeHolder={"Search for notes"} />
+                placeHolder={"Search for notes"} /> */}
 
 
-            <NoteList
+            {/* <NoteList
                 room={room}
                 notes={notes}
                 user={user}
@@ -60,11 +47,10 @@ const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeN
                 setNoteType={setNoteType}
                 updateNote={updateNote}
                 updateMembers={updateMembers}
-                toggleStarredNote={toggleStarredNote}
-            // togglePinned={togglePinned}
-            // setNoteType={setNoteType}
-            // toggleStarred={toggleStarred}
-            />
+                // togglePinned={togglePinned}
+                // setNoteType={setNoteType}
+                // toggleStarred={toggleStarred}
+            /> */}
 
 
         </div>
@@ -85,9 +71,8 @@ const mapDispatchToProps = {
     saveRoom,
     loadRoomById,
     resetCurrRoom,
-    updateNote,
-    toggleStarredNote
+    updateNote
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotesContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(StarredContainer);

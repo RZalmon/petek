@@ -1,37 +1,37 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import RoomPage from '../pages/RoomPage'
+import { getStarredNotes } from '../actions/RoomActions';
+import StarredContainer from '../cmps/Note/StarredContainer'
 
 
 
 
 
-const StarredPage = (props) => {
-
-  const { user } = props
+const StarredPage = ({ user, getStarredNotes }) => {
 
 
-  
+  useEffect(() => {
+    getStarredNotes(user._id)
+  }, []);
+
 
   return (
-      <div>
-       {/* <RoomPage notes={user.starredNotes} isStarredPage={false}/> */}
-       <h1>balllls</h1>
-
-      </div>
+    <div className="starred-page">
+      <h1>Starred</h1>
+      {/* <StarredContainer /> */}
+    </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
     user: state.user.loggedinUser,
-
   };
 };
 
-// const mapDispatchToProps = {
-//   updateUser,
+const mapDispatchToProps = {
+  getStarredNotes
 
-// };
+};
 
 export default connect(mapStateToProps)(StarredPage);

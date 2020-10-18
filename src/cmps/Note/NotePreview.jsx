@@ -19,7 +19,7 @@ import { changeNoteColor } from '../../actions/RoomActions';
 import { Note } from '@material-ui/icons';
 
 
-export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, toggleStarred, changeNoteColor, toggleNotePin, updateNote, updateMembers }) => {
+export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, toggleStarredNote, changeNoteColor, toggleNotePin, updateNote, updateMembers }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currTodoIdx, setCurrTodoIdx] = useState(null);
     const [textEdit, setTextEdit] = useState('')
@@ -51,7 +51,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
         let noteCopy = JSON.parse(JSON.stringify(note));
         (type === 'NoteText' && textEdit) ? noteCopy.data = textEdit : setCurrTodoIdx('');
         await updateNote(room._id, noteCopy);
-        // updateMembers();
+        updateMembers();
     }
 
     const onLoad = useCallback(() => {
@@ -92,13 +92,13 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
                         <div>
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <i onClick={() => setIsEdit(true)}><EditIcon /></i>}
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <i onClick={() => { setIsEdit(false); saveNoteEdits(note.type) }}><SaveIcon /></i>}
-                            <i onClick={async () => { await removeNote(room._id, note._id); }}><RemoveIcon /></i>
+                            <i onClick={async () => { await removeNote(room._id, note._id); updateMembers();}}><RemoveIcon /></i>
 
                         </div>
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
                     <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} textEdit={textEdit} setTextEdit={setTextEdit} updateNote={updateNote} updateMembers={updateMembers} />
-                    <Features room={room} togglePinned={togglePinned} note={note} user={user} changeNoteColor={changeNoteColor} toggleNotePin={toggleNotePin} setNoteColor={setNoteColor} toggleStarred={toggleStarred} updateMembers={updateMembers} />
+                    <Features room={room} togglePinned={togglePinned} note={note} user={user} changeNoteColor={changeNoteColor} toggleNotePin={toggleNotePin} setNoteColor={setNoteColor} toggleStarredNote={toggleStarredNote} updateMembers={updateMembers} />
                 </div>
             </div>
         </div>
