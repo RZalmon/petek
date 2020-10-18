@@ -31,7 +31,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
     //*********CHECKPOINT */
 
     const addTodo = async () => {
-
+        
         let todoToAdd = {
             text: newTodo,
             isDone: false,
@@ -40,6 +40,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
 
         let noteCopy = JSON.parse(JSON.stringify(note))
         noteCopy.data.push(todoToAdd);
+        console.log(noteCopy);
         await updateNote(room._id, noteCopy)
         updateMembers()
         setIsNewTodo(false)
