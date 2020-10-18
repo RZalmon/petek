@@ -203,7 +203,7 @@ const RoomPage = (props) => {
         console.log(props.room);
         //Watching for changes on room and updates with socket
         if (props.room && props.user) updateFriend()
-    }, [props.room]);
+    }, [notes]);
 
     //********************************* */
 
