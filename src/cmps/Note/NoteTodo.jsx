@@ -12,35 +12,45 @@ import ArrowIcon from '../../assets/svg/arrow.svg'
 import { saveRoom } from '../../actions/RoomActions';
 //TODO: IMPROVE EDIT INPUT AND MINUS UI +++ reflect trough socket
 
-const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTodoIdx, setIsNewTodo, isNewTodo }) => {
+const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTodoIdx, updateNote, updateMembers }) => {
+
     const [editedTodo, setEditedTodo] = useState('');
     const [newTodo, setNewTodo] = useState('');
     const [progress, setProgress] = useState(0)
+    const [isNewTodo, setIsNewTodo] = useState(false)
+
     const editInputRef = createRef();
-    const newTodoInputRef = createRef()
 
     const toggleIsDone = async (idx) => {
         if (isEdit) return
-        note.data[idx].isDone = !note.data[idx].isDone
-        await saveRoom(room)
-        SocketService.emit("roomUpdated", { room, userId });
+        let noteCopy = JSON.parse(JSON.stringify(note))
+        noteCopy.data[idx].isDone = !noteCopy.data[idx].isDone
+        await updateNote(room._id, noteCopy)
+        updateMembers()
     }
+    //*********CHECKPOINT */
 
+    const addTodo = async () => {
 
-    const addTodo = () => {
+        let todoToAdd = {
+            text: newTodo,
+            isDone: false,
+            _id: UtilService.makeId(5)
+        }
 
-        let todoToAdd = { text: newTodo, isDone: false, _id: UtilService.makeId(5) }
-
-        note.data.push(todoToAdd);
+        let noteCopy = JSON.parse(JSON.stringify(note))
+        noteCopy.data.push(todoToAdd);
+        await updateNote(room._id, noteCopy)
+        updateMembers()
         setIsNewTodo(false)
         setNewTodo('')
-        newTodoInputRef.current.value = ''
-
-
     };
 
-    const removeTodo = (idx) => {
-        note.data.splice(idx, 1)
+    const removeTodo = async (idx) => {
+        let noteCopy = JSON.parse(JSON.stringify(note))
+        noteCopy.data.splice(idx, 1)
+        await updateNote(room._id, noteCopy)
+        updateMembers()
     }
 
     const culcProgress = () => {
@@ -83,14 +93,14 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
                                 {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} >{todo.text}</span>}
                             </div>
                             {(isEdit && currTodoIdx === idx) && <input type="text" value={editedTodo} ref={editInputRef} onChange={(e) => { setEditedTodo(e.target.value); }} />}
-                            {isEdit && <img src={xmark} className="remove-todo-btn" onClick={() => removeTodo(idx)} />}
+                            {isEdit && <img src={xmark} className="remove-todo-btn" onClick={(ev) => {ev.stopPropagation(); removeTodo(idx); }} />}
                         </li>
                     )
                 })}
             </ul>
 
             {isNewTodo && <div className="add-todo-container">
-                <input type="text" className="add-todo-input" placeholder="New Todo" ref={newTodoInputRef} onChange={e => setNewTodo(e.target.value)} />
+                <input type="text" className="add-todo-input" placeholder="New Todo" onChange={e => setNewTodo(e.target.value)} />
                 <img src={ArrowIcon} className="add-todo-btn" onClick={() => addTodo()} />
             </div>}
             <div className="progress-bar">

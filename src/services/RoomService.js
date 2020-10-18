@@ -43,6 +43,21 @@ async function save(room) {
     return res;
 }
 
+async function removeNote(roomId, noteId) {
+    return HttpService.delete(`room/${roomId}/removeNote`, { roomId, noteId })
+}
+
+async function changeNoteColor(roomId, noteId, color) {
+    return HttpService.put(`room/${roomId}/changeNoteColor`, { roomId, noteId, color })
+}
+
+async function toggleNotePin(roomId, noteId) {
+    return HttpService.put(`room/${roomId}/toggleNotePin`, { roomId, noteId })
+}
+
+async function updateNote(roomId, note) {
+    return HttpService.put(`room/${roomId}/updateNote`, { roomId, note })
+}
 
 async function checkIsValidUser(userId, roomId) {
     return HttpService.post(`room/${roomId}/validate`, { userId, roomId })
@@ -54,7 +69,11 @@ export const RoomService = {
     getById,
     save,
     remove,
-    checkIsValidUser
+    checkIsValidUser,
+    removeNote,
+    changeNoteColor,
+    toggleNotePin,
+    updateNote
 }
 
 

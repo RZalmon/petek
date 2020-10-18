@@ -15,12 +15,13 @@ import EditIcon from "../../cmps/icons/EditIcon";
 import SaveIcon from "../../cmps/icons/SaveIcon";
 
 import AvatarLoader from '../AvatarLoader'
+import { changeNoteColor } from '../../actions/RoomActions';
+import { Note } from '@material-ui/icons';
 
 
-export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
+export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, toggleStarred, changeNoteColor, toggleNotePin, updateNote, updateMembers }) => {
     const [isEdit, setIsEdit] = useState(false);
-    const [isNewTodo, setIsNewTodo] = useState(false);
-    const [currTodoIdx, setCurrTodoIdx] = useState('');
+    const [currTodoIdx, setCurrTodoIdx] = useState(null);
     const [textEdit, setTextEdit] = useState('')
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -32,22 +33,25 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
         NoteTodo,
         NoteLoc
     }
+
     const NoteType = cmps[note.type];
 
     const noteRef = createRef();
 
-    const setNoteColor = (color) => {
+    const setNoteColor = (color) => {//DELETE
         note.bgColor = color;
         saveRoomChanges();
     };
 
-    const paintNote = () => {
+    const paintNote = () => {//KEEP
         if (note.bgColor && noteRef.current) noteRef.current.style.backgroundColor = note.bgColor
     }
 
-    const saveNoteEdits = (type) => {
-        (type === 'NoteText' && textEdit) ? note.data = textEdit : setCurrTodoIdx('')
-        saveRoomChanges();
+    const saveNoteEdits = async (type) => {
+        let noteCopy = JSON.parse(JSON.stringify(note));
+        (type === 'NoteText' && textEdit) ? noteCopy.data = textEdit : setCurrTodoIdx('');
+        await updateNote(room._id, noteCopy);
+        updateMembers();
     }
 
     const onLoad = useCallback(() => {
@@ -81,19 +85,20 @@ export default ({ note, user, removeNote, saveRoomChanges, togglePinned }) => {
     return (
         <div className="note-preview" style={{ backgroudColor: note.bgColor }}>
             <div className={user._id === note.createdBy._id ? 'user-container' : 'friend-container'}>
-                <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" onLoad={onLoad} />
+                <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" onLoad={onLoad} style={{ display: isLoaded ? 'block' : 'none' }} />
                 {!isLoaded && <AvatarLoader />}
                 <div className="note-container" ref={noteRef}>
                     <div className="note-header">
                         <div>
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <i onClick={() => setIsEdit(true)}><EditIcon /></i>}
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <i onClick={() => { setIsEdit(false); saveNoteEdits(note.type) }}><SaveIcon /></i>}
-                            <i onClick={() => removeNote(note._id)}><RemoveIcon /></i>
+                            <i onClick={async () => { await removeNote(room._id, note._id); updateMembers() }}><RemoveIcon /></i>
+
                         </div>
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
-                    <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} setIsNewTodo={setIsNewTodo} isNewTodo={isNewTodo} textEdit={textEdit} setTextEdit={setTextEdit} />
-                    <Features togglePinned={togglePinned} note={note} user={user} setNoteColor={setNoteColor} />
+                    <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} textEdit={textEdit} setTextEdit={setTextEdit} updateNote={updateNote} updateMembers={updateMembers} />
+                    <Features room={room} togglePinned={togglePinned} note={note} user={user} changeNoteColor={changeNoteColor} toggleNotePin={toggleNotePin} setNoteColor={setNoteColor} toggleStarred={toggleStarred} updateMembers={updateMembers} />
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@ export default ({ filterBy, setFilterBy, }) => {
             <select id="type-select" onChange={e => setFilterBy({ ...filterBy, type: e.target.value })}>
                 <option value="">All</option>
                 <option value="NoteText">Text</option>
-                <option value="NoteImg">Img</option>
+                <option value="NoteImg">Image</option>
                 <option value="NoteVideo">Video</option>
                 <option value="NoteTodo">Todos</option>
                 <option value="NoteLoc">Location</option>

@@ -14,7 +14,6 @@ import CloudinaryService from '../../src/services/CloudinaryService'
 
 import { AvatarEdit } from '../cmps/User/AvatarEdit'
 
-
 class SignupPage extends Component {
 
   state = {
