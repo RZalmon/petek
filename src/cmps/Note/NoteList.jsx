@@ -4,7 +4,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import NotePreview from './NotePreview'
 
 export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, setNoteType, toggleStarredNote, changeNoteColor, toggleNotePin, updateNote, updateMembers }) => {
-
+console.log('notesnotesnotesnotesnotes',notes);
     // const [notesForDisplay, setNotesForDisplay] = useState([])
 
     // useEffect(() => {
@@ -18,9 +18,10 @@ export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, 
 
     return (
 
-        <div className="note-list" onClick={() => setNoteType('')}>
+        <div className="note-list">
+        {/* <div className="note-list" onClick={() => setNoteType('')}> */}
             <TransitionGroup component={null}>
-                {room.notes.map((note) =>
+                {notes.map((note) =>
                     <CSSTransition
                         key={note._id}
                         timeout={{ enter: 800, exit: 500 }}

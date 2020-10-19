@@ -1,32 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getStarredNotes } from '../actions/RoomActions';
+import { getStarredNotes,resetCurrRoom } from '../actions/RoomActions';
 import StarredContainer from '../cmps/Note/StarredContainer'
 
 
 
+const StarredPage = ({ room,user, getStarredNotes, resetCurrRoom }) => {
 
 
-const StarredPage = ({ user, room, getStarredNotes }) => {
-
-  const getNotes = async () => {
-     await getStarredNotes(JSON.parse(JSON.stringify(user)))
+  const getNotes = async () =>{
+   return await getStarredNotes(JSON.parse(JSON.stringify(user)))
   }
-
-  const printNotes = () =>{
-    console.log('Notes', room.notes);
-  }
-
+  
   useEffect(() => {
     getNotes()
+    return () =>{
+      resetCurrRoom()
+    }
   }, []);
 
 
   return (
     <div className="starred-page">
       <h1>Starred</h1>
-      {/* <button onClick={printNotes}>check notes</button> */}
-      {room && <StarredContainer room={room.notes}/>}
+      {room && <StarredContainer notes={room.notes}  user={user}/>}
     </div>
   );
 };
@@ -34,13 +31,13 @@ const StarredPage = ({ user, room, getStarredNotes }) => {
 const mapStateToProps = (state) => {
   return {
     user: state.user.loggedinUser,
-    room: state.room.currRoom
+    room: state.room.currRoom,
   };
 };
 
 const mapDispatchToProps = {
-  getStarredNotes
-
+  getStarredNotes,
+  resetCurrRoom
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StarredPage);
+export default connect(mapStateToProps,mapDispatchToProps)(StarredPage);

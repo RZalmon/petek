@@ -76,6 +76,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
             note.createdBy.imgUrl = user.imgUrl;
             saveRoomChanges();
         }
+        
     }, []);
 
     useEffect(() => {

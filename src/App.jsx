@@ -80,7 +80,10 @@ const App = (props) => {
 
   useEffect(() => {
     connectSockets()
-    if (loggedinUser) console.log('connect user sockets', loggedinUser._id);
+    if (loggedinUser){
+    console.log('connect user sockets', loggedinUser._id);
+    console.log(loggedinUser);
+    } 
     if (room) console.log('connect room sockets', room._id);
     return () => {
       disconnectSockets()
@@ -95,7 +98,7 @@ const App = (props) => {
 
 
     return () => {
-      console.log('disconnecet user sockets', loggedinUser._id);
+      if(loggedinUser)console.log('disconnecet user sockets', loggedinUser._id);
       if (room) console.log('disconnecet room sockets', room._id);
       disconnectSockets()
       SocketService.terminate()

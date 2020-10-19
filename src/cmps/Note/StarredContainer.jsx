@@ -13,7 +13,7 @@ import { UserService } from '../../services/UserService';
 import { RoomService } from '../../services/RoomService';
 
 
-const StarredContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote }) => {
+const StarredContainer = ({ room,notes, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote }) => {
     const [filterBy, setFilterBy] = useState({
         term: '',
         type: '',
@@ -38,7 +38,7 @@ const StarredContainer = ({ room, user, setNoteType, removeNote, saveRoom, chang
 
             <NoteList
                 room={room}
-                // notes={notes}
+                notes={notes}
                 user={user}
                 removeNote={removeNote}
                 changeNoteColor={changeNoteColor}
