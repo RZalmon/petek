@@ -36,21 +36,21 @@ const StarredContainer = ({ room, user, setNoteType, removeNote, saveRoom, chang
                 placeHolder={"Search for notes"} /> */}
 
 
-            {/* <NoteList
+            <NoteList
                 room={room}
-                notes={notes}
+                // notes={notes}
                 user={user}
                 removeNote={removeNote}
                 changeNoteColor={changeNoteColor}
                 toggleNotePin={toggleNotePin}
-                saveRoomChanges={saveRoomChanges}
-                setNoteType={setNoteType}
+                // saveRoomChanges={saveRoomChanges}
+                // setNoteType={setNoteType}
                 updateNote={updateNote}
-                updateMembers={updateMembers}
+                // updateMembers={updateMembers}
                 // togglePinned={togglePinned}
                 // setNoteType={setNoteType}
                 // toggleStarred={toggleStarred}
-            /> */}
+            />
 
 
         </div>

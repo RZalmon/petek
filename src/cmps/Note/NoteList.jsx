@@ -20,7 +20,7 @@ export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, 
 
         <div className="note-list" onClick={() => setNoteType('')}>
             <TransitionGroup component={null}>
-                {notes.map((note) =>
+                {room.notes.map((note) =>
                     <CSSTransition
                         key={note._id}
                         timeout={{ enter: 800, exit: 500 }}

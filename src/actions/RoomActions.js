@@ -105,10 +105,10 @@ export function updateNote(roomId, note) {
     }
 }
 
-export function getStarredNotes(userId) {
+export function getStarredNotes(user) {
     return async dispatch => {
         try {
-            let notes = await RoomService.getStarredNotes(userId);
+            let notes = await RoomService.getStarredNotes(user);
             let room = { notes }
             dispatch({ type: 'SET_CURR_ROOM', room })
         } catch (err) {
