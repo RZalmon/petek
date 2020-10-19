@@ -51,7 +51,7 @@ const RoomPage = (props) => {
         header: noteHeader,
         data: noteData,
         type: noteType,
-        bgColor: '#87cefa',
+        // bgColor: '#87cefa',
         isPinned: false
     }
 
