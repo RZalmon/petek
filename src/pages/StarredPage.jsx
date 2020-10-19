@@ -9,9 +9,15 @@ import StarredContainer from '../cmps/Note/StarredContainer'
 
 const StarredPage = ({ user, getStarredNotes }) => {
 
+  const getNotes = async () =>{
+    return await getStarredNotes(JSON.parse(JSON.stringify(user)))
+  }
 
+  
   useEffect(() => {
-    getStarredNotes(user._id)
+   let notes =  getNotes()
+     
+    console.log(notes);
   }, []);
 
 
@@ -34,4 +40,4 @@ const mapDispatchToProps = {
 
 };
 
-export default connect(mapStateToProps)(StarredPage);
+export default connect(mapStateToProps,mapDispatchToProps)(StarredPage);
