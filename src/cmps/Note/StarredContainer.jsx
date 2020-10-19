@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import SocketService from '../../services/SocketService'
 
 import { loadRoomById, saveRoom, resetCurrRoom, removeNote, changeNoteColor, toggleNotePin, updateNote } from '../../actions/RoomActions';
+import { toggleStarredNote } from '../../actions/UserActions'
 
 import NoteFilter from './NoteFilter'
 import NoteList from './NoteList'
@@ -13,7 +14,7 @@ import { UserService } from '../../services/UserService';
 import { RoomService } from '../../services/RoomService';
 
 
-const StarredContainer = ({ room,notes, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote }) => {
+const StarredContainer = ({ room,notes, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote, toggleStarredNote, isStarredPage}) => {
     const [filterBy, setFilterBy] = useState({
         term: '',
         type: '',
@@ -46,6 +47,8 @@ const StarredContainer = ({ room,notes, user, setNoteType, removeNote, saveRoom,
                 // saveRoomChanges={saveRoomChanges}
                 // setNoteType={setNoteType}
                 updateNote={updateNote}
+                isStarredPage={isStarredPage}
+                toggleStarredNote={toggleStarredNote}
                 // updateMembers={updateMembers}
                 // togglePinned={togglePinned}
                 // setNoteType={setNoteType}
@@ -71,7 +74,8 @@ const mapDispatchToProps = {
     saveRoom,
     loadRoomById,
     resetCurrRoom,
-    updateNote
+    updateNote,
+    toggleStarredNote
 };
 
 

@@ -65,7 +65,6 @@ const RoomPage = (props) => {
     const InputType = cmps[noteInputType];
 
     const loadRoom = async () => {
-        console.log('@#$!%$#@#%^^%^');
         const roomId = props.room ? props.room._id : props.match.params.id;
         if (props.room) {
             await props.loadRoomById({ ...filterBy, roomId })

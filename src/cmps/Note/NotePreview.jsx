@@ -19,7 +19,7 @@ import { changeNoteColor } from '../../actions/RoomActions';
 import { Note } from '@material-ui/icons';
 
 
-export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, toggleStarredNote, changeNoteColor, toggleNotePin, updateNote, updateMembers }) => {
+export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, toggleStarredNote, changeNoteColor, toggleNotePin, updateNote, updateMembers, isStarredPage }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currTodoIdx, setCurrTodoIdx] = useState(null);
     const [textEdit, setTextEdit] = useState('')
@@ -59,7 +59,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
         setIsLoaded(true);
     }, []);
 
-
+    
 
     useEffect(() => {
         if (note.createdBy._id !== user._id) return
@@ -99,7 +99,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
                     <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} textEdit={textEdit} setTextEdit={setTextEdit} updateNote={updateNote} updateMembers={updateMembers} />
-                    <Features room={room} togglePinned={togglePinned} note={note} user={user} changeNoteColor={changeNoteColor} toggleNotePin={toggleNotePin} setNoteColor={setNoteColor} toggleStarredNote={toggleStarredNote} updateMembers={updateMembers} />
+                    <Features room={room} togglePinned={togglePinned} note={note} user={user} changeNoteColor={changeNoteColor} toggleNotePin={toggleNotePin} setNoteColor={setNoteColor} toggleStarredNote={toggleStarredNote} updateMembers={updateMembers} isStarredPage={isStarredPage}/>
                 </div>
             </div>
         </div>

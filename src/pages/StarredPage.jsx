@@ -1,20 +1,22 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getStarredNotes,resetCurrRoom } from '../actions/RoomActions';
+import { getStarredNotes, resetCurrRoom } from '../actions/RoomActions';
+
 import StarredContainer from '../cmps/Note/StarredContainer'
+import Loading from '../cmps/Loading'
 
 
 
-const StarredPage = ({ room,user, getStarredNotes, resetCurrRoom }) => {
+const StarredPage = ({ room, user, getStarredNotes, resetCurrRoom }) => {
 
 
-  const getNotes = async () =>{
-   return await getStarredNotes(JSON.parse(JSON.stringify(user)))
+  const getNotes = async () => {
+    return await getStarredNotes(JSON.parse(JSON.stringify(user)))
   }
-  
+
   useEffect(() => {
     getNotes()
-    return () =>{
+    return () => {
       resetCurrRoom()
     }
   }, []);
@@ -23,7 +25,7 @@ const StarredPage = ({ room,user, getStarredNotes, resetCurrRoom }) => {
   return (
     <div className="starred-page">
       <h1>Starred</h1>
-      {room && <StarredContainer notes={room.notes}  user={user}/>}
+      {room ? <StarredContainer notes={room.notes} user={user} isStarredPage={true} /> : <Loading />}
     </div>
   );
 };
@@ -40,4 +42,4 @@ const mapDispatchToProps = {
   resetCurrRoom
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(StarredPage);
+export default connect(mapStateToProps, mapDispatchToProps)(StarredPage);

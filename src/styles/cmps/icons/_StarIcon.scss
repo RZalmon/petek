@@ -9,7 +9,7 @@
         stroke: white;
         transition: .5s;
     }
-    &.pinned {
+    &.starred {
         fill: #f3d250;
         @include hover-supported {
             fill: transparent;
