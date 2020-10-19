@@ -6,7 +6,7 @@ import CircleIcon from '../icons/CircleIcon'
 import ColorPalleteIcon from '../icons/ColorPaletteIcon'
 import StarIcon from '../icons/StarIcon'
 
-export default ({ room, note, user, toggleStarredNote, changeNoteColor, toggleNotePin, updateMembers, isStarredPage }) => {
+export default ({ room, note, user, toggleStarredNote, changeNoteColor, toggleNotePin, updateMembers, isStarredPage, roomId }) => {
     const [isPalleteOpen, setIsPalleteOpen] = useState(false)
     const [isStarred, setIsStarred] = useState(false)
     const colors = ['#ffa350', '#f78888', '#fff59d', '#90ccf4', '#4caf50']
@@ -18,20 +18,14 @@ export default ({ room, note, user, toggleStarredNote, changeNoteColor, toggleNo
 
 
     const handleStarClicked = async () => {
-        let roomId = getRoomId();
         setIsStarred(!isStarred)
         await toggleStarredNote(user._id, roomId, note._id, isStarredPage)
     }
 
     const handleColorClicked = async (color) => {
-        let roomId = getRoomId();
         await changeNoteColor(roomId, note._id, color);
         setIsPalleteOpen(false)
         if (!isStarredPage) updateMembers();
-    }
-
-    const getRoomId = () => {
-        return isStarredPage ? note.roomId : room._id
     }
 
 
@@ -44,7 +38,7 @@ export default ({ room, note, user, toggleStarredNote, changeNoteColor, toggleNo
     return (
         <div className="features-container">
             <i onClick={handleStarClicked}><StarIcon isStarred={isStarred} /></i>
-            {!isStarredPage && <i onClick={async () => { await toggleNotePin(room._id, note._id); updateMembers(); }}><NotePinIcon isPinned={note.isPinned} /></i>}
+            {!isStarredPage && <i onClick={async () => { await toggleNotePin(roomId, note._id); updateMembers(); }}><NotePinIcon isPinned={note.isPinned} /></i>}
             <div className="color-pallete">
                 <i onClick={() => setIsPalleteOpen(!isPalleteOpen)}><ColorPalleteIcon /></i>
 

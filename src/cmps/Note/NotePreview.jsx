@@ -25,7 +25,6 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
     const [textEdit, setTextEdit] = useState('')
     const [isLoaded, setIsLoaded] = useState(false);
 
-
     const cmps = {
         NoteText,
         NoteImg,
@@ -54,12 +53,23 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
         updateMembers();
     }
 
+
+    const handleRemoveClicked = async () => {
+        let roomId = getRoomId()
+        await removeNote(roomId, note._id); 
+        if (!isStarredPage) updateMembers();
+    }
+
+    const getRoomId = () => { //MAYBE SHOULD BE IN PAGE CMP
+        return isStarredPage ? note.roomId : room._id
+    }
+
+
     const onLoad = useCallback(() => {
         console.log("loaded");
         setIsLoaded(true);
     }, []);
 
-    
 
     useEffect(() => {
         if (note.createdBy._id !== user._id) return
@@ -76,7 +86,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
             note.createdBy.imgUrl = user.imgUrl;
             saveRoomChanges();
         }
-        
+
     }, []);
 
     useEffect(() => {
@@ -93,13 +103,13 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
                         <div>
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <i onClick={() => setIsEdit(true)}><EditIcon /></i>}
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <i onClick={() => { setIsEdit(false); saveNoteEdits(note.type) }}><SaveIcon /></i>}
-                            <i onClick={async () => { await removeNote(room._id, note._id); updateMembers();}}><RemoveIcon /></i>
+                            <i onClick={handleRemoveClicked}><RemoveIcon /></i>
 
                         </div>
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
                     <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} textEdit={textEdit} setTextEdit={setTextEdit} updateNote={updateNote} updateMembers={updateMembers} />
-                    <Features room={room} togglePinned={togglePinned} note={note} user={user} changeNoteColor={changeNoteColor} toggleNotePin={toggleNotePin} setNoteColor={setNoteColor} toggleStarredNote={toggleStarredNote} updateMembers={updateMembers} isStarredPage={isStarredPage}/>
+                    <Features room={room} togglePinned={togglePinned} note={note} user={user} changeNoteColor={changeNoteColor} toggleNotePin={toggleNotePin} setNoteColor={setNoteColor} toggleStarredNote={toggleStarredNote} updateMembers={updateMembers} isStarredPage={isStarredPage} roomId={getRoomId()} />
                 </div>
             </div>
         </div>
