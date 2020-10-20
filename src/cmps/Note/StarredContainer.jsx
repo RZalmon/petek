@@ -11,21 +11,11 @@ import NoteList from './NoteList'
 
 
 const StarredContainer = ({ room,notes, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote, toggleStarredNote, isStarredPage}) => {
-    const [filterBy, setFilterBy] = useState({
-        term: '',
-        type: '',
-        by: 'all'
-    });
 
 
-
-    const onFilterHandler = (filterBy) => {
-        setFilterBy(filterBy)
-    };
 
     return (
         <div className="starred-container">
-            <h1>Container</h1>
             {/* <NoteFilter
                 filterBy={filterBy}
                 setFilterBy={setFilterBy}

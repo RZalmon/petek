@@ -1,8 +1,7 @@
 import React from 'react'
 import { DebounceInput } from 'react-debounce-input';
 
-
-export default ({ filterBy, setFilterBy, }) => {
+export default ({ filterBy, setFilterBy, roomId }) => {
     return (
         <section>
             <DebounceInput
@@ -11,10 +10,10 @@ export default ({ filterBy, setFilterBy, }) => {
                 debounceTimeout={300}
                 type="text"
                 placeholder={'Search Notes'}
-                onChange={e => setFilterBy({ ...filterBy, term: e.target.value })}
+                onChange={e => setFilterBy({ ...filterBy, roomId, term: e.target.value,  })}
             />
             <label htmlFor="type-select">Type</label>
-            <select id="type-select" onChange={e => setFilterBy({ ...filterBy, type: e.target.value })}>
+            <select id="type-select" onChange={e => setFilterBy({ ...filterBy, roomId, type: e.target.value })}>
                 <option value="">All</option>
                 <option value="NoteText">Text</option>
                 <option value="NoteImg">Image</option>
@@ -26,3 +25,8 @@ export default ({ filterBy, setFilterBy, }) => {
     )
 
 }
+//filterBy Model{
+    // roomId,
+    // term,
+    // type
+    // }

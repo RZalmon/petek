@@ -55,3 +55,11 @@ export function deleteRoom(id) {
     dispatch({ type: "DELETE_ROOM", id });
   };
 }
+
+//setFilterBy
+
+export function setFilterBy(filterBy) {
+  return async (dispatch) => {
+    dispatch({ type: "SET_FILTER_BY", filterBy });
+  };
+}

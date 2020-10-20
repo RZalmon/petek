@@ -23,7 +23,7 @@ import NavBar from './cmps/NavBar';
 const history = createBrowserHistory();
 
 const App = (props) => {
-  const loggedinUser = props.user;
+  const loggedinUser = props.user;//destruct them
   const room = props.room
 
   const connectSockets = (id) => {
