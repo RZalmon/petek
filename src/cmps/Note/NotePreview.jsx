@@ -100,12 +100,11 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
                 {!isLoaded && <AvatarLoader />}
                 <div className="note-container" ref={noteRef}>
                     <div className="note-header">
-                        <div>
+                       {!isStarredPage && <div>
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <i onClick={() => setIsEdit(true)}><EditIcon /></i>}
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <i onClick={() => { setIsEdit(false); saveNoteEdits(note.type) }}><SaveIcon /></i>}
                             <i onClick={handleRemoveClicked}><RemoveIcon /></i>
-
-                        </div>
+                        </div>}
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
                     <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} textEdit={textEdit} setTextEdit={setTextEdit} updateNote={updateNote} updateMembers={updateMembers} />
