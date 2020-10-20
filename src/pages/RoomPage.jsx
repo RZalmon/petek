@@ -39,11 +39,12 @@ const RoomPage = (props) => {
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
     const [isValidUser, setIsValidUser] = useState(null)
-    const [filterBy, setFilterBy] = useState({
-        term: '',
-        type: '',
-        by: 'all'
-    });
+    // const [cmpFilterBy, setCmpFilterBy] = useState({
+    //     roomId: props.room ? props.room._id : props.match.params.id,
+    //     term: '',
+    //     type: '',
+    //     by: 'all'
+    // });
 
     if (props.room) var { notes } = props.room
 
@@ -67,12 +68,12 @@ const RoomPage = (props) => {
     const loadRoom = async () => {
         const roomId = props.room ? props.room._id : props.match.params.id;
         if (props.room) {
-            await props.loadRoomById({ ...filterBy, roomId })
+            await props.loadRoomById({ ...props.filterBy, roomId })
             // FIX IS VAILD USER
             // checkIsValidUser()
             return
         }
-        await props.loadRoomById({ ...filterBy, roomId })
+        await props.loadRoomById({ ...props.filterBy, roomId })
     }
 
 
@@ -89,9 +90,9 @@ const RoomPage = (props) => {
         setIsUploading(true)
     }
 
-    const onFilterHandler = (filterBy) => {
-        setFilterBy(filterBy)
-    };
+    // const onFilterHandler = (filterBy) => {
+    //     setFilterBy(filterBy)
+    // };
 
     const onHandleSubmit = async (ev) => {
         const { user, room } = props
@@ -146,7 +147,7 @@ const RoomPage = (props) => {
 
     useEffect(() => {
         loadRoom()
-    }, [filterBy]);
+    }, [props.filterBy]);
 
 
 
@@ -182,7 +183,7 @@ const RoomPage = (props) => {
                     togglePinned={togglePinned}
                     setNoteType={setNoteType}
                     toggleStarred={toggleStarred} />} */
-                    <NotesContainer room={props.room} user={props.user} setNoteType={setNoteType} />
+                    <NotesContainer room={props.room} user={props.user} setNoteType={setNoteType} filterBy={props.filterBy}/>
                 }
             </div>}
         </div>
@@ -191,6 +192,7 @@ const RoomPage = (props) => {
 const mapStateToProps = (state) => {
     return {
         room: state.room.currRoom,
+        filterBy: state.room.filterBy,
         user: state.user.loggedinUser,
     };
 };

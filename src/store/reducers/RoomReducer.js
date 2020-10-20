@@ -1,6 +1,7 @@
 const initialState = {
     rooms: [],
     currRoom: null,
+    filterBy:{}
 }
 
 
@@ -35,6 +36,8 @@ export default function RoomReducer(state = initialState, action) {
                 ...state,
                 rooms: [...state.rooms, action.room]
             }
+            case 'SET_FILTER_BY':
+                return { ...state, filterBy: action.filterBy }
         default:
             return state;
     }

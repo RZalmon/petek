@@ -20,6 +20,7 @@ export function removeNote(roomId, noteId) {
         try {
             let room = await NoteService.removeNote(roomId, noteId);
             dispatch({ type: "SET_CURR_ROOM", room });
+            //SET_USER AFTER REMOVING NOTE
         } catch (err) {
             console.log("ERROR", err);
         }

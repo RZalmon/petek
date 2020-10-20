@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import SocketService from '../../services/SocketService'
 
-import { loadRoomById, saveRoom, resetCurrRoom } from '../../actions/RoomActions';
+import { loadRoomById, saveRoom, resetCurrRoom, setFilterBy } from '../../actions/RoomActions';
 import { toggleStarredNote, removeNote, changeNoteColor, toggleNotePin, updateNote } from '../../actions/NoteActions'
 
 import NoteFilter from './NoteFilter'
@@ -11,19 +11,23 @@ import NoteList from './NoteList'
 
 
 
-const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote, toggleStarredNote }) => {
-    const [filterBy, setFilterBy] = useState({
-        term: '',
-        type: '',
-        by: 'all'
-    });
+const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote, toggleStarredNote, filterBy, setFilterBy }) => {
+    // const [cmpFilterBy, setCmpFilterBy] = useState({
+    //     roomId: room._id,
+    //     term: '',
+    //     type: '',
+    //     by: 'all'
+    // });
+
 
     if (room) var { notes } = room
 
 
-    const onFilterHandler = (filterBy) => {
-        setFilterBy(filterBy)
-    };
+    // const onFilterHandler = (filterObj) => {
+    //     setCmpFilterBy(filterObj)
+    //     setFilterBy(JSON.parse(JSON.stringify(cmpFilterBy)))
+    // };
+
 
     const saveRoomChanges = async () => {
         await saveRoom(room)
@@ -42,7 +46,8 @@ const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeN
             <NoteFilter
                 filterBy={filterBy}
                 setFilterBy={setFilterBy}
-                onFilter={onFilterHandler}
+                // onFilter={onFilterHandler}
+                roomId={room._id}
                 placeHolder={"Search for notes"} />
 
 
@@ -70,7 +75,6 @@ const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeN
 
 const mapStateToProps = (state) => {
     return {
-        // room: state.room.currRoom,
         // user: state.user.loggedinUser,
     };
 };
@@ -83,7 +87,8 @@ const mapDispatchToProps = {
     loadRoomById,
     resetCurrRoom,
     updateNote,
-    toggleStarredNote
+    toggleStarredNote,
+    setFilterBy
 };
 
 
