@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getStarredNotes, resetCurrRoom } from '../actions/RoomActions';
+import { resetCurrRoom } from '../actions/RoomActions';
+import { getStarredNotes } from '../actions/NoteActions';
 
 import StarredContainer from '../cmps/Note/StarredContainer'
 import Loading from '../cmps/Loading'

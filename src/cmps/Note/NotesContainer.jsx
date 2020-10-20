@@ -3,15 +3,12 @@ import { connect } from 'react-redux';
 
 import SocketService from '../../services/SocketService'
 
-import { loadRoomById, saveRoom, resetCurrRoom, removeNote, changeNoteColor, toggleNotePin, updateNote } from '../../actions/RoomActions';
-import { toggleStarredNote } from '../../actions/UserActions'
+import { loadRoomById, saveRoom, resetCurrRoom } from '../../actions/RoomActions';
+import { toggleStarredNote, removeNote, changeNoteColor, toggleNotePin, updateNote } from '../../actions/NoteActions'
 
 import NoteFilter from './NoteFilter'
 import NoteList from './NoteList'
 
-
-import { UserService } from '../../services/UserService';
-import { RoomService } from '../../services/RoomService';
 
 
 const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote, toggleStarredNote }) => {

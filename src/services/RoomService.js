@@ -17,10 +17,7 @@ function getById(filterBy) {
   }
 }
 
-// function getById(filterBy) {
-//     console.log(id);
-//     return HttpService.get(`room/${id}`);
-// }
+
 
 function remove(id) {
   return HttpService.delete(`room/${id}`);
@@ -37,56 +34,17 @@ async function save(room) {
   return res;
 }
 
-async function removeNote(roomId, noteId) {
-  return HttpService.delete(`room/${roomId}/removeNote`, { roomId, noteId });
-}
 
-async function changeNoteColor(roomId, noteId, color) {
-  return HttpService.put(`room/${roomId}/changeNoteColor`, {
-    roomId,
-    noteId,
-    color,
-  });
-}
-
-async function toggleNotePin(roomId, noteId) {
-  return HttpService.put(`room/${roomId}/toggleNotePin`, { roomId, noteId });
-}
-
-async function updateNote(roomId, note) {
-  return HttpService.put(`room/${roomId}/updateNote`, { roomId, note });
-}
 
 async function checkIsValidUser(userId, roomId) {
   return HttpService.post(`room/${roomId}/validate`, { userId, roomId });
 }
 
-// async function getStarredNotes(userId) {
-//   const params = new URLSearchParams(userId);
-//   return HttpService.get(`room/starredNotes/?${params}`);
-// }
-
-function getStarredNotes(user) {
-  const queryParams = new URLSearchParams();
-  if (user) {
-    for (const property in user) {
-      if (user[property]) {
-        queryParams.set(property, JSON.stringify(user[property]));
-      }
-    }
-    return HttpService.get(`room/starredNotes/?${queryParams}`);
-  }
-}
 
 export const RoomService = {
   query,
   getById,
   save,
   remove,
-  checkIsValidUser,
-  removeNote,
-  changeNoteColor,
-  toggleNotePin,
-  updateNote,
-  getStarredNotes,
+  checkIsValidUser
 };

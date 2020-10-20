@@ -5,19 +5,12 @@ import avatarImg from '../assets/png/user.png'
 
 const KEY = 'user';
 
-// async function getLoggedinUser() {
-//     var user = StorageService.load(KEY);
-//     return !user ? null : await HttpService.get(`user/${user._id}`)
-// }
 async function getLoggedinUser() {
     var user = StorageService.load(KEY);
     if (!user) return null
     user = await HttpService.get(`user/${user._id}`)
     return user
 }
-// async function getUpdatedUser() {
-//     var user = StorageService.load(KEY);
-//     return
 
 
 
@@ -76,11 +69,6 @@ async function updateFriend(userId, friendId) {
     await HttpService.put(`user/${friend._id}`, friend)
 }
 
-async function toggleStarredNote(userId, roomId, noteId) {
-    return await HttpService.put(`user/toggleStar`, {userId, roomId, noteId})
-}
-
-
 
 function getMinimalUser(_id, imgUrl) {
     return {
@@ -90,7 +78,7 @@ function getMinimalUser(_id, imgUrl) {
 }
 
 function getRoomIdFromContact(loggedinUser, contact) {
-    return loggedinUser.friends.find(friend => { return friend._id === contact._id })
+    return loggedinUser.friends.find(friend =>  friend._id === contact._id )
 
 }
 
@@ -105,5 +93,4 @@ export const UserService = {
     getLoggedinUser,
     getRoomIdFromContact,
     updateFriend,
-    toggleStarredNote
 }

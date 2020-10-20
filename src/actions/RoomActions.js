@@ -1,5 +1,4 @@
 import { RoomService } from "../services/RoomService";
-import noteSelector from "../selectors/notes";
 // LIST
 export function loadRooms(filterBy) {
   return async (dispatch) => {
@@ -54,62 +53,5 @@ export function deleteRoom(id) {
   return async (dispatch) => {
     await RoomService.remove(id);
     dispatch({ type: "DELETE_ROOM", id });
-  };
-}
-
-//REMOVE NOTE
-export function removeNote(roomId, noteId) {
-  return async (dispatch) => {
-    try {
-      let room = await RoomService.removeNote(roomId, noteId);
-      dispatch({ type: "SET_CURR_ROOM", room });
-    } catch (err) {
-      console.log("ERROR", err);
-    }
-  };
-}
-
-export function changeNoteColor(roomId, noteId, color) {
-  return async (dispatch) => {
-    try {
-      let room = await RoomService.changeNoteColor(roomId, noteId, color);
-      dispatch({ type: "SET_CURR_ROOM", room });
-    } catch (err) {
-      console.log("ERROR", err);
-    }
-  };
-}
-
-export function toggleNotePin(roomId, noteId) {
-  return async (dispatch) => {
-    try {
-      let room = await RoomService.toggleNotePin(roomId, noteId);
-      dispatch({ type: "SET_CURR_ROOM", room });
-    } catch (err) {
-      console.log("ERROR", err);
-    }
-  };
-}
-
-export function updateNote(roomId, note) {
-  return async (dispatch) => {
-    try {
-      let room = await RoomService.updateNote(roomId, note);
-      dispatch({ type: "SET_CURR_ROOM", room });
-    } catch (err) {
-      console.log("ERROR", err);
-    }
-  };
-}
-
-export function getStarredNotes(user) {
-  return async (dispatch) => {
-    try {
-      let notes = await RoomService.getStarredNotes(user);
-      let room = { notes };
-      dispatch({ type: "SET_CURR_ROOM", room });
-    } catch (err) {
-      console.log("ERROR", err);
-    }
   };
 }
