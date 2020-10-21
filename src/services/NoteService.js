@@ -1,5 +1,8 @@
 import { HttpService } from './HttpService.js'
 
+async function addNote(userId, roomId, note) {
+    return await HttpService.post(`note/add`, { userId, roomId, note })
+}
 
 async function removeNote(roomId, noteId) {
     return HttpService.delete(`note/removeNote`, { roomId, noteId });
@@ -39,6 +42,7 @@ function getStarredNotes(user) {
 
 
 export const NoteService = {
+    addNote,
     removeNote,
     changeNoteColor,
     toggleNotePin,
