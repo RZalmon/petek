@@ -1,34 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { UtilService } from '../services/UtilService'
-import SocketService from '../services/SocketService'
-import CloudinaryService from '../../src/services/CloudinaryService'
+
 import { loadRoomById, saveRoom, resetCurrRoom } from '../actions/RoomActions';
+import { addNote } from '../actions/NoteActions';
 import { updateUser } from '../actions/UserActions';
+
 import ButtonMenu from '../cmps/ButtonMenu'
-import NoteList from '../cmps/Note/NoteList'
-import NoteFilter from '../cmps/Note/NoteFilter'
+import NotesContainer from '../cmps/Note/NotesContainer';
 import Loading from '../cmps/Loading'
 import InputText from '../cmps/Note/InputText'
 import InputImg from '../cmps/Note/InputImg'
 import InputVideo from '../cmps/Note/InputVideo'
 import InputTodo from '../cmps/Note/InputTodo'
 import InputLoc from '../cmps/Note/InputLoc'
-import { UserService } from '../services/UserService';
+
 import { RoomService } from '../services/RoomService';
-import NotesContainer from '../cmps/Note/NotesContainer';
+import SocketService from '../services/SocketService'
+import CloudinaryService from '../../src/services/CloudinaryService'
 
-
-// actions
-// import * as notesActions from 'redux/notes';
-
-
-
-//Pin
-//change color
-//edit note
-//star
-//removeNote
 
 
 
@@ -39,12 +28,6 @@ const RoomPage = (props) => {
     const [noteInputType, setNoteInputType] = useState('InputText');
     const [isUploading, setIsUploading] = useState(false);
     const [isValidUser, setIsValidUser] = useState(null)
-    // const [cmpFilterBy, setCmpFilterBy] = useState({
-    //     roomId: props.room ? props.room._id : props.match.params.id,
-    //     term: '',
-    //     type: '',
-    //     by: 'all'
-    // });
 
     if (props.room) var { notes } = props.room
 
@@ -52,7 +35,6 @@ const RoomPage = (props) => {
         header: noteHeader,
         data: noteData,
         type: noteType,
-        // bgColor: '#87cefa',
         isPinned: false
     }
 
@@ -90,21 +72,13 @@ const RoomPage = (props) => {
         setIsUploading(true)
     }
 
-    // const onFilterHandler = (filterBy) => {
-    //     setFilterBy(filterBy)
-    // };
 
     const onHandleSubmit = async (ev) => {
+        ev.preventDefault()
         const { user, room } = props
-        if (ev) ev.preventDefault()
-        newNote._id = UtilService.makeId(24)
-        newNote.createdAt = Date.now()    //maybe server side should handle it
-        let minimalUser = UserService.getMinimalUser(user._id, user.imgUrl)
-        newNote.createdBy = minimalUser
+        let noteCopy = JSON.parse(JSON.stringify(newNote))
+        await props.addNote(user._id, room._id, noteCopy)
         const friend = user.friends.find(currFriend => currFriend.roomId === room._id)
-        let idx = room.notes.findIndex(note => !note.isPinned)
-        room.notes.splice(idx, 0, newNote)
-        props.saveRoom(JSON.parse(JSON.stringify(room)))
         SocketService.emit("added note", ({ room, user, friendId: friend._id }));
         // props.showNotification('Note added successfully! So Excited', 'success')
         //Need to find way to transfer that prop on desktop
@@ -157,11 +131,6 @@ const RoomPage = (props) => {
         <div className="room-page">
             {/* {(isValidUser && notes) ? <div className="note-add"> FIX IS VAILD USER*/}
             {notes ? <div className="note-add">
-                {/* <NoteFilter
-                    filterBy={filterBy}
-                    setFilterBy={setFilterBy}
-                    onFilter={onFilterHandler}
-                    placeHolder={"Search for notes"} /> */}
                 {noteType && <InputType
                     isMarkerShown={true}
                     onUploadImg={onUploadImg}
@@ -175,14 +144,7 @@ const RoomPage = (props) => {
             </div> : <Loading />}
             {/* {(isValidUser && notes) && <div> FIX IS VAILD USER */}
             {(notes && props.user) && <div>
-                {/* {!!notes.length && <NoteList
-                    notes={notes}
-                    user={props.user}
-                    room={props.room}
-                    saveRoomChanges={saveRoomChanges}
-                    togglePinned={togglePinned}
-                    setNoteType={setNoteType}
-                    toggleStarred={toggleStarred} />} */
+                {
                     <NotesContainer room={props.room} user={props.user} setNoteType={setNoteType} filterBy={props.filterBy}/>
                 }
             </div>}
@@ -201,6 +163,7 @@ const mapDispatchToProps = {
     saveRoom,
     resetCurrRoom,
     updateUser,
+    addNote
 };
 export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
 

@@ -1,5 +1,19 @@
 import { NoteService } from '../services/NoteService'
 
+
+export function addNote(userId, roomId, note) {
+    return async (dispatch) => {
+        try {
+            let room = await NoteService.addNote(userId, roomId, note);
+            dispatch({ type: "SET_CURR_ROOM", room });
+        } catch (err) {
+            console.log("ERROR", err);
+        }
+    };
+}
+
+
+
 export function toggleStarredNote(userId, roomId, noteId, isStarredPage) {
     return async dispatch => {
         try {
@@ -71,3 +85,4 @@ export function getStarredNotes(user) {
         }
     };
 }
+

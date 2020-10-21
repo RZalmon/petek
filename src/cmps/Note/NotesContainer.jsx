@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import SocketService from '../../services/SocketService'
 
-import { loadRoomById, saveRoom, resetCurrRoom, setFilterBy } from '../../actions/RoomActions';
+import { loadRoomById, saveRoom, resetCurrRoom, setFilterBy, resetFilterBy } from '../../actions/RoomActions';
 import { toggleStarredNote, removeNote, changeNoteColor, toggleNotePin, updateNote } from '../../actions/NoteActions'
 
 import NoteFilter from './NoteFilter'
@@ -11,7 +11,7 @@ import NoteList from './NoteList'
 
 
 
-const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote, toggleStarredNote, filterBy, setFilterBy }) => {
+const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote, toggleStarredNote, filterBy, setFilterBy, resetFilterBy }) => {
     // const [cmpFilterBy, setCmpFilterBy] = useState({
     //     roomId: room._id,
     //     term: '',
@@ -39,6 +39,11 @@ const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeN
     const updateMembers = () => {
         if (room.members.length > 1) SocketService.emit("roomUpdated", { room, userId: user._id });
     }
+
+    useEffect(() => {
+        console.log('!@#@!reset filter!@#!#');
+        return () => {    console.log('!@#@!reset filter!@#!#'); resetFilterBy() }  //onDestroy
+    }, []);
 
 
     return (
@@ -88,7 +93,8 @@ const mapDispatchToProps = {
     resetCurrRoom,
     updateNote,
     toggleStarredNote,
-    setFilterBy
+    setFilterBy,
+    resetFilterBy
 };
 
 

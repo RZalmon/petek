@@ -63,3 +63,10 @@ export function setFilterBy(filterBy) {
     dispatch({ type: "SET_FILTER_BY", filterBy });
   };
 }
+
+//RESET FILTER BY
+export function resetFilterBy() {
+  return async (dispatch) => {
+    dispatch({ type: "RESET_FILTER_BY" });
+  };
+}

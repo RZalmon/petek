@@ -1,4 +1,5 @@
 import React from 'react';
+import SaveIcon from '../icons/SaveIcon'
 
 export default ({ setNoteData, setNoteHeader, handleSubmit }) => {
 
@@ -7,7 +8,7 @@ export default ({ setNoteData, setNoteHeader, handleSubmit }) => {
         <form className="input-text" onSubmit={handleSubmit}>
             <input className="input-header" placeholder="Note Header" type="text" onChange={e => setNoteHeader(e.target.value)} />
             <input className="input-data" placeholder="Say Something" type="text" onChange={e => setNoteData(e.target.value)} />
-            <button hidden>Save</button>
+            <button><SaveIcon/></button>
         </form>
     )
 }
