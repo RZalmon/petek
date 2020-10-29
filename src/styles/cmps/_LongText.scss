@@ -1,0 +1,15 @@
+.long-text{
+
+
+    .long-text-btn {
+        cursor: pointer;
+        color: grey;
+        transition: .3s;
+    
+        @include hover-supported {
+            cursor: pointer;
+            color: rgb(83, 83, 83);
+        }
+    }
+    
+}
