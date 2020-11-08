@@ -2,6 +2,7 @@ import React from 'react'
 import NotificationFriend from './NotificationFriend'
 import NotificationResponse from './NotificationResponse'
 import NotificationNote from './NotificationNote'
+import NotificationStarredNote from './NotificationStarredNote'
 import Moment from 'react-moment';
 
 import xMark from '../../assets/svg/x-mark.svg'
@@ -12,7 +13,8 @@ export default ({ notification,onApprove, onDecline, onDeleteNotification }) => 
     const cmps = {
         NotificationFriend,
         NotificationResponse,
-        NotificationNote
+        NotificationNote,
+        NotificationStarredNote
     }
   
 
