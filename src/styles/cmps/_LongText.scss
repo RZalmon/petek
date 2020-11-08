@@ -1,0 +1,18 @@
+.long-text{
+    p{
+        height: fit-content;
+        transition: .3s;
+    }
+
+
+    .long-text-btn {
+        cursor: pointer;
+        color: grey;
+        transition: .3s;
+    
+        @include hover-supported {
+            color: rgb(83, 83, 83);
+        }
+    }
+    
+}

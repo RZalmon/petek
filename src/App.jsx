@@ -13,11 +13,12 @@ import audioNotification from '../src/assets/sound/sp-tune.mp3'
 
 import SocketService from './services/SocketService'
 import { StorageService } from './services/StorageService'
-import { updateUser, getUser } from '../src/actions/UserActions';
+import { updateUser, getUser, logout } from '../src/actions/UserActions';
 import { saveRoom, loadRoomById } from '../src/actions/RoomActions';
 
-import RoutePage from './RoutePage'
+import RoutePage from './RoutePage';
 import NavBar from './cmps/NavBar';
+import MyNavbar from './cmps/MyNavbar';
 
 
 const history = createBrowserHistory();
@@ -76,14 +77,19 @@ const App = (props) => {
     }).show();
   }
 
+  const handleLogout = async () => {
+    await props.logout()
+    showNotification('Logged out successfully :)', 'success')
+  }
+
 
 
   useEffect(() => {
     connectSockets()
-    if (loggedinUser){
-    console.log('connect user sockets', loggedinUser._id);
-    console.log(loggedinUser);
-    } 
+    if (loggedinUser) {
+      console.log('connect user sockets', loggedinUser._id);
+      console.log(loggedinUser);
+    }
     if (room) console.log('connect room sockets', room._id);
     return () => {
       disconnectSockets()
@@ -98,7 +104,7 @@ const App = (props) => {
 
 
     return () => {
-      if(loggedinUser)console.log('disconnecet user sockets', loggedinUser._id);
+      if (loggedinUser) console.log('disconnecet user sockets', loggedinUser._id);
       if (room) console.log('disconnecet room sockets', room._id);
       disconnectSockets()
       SocketService.terminate()
@@ -110,7 +116,8 @@ const App = (props) => {
   return (
     <div className="App">
       <Router history={history}>
-        <NavBar user={loggedinUser} showNotification={showNotification} />
+        {/* <NavBar user={loggedinUser} showNotification={showNotification} /> */}
+        <MyNavbar user={loggedinUser} handleLogout={handleLogout} />
         <RoutePage onConnectSocket={connectSockets} showNotification={showNotification} />
       </Router>
     </div>
@@ -131,7 +138,8 @@ const mapDispatchToProps = {
   updateUser,
   saveRoom,
   loadRoomById,
-  getUser
+  getUser,
+  logout
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

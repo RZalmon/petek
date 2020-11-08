@@ -23,6 +23,7 @@
 
 //CMPS
 @import "./styles/cmps/NavBar";
+@import "./styles/cmps/MyNavbar";
 @import "./styles/cmps/BurgerMenu";
 @import "./styles/cmps/ContactPreview";
 @import "./styles/cmps/ContactList";
@@ -42,6 +43,9 @@
 @import "./styles/cmps/ButtonMenu.scss";
 @import "./styles/cmps/Loading.scss";
 @import "./styles/cmps/Filter.scss";
+@import "./styles/cmps/NotesContainer";
+@import "./styles/cmps/LongText";
+
 //PAGES
 @import "./styles/pages/SignupPage";
 @import "./styles/pages/RoomPage";

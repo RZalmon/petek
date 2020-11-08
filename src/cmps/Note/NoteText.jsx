@@ -1,17 +1,29 @@
-import React, { useState } from 'react'
+import React from 'react'
+
+import LongText from '../LongText'
 
 export default ({ note, isEdit, textEdit, setTextEdit }) => {
-
     return (
         <div className="note-text">
             {note.header && <h4>{note.header}</h4>}
             {isEdit
                 ? <input type="text" onChange={(e) => setTextEdit(e.target.value)} />
-                : <p>{note.data}</p>}
+                : <LongText text={note.data} limit={25} />}
         </div>
     )
 }
 
+// export default ({ note, isEdit, textEdit, setTextEdit }) => {
+
+//     return (
+//         <div className="note-text">
+//             {note.header && <h4>{note.header}</h4>}
+//             {isEdit
+//                 ? <input type="text" onChange={(e) => setTextEdit(e.target.value)} />
+//                 : <p>{note.data}</p>}
+//         </div>
+//     )
+// }
 
 
 //Trying to animate the switch between edit and text. the problem is that altough its not edit mode 

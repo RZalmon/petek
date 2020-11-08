@@ -1,5 +1,4 @@
 import React, { useEffect, useState, createRef, useCallback } from 'react'
-import { CSSTransition } from 'react-transition-group';
 
 import Moment from 'react-moment';
 
@@ -15,11 +14,10 @@ import EditIcon from "../../cmps/icons/EditIcon";
 import SaveIcon from "../../cmps/icons/SaveIcon";
 
 import AvatarLoader from '../AvatarLoader'
-import { changeNoteColor } from '../../actions/RoomActions';
-import { Note } from '@material-ui/icons';
 
 
-export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, toggleStarredNote, changeNoteColor, toggleNotePin, updateNote, updateMembers, isStarredPage }) => {
+
+export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, toggleStarredNote, changeNoteColor, toggleNotePin, updateNote, updateMembers, isStarredPage, isSpreadView }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currTodoIdx, setCurrTodoIdx] = useState(null);
     const [textEdit, setTextEdit] = useState('')
@@ -56,7 +54,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
 
     const handleRemoveClicked = async () => {
         let roomId = getRoomId()
-        await removeNote(roomId, note._id); 
+        await removeNote(roomId, note._id);
         if (!isStarredPage) updateMembers();
     }
 
@@ -94,13 +92,13 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
     }, [note.bgColor]);
 
     return (
-        <div className="note-preview" style={{ backgroudColor: note.bgColor }}>
+        <div className="note-preview" style={{ backgroudColor: note.bgColor }} style={{ display: isSpreadView ? 'inline-block' : 'block' }}>
             <div className={user._id === note.createdBy._id ? 'user-container' : 'friend-container'}>
-                <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" onLoad={onLoad} style={{ display: isLoaded ? 'block' : 'none' }} />
-                {!isLoaded && <AvatarLoader />}
+                {!isSpreadView && <img src={note.createdBy.imgUrl} alt="Note creator avatar" className="avatar avatar-s" onLoad={onLoad} style={{ display: isLoaded ? 'block' : 'none' }} />}
+                {(!isSpreadView && !isLoaded) && <AvatarLoader />}
                 <div className="note-container" ref={noteRef}>
                     <div className="note-header">
-                       {!isStarredPage && <div>
+                        {!isStarredPage && <div>
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && !isEdit) && <i onClick={() => setIsEdit(true)}><EditIcon /></i>}
                             {((note.type === 'NoteTodo' || note.type === 'NoteText') && isEdit) && <i onClick={() => { setIsEdit(false); saveNoteEdits(note.type) }}><SaveIcon /></i>}
                             <i onClick={handleRemoveClicked}><RemoveIcon /></i>

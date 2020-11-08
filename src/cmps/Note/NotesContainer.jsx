@@ -12,37 +12,20 @@ import NoteList from './NoteList'
 
 
 const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeNoteColor, toggleNotePin, updateNote, toggleStarredNote, filterBy, setFilterBy, resetFilterBy }) => {
-    // const [cmpFilterBy, setCmpFilterBy] = useState({
-    //     roomId: room._id,
-    //     term: '',
-    //     type: '',
-    //     by: 'all'
-    // });
-
 
     if (room) var { notes } = room
-
-
-    // const onFilterHandler = (filterObj) => {
-    //     setCmpFilterBy(filterObj)
-    //     setFilterBy(JSON.parse(JSON.stringify(cmpFilterBy)))
-    // };
-
 
     const saveRoomChanges = async () => {
         await saveRoom(room)
         SocketService.emit("roomUpdated", { room, userId: user._id });
     }
 
-
-
-    const updateMembers = () => {
+    const updateMembers = () => {//this needs to move to room page 
         if (room.members.length > 1) SocketService.emit("roomUpdated", { room, userId: user._id });
     }
 
     useEffect(() => {
-        console.log('!@#@!reset filter!@#!#');
-        return () => {    console.log('!@#@!reset filter!@#!#'); resetFilterBy() }  //onDestroy
+        return () => resetFilterBy()
     }, []);
 
 

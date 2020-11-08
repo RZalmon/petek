@@ -1,38 +1,11 @@
 .note-preview {
+    display: inline-block;
     max-width: 420px;
 
+    
     h4 {
         text-align: start;
     }
-
-    // .remove-btn {
-    //     cursor: pointer;
-    //     width: 30px;
-    //     align-self: flex-end;
-    //     fill: white;//not working
-    //     margin-left: 10px;
-
-    //     &:hover {
-    //         fill: white;//not working
-    //         transition: 0.3s;//not working
-    //         filter: invert(37%) sepia(93%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(135%);
-    //     }
-    // }
-
-    // .edit-btn,
-    // .save-btn {
-    //     cursor: pointer;
-    //     width: 30px;
-    //     align-self: flex-end;
-    //     fill: white;//not working
-    //     margin-left: 10px;
-
-    //     &:hover {
-    //         fill: white;//not working
-    //         transition: 0.3s;//not working
-    //         filter: invert(12%) sepia(83%) saturate(5841%) hue-rotate(244deg) brightness(87%) contrast(153%);
-    //     }
-    // }
 
     p {
         margin: unset;
@@ -92,15 +65,6 @@
     }
 }
 
-// .note-preview-appear {
-//     transform: scale(0.1);
-// }
-// .note-preview-appear-active {
-//     transform: scale(1);
-//     transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
-// }
-
-// .note-preview-exit-active {
-//     transform: rotateY(90deg) rotateX(45deg);
-//     transition: transform 0.8s cubic-bezier(0.5, 0, 0.75, 0);
-// }
+.spread-view-item {
+    display: inline-block;
+}
