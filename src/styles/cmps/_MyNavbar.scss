@@ -1,5 +1,5 @@
 .main-nav {
-    position: absolute;
+    position: sticky;
     z-index: 98;
     top: 0;
     left: 0;
@@ -7,6 +7,7 @@
     color: $clr-nav;
     background-color: yellow;
     transition: background-color 0.4s linear;
+    height: rem(60px);
 
     .nav-container {
         display: flex;

@@ -117,7 +117,7 @@ const App = (props) => {
     <div className="App">
       <Router history={history}>
         {/* <NavBar user={loggedinUser} showNotification={showNotification} /> */}
-        <MyNavbar user={loggedinUser} handleLogout={handleLogout} />
+        <MyNavbar user={loggedinUser} handleLogout={handleLogout} history={history} />
         <RoutePage onConnectSocket={connectSockets} showNotification={showNotification} />
       </Router>
     </div>

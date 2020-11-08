@@ -4,12 +4,21 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 import logo from '../../src/assets/png/petek-logo.png';
 
 
-export default ({ user, handleLogout }) => {
+export default ({ user, handleLogout, history }) => {
     const checkboxRef = createRef()
 
-    useEffect(() => {//Closing The menu after click
-        if (checkboxRef.current.checked) checkboxRef.current.checked = false;
-    }, [checkboxRef])
+    // useEffect(() => {//Closing The menu after click
+    //    console.log(history.location);
+    //      checkboxRef.current.checked = false;
+    // }, [history.location.pathname])
+
+useEffect(() => {
+      return history.listen((location) => { 
+          console.log(checkboxRef);
+        //   if(checkboxRef && checkboxRef.current) checkboxRef.current.checked = false;
+         console.log(`You changed the page to: ${location.pathname}`) 
+      }) 
+   },[history])
 
     return (
         <nav className="main-nav">
@@ -20,9 +29,9 @@ export default ({ user, handleLogout }) => {
                 </Link>
 
                 <input type="checkbox" id="mobile-nav" ref={checkboxRef} hidden />
-                <label for="mobile-nav" class="mobile-btn">
+               { user &&<label htmlFor="mobile-nav" className="mobile-btn">
                     <span>|</span>
-                </label>
+                </label>}
 
                 {user && <ul className="link-list">
                     <li>
