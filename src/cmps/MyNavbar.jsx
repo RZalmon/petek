@@ -29,28 +29,28 @@ export default ({ user, handleLogout, history }) => {
 
                 {user && <ul className="link-list">
                     <li>
-                        <NavLink to="/" className="link" exact onClick={() => { handleCheboxClicked(false) }}>
+                        <NavLink to="/" className="link" exact onClick={() => handleCheboxClicked(false)}>
                             Home
                          </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/contact" className="link" exact onClick={() => { handleCheboxClicked(false) }}>
+                        <NavLink to="/contact" className="link" exact onClick={() => handleCheboxClicked(false)}>
                             Contacts
                          </NavLink>
                     </li>
                     <li>
                         {user.notifications.length && <span className="notification-count">{user.notifications.length}</span>}
-                        <NavLink to={`/inbox/${user._id}`} className="link" exact onClick={() => { handleCheboxClicked(false) }}>
+                        <NavLink to={`/inbox/${user._id}`} className="link" exact onClick={() => handleCheboxClicked(false)}>
                             Inbox
                          </NavLink>
                     </li>
                     <li>
-                        <NavLink to={`/random-game`} className="link" exact onClick={() => { handleCheboxClicked(false) }}>
+                        <NavLink to={`/random-game`} className="link" exact onClick={() => handleCheboxClicked(false)}>
                             Random Game
                          </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/starred" className="link" exact onClick={() => { handleCheboxClicked(false) }}>
+                        <NavLink to="/starred" className="link" exact onClick={() => handleCheboxClicked(false)}>
                             Starred
                          </NavLink>
                     </li>

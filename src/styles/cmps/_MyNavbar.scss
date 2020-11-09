@@ -75,11 +75,12 @@
                     color: $clr21;
                     border-color: $clr21;
                 }
+                &.active {
+                    color: $clr21;
+                    border-color: $clr21;
+                }
             }
-            .router-link-exact-active {
-                color: $clr21;
-                border-color: $clr21;
-            }
+            
         }
 
         .mobile-btn {
