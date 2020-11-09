@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import NotePreview from './NotePreview'
+import SpreadIcon from '../icons/SpreadIcon'
+import ListIcon from '../icons/ListIcon'
 
 export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, setNoteType, toggleStarredNote, changeNoteColor, toggleNotePin, updateNote, updateMembers, isStarredPage }) => {
     const [isSpreadView, setIsSpreadView] = useState(false)
@@ -12,7 +14,7 @@ export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, 
 
     return (
         <React.Fragment>
-            <button onClick={toggleView}>toggle View</button>
+            <i onClick={toggleView}>{isSpreadView ? <ListIcon /> : <SpreadIcon />}</i>
             <div className="note-list" className={isSpreadView ? 'spread-view' : 'chat-view'}>
                 {/* <div className="note-list" onClick={() => setNoteType('')}> */}
                 <TransitionGroup component={null}>
@@ -35,8 +37,8 @@ export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, 
                                 updateNote={updateNote}
                                 updateMembers={updateMembers}
                                 toggleStarredNote={toggleStarredNote}
-                                isStarredPage={isStarredPage} 
-                                isSpreadView={isSpreadView}/>
+                                isStarredPage={isStarredPage}
+                                isSpreadView={isSpreadView} />
                         </CSSTransition>)}
                 </TransitionGroup>
             </div>
