@@ -13,9 +13,9 @@ export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, 
     }
 
     return (
-        <React.Fragment>
+        <div className="note-list">
             <i onClick={toggleView}>{isSpreadView ? <ListIcon /> : <SpreadIcon />}</i>
-            <div className="note-list" className={isSpreadView ? 'spread-view' : 'chat-view'}>
+            <div className={isSpreadView ? 'spread-view' : 'chat-view'}>
                 {/* <div className="note-list" onClick={() => setNoteType('')}> */}
                 <TransitionGroup component={null}>
                     {notes.map((note) =>
@@ -42,6 +42,6 @@ export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, 
                         </CSSTransition>)}
                 </TransitionGroup>
             </div>
-        </ React.Fragment>
+        </ div>
     )
 }

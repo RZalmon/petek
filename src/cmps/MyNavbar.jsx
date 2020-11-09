@@ -16,7 +16,7 @@ export default ({ user, handleLogout, history }) => {
 
     return (
         <nav className="main-nav">
-            <div className="nav-container container">
+            <div className="nav-container">
 
                 <Link to={`/`} className="logo-container" >
                     <img src={logo} alt="logo" className="logo" />

@@ -74,7 +74,7 @@ const RoomPage = (props) => {
 
 
     const onHandleSubmit = async (ev) => {
-        ev.preventDefault()
+        if (ev) ev.preventDefault()
         const { user, room } = props
         let noteCopy = JSON.parse(JSON.stringify(newNote))
         await props.addNote(user._id, room._id, noteCopy)
@@ -145,7 +145,7 @@ const RoomPage = (props) => {
             {/* {(isValidUser && notes) && <div> FIX IS VAILD USER */}
             {(notes && props.user) && <div>
                 {
-                    <NotesContainer room={props.room} user={props.user} setNoteType={setNoteType} filterBy={props.filterBy}/>
+                    <NotesContainer room={props.room} user={props.user} setNoteType={setNoteType} filterBy={props.filterBy} />
                 }
             </div>}
         </div>
