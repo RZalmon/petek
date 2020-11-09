@@ -16,12 +16,12 @@ export default ({ user, handleLogout, history }) => {
 
     return (
         <nav className="main-nav">
-            <div className="nav-container container">
-
+            <div className="nav-container">
                 <Link to={`/`} className="logo-container" >
                     <img src={logo} alt="logo" className="logo" />
                 </Link>
 
+             {user && user.notifications.length && <span className="notification-count-nav">{user.notifications.length}</span>}
                 <input type="checkbox" id="mobile-nav" className={isMenuOpen ? 'menu-open' : ''} ref={checkboxRef} hidden onClick={() => handleCheboxClicked(!isMenuOpen)} />
                 {user && <label htmlFor="mobile-nav" className="mobile-btn">
                     <span>|</span>

@@ -74,7 +74,7 @@ const RoomPage = (props) => {
 
 
     const onHandleSubmit = async (ev) => {
-        ev.preventDefault()
+        if(ev) ev.preventDefault() 
         const { user, room } = props
         let noteCopy = JSON.parse(JSON.stringify(newNote))
         await props.addNote(user._id, room._id, noteCopy)

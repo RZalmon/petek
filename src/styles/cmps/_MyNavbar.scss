@@ -11,17 +11,37 @@
     display: flex;
 
     .nav-container {
+        padding: 10px;
+        width: inherit;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        
+                .notification-count-nav {
+                    display: inline-block;
+                    position: relative;
+                    color: white;
+                    border: 1px solid white;
+                    border-radius: 50%;
+                    font-size: 15px;
+                    width: 25px;
+                    height: 25px;
+                    background-color: purple;
+                    left: rem(129px);
+                    top: rem(6px);
+
+
+                    @include for-normal-layout {
+                        padding: 1px;
+                        left: 14px;
+                        top: -12px;
+                    }
+                }
 
         .logo-container {
             .logo {
-                height: 50px;
-                width: 50px;
-                position: absolute;
-                margin-left: 5px;
-                top: 5px;
+                height: 40px;
+                width: 40px;
             }
         }
 
@@ -36,11 +56,15 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: yellow;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
             transform: translateX(100%);
             transition: transform 0.6s linear;
             list-style: none;
             margin: unset;
+              display: flex;
+                align-items: flex-end;
+                padding: 10px;
 
             li {
                 margin-bottom: rem(60px);
@@ -81,6 +105,13 @@
                     border-color: $clr21;
                 }
             }
+
+            a.link{
+                padding-right: 5px;
+                color: white;
+                font-weight: bold;
+                letter-spacing: 3px;
+            }
             
         }
 
@@ -88,7 +119,7 @@
             transform: rotateZ(90deg);
             display: inline-block;
             cursor: pointer;
-            font-size: rem(24px);
+            font-size: rem(30px);
             z-index: 99;
             user-select: none;
 
@@ -124,6 +155,7 @@
     .main-nav {
         .nav-container {
             .link-list {
+
                 position: initial;
                 width: unset;
                 height: unset;
@@ -132,6 +164,7 @@
                 justify-content: space-between;
                 background-color: transparent;
                 transform: none;
+              
 
                 li {
                     margin-bottom: 0;
