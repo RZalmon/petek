@@ -45,6 +45,7 @@
                 margin-bottom: rem(60px);
 
                 .notification-count {
+                    display: inline-block;
                     position: relative;
                     color: white;
                     border: 1px solid white;
@@ -53,7 +54,6 @@
                     width: 25px;
                     height: 25px;
                     background-color: purple;
-                    padding: 2px;
 
 
                     @include for-normal-layout {
