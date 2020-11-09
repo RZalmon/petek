@@ -30,7 +30,7 @@ const NotesContainer = ({ room, user, setNoteType, removeNote, saveRoom, changeN
 
 
     return (
-        <div className="notes-container">
+        <div className="notes-container ">
             <NoteFilter
                 filterBy={filterBy}
                 setFilterBy={setFilterBy}

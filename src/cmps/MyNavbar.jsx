@@ -17,11 +17,11 @@ export default ({ user, handleLogout, history }) => {
     return (
         <nav className="main-nav">
             <div className="nav-container">
-
                 <Link to={`/`} className="logo-container" >
                     <img src={logo} alt="logo" className="logo" />
                 </Link>
 
+                {(!isMenuOpen && user && user.notifications.length) && <span className="notification-count-nav">{user.notifications.length}</span>}
                 <input type="checkbox" id="mobile-nav" className={isMenuOpen ? 'menu-open' : ''} ref={checkboxRef} hidden onClick={() => handleCheboxClicked(!isMenuOpen)} />
                 {user && <label htmlFor="mobile-nav" className="mobile-btn">
                     <span>|</span>
@@ -34,11 +34,11 @@ export default ({ user, handleLogout, history }) => {
                          </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/contact" className="link" exact onClick={() => handleCheboxClicked(false)}>
-                            Contacts
+                        {user.notifications.length && <span className="notification-count">{user.notifications.length}</span>}
+                        <NavLink to={`/inbox/${user._id}`} className="link" exact onClick={() => { handleCheboxClicked(false) }}>
+                            Inbox
                          </NavLink>
                     </li>
-                  
                     <li>
                         <NavLink to={`/random-game`} className="link" exact onClick={() => handleCheboxClicked(false)}>
                             Random Game
@@ -49,10 +49,9 @@ export default ({ user, handleLogout, history }) => {
                             Starred
                          </NavLink>
                     </li>
-                      <li>
-                        {user.notifications.length && <span className="notification-count">{user.notifications.length}</span>}
-                        <NavLink to={`/inbox/${user._id}`} className="link" exact onClick={() => { handleCheboxClicked(false) }}>
-                            Inbox
+                    <li>
+                        <NavLink to="/contact" className="link" exact onClick={() => handleCheboxClicked(false)}>
+                            Contacts
                          </NavLink>
                     </li>
                     <li>
