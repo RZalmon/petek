@@ -12,7 +12,7 @@ import ArrowIcon from '../../assets/svg/arrow.svg'
 import { saveRoom } from '../../actions/RoomActions';
 //TODO: IMPROVE EDIT INPUT AND MINUS UI +++ reflect trough socket
 
-const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTodoIdx, updateNote, updateMembers }) => {
+const NoteTodo = ({ note, roomId, room, userId, isEdit, currTodoIdx, setCurrTodoIdx, updateNote, updateMembers, isStarredPage }) => {
 
     const [editedTodo, setEditedTodo] = useState('');
     const [newTodo, setNewTodo] = useState('');
@@ -25,13 +25,15 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
         if (isEdit) return
         let noteCopy = JSON.parse(JSON.stringify(note))
         noteCopy.data[idx].isDone = !noteCopy.data[idx].isDone
-        await updateNote(room._id, noteCopy)
-        updateMembers()
+        console.log('%%%%isStarredPage%%%%', isStarredPage);
+        await updateNote(roomId, noteCopy)// old and load notes in starred bug 
+        // await updateNote(roomId, noteCopy, isStarredPage)// right now its not working, 
+        if (room.members && room.members.length > 1) updateMembers() //if is a plaster
     }
     //*********CHECKPOINT */
 
     const addTodo = async () => {
-        
+
         let todoToAdd = {
             text: newTodo,
             isDone: false,
@@ -94,7 +96,7 @@ const NoteTodo = ({ note, saveRoom, room, userId, isEdit, currTodoIdx, setCurrTo
                                 {(currTodoIdx !== idx) && <span className={todo.isDone ? 'done' : ''} >{todo.text}</span>}
                             </div>
                             {(isEdit && currTodoIdx === idx) && <input type="text" value={editedTodo} ref={editInputRef} onChange={(e) => { setEditedTodo(e.target.value); }} />}
-                            {isEdit && <img src={xmark} className="remove-todo-btn" onClick={(ev) => {ev.stopPropagation(); removeTodo(idx); }} />}
+                            {isEdit && <img src={xmark} className="remove-todo-btn" onClick={(ev) => { ev.stopPropagation(); removeTodo(idx); }} />}
                         </li>
                     )
                 })}

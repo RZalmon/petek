@@ -40,7 +40,38 @@ export default function RoomReducer(state = initialState, action) {
             return { ...state, filterBy: action.filterBy }
         case 'RESET_FILTER_BY':
             return { ...state, filterBy: null }
+        case 'UPDATE_NOTE':
+            return {
+                ...state,
+                currRoom: {
+                    ...state.currRoom,
+                    notes: state.currRoom.notes.map(currNote => {
+                        if (currNote._id === action.note._id) return action.note;
+                    })
+                }
+            }
+        case 'ADD_NOTE':
+            let idx = state.currRoom.notes.findIndex(currNote => !currNote.isPinned);
+            return {
+                ...state,
+                currRoom: {
+                    ...state.currRoom,
+                    notes: [...state.currRoom.notes.slice(0, idx), action.note, ...state.currRoom.notes.slice(idx, state.currRoom.notes.length)]//probably there is a better solution
+                }
+            }
+        case 'REMOVE_NOTE':
+            return {
+                ...state,
+                currRoom: {
+                    ...state.currRoom,
+                    notes: state.currRoom.notes.filter(note => note._id !== action.noteId)
+                }
+            }
         default:
             return state;
     }
 };
+
+// currRoom: state.rooms.filter(room => {
+//     return room._id !== action.id
+// })

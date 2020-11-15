@@ -35,6 +35,7 @@ const StarredContainer = ({ room,notes, user, setNoteType, removeNote, saveRoom,
                 updateNote={updateNote}
                 isStarredPage={isStarredPage}
                 toggleStarredNote={toggleStarredNote}
+                isStarredPage={isStarredPage}
                 // updateMembers={updateMembers}
                 // togglePinned={togglePinned}
                 // setNoteType={setNoteType}

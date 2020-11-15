@@ -85,6 +85,7 @@ const App = (props) => {
 
 
   useEffect(() => {
+    console.log('Connect sockets room', room);
     connectSockets()
     if (loggedinUser) {
       console.log('connect user sockets', loggedinUser._id);

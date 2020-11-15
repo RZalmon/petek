@@ -3,8 +3,7 @@ import thunk from 'redux-thunk';
 
 import UserReducer from './reducers/UserReducer';
 import ContactReducer from './reducers/ContactReducer';
-import RoomReducer from './reducers/RoomReducer'
-
+import RoomReducer from './reducers/RoomReducer';
 
 const rootReducer = combineReducers({
     user: UserReducer,

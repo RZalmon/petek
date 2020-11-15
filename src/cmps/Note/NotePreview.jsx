@@ -48,7 +48,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
         let noteCopy = JSON.parse(JSON.stringify(note));
         (type === 'NoteText' && textEdit) ? noteCopy.data = textEdit : setCurrTodoIdx('');
         await updateNote(room._id, noteCopy);
-        updateMembers();
+        if (room.members && room.members.length > 1) updateMembers();
     }
 
 
@@ -64,7 +64,6 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
 
 
     const onLoad = useCallback(() => {
-        console.log("loaded");
         setIsLoaded(true);
     }, []);
 
@@ -105,8 +104,8 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
                         </div>}
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
-                    <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} textEdit={textEdit} setTextEdit={setTextEdit} updateNote={updateNote} updateMembers={updateMembers} />
-                    <Features room={room} togglePinned={togglePinned} note={note} user={user} changeNoteColor={changeNoteColor} toggleNotePin={toggleNotePin} setNoteColor={setNoteColor} toggleStarredNote={toggleStarredNote} updateMembers={updateMembers} isStarredPage={isStarredPage} roomId={getRoomId()} />
+                    <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} textEdit={textEdit} setTextEdit={setTextEdit} updateNote={updateNote} updateMembers={updateMembers} isStarredPage={isStarredPage}  roomId={getRoomId()}/>
+                    <Features room={room} togglePinned={togglePinned} note={note} user={user} changeNoteColor={changeNoteColor} toggleNotePin={toggleNotePin} setNoteColor={setNoteColor} toggleStarredNote={toggleStarredNote} updateMembers={updateMembers} isStarredPage={isStarredPage} roomId={getRoomId()} updateNote={updateNote}/>
                 </div>
             </div>
         </div>
