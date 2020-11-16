@@ -7,7 +7,7 @@ export default ({ note, isEdit, textEdit, setTextEdit }) => {
         <div className="note-text">
             {note.header && <h4>{note.header}</h4>}
             {isEdit
-                ? <input type="text" onChange={(e) => setTextEdit(e.target.value)} />
+                ? <textarea type="text" onChange={(e) => setTextEdit(e.target.value)} value={textEdit} />
                 : <LongText text={note.data} limit={25} />}
         </div>
     )

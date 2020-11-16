@@ -1,8 +1,8 @@
-.note-list{
-   
+.note-list {
 
-}
- .spread-view {
+
+
+    .spread-view {
         @include for-mobile-layout {
             break-inside: avoid-column;
             column-gap: 2%;
@@ -17,3 +17,5 @@
             column-count: 4;
         }
     }
+    
+}

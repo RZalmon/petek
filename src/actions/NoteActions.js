@@ -41,17 +41,7 @@ export function removeNote(roomId, noteId) {
     };
 }
 
-// export function changeNoteColor(roomId, noteId, color) {
-//     return async (dispatch) => {
-//         try {
-//             let room = await NoteService.changeNoteColor(roomId, noteId, color);
-//             dispatch({ type: "SET_CURR_ROOM", room });
-//         } catch (err) {
-//             console.log("ERROR", err);
-//         }
-//     };
-// }
-//OPT2
+
 export function changeNoteColor(roomId, noteId, color) {
     return async (dispatch) => {
         try {
@@ -74,7 +64,7 @@ export function toggleNotePin(roomId, noteId) {
     };
 }
 
-export function updateNote(roomId, note, isStarredPage = false) {
+export function updateNote(roomId, note) {
     return async (dispatch) => {
         try {
             let updatedNote = await NoteService.updateNote(roomId, note);

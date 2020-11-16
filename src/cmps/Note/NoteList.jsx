@@ -5,7 +5,7 @@ import NotePreview from './NotePreview'
 import SpreadIcon from '../icons/SpreadIcon'
 import ListIcon from '../icons/ListIcon'
 
-export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, setNoteType, toggleStarredNote, changeNoteColor, toggleNotePin, updateNote, updateMembers, isStarredPage }) => {
+export default ({ room, notes, user, removeNote, saveRoomChanges, togglePinned, toggleStarredNote, changeNoteColor, toggleNotePin, updateNote, updateMembers, isStarredPage }) => {
     const [isSpreadView, setIsSpreadView] = useState(false)
 
     const toggleView = () => {

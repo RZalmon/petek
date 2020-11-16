@@ -6,7 +6,7 @@ import CircleIcon from '../icons/CircleIcon'
 import ColorPalleteIcon from '../icons/ColorPaletteIcon'
 import StarIcon from '../icons/StarIcon'
 
-export default ({ room, note, user, toggleStarredNote, changeNoteColor, toggleNotePin, updateMembers, isStarredPage, roomId }) => {
+export default ({ note, user, toggleStarredNote, changeNoteColor, toggleNotePin, updateMembers, isStarredPage, roomId }) => {
     const [isPalleteOpen, setIsPalleteOpen] = useState(false)
     const [isStarred, setIsStarred] = useState(false)
     const colors = ['#ffa350', '#f78888', '#fff59d', '#90ccf4', '#4caf50']

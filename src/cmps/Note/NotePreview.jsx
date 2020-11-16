@@ -20,7 +20,7 @@ import AvatarLoader from '../AvatarLoader'
 export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, toggleStarredNote, changeNoteColor, toggleNotePin, updateNote, updateMembers, isStarredPage, isSpreadView }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [currTodoIdx, setCurrTodoIdx] = useState(null);
-    const [textEdit, setTextEdit] = useState('')
+    const [textEdit, setTextEdit] = useState(note.data)
     const [isLoaded, setIsLoaded] = useState(false);
 
     const cmps = {
@@ -35,11 +35,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
 
     const noteRef = createRef();
 
-    const setNoteColor = (color) => {//DELETE
-        note.bgColor = color;
-        saveRoomChanges();
-    };
-
+   
     const paintNote = () => {//KEEP
         if (note.bgColor && noteRef.current) noteRef.current.style.backgroundColor = note.bgColor
     }
@@ -105,7 +101,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
                         <Moment format="MM/DD/YY ,HH:mm">{note.createdAt}</Moment>
                     </div>
                     <NoteType note={note} user={user} isEdit={isEdit} currTodoIdx={currTodoIdx} setCurrTodoIdx={setCurrTodoIdx} textEdit={textEdit} setTextEdit={setTextEdit} updateNote={updateNote} updateMembers={updateMembers} isStarredPage={isStarredPage}  roomId={getRoomId()}/>
-                    <Features room={room} togglePinned={togglePinned} note={note} user={user} changeNoteColor={changeNoteColor} toggleNotePin={toggleNotePin} setNoteColor={setNoteColor} toggleStarredNote={toggleStarredNote} updateMembers={updateMembers} isStarredPage={isStarredPage} roomId={getRoomId()} updateNote={updateNote}/>
+                    <Features room={room} togglePinned={togglePinned} note={note} user={user} changeNoteColor={changeNoteColor} toggleNotePin={toggleNotePin} toggleStarredNote={toggleStarredNote} updateMembers={updateMembers} isStarredPage={isStarredPage} roomId={getRoomId()} updateNote={updateNote}/>
                 </div>
             </div>
         </div>

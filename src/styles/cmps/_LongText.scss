@@ -1,18 +1,17 @@
-.long-text{
-    p{
+.long-text {
+    p {
         height: fit-content;
-        transition: .3s;
+        white-space: pre-line;
+        word-break: break-all;
+        max-width: 210px;
     }
-
 
     .long-text-btn {
         cursor: pointer;
         color: grey;
-        transition: .3s;
-    
+
         @include hover-supported {
             color: rgb(83, 83, 83);
         }
     }
-    
 }

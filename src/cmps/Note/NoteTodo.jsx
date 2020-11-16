@@ -25,12 +25,9 @@ const NoteTodo = ({ note, roomId, room, userId, isEdit, currTodoIdx, setCurrTodo
         if (isEdit) return
         let noteCopy = JSON.parse(JSON.stringify(note))
         noteCopy.data[idx].isDone = !noteCopy.data[idx].isDone
-        console.log('%%%%isStarredPage%%%%', isStarredPage);
         await updateNote(roomId, noteCopy)// old and load notes in starred bug 
-        // await updateNote(roomId, noteCopy, isStarredPage)// right now its not working, 
         if (room.members && room.members.length > 1) updateMembers() //if is a plaster
     }
-    //*********CHECKPOINT */
 
     const addTodo = async () => {
 

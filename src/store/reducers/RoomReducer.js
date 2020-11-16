@@ -46,17 +46,19 @@ export default function RoomReducer(state = initialState, action) {
                 currRoom: {
                     ...state.currRoom,
                     notes: state.currRoom.notes.map(currNote => {
-                        if (currNote._id === action.note._id) return action.note;
+                        return (currNote._id === action.note._id) ? action.note : currNote;
                     })
                 }
             }
         case 'ADD_NOTE':
-            let idx = state.currRoom.notes.findIndex(currNote => !currNote.isPinned);
+            const notesCopy = JSON.parse(JSON.stringify(state.currRoom.notes))
+            const idx = notesCopy.findIndex(currNote => !currNote.isPinned);
+            (idx === -1) ? notesCopy.unShift(action.note) : notesCopy.splice(idx, 0, action.note)
             return {
                 ...state,
                 currRoom: {
                     ...state.currRoom,
-                    notes: [...state.currRoom.notes.slice(0, idx), action.note, ...state.currRoom.notes.slice(idx, state.currRoom.notes.length)]//probably there is a better solution
+                    notes: notesCopy
                 }
             }
         case 'REMOVE_NOTE':
@@ -72,6 +74,3 @@ export default function RoomReducer(state = initialState, action) {
     }
 };
 
-// currRoom: state.rooms.filter(room => {
-//     return room._id !== action.id
-// })
