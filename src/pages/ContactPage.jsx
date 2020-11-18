@@ -17,7 +17,6 @@ const ContactPage = (props) => {
     const { contacts, user } = props
 
 
-
     const onMoveToRoom = async (ev, roomId) => {
         if (!props.history) {
             await props.loadRoomById({ roomId });
@@ -83,7 +82,7 @@ const ContactPage = (props) => {
                     filterBy={filterBy}
                     setFilterBy={setFilterBy}
                     moveToContact={handleKeyPress} />
-                {!!contacts && <ContactList showNotification={showNotification} onDeleteFriend={onDeleteFriend} onMoveToRoom={onMoveToRoom} loggedinUser={user} contacts={contacts.length ? contacts : user.friends} />}
+                {!!contacts && <ContactList showNotification={showNotification} onDeleteFriend={onDeleteFriend} onMoveToRoom={onMoveToRoom} loggedinUser={user} contacts={user.friends} />}
             </div>
             }
         </div>

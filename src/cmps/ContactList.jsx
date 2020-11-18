@@ -8,6 +8,7 @@ import deleteUser from '../assets/svg/delete-user.svg'
 import ContactPreview from './ContactPreview'
 
 export default (props) => {
+    console.log('hi?');
     const { onAddFriend, loggedinUser, onMoveToRoom, isHome, onDeleteFriend, showNotification } = props
     const [roomId, setRoomId] = useState('')
 

@@ -1,10 +1,9 @@
-import { UtilService } from './UtilService'
-import { StorageService } from './StorageService'
-import { HttpService } from './HttpService.js'
+import { UtilService } from "./UtilService";
+import { StorageService } from "./StorageService";
+import { HttpService } from "./HttpService.js";
 
-
-const CONTACT_KEY = 'contacts';
-var contacts = []
+const CONTACT_KEY = "contacts";
+var contacts = [];
 
 // function sort(arr) {
 //     return arr.sort((a, b) => {
@@ -34,23 +33,25 @@ var contacts = []
 //     })
 // }
 function query(filterBy, user) {
-    if (filterBy.term && user) {
-        filterBy.term = filterBy.term.toLowerCase()
-        var filteredFriends = user.friends.filter(friend => {
-            return friend.userName.toLowerCase().includes(filterBy.term) || friend.fullName.toLowerCase().includes(filterBy.term)
-        })
-        return filteredFriends.length ? filteredFriends : ''
+  if (filterBy.term && user) {
+    filterBy.term = filterBy.term.toLowerCase();
+    var filteredFriends = user.friends.filter((friend) => {
+      return (
+        friend.userName.toLowerCase().includes(filterBy.term) ||
+        friend.fullName.toLowerCase().includes(filterBy.term)
+      );
+    });
+    return filteredFriends.length ? filteredFriends : "";
+  }
+  const queryParams = new URLSearchParams();
+  if (filterBy) {
+    for (const property in filterBy) {
+      if (filterBy[property]) {
+        queryParams.set(property, filterBy[property]);
+      }
     }
-    const queryParams = new URLSearchParams();
-    if (filterBy) {
-        for (const property in filterBy) {
-            if (filterBy[property]) {
-                queryParams.set(property, filterBy[property])
-            }
-        }
-        return HttpService.get(`user?${queryParams}`);
-    }
-
+    return HttpService.get(`user?${queryParams}`);
+  }
 }
 // function query(filterBy, user) {
 //     console.log(filterBy);
@@ -69,55 +70,53 @@ function query(filterBy, user) {
 //     // return HttpService.get('user');
 // }
 
-
-
 function getContactById(id) {
-    return new Promise((resolve, reject) => {
-        const contact = contacts.find(contact => contact._id === id)
-        contact ? resolve(contact) : reject(`Contact id ${id} not found!`)
-    })
+  return new Promise((resolve, reject) => {
+    const contact = contacts.find((contact) => contact._id === id);
+    contact ? resolve(contact) : reject(`Contact id ${id} not found!`);
+  });
 }
 
 function deleteContact(id) {
-    return new Promise((resolve, reject) => {
-        const index = contacts.findIndex(contact => contact._id === id)
-        if (index !== -1) {
-            contacts.splice(index, 1)
-        }
-        StorageService.save(CONTACT_KEY, contacts)
-        resolve(contacts)
-    })
+  return new Promise((resolve, reject) => {
+    const index = contacts.findIndex((contact) => contact._id === id);
+    if (index !== -1) {
+      contacts.splice(index, 1);
+    }
+    StorageService.save(CONTACT_KEY, contacts);
+    resolve(contacts);
+  });
 }
 
 function _updateContact(contact) {
-    return new Promise((resolve, reject) => {
-        const index = contacts.findIndex(c => contact._id === c._id)
-        if (index !== -1) {
-            contacts[index] = contact
-        }
-        StorageService.save(CONTACT_KEY, contacts)
-        resolve(contact)
-    })
+  return new Promise((resolve, reject) => {
+    const index = contacts.findIndex((c) => contact._id === c._id);
+    if (index !== -1) {
+      contacts[index] = contact;
+    }
+    StorageService.save(CONTACT_KEY, contacts);
+    resolve(contact);
+  });
 }
 
 function _addContact(contact) {
-    return new Promise((resolve, reject) => {
-        contact._id = UtilService.makeId()
-        contacts.push(contact)
-        StorageService.save(CONTACT_KEY, contacts)
-        resolve(contact)
-    })
+  return new Promise((resolve, reject) => {
+    contact._id = UtilService.makeId();
+    contacts.push(contact);
+    StorageService.save(CONTACT_KEY, contacts);
+    resolve(contact);
+  });
 }
 
 function saveContact(contact) {
-    return contact._id ? _updateContact(contact) : _addContact(contact)
+  return contact._id ? _updateContact(contact) : _addContact(contact);
 }
 
 function getEmptyContact() {
-    return {
-        fullName: '',
-        userName: '',
-    }
+  return {
+    fullName: "",
+    userName: "",
+  };
 }
 
 // function filter(term) {
@@ -129,9 +128,9 @@ function getEmptyContact() {
 // }
 
 export const ContactService = {
-    query,
-    getContactById,
-    deleteContact,
-    saveContact,
-    getEmptyContact
-}
+  query,
+  getContactById,
+  deleteContact,
+  saveContact,
+  getEmptyContact,
+};

@@ -181,6 +181,29 @@
             background-color: yellow;
         }
     }
+   .logo-filter-container{
+       display: flex;
+       align-items: center;
+       
+       .nav-filter-container{
+        display: none;
+        
+        @include for-normal-layout {
+          display: flex;
+           flex-direction: column;
+           margin-left: rem(20px);
+   
+           .contact-list{
+               position: absolute;
+               top: rem(60px);
+               left:rem(10px);
+               width: 33%;
+               padding: 5px;
+           }
+        }
+          
+       }
+   }
 }
 
 @include for-normal-layout {
