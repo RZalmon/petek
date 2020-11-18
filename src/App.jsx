@@ -17,7 +17,7 @@ import { updateUser, getUser, logout } from '../src/actions/UserActions';
 import { saveRoom, loadRoomById } from '../src/actions/RoomActions';
 
 import RoutePage from './RoutePage';
-import MyNavbar from './cmps/MyNavbar';
+import Navbar from './cmps/Navbar';
 
 
 const history = createBrowserHistory();
@@ -116,7 +116,7 @@ const App = (props) => {
   return (
     <div className="App">
       <Router history={history}>
-        <MyNavbar user={loggedinUser} handleLogout={handleLogout} history={history} />
+        <Navbar user={loggedinUser} handleLogout={handleLogout} history={history} />
         <RoutePage onConnectSocket={connectSockets} showNotification={showNotification} />
       </Router>
     </div>

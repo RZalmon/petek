@@ -55,3 +55,17 @@ export function deleteContact(id) {
         dispatch({ type: 'DELETE_CONTACT', id })
     }
 }
+
+export function setFilterBy(filterBy) {
+    return async (dispatch) => {
+      dispatch({ type: "SET_CONTACT_FILTER_BY", filterBy });
+    };
+  }
+  
+  //RESET FILTER BY
+  export function resetFilterBy() {
+    return async (dispatch) => {
+      dispatch({ type: "RESET_CONTACT_FILTER_BY" });
+    };
+  }
+  

@@ -1,4 +1,6 @@
 import React, { createRef, useEffect, useState } from 'react'
+import { connect } from 'react-redux';
+
 import { Link, NavLink, withRouter } from 'react-router-dom';
 
 import logo from '../../src/assets/png/petek-logo.png';
@@ -7,8 +9,11 @@ import NotificationIcon from './icons/NotificationIcon';
 
 import InboxPage from '../pages/InboxPage';
 
+import { setFilterBy, resetFilterBy, loadContacts } from '../actions/ContactActions';
 
-export default ({ user, handleLogout, history }) => {
+
+
+const Navbar = ({ user, handleLogout, history, setFilterBy, resetFilterBy, loadContacts, contacts, filterBy }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isNotificationOpen, setIsNotificationOpen] = useState(false)
     const checkboxRef = createRef()
@@ -41,8 +46,8 @@ export default ({ user, handleLogout, history }) => {
                     <li>
                         {user.notifications.length && <span className="notification-count">{user.notifications.length}</span>}
                         <div className='notification-list-container'>
-                        <i className='notificaion-icon' onClick={() => setIsNotificationOpen(!isNotificationOpen)}><NotificationIcon/></i>
-                        {isNotificationOpen && <i className='notification-list'><InboxPage /></i>}
+                            <i className='notificaion-icon' onClick={() => setIsNotificationOpen(!isNotificationOpen)}><NotificationIcon /></i>
+                            {isNotificationOpen && <i className='notification-list'><InboxPage /></i>}
                         </div>
                         <NavLink to={`/inbox/${user._id}`} className="link link-inbox" exact onClick={() => { handleCheboxClicked(false) }}>
                             Inbox
@@ -79,6 +84,19 @@ export default ({ user, handleLogout, history }) => {
         </nav>
     )
 }
+const mapStateToProps = (state) => {
+    return {
+        filterBy: state.contact.filterBy,
+        contacts: state.contact.contacts,
+    };
+};
+const mapDispatchToProps = {
+    setFilterBy,
+    resetFilterBy,
+    loadContacts
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+
 
 
 
