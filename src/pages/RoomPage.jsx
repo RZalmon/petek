@@ -79,7 +79,7 @@ const RoomPage = (props) => {
         let noteCopy = JSON.parse(JSON.stringify(newNote))
         await props.addNote(user._id, room._id, noteCopy)
         const friend = user.friends.find(currFriend => currFriend.roomId === room._id)
-        SocketService.emit("added note", ({ room, user, friendId: friend._id }));
+        if (props.room.members.length > 1) SocketService.emit("added note", ({ room, user, friendId: friend._id }));
         // props.showNotification('Note added successfully! So Excited', 'success')
         //Need to find way to transfer that prop on desktop
         setNoteHeader('')

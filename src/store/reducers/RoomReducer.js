@@ -6,6 +6,8 @@ const initialState = {
 
 
 export default function RoomReducer(state = initialState, action) {
+    let notesCopy;
+    let idx;
     switch (action.type) {
         case 'SET_ROOMS':
             return { ...state, rooms: action.rooms }
@@ -15,13 +17,7 @@ export default function RoomReducer(state = initialState, action) {
             return {
                 ...state,
                 rooms: state.rooms.map(room => {
-                    if (room._id === action.room._id) {
-                        //after problems fixed return it to one line term
-                        console.log('id match!');
-
-                        return action.room;
-                    }
-                    return room;
+                    return (room._id === action.room._id) ? action.room : room;
                 })
             }
         case 'DELETE_ROOM':
@@ -51,9 +47,9 @@ export default function RoomReducer(state = initialState, action) {
                 }
             }
         case 'ADD_NOTE':
-            const notesCopy = JSON.parse(JSON.stringify(state.currRoom.notes))
-            const idx = notesCopy.findIndex(currNote => !currNote.isPinned);
-            (idx === -1) ? notesCopy.unShift(action.note) : notesCopy.splice(idx, 0, action.note)
+            notesCopy = JSON.parse(JSON.stringify(state.currRoom.notes))
+            idx = notesCopy.findIndex(currNote => !currNote.isPinned);
+            (idx === -1) ? notesCopy.push(action.note) : notesCopy.splice(idx, 0, action.note)
             return {
                 ...state,
                 currRoom: {
@@ -66,7 +62,32 @@ export default function RoomReducer(state = initialState, action) {
                 ...state,
                 currRoom: {
                     ...state.currRoom,
-                    notes: state.currRoom.notes.filter(note => note._id !== action.noteId)
+                    notes: state.currRoom.notes.filter(currNote => currNote._id !== action.noteId)
+                }
+            }
+        case 'SET_PIN_NOTE':
+            notesCopy = JSON.parse(JSON.stringify(state.currRoom.notes))
+            idx = notesCopy.findIndex(currNote => currNote._id === action.note._id);
+            notesCopy.splice(idx, 1)
+            notesCopy.unshift(action.note)
+            return {
+                ...state,
+                currRoom: {
+                    ...state.currRoom,
+                    notes: notesCopy
+                }
+            }
+        case 'SET_UNPIN_NOTE':
+            notesCopy = JSON.parse(JSON.stringify(state.currRoom.notes))
+            const toDeleteIdx = notesCopy.findIndex(currNote => currNote._id === action.note._id);
+            notesCopy.splice(toDeleteIdx, 1)//remove old note
+            const toUpdateIdx = notesCopy.findIndex(currNote => !currNote.isPinned && currNote.createdAt <= action.note.createdAt);//find correct IDX
+            toUpdateIdx === -1 ? notesCopy.push(action.note) : notesCopy.splice(toUpdateIdx, 0, action.note);//INSERT NOTE
+            return {
+                ...state,
+                currRoom: {
+                    ...state.currRoom,
+                    notes: notesCopy
                 }
             }
         default:

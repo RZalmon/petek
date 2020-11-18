@@ -53,11 +53,13 @@ export function changeNoteColor(roomId, noteId, color) {
     };
 }
 
+
+
 export function toggleNotePin(roomId, noteId) {
     return async (dispatch) => {
         try {
-            let room = await NoteService.toggleNotePin(roomId, noteId);
-            dispatch({ type: "SET_CURR_ROOM", room });
+            let note = await NoteService.toggleNotePin(roomId, noteId);
+            dispatch({ type: (note.isPinned) ? "SET_PIN_NOTE" : "SET_UNPIN_NOTE", note })
         } catch (err) {
             console.log("ERROR", err);
         }
