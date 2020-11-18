@@ -199,6 +199,12 @@
                left:rem(10px);
                width: 33%;
                padding: 5px;
+               border: 1px solid lightgray;
+               border-bottom-left-radius:10px ;
+               border-bottom-right-radius:10px ;
+               &::-webkit-scrollbar {
+                display: none;
+}
            }
         }
           

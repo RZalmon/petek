@@ -54,7 +54,7 @@ const Navbar = ({ user, handleLogout, history, setFilterBy, resetFilterBy, loadC
                 </Link>
                 {user &&<section className='nav-filter-container'>
                 <Filter filterBy={filterBy} setFilterBy={setFilterBy} placeHolder='Search For New Friends!' />
-                <ContactList contacts={contacts} loggedinUser={user} onAddFriend={onAddFriendHandler} onMoveToRoom={onMoveToRoom} />
+                {!!contacts.length &&<ContactList contacts={contacts} loggedinUser={user} onAddFriend={onAddFriendHandler} onMoveToRoom={onMoveToRoom} />}
                  </section> }
                 </div>
 
