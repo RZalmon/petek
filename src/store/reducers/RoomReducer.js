@@ -1,9 +1,8 @@
 const initialState = {
-    rooms: [],
-    currRoom: null,
-    filterBy: {}
-}
-
+  rooms: [],
+  currRoom: null,
+  filterBy: {},
+};
 
 export default function RoomReducer(state = initialState, action) {
     let notesCopy;
@@ -94,4 +93,3 @@ export default function RoomReducer(state = initialState, action) {
             return state;
     }
 };
-
