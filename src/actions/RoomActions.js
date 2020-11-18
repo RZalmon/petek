@@ -25,6 +25,7 @@ export function loadRoomById(filterBy) {
 
 //RESET
 export function resetCurrRoom() {
+  console.log("savavavavavavavavavava");
   return async (dispatch) => {
     try {
       const room = null;
@@ -34,7 +35,6 @@ export function resetCurrRoom() {
     }
   };
 }
-
 
 // UPDATE + CREATE
 export function saveRoom(room) {

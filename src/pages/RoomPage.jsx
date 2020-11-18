@@ -49,14 +49,8 @@ const RoomPage = (props) => {
 
 
 
-    const loadRoom = async () => {
-        const roomId = props.match ? props.match.params.id : props.room._id;
-        if (props.room) {
-            await props.loadRoomById({ ...props.filterBy, roomId })
-            // FIX IS VAILD USER
-            // checkIsValidUser()
-            return
-        }
+    const loadRoom = async () => { 
+        const roomId = props?.match?.params?.id || props.roomId 
         await props.loadRoomById({ ...props.filterBy, roomId })
     }
 
@@ -104,8 +98,11 @@ const RoomPage = (props) => {
         // (props.history.location.pathname === '/') ? props.resetCurrRoom() : loadRoom()
         loadRoom()//created
 
-        return () => props.resetCurrRoom(); //onDestroy
+        return () => {
+            props.resetCurrRoom()   
+        }; //onDestroy
     }, [props.history.location.pathname]);
+
 
     // useEffect(() => {
     //     loadRoom()//created
@@ -133,6 +130,7 @@ const RoomPage = (props) => {
             onHandleSubmit()
         }
     }, [isUploading]);
+    
 
     useEffect(() => {
         loadRoom()

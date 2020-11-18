@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 
 import { getUser, updateUser } from '../actions/UserActions';
+import { resetCurrRoom } from '../actions/RoomActions';
 
 
 import ContactPage from '../pages/ContactPage'
@@ -63,9 +64,10 @@ const HomePage = (props) => {
   }
 
 
-  useEffect(() => {
+  useEffect(() => { 
     props.getUser()
     if (!props.user) props.history.push("/signup")
+
     loadContacts()
     return () =>{
       setIsHome(false)
@@ -76,6 +78,8 @@ const HomePage = (props) => {
   useEffect(() => {
     loadContacts()
   }, [filterBy])
+
+ 
 
 
   return (
@@ -116,6 +120,7 @@ const mapDispatchToProps = {
   getUser,
   updateUser,
   loadContacts,
+  resetCurrRoom
   
 
 };

@@ -103,7 +103,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     loadContacts,
     loadRoomById,
-    updateUser
+    updateUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactPage);
