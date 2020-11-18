@@ -47,8 +47,10 @@ const RoomPage = (props) => {
     }
     const InputType = cmps[noteInputType];
 
+
+
     const loadRoom = async () => {
-        const roomId = props.room ? props.room._id : props.match.params.id;
+        const roomId = props.match ? props.match.params.id : props.room._id;
         if (props.room) {
             await props.loadRoomById({ ...props.filterBy, roomId })
             // FIX IS VAILD USER
@@ -99,16 +101,29 @@ const RoomPage = (props) => {
     }
 
     useEffect(() => {
+        // (props.history.location.pathname === '/') ? props.resetCurrRoom() : loadRoom()
         loadRoom()//created
-        console.log(props.user);
-        return () => { props.resetCurrRoom() }; //onDestroy
-    }, []);
+
+        return () => props.resetCurrRoom(); //onDestroy
+    }, [props.history.location.pathname]);
+
+    // useEffect(() => {
+    //     loadRoom()//created
+    //     console.log('history', props.history);
+
+    //     return () => { console.log('RESETING CURR ROOM');; props.resetCurrRoom() }; //onDestroy
+    // }, [props.history.location.pathname]);
+
+
+
 
     // //watcher
     // useEffect(() => { 
     // FIX IS VAILD USER
     //     if (props.room) checkIsValidUser()
     // }, [props.room]);
+
+
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import AvatarLoader from './AvatarLoader'
 
@@ -7,16 +7,16 @@ import friendReqSent from '../assets/svg/ok.svg'
 
 
 
-export default ({ contact, onAddFriend, loggedinUser, moveToRoom,setRoomId,roomId }) => {
+export default ({ contact, onAddFriend, loggedinUser, onMoveToRoom, setRoomId, roomId }) => {
 
 
     const [isFriendSent, setIsFriendSent] = useState(false)
     const [isFriend, setIsFriend] = useState(false)
     const [isLoaded, setIsLoaded] = useState(false)
 
-  const onLoad = useCallback(() => {
-    console.log('loaded');
-    setIsLoaded(true);
+    const onLoad = useCallback(() => {
+        console.log('loaded');
+        setIsLoaded(true);
     }, [])
 
     useEffect(() => {
@@ -28,15 +28,15 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom,setRoomId,roomI
         } else {
             setIsFriend(false)
         }
-       
-    },[loggedinUser, contact._id]);
+
+    }, [loggedinUser, contact._id]);
 
     const toggleIsFriend = (ev) => {
         // ev.preventDefault()
         setIsFriendSent(true)
 
     }
-    
+
 
     const handelClick = (ev) => {
         onAddFriend(contact._id);
@@ -45,9 +45,9 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom,setRoomId,roomI
 
 
     return (
-      <div className="contact-preview" onClick={(ev) => {if(isFriend) contact.roomId ?  moveToRoom(ev,contact.roomId) : moveToRoom(ev,contact)  }}>    
-           <img  onLoad={onLoad} src={contact.imgUrl} alt={`${contact.userName}`} className="avatar avatar-s" style={{display: isLoaded? 'block': 'none'}}/> 
-          {!isLoaded && <AvatarLoader/>}
+        <div className="contact-preview" onClick={(ev) => { if (isFriend) contact.roomId ? onMoveToRoom(ev, contact.roomId) : onMoveToRoom(ev, contact) }}>
+            <img onLoad={onLoad} src={contact.imgUrl} alt={`${contact.userName}`} className="avatar avatar-s" style={{ display: isLoaded ? 'block' : 'none' }} />
+            {!isLoaded && <AvatarLoader />}
             <div className="user-name-container">
                 <span>Full Name: {contact.fullName}</span>
                 <span>User Name: {contact.userName}</span>
@@ -56,10 +56,10 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom,setRoomId,roomI
                 <img src={isFriendSent || isFriend ? friendReqSent : addFriendImg}
                     alt=""
                     className="add-friend-img"
-                    onClick={(ev) => isFriend || isFriendSent ? toggleIsFriend(ev) : handelClick(ev)} />}      
-           
+                    onClick={(ev) => isFriend || isFriendSent ? toggleIsFriend(ev) : handelClick(ev)} />}
+
         </div>
-       
+
 
     );
 };
@@ -104,7 +104,7 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom,setRoomId,roomI
 //         setIsFriendSent(true)
 
 //     }
-    
+
 
 //     const handelClick = (ev) => {
 //         onAddFriend(contact._id);
@@ -115,16 +115,16 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom,setRoomId,roomI
 //     return (
 //         <div className="swipe-container">
 //       <SwipeableListItem 
-      
+
 //     swipeLeft={{
 //         content:<img className="swipe-content-left" src={deleteUser}/>,
 //         action: (ev) => {console.log('balls');},
-        
+
 //     }}
 //     swipeRight={{
 //         content:isHome ? <img src={isFriendSent || isFriend ? friendReqSent : addFriendImg} className="add-friend-img"/> :  <img className="swipe-content-right" src={addNote}/>,
 //         action: isHome ?  (ev) => isFriend || isFriendSent ? toggleIsFriend(ev) : handelClick(ev) : (ev) => { moveToRoom(ev,roomId)},
-        
+
 //     }} 
 //     >
 //       <div className="contact-preview" onClick={(ev) => {if(isFriend) moveToRoom(ev,roomId) }}>    
@@ -138,11 +138,11 @@ export default ({ contact, onAddFriend, loggedinUser, moveToRoom,setRoomId,roomI
 //                     alt=""
 //                     className="add-friend-img"
 //                     onClick={(ev) => isFriend || isFriendSent ? toggleIsFriend(ev) : handelClick(ev)} />}      
-           
+
 //         </div>
 //          </SwipeableListItem>
 //         </div>
-       
+
 
 //     );
 // };

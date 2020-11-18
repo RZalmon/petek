@@ -28,12 +28,13 @@ export function resetCurrRoom() {
   return async (dispatch) => {
     try {
       const room = null;
-      dispatch({ type: "SET_CURR_ROOM", room });
+      dispatch({ type: "RESET_CURR_ROOM", room });
     } catch (err) {
       console.log("ERROR:", err);
     }
   };
 }
+
 
 // UPDATE + CREATE
 export function saveRoom(room) {

@@ -12,6 +12,8 @@ export default function RoomReducer(state = initialState, action) {
       return { ...state, rooms: action.rooms };
     case "SET_CURR_ROOM":
       return { ...state, currRoom: action.room };
+      case "RESET_CURR_ROOM":
+        return { ...state, currRoom: null };
     case "UPDATE_ROOM":
       return {
         ...state,
