@@ -50,13 +50,13 @@ const Navbar = ({ user, handleLogout, history, setFilterBy, resetFilterBy, loadC
         <nav className="main-nav">
             <div className="nav-container">
                 <div className='logo-filter-container'>
-                    <Link to={`/`} className="logo-container" >
-                        <img src={logo} alt="logo" className="logo" />
-                    </Link>
-                    {user && <section className='nav-filter-container'>
-                        <Filter filterBy={filterBy} setFilterBy={setFilterBy} placeHolder='Search For New Friends!' />
-                       {!!contacts.length && <ContactList contacts={contacts} loggedinUser={user} onAddFriend={onAddFriendHandler} onMoveToRoom={onMoveToRoom} />}
-                    </section>}
+                <Link to={`/`} className="logo-container" >
+                    <img src={logo} alt="logo" className="logo" />
+                </Link>
+                {user &&<section className='nav-filter-container'>
+                <Filter filterBy={filterBy} setFilterBy={setFilterBy} placeHolder='Search For New Friends!' />
+                {!!contacts.length &&<ContactList contacts={contacts} loggedinUser={user} onAddFriend={onAddFriendHandler} onMoveToRoom={onMoveToRoom} />}
+                 </section> }
                 </div>
 
                 {(!isMenuOpen && user && !!user.notifications.length) && <span className="notification-count-nav">{user.notifications.length}</span>}
