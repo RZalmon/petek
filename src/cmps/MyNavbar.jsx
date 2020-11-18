@@ -3,9 +3,14 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 
 import logo from '../../src/assets/png/petek-logo.png';
 
+import NotificationIcon from './icons/NotificationIcon';
+
+import InboxPage from '../pages/InboxPage';
+
 
 export default ({ user, handleLogout, history }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isNotificationOpen, setIsNotificationOpen] = useState(false)
     const checkboxRef = createRef()
 
     const handleCheboxClicked = (bool) => {
@@ -35,7 +40,11 @@ export default ({ user, handleLogout, history }) => {
                     </li>
                     <li>
                         {user.notifications.length && <span className="notification-count">{user.notifications.length}</span>}
-                        <NavLink to={`/inbox/${user._id}`} className="link" exact onClick={() => { handleCheboxClicked(false) }}>
+                        <div className='notification-list-container'>
+                        <i className='notificaion-icon' onClick={() => setIsNotificationOpen(!isNotificationOpen)}><NotificationIcon/></i>
+                        {isNotificationOpen && <i className='notification-list'><InboxPage /></i>}
+                        </div>
+                        <NavLink to={`/inbox/${user._id}`} className="link link-inbox" exact onClick={() => { handleCheboxClicked(false) }}>
                             Inbox
                          </NavLink>
                     </li>

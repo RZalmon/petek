@@ -13,7 +13,6 @@ const InboxPage = (props) => {
   const { user } = props
 
   const onApprove = (notification) => {
-
     onDeleteNotification(notification)
     SocketService.emit("approve", { notification, user });
 
@@ -31,13 +30,13 @@ const InboxPage = (props) => {
     props.updateUser(user)
   }
 
-  const handleForbiddenUser = () => {
-    if(props.match.params.id !== user._id) props.history.push('/')
-  }
+  // const handleForbiddenUser = () => {
+  //   if(props.match.params.id !== user._id) props.history.push('/')
+  // }
 
-  useEffect(() => {
-    handleForbiddenUser()
-  }, [])
+  // useEffect(() => {
+  //   handleForbiddenUser()
+  // }, [])
   
 
   return (
