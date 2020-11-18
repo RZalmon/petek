@@ -91,6 +91,25 @@
                 display: flex;
                 align-items: center;
 
+                span {
+                    @include for-mobile-layout {
+                        display: block;
+                    } 
+                    @include for-normal-layout {
+                        display: none;
+                    }
+                }
+
+                svg {
+                    @include for-mobile-layout {
+                        display: none;
+                    } 
+                    
+                    @include for-normal-layout {
+                        display: block;
+                    }
+                }
+
                 .notification-count {
                     display: inline-block;
                     position: relative;

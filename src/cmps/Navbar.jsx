@@ -6,12 +6,13 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 import logo from '../../src/assets/png/petek-logo.png';
 
 import NotificationIcon from './icons/NotificationIcon';
+import ContactsIcon from './icons/ContactsIcon';
 
 import InboxPage from '../pages/InboxPage';
 import Filter from '../cmps/Filter';
 import ContactList from '../cmps/ContactList';
 
-import {UserService} from '../services/UserService'
+import { UserService } from '../services/UserService'
 
 import { setFilterBy, resetFilterBy, loadContacts } from '../actions/ContactActions';
 
@@ -27,21 +28,21 @@ const Navbar = ({ user, handleLogout, history, setFilterBy, resetFilterBy, loadC
         if (checkboxRef.current) checkboxRef.current.checked = bool
     }
 
-    const onAddFriendHandler = (friendId) =>{
-        UserService.addFriend(user,friendId)
+    const onAddFriendHandler = (friendId) => {
+        UserService.addFriend(user, friendId)
     }
 
     const onMoveToRoom = (ev, contact) => {
-    const roomId = UserService.getRoomIdFromContact(user,contact).roomId
-    console.log('roomId', roomId);
-    ev.stopPropagation()
-    history.push(`/room/${roomId}`);
-    resetFilterBy()
-  }
+        const roomId = UserService.getRoomIdFromContact(user, contact).roomId
+        console.log('roomId', roomId);
+        ev.stopPropagation()
+        history.push(`/room/${roomId}`);
+        resetFilterBy()
+    }
 
     useEffect(() => {
         loadContacts(filterBy)
-      
+
     }, [filterBy])
 
 
@@ -49,13 +50,13 @@ const Navbar = ({ user, handleLogout, history, setFilterBy, resetFilterBy, loadC
         <nav className="main-nav">
             <div className="nav-container">
                 <div className='logo-filter-container'>
-                <Link to={`/`} className="logo-container" >
-                    <img src={logo} alt="logo" className="logo" />
-                </Link>
-                {user &&<section className='nav-filter-container'>
-                <Filter filterBy={filterBy} setFilterBy={setFilterBy} placeHolder='Search For New Friends!' />
-                <ContactList contacts={contacts} loggedinUser={user} onAddFriend={onAddFriendHandler} onMoveToRoom={onMoveToRoom} />
-                 </section> }
+                    <Link to={`/`} className="logo-container" >
+                        <img src={logo} alt="logo" className="logo" />
+                    </Link>
+                    {user && <section className='nav-filter-container'>
+                        <Filter filterBy={filterBy} setFilterBy={setFilterBy} placeHolder='Search For New Friends!' />
+                       {!!contacts.length && <ContactList contacts={contacts} loggedinUser={user} onAddFriend={onAddFriendHandler} onMoveToRoom={onMoveToRoom} />}
+                    </section>}
                 </div>
 
                 {(!isMenuOpen && user && !!user.notifications.length) && <span className="notification-count-nav">{user.notifications.length}</span>}
@@ -73,16 +74,11 @@ const Navbar = ({ user, handleLogout, history, setFilterBy, resetFilterBy, loadC
                     <li>
                         {!!user.notifications.length && <span className="notification-count">{user.notifications.length}</span>}
                         <div className='notification-list-container'>
-                            <i className='notificaion-icon' onClick={() => setIsNotificationOpen(!isNotificationOpen)}><NotificationIcon /></i>
+                            <i className='notification-icon' onClick={() => setIsNotificationOpen(!isNotificationOpen)}><NotificationIcon /></i>
                             {isNotificationOpen && <i className='notification-list'><InboxPage /></i>}
                         </div>
                         <NavLink to={`/inbox/${user._id}`} className="link link-inbox" exact onClick={() => { handleCheboxClicked(false) }}>
                             Inbox
-                         </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to={`/random-game`} className="link" exact onClick={() => handleCheboxClicked(false)}>
-                            Random Game
                          </NavLink>
                     </li>
                     <li>
@@ -97,8 +93,9 @@ const Navbar = ({ user, handleLogout, history, setFilterBy, resetFilterBy, loadC
                     </li>
                     <li>
                         <NavLink to="/contact" className="link" exact onClick={() => handleCheboxClicked(false)}>
-                            Contacts
-                         </NavLink>
+                            <ContactsIcon />
+                            <span>Contacts</span>
+                        </NavLink>
                     </li>
                     <li>
                         <NavLink to="/signup" className="link" exact onClick={handleLogout}>

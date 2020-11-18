@@ -23,6 +23,7 @@
 @import "./styles/cmps/icons/SpreadIcon";
 @import "./styles/cmps/icons/ListIcon";
 @import "./styles/cmps/icons/NotificationIcon";
+@import "./styles/cmps/icons/ContactsIcon";
 
 //CMPS
 @import "./styles/cmps/Navbar";
@@ -35,7 +36,9 @@
 @import "./styles/cmps/NoteList.scss";
 @import "./styles/cmps/NoteImg.scss";
 @import "./styles/cmps/NoteTodo.scss";
+@import './styles/cmps/NotificationFriend';
 @import "./styles/cmps/NotificationPreview.scss";
+@import "./styles/cmps/NotificationList";
 @import "./styles/cmps/InputText.scss";
 @import "./styles/cmps/InputVideo.scss";
 @import "./styles/cmps/InputTodo.scss";
@@ -51,7 +54,6 @@
 @import "./styles/pages/SignupPage";
 @import "./styles/pages/RoomPage";
 @import "./styles/pages/HomePage";
-@import "./styles/pages/RandomGame";
 //NOTY LIB
 @import "~noty/src/noty.scss";
 @import "~noty/src/themes/bootstrap-v4.scss";

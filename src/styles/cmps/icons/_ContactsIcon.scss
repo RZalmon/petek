@@ -1,0 +1,8 @@
+.contacts-icon {
+    width: rem(25px);
+    display: none;
+
+    @include for-normal-layout {
+        display: block;
+    }
+}

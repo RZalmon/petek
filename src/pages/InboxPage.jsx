@@ -26,6 +26,7 @@ const InboxPage = (props) => {
     const idx = user.notifications.findIndex(
       currNotification => currNotification._id === notification._id
     );
+    console.log('@%IDX$^', idx);
     user.notifications.splice(idx, 1);
     props.updateUser(user)
   }
