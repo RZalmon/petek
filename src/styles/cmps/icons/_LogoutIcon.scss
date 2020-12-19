@@ -1,0 +1,31 @@
+.logout-icon {
+    width: rem(25px);
+    display: none;
+
+    circle, .element-g{
+        transition: .3s;
+    }
+
+    circle{
+        fill: transparent;
+    }
+    
+    .element-g{
+        fill: transparent;
+    }
+
+    @include hover-supported{
+        animation: grow-shrink 1s 1 linear;
+        circle{
+            fill: #dc3545;
+        }
+
+        .element-g{
+            fill: #faf7f5;
+        }
+    }
+
+    @include for-normal-layout {
+        display: block;
+    }
+}

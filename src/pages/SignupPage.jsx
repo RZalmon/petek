@@ -125,7 +125,7 @@ class SignupPage extends Component {
             {isSignUp ? <h1>SignUp</h1> : <h1>Login</h1>}
             {isSignUp && <AvatarEdit onUploadImg={this.onUploadImg} imgUrl={imgUrl} isLoading={isLoading} />}
             {isSignUp && <MDBInput label="Full Name" name="fullName" value={this.state.newUser.fullName || ''} onChange={this.onChangeHandler} />}
-            <MDBInput label="UserName" type="text" name="userName" value={this.state.newUser.userName || ''} onChange={this.onChangeHandler} />
+            <MDBInput label="User Name" type="text" name="userName" value={this.state.newUser.userName || ''} onChange={this.onChangeHandler} />
             <MDBInput label="Password" type="password" name="password" value={this.state.newUser.password || ''} onChange={this.onChangeHandler} />
             <button className="signup-login-btn">{isSignUp ? 'Signup' : 'Login'}</button>
             {!isSignUp && <h2 >Don't Have an account?<span className="toggle-btn" onClick={this.toggleSignUp}> Sign up!</span></h2>}

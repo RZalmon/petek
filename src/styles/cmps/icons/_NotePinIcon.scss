@@ -5,6 +5,7 @@
         fill: transparent;
     }
     @include hover-supported {
+        animation: pin .3s forwards linear;
         .clr {
             transition: 0.3s;
         }
@@ -25,6 +26,7 @@
         }
     }
     &.pinned {
+        transform: rotate(-45deg);
         .clr-1 {
             fill: #fb5252;
         }
@@ -42,6 +44,7 @@
         }
         @include hover-supported {
             transition: 0.3s;
+            animation: unpin .3s forwards linear;
             .clr {
                 fill: transparent;
             }

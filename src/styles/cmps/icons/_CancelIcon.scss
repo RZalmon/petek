@@ -1,0 +1,11 @@
+.cancel-icon {
+    cursor: pointer;
+    width: 15px;
+    transition: .3s;
+    fill: gray;
+    animation: spin .3s 1 linear;
+    @include hover-supported {
+        animation: grow-shrink .3s 1 linear;
+        fill: black;
+    }
+}

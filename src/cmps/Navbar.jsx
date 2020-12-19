@@ -7,7 +7,8 @@ import logo from '../../src/assets/png/petek-logo.png';
 
 import NotificationIcon from './icons/NotificationIcon';
 import ContactsIcon from './icons/ContactsIcon';
-
+import LogoutIcon from './icons/LogoutIcon';
+import StarIcon from './icons/StarIcon'
 import InboxPage from '../pages/InboxPage';
 import Filter from '../cmps/Filter';
 import ContactList from '../cmps/ContactList';
@@ -50,13 +51,13 @@ const Navbar = ({ user, handleLogout, history, setFilterBy, resetFilterBy, loadC
         <nav className="main-nav">
             <div className="nav-container">
                 <div className='logo-filter-container'>
-                <Link to={`/`} className="logo-container" >
-                    <img src={logo} alt="logo" className="logo" />
-                </Link>
-                {user &&<section className='nav-filter-container'>
-                <Filter filterBy={filterBy} setFilterBy={setFilterBy} placeHolder='Search For New Friends!' />
-                {!!contacts.length &&<ContactList contacts={contacts} loggedinUser={user} onAddFriend={onAddFriendHandler} onMoveToRoom={onMoveToRoom} />}
-                 </section> }
+                    <Link to={`/`} className="logo-container" >
+                        <img src={logo} alt="logo" className="logo" />
+                    </Link>
+                    {user && <section className='nav-filter-container'>
+                        <Filter filterBy={filterBy} setFilterBy={setFilterBy} placeHolder='Search For New Friends!' />
+                        {!!contacts.length && <ContactList contacts={contacts} loggedinUser={user} onAddFriend={onAddFriendHandler} onMoveToRoom={onMoveToRoom} />}
+                    </section>}
                 </div>
 
                 {(!isMenuOpen && user && !!user.notifications.length) && <span className="notification-count-nav">{user.notifications.length}</span>}
@@ -72,34 +73,37 @@ const Navbar = ({ user, handleLogout, history, setFilterBy, resetFilterBy, loadC
                          </NavLink>
                     </li>
                     <li>
+                        <NavLink to={`/room/${user._id}`} className="link private" exact onClick={() => handleCheboxClicked(false)}>
+                            <img className="user-avatar" src={user.imgUrl} alt="User Avatar"/>
+                            <span>My Board</span>
+                         </NavLink>
+                    </li>
+                    <li>
                         {!!user.notifications.length && <span className="notification-count">{user.notifications.length}</span>}
                         <div className='notification-list-container'>
                             <i className='notification-icon' onClick={() => setIsNotificationOpen(!isNotificationOpen)}><NotificationIcon /></i>
                             {isNotificationOpen && <i className='notification-list'><InboxPage /></i>}
                         </div>
-                        <NavLink to={`/inbox/${user._id}`} className="link link-inbox" exact onClick={() => { handleCheboxClicked(false) }}>
+                        <NavLink to={`/inbox/${user._id}`} className="link inbox" exact onClick={() => { handleCheboxClicked(false) }}>
                             Inbox
                          </NavLink>
                     </li>
                     <li>
-                        <NavLink to={`/room/${user._id}`} className="link" exact onClick={() => handleCheboxClicked(false)}>
-                            Private
+                        <NavLink to="/starred" className="link starred" exact onClick={() => handleCheboxClicked(false)}>
+                            <StarIcon />
+                            <span>Starred</span>
                          </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/starred" className="link" exact onClick={() => handleCheboxClicked(false)}>
-                            Starred
-                         </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/contact" className="link" exact onClick={() => handleCheboxClicked(false)}>
+                        <NavLink to="/contact" className="link contacts" exact onClick={() => handleCheboxClicked(false)}>
                             <ContactsIcon />
                             <span>Contacts</span>
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/signup" className="link" exact onClick={handleLogout}>
-                            Logout
+                        <NavLink to="/signup" className="link logout" exact onClick={handleLogout}>
+                            <LogoutIcon />
+                           <span>Logout</span> 
                        </NavLink>
                     </li>
                 </ul>

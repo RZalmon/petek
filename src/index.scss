@@ -4,6 +4,8 @@
 @import "./styles/setup/typography";
 @import "./styles/setup/variables";
 @import "./styles/setup/animations";
+@import "./styles/setup/reset";
+
 
 //BASE
 @import "./styles/basics/helpers";
@@ -24,6 +26,8 @@
 @import "./styles/cmps/icons/ListIcon";
 @import "./styles/cmps/icons/NotificationIcon";
 @import "./styles/cmps/icons/ContactsIcon";
+@import "./styles/cmps/icons/LogoutIcon";
+@import "./styles/cmps/icons/CancelIcon";
 
 //CMPS
 @import "./styles/cmps/Navbar";

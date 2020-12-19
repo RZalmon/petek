@@ -9,14 +9,13 @@ export default ({ setNoteHeader, onUploadImg }) => {
 
     const onUploadImgHandler = () => {
         inputRef.current.click()
-        // setNoteType('NoteImg');
     }
 
     return (
         <section className="input-img">
             <input className="input-header" placeholder="Img Header" type="text" onChange={e => setNoteHeader(e.target.value)} />
-            <input type="file" onChange={(ev) => { onUploadImg(ev); }} ref={inputRef} hidden />
-            <img src={uploadImg} className="add-button" alt="Plus Icon" onClick={() => { onUploadImgHandler() }} />
+            <input type="file" onChange={(ev) => onUploadImg(ev)} ref={inputRef} hidden />
+            <img src={uploadImg} className="add-button" alt="Plus Icon" onClick={onUploadImgHandler} />
         </section >
     );
 };

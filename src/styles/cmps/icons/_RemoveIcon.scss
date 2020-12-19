@@ -2,10 +2,9 @@
     cursor: pointer;
     align-self: flex-end;
     width: 30px;
-    margin-left: rem(10px);
+    transition: 0.3s;
     @include hover-supported {
         fill: red;
         stroke: red;
-        transition: 0.3s;
     }
 }

@@ -27,7 +27,7 @@ export default ({ text, limit }) => {
 
     return (
         <div className="long-text">
-            {textToShow.length && <p>
+            {!!textToShow.length && <p>
                 {textToShow}
                 {text.length > limit && <span class="long-text-btn" onClick={toggleIsLongText}>{textToShow.length > limit + 4 ? 'Read Less' : 'Read More'}</span>}
             </p>}

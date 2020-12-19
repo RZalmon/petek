@@ -1,6 +1,7 @@
 .note-list {
-
-
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
 
     .spread-view {
         @include for-mobile-layout {

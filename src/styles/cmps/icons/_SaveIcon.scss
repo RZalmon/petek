@@ -2,10 +2,11 @@
     cursor: pointer;
     align-self: flex-end;
     width: 30px;
-    margin-left: rem(10px);
+    transition: .3s;
+    animation: grow-shrink .3s 1 linear;
     @include hover-supported {
+        animation: grow-shrink .3s infinite linear;
         fill: #2e47fd;
         stroke: #2e47fd;
-        transition: .3s;
     }
 }

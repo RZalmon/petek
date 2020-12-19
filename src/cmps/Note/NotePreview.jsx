@@ -68,7 +68,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
         if (note.createdBy._id !== user._id) return
         if (note.createdBy.imgUrl !== user.imgUrl) {
             note.createdBy.imgUrl = user.imgUrl
-            saveRoomChanges()
+            if(!isStarredPage) saveRoomChanges()
         }
     }, []);
 
@@ -77,7 +77,7 @@ export default ({ room, note, user, removeNote, saveRoomChanges, togglePinned, t
         if (note.createdBy._id !== user._id) return;
         if (note.createdBy.imgUrl !== user.imgUrl) {
             note.createdBy.imgUrl = user.imgUrl;
-            saveRoomChanges();
+            if(!isStarredPage) saveRoomChanges();
         }
 
     }, []);

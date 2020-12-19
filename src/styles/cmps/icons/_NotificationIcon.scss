@@ -1,8 +1,51 @@
-.notification-icon{
+
+.notification-icon {
+    cursor: pointer;
     width: rem(25px);
     display: none;
-      
-     @include for-normal-layout {
-          display: block;
-      }
+    stroke: black;
+    stroke-width: 10px;
+    path{
+        fill: transparent;
+        transition: .3s;
+    }
+
+    @include hover-supported {
+        stroke-width: 0;
+        stroke: black;
+        animation: shake .5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        animation-duration: 0.3s;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+            .path1 {
+                fill: #ffb454;
+            }
+            .path2 {
+                fill: #ff8e00;
+            }
+            .path3 {
+                fill: #ffb454;
+            }
+            .path4 {
+                fill: #ff8e00;
+            }
+            .path5 {
+                fill: #ffe278;
+            }
+            .path6 {
+                fill: #ffb454;
+            }
+            .path7 {
+                fill: #08475e;
+            }
+            .path8 {
+                fill: #0a789b;
+            }
+
+    }
+
+    @include for-normal-layout {
+        display: block;
+    }
 }

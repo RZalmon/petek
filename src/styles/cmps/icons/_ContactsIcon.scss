@@ -2,7 +2,115 @@
     width: rem(25px);
     display: none;
 
+    .path,
+    circle,
+    .element-g {
+        transition: 1s;
+        fill: transparent;
+    }
+
+    .path1,
+    .path3,
+    .path4,
+    .path5,
+    circle {
+        stroke: black;
+        stroke-width: 10px;
+    }
+
+    
+    .element-g {
+        fill: black;
+    }
+
+    @include hover-supported {
+        -webkit-animation: rotateY 1s 1 linear;
+        animation: rotateY 1s 1 linear;
+
+        .path1,
+        .path3,
+        .path4,
+        .path5 {
+            stroke-width: 0px;
+        }
+        .path1 {
+            fill: #94dfda;
+        }
+        .path2 {
+            fill: #61a7c5;
+        }
+        .path3 {
+            fill: #425796;
+        }
+        .path4 {
+            fill: #283758;
+        }
+        circle {
+            fill: #f5dccc;
+        }
+        .path5 {
+            fill: #f0cabb;
+        }
+        .element-g {
+            fill: #ffe278;
+        }
+    }
+
     @include for-normal-layout {
         display: block;
     }
 }
+
+// .contacts-icon {
+//     width: rem(25px);
+
+//     display: none;
+//     transition: 1s;
+//     .path,
+//     circle,
+//     .element-g {
+//         transition: 1s;
+//         fill: transparent;
+//         stroke: black;
+//         stroke-width: 10px;
+//     }
+//     .path5 {
+//         transition: 1s;
+//         fill: transparent;
+//     }
+//     @include hover-supported {
+//         -webkit-animation: rotateY 1s infinite linear;
+//         animation: rotateY 1s 1 linear;
+
+//         .path,
+//         circle,
+//         .element-g {
+//             stroke-width: 0px;
+//         }
+//         .path1 {
+//             fill: #94dfda;
+//         }
+//         .path2 {
+//             fill: #61a7c5;
+//         }
+//         .path3 {
+//             fill: #425796;
+//         }
+//         .path4 {
+//             fill: #283758;
+//         }
+//         circle {
+//             fill: #f5dccc;
+//         }
+//         .path5 {
+//             fill: #f0cabb;
+//         }
+//         .element-g {
+//             fill: #ffe278;
+//         }
+//     }
+
+//     @include for-normal-layout {
+//         display: block;
+//     }
+// }

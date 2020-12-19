@@ -8,6 +8,7 @@
         fill: #f3d250;
         stroke: white;
         transition: .5s;
+        animation: spin 1s infinite linear;
     }
     &.starred {
         fill: #f3d250;
@@ -15,6 +16,7 @@
             fill: transparent;
             stroke: black;
             transition: 0.5s;
+            animation: spin 1s 1 linear;
         }
     }
 }

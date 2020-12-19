@@ -78,13 +78,15 @@ const RoomPage = (props) => {
         if (props.room.members.length > 1) SocketService.emit("added note", ({ room, user, friendId: friend._id }));
         // props.showNotification('Note added successfully! So Excited', 'success')
         //Need to find way to transfer that prop on desktop
-        setNoteHeader('')
-        setNoteData('')
-        setNoteType('')
+        resetNoteAdd()
         setIsUploading(false)
     }
 
-
+    const resetNoteAdd = () =>{
+        setNoteHeader('')
+        setNoteData('')
+        setNoteType('')
+    }
 
 
     const checkIsValidUser = async () => { //FIX
@@ -152,6 +154,7 @@ const RoomPage = (props) => {
                     setNoteHeader={setNoteHeader}
                     setNoteData={setNoteData}
                     noteData={noteData}
+                    resetNoteAdd={resetNoteAdd}
                 />}
                 <ButtonMenu setNoteType={setNoteType} setNoteInputType={setNoteInputType} setNoteData={setNoteData} />
             </div> : <Loading />}

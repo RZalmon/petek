@@ -19,6 +19,10 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 5px;
+
+        i{
+            margin-left: rem(10px);
+        }
     }
 
     .friend-container {
