@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 import Noty from 'noty';
 
 
-
-
 import audioNotification from '../src/assets/sound/sp-tune.mp3'
 
 import SocketService from './services/SocketService'
